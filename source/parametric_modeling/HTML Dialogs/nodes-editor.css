@@ -1,0 +1,242 @@
+/**
+ * Parametric Modeling (PMG) extension for SketchUp.
+ *
+ * Copyright: © 2021 Samuel Tallet
+ *
+ * Licence: GNU General Public License 3.0
+ */
+
+* {
+
+    box-sizing: border-box;
+
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    
+}
+
+*:focus {
+    outline: none;
+}
+
+body {
+    margin: 0;
+}
+
+#pmg-nodes-editor {
+
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAAACXBIWXMAABYlAAAWJQFJUiTwAAAFyGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNi4wLWMwMDUgNzkuMTY0NTkwLCAyMDIwLzEyLzA5LTExOjU3OjQ0ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjIuMSAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIxLTAyLTE2VDE0OjE4OjE4KzAxOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIxLTAyLTE2VDE0OjE4OjE4KzAxOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMS0wMi0xNlQxNDoxODoxOCswMTowMCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxOGZkN2FlNS1jYWRiLTE3NGItYjllMC0zM2Q0OTIyMTY5OTAiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDoyYWRkZTJiMC1iZGM2LWYzNDYtYmRjYy05ZDE0Yjc1Mzc4YWEiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo4ZDk5ZWVkNy03NDZkLWJjNGMtODAwYi02N2JlNmQwMWExM2QiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIj4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo4ZDk5ZWVkNy03NDZkLWJjNGMtODAwYi02N2JlNmQwMWExM2QiIHN0RXZ0OndoZW49IjIwMjEtMDItMTZUMTQ6MTg6MTgrMDE6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMi4xIChXaW5kb3dzKSIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MThmZDdhZTUtY2FkYi0xNzRiLWI5ZTAtMzNkNDkyMjE2OTkwIiBzdEV2dDp3aGVuPSIyMDIxLTAyLTE2VDE0OjE4OjE4KzAxOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjIuMSAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+3sYJbwAAAxFJREFUeJzt3bGNg0AURdFh5YwWqICc/sshRyJ3MCWsLGzdcwp4IrmajL/s+z4+Y13XMcZ93/btf+H+dV1jjL8PrcNPEABpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgLTlOI6nvwEecJ7n8AIQ9/rd/7vbt/9/XgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIM19AKLcBwD3AexX9ycvAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQ5j4AUe4DgPsA9qv7kxeANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEhzH4Ao9wHAfQD71f3JC0CaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApLkPQJT7AOA+gP3q/uQFIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDS3Acgyn0AcB/AfnV/8gKQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGnuAxDlPgC4D2C/uj95AUgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmAtGXbtqe/AR7jBSDtDR1+2RM4vMoLAAAAAElFTkSuQmCC');
+    background-size: 128px;
+    image-rendering: pixelated;
+
+}
+
+#pmg-nodes-editor .toolbar {
+
+    position: absolute;
+    top: 5px;
+    left: 5px;
+
+    z-index: 1;
+
+}
+
+#pmg-nodes-editor .toolbar .icon {
+
+    display: inline-block;
+
+    width: 32px;
+    height: 32px;
+
+    cursor: pointer;
+
+}
+
+#pmg-nodes-editor .node {
+
+    background: rgba(35,35,35,.7);
+    border: 1px solid #000;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+    height: auto;
+    min-width: 225px;
+    padding-bottom: 6px;
+    box-sizing: content-box;
+    box-shadow: 4px 5px 12px rgba(0, 0, 0, .5);
+
+}
+
+#pmg-nodes-editor .node .title {
+
+    position: relative;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;
+    padding: 8px;
+    overflow: hidden;
+    background-image: linear-gradient(0deg,hsla(0,0%,100%,.05) 0,hsla(0,0%,100%,.05) 40%,hsla(0,0%,100%,.19)),radial-gradient(70% 40px at center,hsla(105, 100%, 50%, 0.5) 0,rgba(0,0,0,0) 60%);
+
+}
+
+#pmg-nodes-editor .node .title .icon {
+
+    position: absolute;
+    left: 10px;
+    top: 5px;
+
+    width: 24px;
+    height: 24px;
+    
+}
+
+#pmg-nodes-editor .node .content {
+
+    display: table;
+    width: 100%;
+
+}
+
+#pmg-nodes-editor .node .content .column:not(:last-child) {
+    padding-right: 20px;
+}
+
+#pmg-nodes-editor .node .content .column {
+
+    display: table-cell;
+    white-space: nowrap;
+
+}
+
+#pmg-nodes-editor .node .inputs {
+    text-align: left;
+}
+
+#pmg-nodes-editor .node .control {
+
+    width: 100%;
+    padding: 10px 18px;
+
+}
+
+#pmg-nodes-editor .node input[type="number"],
+#pmg-nodes-editor .node input[type="text"] {
+
+    background-color: transparent;
+    color: #fff;
+
+    padding: 2px 6px;
+
+    border: 0.5px solid #fff;
+
+}
+
+#pmg-nodes-editor .node input[type="number"] {
+    width: 80px;
+}
+
+#pmg-nodes-editor .node input[type="text"] {
+    width: 100%;
+}
+
+#pmg-nodes-editor .node input:read-only {
+    cursor: default;
+}
+
+#pmg-nodes-editor .node .checkbox-control {
+    color: #fff;
+}
+
+#pmg-nodes-editor .node input[type="checkbox"] {
+
+    position: relative;
+    left: -6px;
+    top: -1px;
+
+    vertical-align: middle;
+
+    margin: 1px;
+
+}
+
+#pmg-nodes-editor .node select {
+
+    width: 100%;
+    
+    padding: 2px;
+
+    border: none;
+    
+}
+
+#pmg-nodes-editor .node .outputs {
+    text-align: right;
+}
+
+#pmg-nodes-editor .node .input-title,
+#pmg-nodes-editor .node .output-title {
+
+    display: inline-block;
+    vertical-align: middle;
+
+    margin: 10px 0;
+
+    color: #fff;
+    font-size: 13px;
+    line-height: 1;
+    
+}
+
+#pmg-nodes-editor .socket {
+
+    display: inline-block;
+    cursor: pointer;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    width: 16px;
+    height: 16px;
+    margin: 10px!important;
+    vertical-align: middle;
+    background: transparent;
+    position: relative;
+    z-index: 2;
+
+}
+
+#pmg-nodes-editor .socket:hover,
+#pmg-nodes-editor .socket.used {
+    background: #fff;
+}
+
+#pmg-nodes-editor .socket::after {
+
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 3px;
+    left: 16px;
+    display: inline-block;
+    border-style: solid;
+    border-width: 4px 0 4px 2.66667px;
+    border-color: transparent transparent transparent #fff;
+
+}
+
+#pmg-nodes-editor .connection .main-path {
+
+    stroke-width: 2px;
+    stroke: #fff;
+
+}
+
+.ContextMenu {
+
+    border: none;
+    border-radius: 5px;
+
+    box-shadow: 4px 5px 12px rgba(0, 0, 0, .5);
+
+}

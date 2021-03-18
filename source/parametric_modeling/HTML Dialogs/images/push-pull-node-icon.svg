@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="color" enable-background="new 0 0 24 24" height="512.005" viewBox="0 0 24.068 24" width="513.449" version="1.1" sodipodi:docname="push-pull-node-icon.svg" inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-width="1920" inkscape:window-height="970" id="namedview869" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" inkscape:zoom="1.063" inkscape:cx="216.663" inkscape:cy="238.786" inkscape:window-x="-12" inkscape:window-y="-12" inkscape:window-maximized="1" inkscape:current-layer="color" inkscape:document-rotation="0"/>
+  <path d="M12 8.957l-11.906 5.5L12 19.957l12-5.5z" fill="#2196f3" id="path854" sodipodi:nodetypes="ccccc"/>
+  <path d="M.088 14.457v4L12 23.957v-4z" fill="#64b5f6" id="path856" style="stroke-width:0.996318"/>
+  <path d="M12 23.957v-4l12-5.5v4z" fill="#42a5f5" id="path858"/>
+  <path d="M13.023 13.747h-2.07c-.571 0-1.036-.534-1.036-1.19l-.044-6.232H7.617c-.25 0-.456.339-.552.072a.794.794 0 01.135-.779L11.55.615a.566.566 0 01.879 0l4.348 5.003a.796.796 0 01.135.78c-.096.266-.3-.152-.552-.143l-2.41.094.11 6.207c.011.657-.465 1.191-1.036 1.191z" fill="#cfd8dc" id="path860" style="stroke-width:0.888459" sodipodi:nodetypes="ssscsscccscscss"/>
+  <path d="M9.594 10.103l-9.5 4.354 12 5.5v-6h-1.25c-.69 0-1.25-.561-1.25-1.25z" fill="#1d83d4" id="path862"/>
+  <path d="M.094 14.457v4l12 5.5v-4z" fill="#579ed6" id="path864"/>
+  <path d="M12.094.243c-.18 0-.36.067-.496.202l-4.91 4.82a.678.678 0 00-.153.75c.109.257.32.23.604.235l2.616.041v5.657a1.16 1.16 0 001.17 1.148h1.169z" fill="#b4bcc0" id="path866" style="stroke-width:0.926658" sodipodi:nodetypes="cccssccsscc"/>
+  <g id="g909" transform="translate(.068)">
+    <path d="M12 20a.49.49 0 01-.199-.042l-11.5-5a.499.499 0 01-.001-.916l6.5-2.83a.5.5 0 11.399.917L1.753 14.5 12 18.955 22.247 14.5 16.8 12.128a.5.5 0 01.399-.917l6.5 2.83a.501.501 0 01-.001.916l-11.5 5A.468.468 0 0112 20z" id="path890"/>
+    <path d="M12 24a.49.49 0 01-.199-.042l-11.5-5A.499.499 0 010 18.5v-4a.5.5 0 011 0v3.672l11 4.782 11-4.782V14.5a.5.5 0 011 0v4a.499.499 0 01-.301.458l-11.5 5A.49.49 0 0112 24z" id="path892"/>
+    <path d="M12 24a.5.5 0 01-.5-.5v-4a.5.5 0 011 0v4a.5.5 0 01-.5.5z" id="path894"/>
+    <path d="M13.5 14h-3c-.551 0-1-.449-1-1V6.5h-3a.5.5 0 01-.354-.854l5.5-5.5a.5.5 0 01.707 0l5.5 5.5a.499.499 0 01-.353.854h-3V13c0 .551-.449 1-1 1zM7.707 5.5H10a.5.5 0 01.5.5v7h3V6a.5.5 0 01.5-.5h2.293L12 1.207z" id="path896"/>
+  </g>
+</svg>
