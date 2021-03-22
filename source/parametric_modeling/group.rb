@@ -173,6 +173,41 @@ module ParametricModeling
 
     end
 
+    # Makes a group.
+    #
+    # @param [Array<Sketchup::Group>] groups
+    # @param [String] name
+    # @param [Sketchup::Material, nil] material
+    # @param [Sketchup::Layer, nil] layer
+    # @raise [ArgumentError]
+    #
+    # @return [Sketchup::Group]
+    def self.make(groups, name, material, layer)
+
+      raise ArgumentError, 'Groups must be an Array.'\
+        unless groups.is_a?(Array)
+
+      raise ArgumentError, 'Name must be a String.'\
+        unless name.is_a?(String)
+  
+      raise ArgumentError, 'Material must be a Sketchup::Material or nil.'\
+        unless material.is_a?(Sketchup::Material) || material.nil?
+  
+      raise ArgumentError, 'Layer must be a Sketchup::Layer or nil.'\
+        unless layer.is_a?(Sketchup::Layer) || layer.nil?
+
+      group = Sketchup.active_model.entities.add_group(groups)
+
+      group.name = name
+      group.material = material
+      group.layer = layer
+
+      group.set_attribute(CODE_NAME, 'isParametric', true)
+
+      group
+
+    end
+
   end
 
 end

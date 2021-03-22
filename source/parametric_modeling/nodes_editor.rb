@@ -66,10 +66,13 @@ module ParametricModeling
           'libraries/rete.min.js',
           'libraries/rete/vue-render-plugin.min.js',
           'libraries/rete/connection-plugin.min.js',
+          'libraries/rete/minimap-plugin.min.js',
+          'libraries/drooltip.js',
           'libraries/context-menu.js',
           'nodes-editor.js'
         ],
         styles: [
+          'libraries/drooltip.css',
           'nodes-editor.css'
         ]
 
@@ -153,6 +156,21 @@ module ParametricModeling
             color: 'rgba(255, 100, 101, 0.5)'
           },
 
+          "Multiply": {
+            path: File.join(images_dir, 'multiply-node-icon.svg'),
+            color: 'rgba(125, 210, 240, 0.5)'
+          },
+
+          "Divide": {
+            path: File.join(images_dir, 'divide-node-icon.svg'),
+            color: 'rgba(255, 100, 101, 0.5)'
+          },
+
+          "Calculate": {
+            path: File.join(images_dir, 'calculate-node-icon.svg'),
+            color: 'rgba(5, 112, 150, 0.5)'
+          },
+
           "Point": {
             path: File.join(images_dir, 'point-node-icon.svg'),
             color: 'rgba(229, 157, 31, 0.5)'
@@ -163,6 +181,21 @@ module ParametricModeling
             color: 'rgba(229, 56, 4, 0.5)'
           },
 
+          "Intersect solids": {
+            path: File.join(images_dir, 'intersect-solids-node-icon.svg'),
+            color: 'rgba(156, 129, 238, 0.5)'
+          },
+
+          "Unite solids": {
+            path: File.join(images_dir, 'unite-solids-node-icon.svg'),
+            color: 'rgba(125, 210, 240, 0.5)'
+          },
+
+          "Subtract solids": {
+            path: File.join(images_dir, 'subtract-solids-node-icon.svg'),
+            color: 'rgba(255, 100, 101, 0.5)'
+          },
+
           "Push/Pull": {
             path: File.join(images_dir, 'push-pull-node-icon.svg'),
             color: 'rgba(29, 131, 212, 0.5)'
@@ -170,24 +203,44 @@ module ParametricModeling
 
           "Move": {
             path: File.join(images_dir, 'move-node-icon.svg'),
-            color: 'rgba(235, 129, 161, 0.5)'
+            color: 'rgba(255, 128, 191, 0.5)'
           },
 
           "Rotate": {
             path: File.join(images_dir, 'rotate-node-icon.svg'),
-            color: 'rgba(51, 141, 239, 0.5)'
+            color: 'rgba(255, 215, 0, 0.5)'
           },
 
           "Scale": {
             path: File.join(images_dir, 'scale-node-icon.svg'),
-            color: 'rgba(86, 196, 240, 0.5)'
+            color: 'rgba(153, 204, 0, 0.5)'
+          },
+
+          "Paint": {
+            path: File.join(images_dir, 'paint-node-icon.svg'),
+            color: 'rgba(0, 206, 209, 0.5)'
           },
 
           "Copy": {
             path: File.join(images_dir, 'copy-node-icon.svg'),
             color: 'rgba(160, 160, 165, 0.5)'
+          },
+
+          "Select": {
+            path: File.join(images_dir, 'select-node-icon.svg'),
+            color: 'rgba(204, 164, 0, 0.5)'
+          },
+
+          "Make group": {
+            path: File.join(images_dir, 'make-group-node-icon.svg'),
+            color: 'rgba(0, 0, 0, 0.8)'
           }
 
+        },
+
+        help: {
+          path: File.join(images_dir, 'help-icon.svg'),
+          title: 'Access online help'
         }
 
       }
@@ -279,6 +332,55 @@ module ParametricModeling
 
     end
 
+    # Tags all nodes as valid in Editor.
+    #
+    # @return [Boolean]
+    def self.tag_nodes_as_valid
+
+      if SESSION[:nodes_editor][:html_dialog_open?]
+
+        raise 'Parametric Modeling Nodes Editor HTML Dialog instance is missing.'\
+          if SESSION[:nodes_editor][:html_dialog].nil?
+
+        SESSION[:nodes_editor][:html_dialog].execute_script(
+          'PMG.NodesEditor.tagNodesAsValid()'
+        )
+
+        return true
+
+      end
+
+      false
+
+    end
+
+    # Tags a node as invalid in Editor.
+    #
+    # @param [Integer] node_id
+    #
+    # @return [Boolean]
+    def self.tag_node_as_invalid(node_id)
+
+      raise ArgumentError, 'Node ID must be an Integer.'\
+        unless node_id.is_a?(Integer)
+
+      if SESSION[:nodes_editor][:html_dialog_open?]
+
+        raise 'Parametric Modeling Nodes Editor HTML Dialog instance is missing.'\
+          if SESSION[:nodes_editor][:html_dialog].nil?
+
+        SESSION[:nodes_editor][:html_dialog].execute_script(
+          'PMG.NodesEditor.tagNodeAsInvalid(' + node_id.to_s + ')'
+        )
+
+        return true
+
+      end
+
+      false
+
+    end
+
     # Builds Nodes Editor.
     def initialize
 
@@ -344,11 +446,17 @@ module ParametricModeling
         ParametricEntities.freeze
       end
 
-      @html_dialog.add_action_callback('redrawParametricEntities') do |_ctx, schema_json|
+      @html_dialog.add_action_callback('exportModelSchema') do |_ctx, schema_json, redraw|
 
         self.class.schema = schema_json
-        ParametricEntities.redraw
+        ParametricEntities.redraw if redraw
 
+      end
+
+      @html_dialog.add_action_callback('accessOnlineHelp') do |_ctx|
+        UI.openURL(
+          'https://github.com/SamuelTS/SketchUp-Parametric-Modeling-Plugin#nodes-editor'
+        )
       end
 
       @html_dialog.set_on_closed { SESSION[:nodes_editor][:html_dialog_open?] = false }

@@ -20,6 +20,7 @@
 require 'sketchup'
 require 'parametric_modeling/nodes_editor'
 require 'parametric_modeling/node'
+require 'parametric_modeling/node_error'
 
 # Parametric Modeling plugin namespace.
 module ParametricModeling
@@ -44,26 +45,36 @@ module ParametricModeling
     # Draws all parametric entities depending on Nodes Editor schema.
     def self.draw
 
-      model = Sketchup.active_model
+      begin
 
-      model.start_operation('Draw Parametric Entities', disable_ui = true)
+        NodesEditor.tag_nodes_as_valid
+          
+        model = Sketchup.active_model
+        model.start_operation('Draw Parametric Entities', disable_ui = true)
+        
+        SESSION[:nodes] = NodesEditor.schema[:nodes]
+
+        SESSION[:nodes].each_value do |node|
+
+          node[:computed?] = false
+          
+          node[:computed_data] = {
+            input: {},
+            output: {}
+          }
+          
+        end
+
+        SESSION[:nodes].each_value { |node| Node.compute_once(node) }
+
+        model.commit_operation
+
+      rescue NodeError => node_error
       
-      SESSION[:nodes] = NodesEditor.schema[:nodes]
+        model.abort_operation
+        NodesEditor.tag_node_as_invalid(node_error.node_id.to_i)
 
-      SESSION[:nodes].each_value do |node|
-
-        node[:computed?] = false
-        
-        node[:computed_data] = {
-          input: {},
-          output: {}
-        }
-        
       end
-
-      SESSION[:nodes].each_value { |node| Node.compute_once(node) }
-
-      model.commit_operation
 
     end
 

@@ -25,6 +25,19 @@ module ParametricModeling
   # Utilities.
   module Utils
 
+    # Checks if a number is valid.
+    # 
+    # @return [Boolean] true if number is valid, false otherwise.
+    def self.valid_num?(number)
+
+      return true if number.is_a?(Integer) || number.is_a?(Float)
+
+      return true if number.is_a?(String) && number.match(/^-?(0|[1-9][0-9]*)(\.[0-9]+)?$/)
+
+      false
+
+    end
+
     # Converts a number to a length according to model length unit.
     #
     # @param [Integer, Float] number
@@ -37,18 +50,59 @@ module ParametricModeling
         unless number.is_a?(Integer) || number.is_a?(Float) 
       
       length_unit = Sketchup.active_model.options['UnitsOptions']['LengthUnit']
+      number = number.to_f
 
       if length_unit == Length::Inches
-        number.to_f.inch
+        number.inch
       elsif length_unit == Length::Feet
-        number.to_f.feet
+        number.feet
       elsif length_unit == Length::Millimeter
-        number.to_f.mm
+        number.mm
       elsif length_unit == Length::Centimeter
-        number.to_f.cm
+        number.cm
       else
-        number.to_f.m
+        number.m
       end
+
+    end
+
+    # Converts a length to a number according to model length unit.
+    #
+    # @param [Length] length
+    # @raise [ArgumentError]
+    #
+    # @return [Float] Default: meters.
+    def self.ul2num(length)
+
+      raise ArgumentError, 'Length must be a Length.'\
+        unless length.is_a?(Length)
+      
+      length_unit = Sketchup.active_model.options['UnitsOptions']['LengthUnit']
+
+      if length_unit == Length::Inches
+        length.to_inch
+      elsif length_unit == Length::Feet
+        length.to_feet
+      elsif length_unit == Length::Millimeter
+        length.to_mm
+      elsif length_unit == Length::Centimeter
+        length.to_cm
+      else
+        length.to_m
+      end
+
+    end
+
+    # Generates a random color.
+    #
+    # @return [Sketchup::Color]
+    def self.rand_color
+
+      Sketchup::Color.new(
+        rand(0..255), # red
+        rand(0..255), # green
+        rand(0..255) # blue
+      )
 
     end
 

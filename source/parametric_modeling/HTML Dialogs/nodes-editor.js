@@ -25,8 +25,24 @@ PMG.NodesEditor.initializeSockets = () => {
 
 PMG.NodesEditor.initializeSockets()
 
-PMG.cloneObject = (object) => {
+PMG.Utils = {}
+
+PMG.Utils.cloneObject = object => {
     return JSON.parse(JSON.stringify(object))
+}
+
+PMG.Utils.isValidNumber = number => {
+
+    if ( typeof number === 'number' ) {
+        return true
+    }
+
+    if ( typeof number === 'string' && /^-?(0|[1-9][0-9]*)(\.[0-9]+)?$/.test(number) ) {
+        return true
+    }
+
+    return false
+
 }
 
 PMG.NodesEditor.initializeControls = () => {
@@ -42,7 +58,7 @@ PMG.NodesEditor.initializeControls = () => {
         data() {
 
             return {
-                value: 0
+                value: ''
             }
 
         },
@@ -51,15 +67,19 @@ PMG.NodesEditor.initializeControls = () => {
 
             change(event) {
 
-                this.value = + event.target.value
-                this.update()
+                if ( PMG.Utils.isValidNumber(event.target.value) ) {
+
+                    this.value = parseFloat(event.target.value)
+
+                    this.update()
+
+                }
 
             },
 
             update() {
 
-                if ( this.ikey )
-                    this.putData(this.ikey, this.value)
+                this.putData(this.ikey, this.value)
 
                 this.emitter.trigger('process')
 
@@ -68,7 +88,11 @@ PMG.NodesEditor.initializeControls = () => {
         },
 
         mounted() {
-            this.value = this.getData(this.ikey)
+
+            if ( PMG.Utils.isValidNumber(this.getData(this.ikey)) ) {
+                this.value = this.getData(this.ikey)
+            }
+
         }
         
     }
@@ -92,15 +116,15 @@ PMG.NodesEditor.initializeControls = () => {
             change(event) {
 
                 this.value = event.target.value
+
                 this.update()
 
             },
 
             update() {
 
-                if ( this.ikey )
-                    this.putData(this.ikey, this.value)
-
+                this.putData(this.ikey, this.value)
+                
                 this.emitter.trigger('process')
 
             }
@@ -137,15 +161,15 @@ PMG.NodesEditor.initializeControls = () => {
             change(event) {
 
                 this.checked = event.target.checked
+
                 this.update()
 
             },
 
             update() {
 
-                if ( this.ikey )
-                    this.putData(this.ikey, this.checked)
-
+                this.putData(this.ikey, this.checked)
+                
                 this.emitter.trigger('process')
 
             }
@@ -173,7 +197,7 @@ PMG.NodesEditor.initializeControls = () => {
         data() {
 
             var nodeSelectedMaterial = this.getData(this.ikey)
-            var nodeSelectableMaterials = PMG.cloneObject(SketchUpMaterials)
+            var nodeSelectableMaterials = PMG.Utils.cloneObject(SketchUpMaterials)
 
             nodeSelectableMaterials.forEach(nodeSelectableMaterial => {
 
@@ -196,15 +220,15 @@ PMG.NodesEditor.initializeControls = () => {
             change(event) {
 
                 this.value = event.target.value
+
                 this.update()
 
             },
 
             update() {
 
-                if ( this.ikey )
-                    this.putData(this.ikey, this.value)
-
+                this.putData(this.ikey, this.value)
+                
                 this.emitter.trigger('process')
 
             }
@@ -232,7 +256,7 @@ PMG.NodesEditor.initializeControls = () => {
         data() {
 
             var nodeSelectedLayer = this.getData(this.ikey)
-            var nodeSelectableLayers = PMG.cloneObject(SketchUpLayers)
+            var nodeSelectableLayers = PMG.Utils.cloneObject(SketchUpLayers)
 
             nodeSelectableLayers.forEach(nodeSelectableLayer => {
 
@@ -255,15 +279,15 @@ PMG.NodesEditor.initializeControls = () => {
             change(event) {
 
                 this.value = event.target.value
+
                 this.update()
 
             },
 
             update() {
 
-                if ( this.ikey )
-                    this.putData(this.ikey, this.value)
-
+                this.putData(this.ikey, this.value)
+                
                 this.emitter.trigger('process')
 
             }
@@ -386,7 +410,7 @@ class DrawBoxReteComponent extends Rete.Component {
     }
 
     worker(_node, _inputs, outputs) {
-        outputs['groups'] = ''
+        outputs['groups'] = []
     }
 
 }
@@ -417,7 +441,7 @@ class DrawPrismReteComponent extends Rete.Component {
     }
 
     worker(_node, _inputs, outputs) {
-        outputs['groups'] = ''
+        outputs['groups'] = []
     }
 
 }
@@ -448,7 +472,7 @@ class DrawCylinderReteComponent extends Rete.Component {
     }
 
     worker(_node, _inputs, outputs) {
-        outputs['groups'] = ''
+        outputs['groups'] = []
     }
 
 }
@@ -479,7 +503,7 @@ class DrawPyramidReteComponent extends Rete.Component {
     }
 
     worker(_node, _inputs, outputs) {
-        outputs['groups'] = ''
+        outputs['groups'] = []
     }
 
 }
@@ -510,7 +534,7 @@ class DrawConeReteComponent extends Rete.Component {
     }
 
     worker(_node, _inputs, outputs) {
-        outputs['groups'] = ''
+        outputs['groups'] = []
     }
 
 }
@@ -537,7 +561,7 @@ class DrawSphereReteComponent extends Rete.Component {
     }
 
     worker(_node, _inputs, outputs) {
-        outputs['groups'] = ''
+        outputs['groups'] = []
     }
 
 }
@@ -551,13 +575,18 @@ class NumberReteComponent extends Rete.Component {
     builder(node) {
 
         var number = new Rete.Output('number', 'Number', PMG.NodesEditor.sockets.number)
-        return node.addControl(new NumberReteControl(this.editor, 'number')).addOutput(number)
+
+        return node
+            .addControl(new TextReteControl(this.editor, 'label', 'Label'))
+            .addControl(new NumberReteControl(this.editor, 'number'))
+            .addOutput(number)
 
     }
 
     worker(node, _inputs, outputs) {
-        outputs['number'] = node.data.number
+        outputs['number'] = PMG.Utils.isValidNumber(node.data.number) ? node.data.number : 0
     }
+
 }
 
 class AddReteComponent extends Rete.Component {
@@ -568,19 +597,19 @@ class AddReteComponent extends Rete.Component {
 
     builder (node) {
 
-        var number1 = new Rete.Input('number1', 'Number', PMG.NodesEditor.sockets.number)
-        var number2 = new Rete.Input('number2', 'Number', PMG.NodesEditor.sockets.number)
+        var inputNumber1 = new Rete.Input('number1', 'Number', PMG.NodesEditor.sockets.number)
+        inputNumber1.addControl(new NumberReteControl(this.editor, 'number1'))
 
-        var number = new Rete.Output('number', 'Number', PMG.NodesEditor.sockets.number)
+        var inputNumber2 = new Rete.Input('number2', 'Number', PMG.NodesEditor.sockets.number)
+        inputNumber2.addControl(new NumberReteControl(this.editor, 'number2'))
 
-        number1.addControl(new NumberReteControl(this.editor, 'number1'))
-        number2.addControl(new NumberReteControl(this.editor, 'number2'))
+        var outputNumber = new Rete.Output('number', 'Number', PMG.NodesEditor.sockets.number)
 
         return node
-            .addInput(number1)
-            .addInput(number2)
+            .addInput(inputNumber1)
+            .addInput(inputNumber2)
             .addControl(new NumberReteControl(this.editor, 'preview', '', true))
-            .addOutput(number)
+            .addOutput(outputNumber)
 
     }
 
@@ -588,7 +617,21 @@ class AddReteComponent extends Rete.Component {
 
         var number1 = inputs['number1'].length ? inputs['number1'][0] : node.data.number1
         var number2 = inputs['number2'].length ? inputs['number2'][0] : node.data.number2
+
+        if ( PMG.Utils.isValidNumber(number1) ) {
+            number1 = parseFloat(number1)
+        } else {
+            number1 = 0
+        }
+
+        if ( PMG.Utils.isValidNumber(number2) ) {
+            number2 = parseFloat(number2)
+        } else {
+            number2 = 0
+        }
+        
         var sum = number1 + number2
+        sum = Math.round((sum + Number.EPSILON) * 100) / 100
         
         this.editor.nodes.find(n => n.id == node.id).controls.get('preview').setValue(sum)
         outputs['number'] = sum
@@ -605,19 +648,19 @@ class SubtractReteComponent extends Rete.Component {
 
     builder (node) {
 
-        var number1 = new Rete.Input('number1', 'Number', PMG.NodesEditor.sockets.number)
-        var number2 = new Rete.Input('number2', 'Number', PMG.NodesEditor.sockets.number)
+        var inputNumber1 = new Rete.Input('number1', 'Number', PMG.NodesEditor.sockets.number)
+        inputNumber1.addControl(new NumberReteControl(this.editor, 'number1'))
 
-        var number = new Rete.Output('number', 'Number', PMG.NodesEditor.sockets.number)
+        var inputNumber2 = new Rete.Input('number2', 'Number', PMG.NodesEditor.sockets.number)
+        inputNumber2.addControl(new NumberReteControl(this.editor, 'number2'))
 
-        number1.addControl(new NumberReteControl(this.editor, 'number1'))
-        number2.addControl(new NumberReteControl(this.editor, 'number2'))
+        var outputNumber = new Rete.Output('number', 'Number', PMG.NodesEditor.sockets.number)
 
         return node
-            .addInput(number1)
-            .addInput(number2)
+            .addInput(inputNumber1)
+            .addInput(inputNumber2)
             .addControl(new NumberReteControl(this.editor, 'preview', '', true))
-            .addOutput(number)
+            .addOutput(outputNumber)
 
     }
 
@@ -625,10 +668,255 @@ class SubtractReteComponent extends Rete.Component {
 
         var number1 = inputs['number1'].length ? inputs['number1'][0] : node.data.number1
         var number2 = inputs['number2'].length ? inputs['number2'][0] : node.data.number2
+
+        if ( PMG.Utils.isValidNumber(number1) ) {
+            number1 = parseFloat(number1)
+        } else {
+            number1 = 0
+        }
+
+        if ( PMG.Utils.isValidNumber(number2) ) {
+            number2 = parseFloat(number2)
+        } else {
+            number2 = 0
+        }
+        
         var diff = number1 - number2
+        diff = Math.round((diff + Number.EPSILON) * 100) / 100
         
         this.editor.nodes.find(n => n.id == node.id).controls.get('preview').setValue(diff)
         outputs['number'] = diff
+
+    }
+
+}
+
+class MultiplyReteComponent extends Rete.Component {
+
+    constructor(){
+        super('Multiply')
+    }
+
+    builder (node) {
+
+        var inputNumber1 = new Rete.Input('number1', 'Number', PMG.NodesEditor.sockets.number)
+        inputNumber1.addControl(new NumberReteControl(this.editor, 'number1'))
+
+        var inputNumber2 = new Rete.Input('number2', 'Number', PMG.NodesEditor.sockets.number)
+        inputNumber2.addControl(new NumberReteControl(this.editor, 'number2'))
+
+        var outputNumber = new Rete.Output('number', 'Number', PMG.NodesEditor.sockets.number)
+
+        return node
+            .addInput(inputNumber1)
+            .addInput(inputNumber2)
+            .addControl(new NumberReteControl(this.editor, 'preview', '', true))
+            .addOutput(outputNumber)
+
+    }
+
+    worker(node, inputs, outputs) {
+
+        var number1 = inputs['number1'].length ? inputs['number1'][0] : node.data.number1
+        var number2 = inputs['number2'].length ? inputs['number2'][0] : node.data.number2
+
+        if ( PMG.Utils.isValidNumber(number1) ) {
+            number1 = parseFloat(number1)
+        } else {
+            number1 = 0
+        }
+
+        if ( PMG.Utils.isValidNumber(number2) ) {
+            number2 = parseFloat(number2)
+        } else {
+            number2 = 0
+        }
+        
+        var product = number1 * number2
+        
+        this.editor.nodes.find(n => n.id == node.id).controls.get('preview').setValue(product)
+        outputs['number'] = product
+
+    }
+
+}
+
+class DivideReteComponent extends Rete.Component {
+
+    constructor(){
+        super('Divide')
+    }
+
+    builder (node) {
+
+        var dividend = new Rete.Input('dividend', 'Dividend', PMG.NodesEditor.sockets.number)
+        dividend.addControl(new NumberReteControl(this.editor, 'dividend', 'Dividend'))
+
+        var divisor = new Rete.Input('divisor', 'Divisor', PMG.NodesEditor.sockets.number)
+        divisor.addControl(new NumberReteControl(this.editor, 'divisor', 'Divisor'))
+
+        var quotient = new Rete.Output('quotient', 'Quotient', PMG.NodesEditor.sockets.number)
+        var remainder = new Rete.Output('remainder', 'Remainder', PMG.NodesEditor.sockets.number)
+
+        return node
+            .addInput(dividend)
+            .addInput(divisor)
+            .addControl(new NumberReteControl(this.editor, 'preview', '', true))
+            .addOutput(quotient)
+            .addOutput(remainder)
+
+    }
+
+    worker(node, inputs, outputs) {
+
+        var dividend = inputs['dividend'].length ? inputs['dividend'][0] : node.data.dividend
+        var divisor = inputs['divisor'].length ? inputs['divisor'][0] : node.data.divisor
+
+        if ( PMG.Utils.isValidNumber(dividend) ) {
+            dividend = parseFloat(dividend)
+        } else {
+            dividend = 0
+        }
+
+        if ( PMG.Utils.isValidNumber(divisor) ) {
+            divisor = parseFloat(divisor)
+        } else {
+            divisor = 1
+        }
+
+        var quotient = dividend / divisor
+        var remainder = dividend % divisor
+        
+        this.editor.nodes.find(n => n.id == node.id).controls.get('preview').setValue(quotient)
+        outputs['quotient'] = quotient
+        outputs['remainder'] = remainder
+
+    }
+
+}
+
+class CalculateReteComponent extends Rete.Component {
+
+    constructor(){
+        super('Calculate')
+    }
+
+    builder (node) {
+
+        var inputA = new Rete.Input('a', 'Variable A', PMG.NodesEditor.sockets.number)
+        inputA.addControl(new NumberReteControl(this.editor, 'a', 'Variable A'))
+
+        var inputB = new Rete.Input('b', 'Variable B', PMG.NodesEditor.sockets.number)
+        inputB.addControl(new NumberReteControl(this.editor, 'b', 'Variable B'))
+
+        var inputC = new Rete.Input('c', 'Variable C', PMG.NodesEditor.sockets.number)
+        inputC.addControl(new NumberReteControl(this.editor, 'c', 'Variable C'))
+
+        var inputD = new Rete.Input('d', 'Variable D', PMG.NodesEditor.sockets.number)
+        inputD.addControl(new NumberReteControl(this.editor, 'd', 'Variable D'))
+
+        var inputE = new Rete.Input('e', 'Variable E', PMG.NodesEditor.sockets.number)
+        inputE.addControl(new NumberReteControl(this.editor, 'e', 'Variable E'))
+        
+        var inputF = new Rete.Input('f', 'Variable F', PMG.NodesEditor.sockets.number)
+        inputF.addControl(new NumberReteControl(this.editor, 'f', 'Variable F'))
+
+        var inputG = new Rete.Input('g', 'Variable G', PMG.NodesEditor.sockets.number)
+        inputG.addControl(new NumberReteControl(this.editor, 'g', 'Variable G'))
+
+        var inputH = new Rete.Input('h', 'Variable H', PMG.NodesEditor.sockets.number)
+        inputH.addControl(new NumberReteControl(this.editor, 'h', 'Variable H'))
+
+        var inputI = new Rete.Input('i', 'Variable I', PMG.NodesEditor.sockets.number)
+        inputI.addControl(new NumberReteControl(this.editor, 'i', 'Variable I'))
+
+        var inputJ = new Rete.Input('j', 'Variable J', PMG.NodesEditor.sockets.number)
+        inputJ.addControl(new NumberReteControl(this.editor, 'j', 'Variable J'))
+
+        var inputK = new Rete.Input('k', 'Variable K', PMG.NodesEditor.sockets.number)
+        inputK.addControl(new NumberReteControl(this.editor, 'k', 'Variable K'))
+
+        var inputL = new Rete.Input('l', 'Variable L', PMG.NodesEditor.sockets.number)
+        inputL.addControl(new NumberReteControl(this.editor, 'l', 'Variable L'))
+
+        var outputNumber = new Rete.Output('number', 'Number', PMG.NodesEditor.sockets.number)
+
+        return node
+            .addControl(new TextReteControl(this.editor, 'formula', 'Formula example: round(a) * b'))
+            .addInput(inputA)
+            .addInput(inputB)
+            .addInput(inputC)
+            .addInput(inputD)
+            .addInput(inputE)
+            .addInput(inputF)
+            .addInput(inputG)
+            .addInput(inputH)
+            .addInput(inputI)
+            .addInput(inputJ)
+            .addInput(inputK)
+            .addInput(inputL)
+            .addOutput(outputNumber)
+
+    }
+
+    worker(node, inputs, outputs) {
+
+        if ( node.data.formula === undefined ) {
+
+            outputs['number'] = 0
+            return
+            
+        }
+
+        var a = inputs['a'].length ? inputs['a'][0] : node.data.a
+        var b = inputs['b'].length ? inputs['b'][0] : node.data.b
+        var c = inputs['c'].length ? inputs['c'][0] : node.data.c
+        var d = inputs['d'].length ? inputs['d'][0] : node.data.d
+        var e = inputs['e'].length ? inputs['e'][0] : node.data.e
+        var f = inputs['f'].length ? inputs['f'][0] : node.data.f
+        var g = inputs['g'].length ? inputs['g'][0] : node.data.g
+        var h = inputs['h'].length ? inputs['h'][0] : node.data.h
+        var i = inputs['i'].length ? inputs['i'][0] : node.data.i
+        var j = inputs['j'].length ? inputs['j'][0] : node.data.j
+        var k = inputs['k'].length ? inputs['k'][0] : node.data.k
+        var l = inputs['l'].length ? inputs['l'][0] : node.data.l
+        var pi = Math.PI
+
+        a = PMG.Utils.isValidNumber(a) ? a : 0
+        b = PMG.Utils.isValidNumber(b) ? b : 0
+        c = PMG.Utils.isValidNumber(c) ? c : 0
+        d = PMG.Utils.isValidNumber(d) ? d : 0
+        e = PMG.Utils.isValidNumber(e) ? e : 0
+        f = PMG.Utils.isValidNumber(f) ? f : 0
+        g = PMG.Utils.isValidNumber(g) ? g : 0
+        h = PMG.Utils.isValidNumber(h) ? h : 0
+        i = PMG.Utils.isValidNumber(i) ? i : 0
+        j = PMG.Utils.isValidNumber(j) ? j : 0
+        k = PMG.Utils.isValidNumber(k) ? k : 0
+        l = PMG.Utils.isValidNumber(l) ? l : 0
+
+        var fixed_formula = node.data.formula
+            .replace(/min/g, 'Math.min')
+            .replace(/max/g, 'Math.max')
+            .replace(/round/g, 'Math.round')
+            .replace(/ceil/g, 'Math.ceil')
+            .replace(/floor/g, 'Math.floor')
+            .replace(/asinh/g, 'Math.asinh')
+            .replace(/asin/g, 'Math.asin')
+            .replace(/sin/g, 'Math.sin')
+            .replace(/acosh/g, 'Math.acosh')
+            .replace(/acos/g, 'Math.acos')
+            .replace(/cos/g, 'Math.cos')
+            .replace(/atanh/g, 'Math.atanh')
+            .replace(/atan/g, 'Math.atan')
+            .replace(/tan/g, 'Math.tan')
+            .replace(/exp/g, 'Math.exp')
+            .replace(/log2/g, 'Math.log2')
+            .replace(/log10/g, 'Math.log10')
+            .replace(/sqrt/g, 'Math.sqrt')
+            .replace(/cbrt/g, 'Math.cbrt')
+
+        outputs['number'] = eval(fixed_formula)
 
     }
 
@@ -662,7 +950,13 @@ class PointReteComponent extends Rete.Component {
     }
 
     worker(node, _inputs, outputs) {
-        outputs['point'] = { x: node.data.x, y: node.data.y, z: node.data.z }
+
+        var x = PMG.Utils.isValidNumber(node.data.x) ? node.data.x : 0
+        var y = PMG.Utils.isValidNumber(node.data.y) ? node.data.y : 0
+        var z = PMG.Utils.isValidNumber(node.data.z) ? node.data.z : 0
+
+        outputs['point'] = { x, y, z }
+
     }
 }
 
@@ -694,8 +988,92 @@ class VectorReteComponent extends Rete.Component {
     }
 
     worker(node, _inputs, outputs) {
-        outputs['vector'] = { x: node.data.x, y: node.data.y, z: node.data.z }
+
+        var x = PMG.Utils.isValidNumber(node.data.x) ? node.data.x : 0
+        var y = PMG.Utils.isValidNumber(node.data.y) ? node.data.y : 0
+        var z = PMG.Utils.isValidNumber(node.data.z) ? node.data.z : 0
+
+        outputs['vector'] = { x, y, z }
+
     }
+}
+
+class IntersectSolidsReteComponent extends Rete.Component {
+
+    constructor(){
+        super('Intersect solids')
+    }
+
+    builder (node) {
+
+        var inputGroups1 = new Rete.Input('groups1', 'Group', PMG.NodesEditor.sockets.groups)
+        var inputGroups2 = new Rete.Input('groups2', 'Group', PMG.NodesEditor.sockets.groups)
+
+        var outputGroups = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+
+        return node
+            .addInput(inputGroups1)
+            .addInput(inputGroups2)
+            .addOutput(outputGroups)
+
+    }
+
+    worker(_node, _inputs, outputs) {
+        outputs['groups'] = []
+    }
+
+}
+
+class UniteSolidsReteComponent extends Rete.Component {
+
+    constructor(){
+        super('Unite solids')
+    }
+
+    builder (node) {
+
+        var inputGroups1 = new Rete.Input('groups1', 'Group', PMG.NodesEditor.sockets.groups)
+        var inputGroups2 = new Rete.Input('groups2', 'Group', PMG.NodesEditor.sockets.groups)
+
+        var outputGroups = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+
+        return node
+            .addInput(inputGroups1)
+            .addInput(inputGroups2)
+            .addOutput(outputGroups)
+
+    }
+
+    worker(_node, _inputs, outputs) {
+        outputs['groups'] = []
+    }
+
+}
+
+class SubtractSolidsReteComponent extends Rete.Component {
+
+    constructor(){
+        super('Subtract solids')
+    }
+
+    builder (node) {
+
+        var inputGroups1 = new Rete.Input('groups1', 'Group', PMG.NodesEditor.sockets.groups)
+        var inputGroups2 = new Rete.Input('groups2', 'Group', PMG.NodesEditor.sockets.groups)
+
+        var outputGroups = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+
+        return node
+            .addInput(inputGroups1)
+            .addInput(inputGroups2)
+            .addOutput(outputGroups)
+
+    }
+
+    worker(_node, _inputs, outputs) {
+        outputs['groups'] = []
+    }
+
 }
 
 class PushPullReteComponent extends Rete.Component {
@@ -723,7 +1101,7 @@ class PushPullReteComponent extends Rete.Component {
     }
 
     worker(_node, _inputs, outputs) {
-        outputs['groups'] = ''
+        outputs['groups'] = []
     }
 
 }
@@ -749,7 +1127,7 @@ class MoveReteComponent extends Rete.Component {
     }
 
     worker(_node, _inputs, outputs) {
-        outputs['groups'] = ''
+        outputs['groups'] = []
     }
 
 }
@@ -780,7 +1158,7 @@ class RotateReteComponent extends Rete.Component {
     }
 
     worker(_node, _inputs, outputs) {
-        outputs['groups'] = ''
+        outputs['groups'] = []
     }
 
 }
@@ -815,7 +1193,32 @@ class ScaleReteComponent extends Rete.Component {
     }
 
     worker(_node, _inputs, outputs) {
-        outputs['groups'] = ''
+        outputs['groups'] = []
+    }
+
+}
+
+class PaintReteComponent extends Rete.Component {
+
+    constructor(){
+        super('Paint')
+    }
+
+    builder (node) {
+
+        var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+
+        var outputGroups = new Rete.Output('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+
+        return node
+            .addInput(inputGroups)
+            .addControl(new MaterialReteControl(this.editor, 'material'))
+            .addOutput(outputGroups)
+
+    }
+
+    worker(_node, _inputs, outputs) {
+        outputs['groups'] = []
     }
 
 }
@@ -843,7 +1246,129 @@ class CopyReteComponent extends Rete.Component {
     }
 
     worker(_node, _inputs, outputs) {
-        outputs['groups'] = ''
+        outputs['groups'] = []
+    }
+
+}
+
+class SelectReteComponent extends Rete.Component {
+
+    constructor(){
+        super('Select')
+    }
+
+    builder (node) {
+
+        var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+
+        var inputA = new Rete.Input('a', 'Variable A', PMG.NodesEditor.sockets.number)
+        inputA.addControl(new NumberReteControl(this.editor, 'a', 'Variable A'))
+
+        var inputB = new Rete.Input('b', 'Variable B', PMG.NodesEditor.sockets.number)
+        inputB.addControl(new NumberReteControl(this.editor, 'b', 'Variable B'))
+
+        var inputC = new Rete.Input('c', 'Variable C', PMG.NodesEditor.sockets.number)
+        inputC.addControl(new NumberReteControl(this.editor, 'c', 'Variable C'))
+
+        var inputD = new Rete.Input('d', 'Variable D', PMG.NodesEditor.sockets.number)
+        inputD.addControl(new NumberReteControl(this.editor, 'd', 'Variable D'))
+
+        var inputE = new Rete.Input('e', 'Variable E', PMG.NodesEditor.sockets.number)
+        inputE.addControl(new NumberReteControl(this.editor, 'e', 'Variable E'))
+        
+        var inputF = new Rete.Input('f', 'Variable F', PMG.NodesEditor.sockets.number)
+        inputF.addControl(new NumberReteControl(this.editor, 'f', 'Variable F'))
+
+        var inputG = new Rete.Input('g', 'Variable G', PMG.NodesEditor.sockets.number)
+        inputG.addControl(new NumberReteControl(this.editor, 'g', 'Variable G'))
+
+        var inputH = new Rete.Input('h', 'Variable H', PMG.NodesEditor.sockets.number)
+        inputH.addControl(new NumberReteControl(this.editor, 'h', 'Variable H'))
+
+        var inputI = new Rete.Input('i', 'Variable I', PMG.NodesEditor.sockets.number)
+        inputI.addControl(new NumberReteControl(this.editor, 'i', 'Variable I'))
+
+        var inputJ = new Rete.Input('j', 'Variable J', PMG.NodesEditor.sockets.number)
+        inputJ.addControl(new NumberReteControl(this.editor, 'j', 'Variable J'))
+
+        var inputK = new Rete.Input('k', 'Variable K', PMG.NodesEditor.sockets.number)
+        inputK.addControl(new NumberReteControl(this.editor, 'k', 'Variable K'))
+
+        var inputL = new Rete.Input('l', 'Variable L', PMG.NodesEditor.sockets.number)
+        inputL.addControl(new NumberReteControl(this.editor, 'l', 'Variable L'))
+
+        var outputGroups = new Rete.Output('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+
+        return node
+            .addControl(new TextReteControl(this.editor, 'query', 'Query example: first or even'))
+            .addInput(inputGroups)
+            .addInput(inputA)
+            .addInput(inputB)
+            .addInput(inputC)
+            .addInput(inputD)
+            .addInput(inputE)
+            .addInput(inputF)
+            .addInput(inputG)
+            .addInput(inputH)
+            .addInput(inputI)
+            .addInput(inputJ)
+            .addInput(inputK)
+            .addInput(inputL)
+            .addOutput(outputGroups)
+
+    }
+
+    worker(_node, _inputs, outputs) {
+        outputs['groups'] = []
+    }
+
+}
+
+class MakeGroupReteComponent extends Rete.Component {
+
+    constructor(){
+        super('Make group')
+    }
+
+    builder (node) {
+
+        var inputGroups1 = new Rete.Input('groups1', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups2 = new Rete.Input('groups2', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups3 = new Rete.Input('groups3', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups4 = new Rete.Input('groups4', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups5 = new Rete.Input('groups5', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups6 = new Rete.Input('groups6', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups7 = new Rete.Input('groups7', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups8 = new Rete.Input('groups8', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups9 = new Rete.Input('groups9', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups10 = new Rete.Input('groups10', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups11 = new Rete.Input('groups11', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups12 = new Rete.Input('groups12', 'Group(s)', PMG.NodesEditor.sockets.groups)
+
+        var outputGroup = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+
+        return node
+            .addInput(inputGroups1)
+            .addInput(inputGroups2)
+            .addInput(inputGroups3)
+            .addInput(inputGroups4)
+            .addInput(inputGroups5)
+            .addInput(inputGroups6)
+            .addInput(inputGroups7)
+            .addInput(inputGroups8)
+            .addInput(inputGroups9)
+            .addInput(inputGroups10)
+            .addInput(inputGroups11)
+            .addInput(inputGroups12)
+            .addControl(new TextReteControl(this.editor, 'name', 'Name'))
+            .addControl(new MaterialReteControl(this.editor, 'material'))
+            .addControl(new LayerReteControl(this.editor, 'layer'))
+            .addOutput(outputGroup)
+
+    }
+
+    worker(_node, _inputs, outputs) {
+        outputs['groups'] = []
     }
 
 }
@@ -859,6 +1384,7 @@ PMG.NodesEditor.initializeEditor = () => {
 
     PMG.NodesEditor.editor.use(VueRenderPlugin.default)
     PMG.NodesEditor.editor.use(ConnectionPlugin.default)
+    PMG.NodesEditor.editor.use(MinimapPlugin.default)
 
 }
 
@@ -883,13 +1409,22 @@ PMG.NodesEditor.initializeComponents = () => {
         "Number": new NumberReteComponent(),
         "Add": new AddReteComponent(),
         "Subtract": new SubtractReteComponent(),
+        "Multiply": new MultiplyReteComponent(),
+        "Divide": new DivideReteComponent(),
+        "Calculate": new CalculateReteComponent(),
         "Point": new PointReteComponent(),
         "Vector": new VectorReteComponent(),
+        "Intersect solids": new IntersectSolidsReteComponent(),
+        "Unite solids": new UniteSolidsReteComponent(),
+        "Subtract solids": new SubtractSolidsReteComponent(),
         "Push/Pull": new PushPullReteComponent(),
         "Move": new MoveReteComponent(),
         "Rotate": new RotateReteComponent(),
         "Scale": new ScaleReteComponent(),
-        "Copy": new CopyReteComponent()
+        "Paint": new PaintReteComponent(),
+        "Copy": new CopyReteComponent(),
+        "Select": new SelectReteComponent(),
+        "Make group": new MakeGroupReteComponent()
 
     }
 
@@ -910,21 +1445,36 @@ PMG.NodesEditor.registerComponents = () => {
 
 PMG.NodesEditor.loadToolbarIcons = () => {
     
-    document.querySelectorAll('.toolbar .icon').forEach(toolbarIcon => {
+    document.querySelectorAll('.toolbar .node-icon').forEach(toolbarNodeIcon => {
 
-        toolbarIcon.src = PMGNodesEditorIcons['nodes'][toolbarIcon.dataset.nodeName]['path']
-        toolbarIcon.title = toolbarIcon.dataset.nodeName
+        toolbarNodeIcon.src = PMGNodesEditorIcons['nodes'][toolbarNodeIcon.dataset.nodeName]['path']
+        toolbarNodeIcon.title = toolbarNodeIcon.dataset.nodeName
 
     })
+
+    var toolbarHelpIcon = document.querySelector('.toolbar .help-icon')
+
+    toolbarHelpIcon.src = PMGNodesEditorIcons['help']['path']
+    toolbarHelpIcon.title = PMGNodesEditorIcons['help']['title']
+
+    if ( SketchUpVersion < 21 ) {
+        new Drooltip({
+            element: '.toolbar .node-icon, .toolbar .help-icon',
+            position: 'bottom',
+            background: '#fff',
+            color: '#000',
+            animation: 'fade'
+        })
+    }
 
 }
 
 PMG.NodesEditor.schemaIsExportable = false
 
-PMG.NodesEditor.exportModelSchema = () => {
+PMG.NodesEditor.exportModelSchema = redraw => {
 
     if ( PMG.NodesEditor.schemaIsExportable ) {
-        sketchup.redrawParametricEntities(JSON.stringify(PMG.NodesEditor.editor.toJSON()))
+        sketchup.exportModelSchema(JSON.stringify(PMG.NodesEditor.editor.toJSON()), redraw)
     }
 
 }
@@ -943,8 +1493,12 @@ PMG.NodesEditor.addEventListeners = () => {
         
     })
 
-    PMG.NodesEditor.editor.on('nodecreated noderemoved nodedragged connectioncreated connectionremoved', () => {
-        PMG.NodesEditor.exportModelSchema()
+    PMG.NodesEditor.editor.on('nodecreated noderemoved connectioncreated connectionremoved', () => {
+        PMG.NodesEditor.exportModelSchema(true)
+    })
+
+    PMG.NodesEditor.editor.on('nodedragged', () => {
+        PMG.NodesEditor.exportModelSchema(false)
     })
 
     PMG.NodesEditor.editor.on('nodecreated', (node) => {
@@ -953,10 +1507,27 @@ PMG.NodesEditor.addEventListeners = () => {
 
         nodeElement.setAttribute('data-node-id', node.id)
 
+        new ContextMenu('.node[data-node-id="' + node.id + '"] *', [
+            {
+                name: 'Remove this node',
+                fn: () => { PMG.NodesEditor.editor.removeNode(node) }
+            }
+        ])
+
+        if ( SketchUpVersion < 21 ) {
+            new Drooltip({
+                element: '.node[data-node-id="' + node.id + '"] .socket',
+                position: 'bottom',
+                background: '#fff',
+                color: '#000',
+                animation: 'fade'
+            })
+        }
+
         nodeElement.querySelectorAll('input[type="number"]').forEach(nodeNumberInputElement => {
 
             nodeNumberInputElement.addEventListener('input', _event => {
-                PMG.NodesEditor.exportModelSchema()
+                PMG.NodesEditor.exportModelSchema(true)
             })
 
         })
@@ -964,7 +1535,7 @@ PMG.NodesEditor.addEventListeners = () => {
         nodeElement.querySelectorAll('input[type="text"]').forEach(nodeTextInputElement => {
 
             nodeTextInputElement.addEventListener('input', _event => {
-                PMG.NodesEditor.exportModelSchema()
+                PMG.NodesEditor.exportModelSchema(true)
             })
 
         })
@@ -972,7 +1543,7 @@ PMG.NodesEditor.addEventListeners = () => {
         nodeElement.querySelectorAll('input[type="checkbox"]').forEach(nodeCheckBoxInputElement => {
 
             nodeCheckBoxInputElement.addEventListener('change', _event => {
-                PMG.NodesEditor.exportModelSchema()
+                PMG.NodesEditor.exportModelSchema(true)
             })
 
         })
@@ -980,20 +1551,12 @@ PMG.NodesEditor.addEventListeners = () => {
         nodeElement.querySelectorAll('select').forEach(nodeSelectElement => {
 
             nodeSelectElement.addEventListener('change', _event => {
-                PMG.NodesEditor.exportModelSchema()
+                PMG.NodesEditor.exportModelSchema(true)
             })
 
         })
 
         var nodeTitleElement = nodeElement.querySelector('.title')
-
-        nodeTitleElement.addEventListener('dblclick', _event => {
-
-            if ( window.confirm(`Do you want to remove this "${node.name}" node?`) ) {
-                PMG.NodesEditor.editor.removeNode(node)
-            }
-            
-        })
 
         var nodeTitleGradient = 'linear-gradient(0deg,hsla(0,0%,100%,.05) 0,hsla(0,0%,100%,.05)' +
             ' 40%,hsla(0,0%,100%,.19)),radial-gradient(70% 40px at center,' +
@@ -1013,9 +1576,9 @@ PMG.NodesEditor.addEventListeners = () => {
         return source !== 'dblclick'
     })
 
-    document.querySelectorAll('.toolbar .icon').forEach(toolbarIcon => {
+    document.querySelectorAll('.toolbar .node-icon').forEach(toolbarNodeIcon => {
 
-        toolbarIcon.addEventListener('click', event => {
+        toolbarNodeIcon.addEventListener('click', event => {
 
             var component = PMG.NodesEditor.components[event.currentTarget.dataset.nodeName]
 
@@ -1028,7 +1591,13 @@ PMG.NodesEditor.addEventListeners = () => {
 
     })
 
-    window.onresize = PMG.NodesEditor.resizeEditorView
+    document.querySelector('.toolbar .help-icon').addEventListener('click', _event => {
+        sketchup.accessOnlineHelp()
+    })
+
+    window.addEventListener('resize', _event => {
+        PMG.NodesEditor.resizeEditorView()
+    })
 
 }
 
@@ -1048,7 +1617,14 @@ PMG.NodesEditor.importModelSchema = () => {
 
 }
 
-PMG.NodesEditor.activateContextMenu = () => {
+PMG.NodesEditor.showOrHideMinimap = () => {
+
+    document.querySelector('.minimap').classList.toggle('displayed')
+    PMG.NodesEditor.editor.trigger('zoomed')
+
+}
+
+PMG.NodesEditor.setGlobalContextMenu = () => {
 
     var contextMenuOptions = [
         {
@@ -1062,10 +1638,33 @@ PMG.NodesEditor.activateContextMenu = () => {
         {
             name: 'Freeze parametric entities',
             fn: () => { sketchup.freezeParametricEntities() }
+        },
+        {
+            name: 'Show or hide minimap',
+            fn: () => { PMG.NodesEditor.showOrHideMinimap() }
+        },
+        {
+            name: 'Remove all nodes',
+            fn: () => { PMG.NodesEditor.editor.clear() }
         }
     ]
 
     new ContextMenu('#pmg-nodes-editor', contextMenuOptions)
+
+}
+
+PMG.NodesEditor.tagNodesAsValid = () => {
+
+    document.querySelectorAll('.node').forEach(nodeElement => {
+        nodeElement.classList.remove('invalid')
+    })
+
+}
+
+PMG.NodesEditor.tagNodeAsInvalid = nodeId => {
+
+    var nodeElement = document.querySelector('.node[data-node-id="' + nodeId + '"]')
+    nodeElement.classList.add('invalid')
 
 }
 
@@ -1078,7 +1677,7 @@ document.addEventListener('DOMContentLoaded', _event => {
     PMG.NodesEditor.loadToolbarIcons()
     PMG.NodesEditor.addEventListeners()
     PMG.NodesEditor.importModelSchema()
-    PMG.NodesEditor.activateContextMenu()
+    PMG.NodesEditor.setGlobalContextMenu()
     PMG.NodesEditor.resizeEditorView()
 
 })

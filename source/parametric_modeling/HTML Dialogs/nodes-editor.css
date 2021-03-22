@@ -41,7 +41,8 @@ body {
 
 }
 
-#pmg-nodes-editor .toolbar .icon {
+#pmg-nodes-editor .toolbar .node-icon,
+#pmg-nodes-editor .toolbar .help-icon {
 
     display: inline-block;
 
@@ -65,6 +66,19 @@ body {
     box-sizing: content-box;
     box-shadow: 4px 5px 12px rgba(0, 0, 0, .5);
 
+}
+
+#pmg-nodes-editor .node.selected,
+#pmg-nodes-editor .node.invalid {
+    box-shadow: none;
+}
+
+#pmg-nodes-editor .node.selected {
+    border: 1px solid rgb(130, 191, 64);
+}
+
+#pmg-nodes-editor .node.invalid {
+    border: 1px solid rgb(191, 64, 64);
 }
 
 #pmg-nodes-editor .node .title {
@@ -134,7 +148,7 @@ body {
 }
 
 #pmg-nodes-editor .node input[type="number"] {
-    width: 80px;
+    width: 90px;
 }
 
 #pmg-nodes-editor .node input[type="text"] {
@@ -230,6 +244,35 @@ body {
     stroke-width: 2px;
     stroke: #fff;
 
+}
+
+#pmg-nodes-editor .minimap {
+
+    display: none;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+
+}
+
+#pmg-nodes-editor .minimap.displayed {
+    display: block;
+}
+
+#pmg-nodes-editor .minimap .mini-node {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#pmg-nodes-editor .minimap .mini-viewport {
+
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgb(130, 191, 64);
+
+}
+
+.drooltip {
+
+    margin-top: 5px;
+    transform: scale(0.8);
+    
 }
 
 .ContextMenu {

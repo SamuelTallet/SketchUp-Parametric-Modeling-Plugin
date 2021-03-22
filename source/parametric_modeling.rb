@@ -20,12 +20,14 @@
 require 'sketchup'
 require 'extensions'
 
+$LOAD_PATH.push(File.join(__dir__, 'parametric_modeling', 'Libraries'))
+
 # Parametric Modeling plugin namespace.
 module ParametricModeling
 
   if Sketchup.version.to_i >= 17
 
-    VERSION = '0.0.1'
+    VERSION = '0.0.2'
 
     CODE_NAME = 'ParametricModeling'
     NAME = 'Parametric Modeling'
@@ -56,6 +58,10 @@ module ParametricModeling
 
     extension_features.push(
       'Modify entities parameters at any time and see result instantly.'
+    )
+
+    extension_features.push(
+      'Import schema from file. Export schema to file.'
     )
 
     extension.description = extension_features.join(' ')

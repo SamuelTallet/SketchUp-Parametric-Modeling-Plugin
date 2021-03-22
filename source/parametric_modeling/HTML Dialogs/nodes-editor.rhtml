@@ -17,16 +17,21 @@
     <%= scripts['libraries/rete.min.js'] %>
     <%= scripts['libraries/rete/vue-render-plugin.min.js'] %>
     <%= scripts['libraries/rete/connection-plugin.min.js'] %>
+    <%= scripts['libraries/rete/minimap-plugin.min.js'] %>
 
     <script>SketchUpMaterials = <%= Materials.list.to_json %></script>
     <script>SketchUpLayers = <%= Layers.list.to_json %></script>
+    <script>SketchUpVersion = <%= Sketchup.version.to_i %></script>
+
     <script>PMGNodesEditorSchemaVersion = '<%= NodesEditor::SCHEMA_VERSION %>'</script>
     <script>PMGNodesEditorIcons= <%= NodesEditor.icons.to_json %></script>
     <script>PMGNodesEditorSchema = <%= NodesEditor.schema.to_json %></script>
 
+    <%= scripts['libraries/drooltip.js'] %>
     <%= scripts['libraries/context-menu.js'] %>
 	<%= scripts['nodes-editor.js'] %>
 
+    <%= styles['libraries/drooltip.css'] %>
 	<%= styles['nodes-editor.css'] %>
 
 </head>
@@ -37,25 +42,38 @@
 
         <div class="toolbar">
 
-            <img class="icon" data-node-name="Draw box" />
-            <img class="icon" data-node-name="Draw prism" />
-            <img class="icon" data-node-name="Draw cylinder" />
-            <img class="icon" data-node-name="Draw pyramid" />
-            <img class="icon" data-node-name="Draw cone" />
-            <img class="icon" data-node-name="Draw sphere" />
+            <img class="node-icon" data-node-name="Draw box" />
+            <img class="node-icon" data-node-name="Draw prism" />
+            <img class="node-icon" data-node-name="Draw cylinder" />
+            <img class="node-icon" data-node-name="Draw pyramid" />
+            <img class="node-icon" data-node-name="Draw cone" />
+            <img class="node-icon" data-node-name="Draw sphere" />
 
-            <img class="icon" data-node-name="Number" />
-            <img class="icon" data-node-name="Add" />
-            <img class="icon" data-node-name="Subtract" />
+            <img class="node-icon" data-node-name="Number" />
+            <img class="node-icon" data-node-name="Add" />
+            <img class="node-icon" data-node-name="Subtract" />
+            <img class="node-icon" data-node-name="Multiply" />
+            <img class="node-icon" data-node-name="Divide" />
+            <img class="node-icon" data-node-name="Calculate" />
 
-            <img class="icon" data-node-name="Point" />
-            <img class="icon" data-node-name="Vector" />
+            <img class="node-icon" data-node-name="Point" />
+            <img class="node-icon" data-node-name="Vector" />
 
-            <img class="icon" data-node-name="Push/Pull" />
-            <img class="icon" data-node-name="Move" />
-            <img class="icon" data-node-name="Rotate" />
-            <img class="icon" data-node-name="Scale" />
-            <img class="icon" data-node-name="Copy" />
+            <img class="node-icon" data-node-name="Intersect solids" />
+            <img class="node-icon" data-node-name="Unite solids" />
+            <img class="node-icon" data-node-name="Subtract solids" />
+
+            <img class="node-icon" data-node-name="Push/Pull" />
+            <img class="node-icon" data-node-name="Move" />
+            <img class="node-icon" data-node-name="Rotate" />
+            <img class="node-icon" data-node-name="Scale" />
+            <img class="node-icon" data-node-name="Paint" />
+
+            <img class="node-icon" data-node-name="Copy" />
+            <img class="node-icon" data-node-name="Select" />
+            <img class="node-icon" data-node-name="Make group" />
+
+            <img class="help-icon">
 
         </div>
 
