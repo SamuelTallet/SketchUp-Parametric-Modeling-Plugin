@@ -1479,6 +1479,22 @@ PMG.NodesEditor.exportModelSchema = redraw => {
 
 }
 
+PMG.NodesEditor.addNode = (nodeName, nodeData) => {
+
+    var component = PMG.NodesEditor.components[nodeName]
+    var mouse = PMG.NodesEditor.editor.view.area.mouse
+
+    component.createNode(nodeData).then(node => {
+
+        node.position = [mouse.x, mouse.y]
+        PMG.NodesEditor.editor.addNode(node)
+
+        PMG.NodesEditor.nodeBeingAdded = node
+        
+    })
+
+}
+
 PMG.NodesEditor.resizeEditorView = () => {
     document.querySelector('#pmg-nodes-editor').style.height = window.innerHeight + 'px'
 }
@@ -1603,19 +1619,7 @@ PMG.NodesEditor.addEventListeners = () => {
     document.querySelectorAll('.toolbar .node-icon').forEach(toolbarNodeIcon => {
 
         toolbarNodeIcon.addEventListener('click', event => {
-
-            var component = PMG.NodesEditor.components[event.currentTarget.dataset.nodeName]
-            var mouse = PMG.NodesEditor.editor.view.area.mouse
-
-            component.createNode().then(node => {
-
-                node.position = [mouse.x, mouse.y]
-                PMG.NodesEditor.editor.addNode(node)
-
-                PMG.NodesEditor.nodeBeingAdded = node
-                
-            })
-
+            PMG.NodesEditor.addNode(event.currentTarget.dataset.nodeName, {})
         })
 
     })

@@ -357,6 +357,7 @@ module ParametricModeling
     # Tags a node as invalid in Editor.
     #
     # @param [Integer] node_id
+    # @raise [ArgumentError]
     #
     # @return [Boolean]
     def self.tag_node_as_invalid(node_id)
@@ -371,6 +372,38 @@ module ParametricModeling
 
         SESSION[:nodes_editor][:html_dialog].execute_script(
           'PMG.NodesEditor.tagNodeAsInvalid(' + node_id.to_s + ')'
+        )
+
+        return true
+
+      end
+
+      false
+
+    end
+
+    # Adds a node to Editor.
+    #
+    # @param [String] node_name
+    # @param [Hash] node_data
+    # @raise [ArgumentError]
+    #
+    # @return [Boolean]
+    def self.add_node(node_name, node_data)
+
+      raise ArgumentError, 'Node name must be a String.'\
+        unless node_name.is_a?(String)
+
+      raise ArgumentError, 'Node data must be a Hash.'\
+        unless node_data.is_a?(Hash)
+
+      if SESSION[:nodes_editor][:html_dialog_open?]
+
+        raise 'Parametric Modeling Nodes Editor HTML Dialog instance is missing.'\
+          if SESSION[:nodes_editor][:html_dialog].nil?
+
+        SESSION[:nodes_editor][:html_dialog].execute_script(
+          'PMG.NodesEditor.addNode("' + node_name + '", ' + node_data.to_json + ')'
         )
 
         return true

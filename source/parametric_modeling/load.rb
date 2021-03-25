@@ -20,6 +20,7 @@
 require 'sketchup'
 require 'parametric_modeling/app_observer'
 require 'parametric_modeling/menu'
+require 'parametric_modeling/context_menu'
 require 'parametric_modeling/toolbar'
 
 # Parametric Modeling plugin namespace.
@@ -28,6 +29,7 @@ module ParametricModeling
   Sketchup.add_observer(AppObserver.new)
 
   Menu.add
+  ContextMenu.add
   Toolbar.add
 
   # Load complete.
