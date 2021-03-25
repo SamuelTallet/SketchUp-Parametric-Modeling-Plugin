@@ -12,6 +12,8 @@
 
     font-family: Arial, sans-serif;
     font-size: 13px;
+
+    cursor: move;
     
 }
 
@@ -58,7 +60,6 @@ body {
     background: rgba(35,35,35,.7);
     border: 1px solid #000;
     border-radius: 10px;
-    cursor: pointer;
     display: inline-block;
     height: auto;
     min-width: 225px;
@@ -145,6 +146,8 @@ body {
 
     border: 0.5px solid #fff;
 
+    cursor: text;
+
 }
 
 #pmg-nodes-editor .node input[type="number"] {
@@ -173,6 +176,8 @@ body {
 
     margin: 1px;
 
+    cursor: default;
+
 }
 
 #pmg-nodes-editor .node select {
@@ -182,6 +187,8 @@ body {
     padding: 2px;
 
     border: none;
+
+    cursor: default;
     
 }
 

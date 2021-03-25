@@ -27,7 +27,7 @@ module ParametricModeling
 
   if Sketchup.version.to_i >= 17
 
-    VERSION = '0.0.2'
+    VERSION = '0.0.3-dev'
 
     CODE_NAME = 'ParametricModeling'
     NAME = 'Parametric Modeling'
@@ -61,7 +61,7 @@ module ParametricModeling
     )
 
     extension_features.push(
-      'Import schema from file. Export schema to file.'
+      'Import schema from a file. Export schema to a file.'
     )
 
     extension.description = extension_features.join(' ')

@@ -1576,15 +1576,44 @@ PMG.NodesEditor.addEventListeners = () => {
         return source !== 'dblclick'
     })
 
+    PMG.NodesEditor.editor.on('mousemove', () => {
+
+        if ( PMG.NodesEditor.nodeBeingAdded === undefined ) {
+            return
+        }
+
+        var mouse = PMG.NodesEditor.editor.view.area.mouse
+
+        PMG.NodesEditor.editor.view.nodes
+            .get(PMG.NodesEditor.nodeBeingAdded)
+            .translate(mouse.x, mouse.y)
+
+    })
+
+    window.addEventListener('click', event => {
+
+        if ( event.target.className === 'node-icon' ) {
+            return
+        }
+
+        PMG.NodesEditor.nodeBeingAdded = undefined
+
+    })
+
     document.querySelectorAll('.toolbar .node-icon').forEach(toolbarNodeIcon => {
 
         toolbarNodeIcon.addEventListener('click', event => {
 
             var component = PMG.NodesEditor.components[event.currentTarget.dataset.nodeName]
+            var mouse = PMG.NodesEditor.editor.view.area.mouse
 
             component.createNode().then(node => {
-                node.position = [40, 60]
+
+                node.position = [mouse.x, mouse.y]
                 PMG.NodesEditor.editor.addNode(node)
+
+                PMG.NodesEditor.nodeBeingAdded = node
+                
             })
 
         })
