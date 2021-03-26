@@ -19,6 +19,8 @@
 
 require 'sketchup'
 require 'parametric_modeling/app_observer'
+require 'parametric_modeling/materials_observer'
+require 'parametric_modeling/layers_observer'
 require 'parametric_modeling/menu'
 require 'parametric_modeling/context_menu'
 require 'parametric_modeling/toolbar'
@@ -27,6 +29,8 @@ require 'parametric_modeling/toolbar'
 module ParametricModeling
 
   Sketchup.add_observer(AppObserver.new)
+  Sketchup.active_model.materials.add_observer(MaterialsObserver.new)
+  Sketchup.active_model.layers.add_observer(LayersObserver.new)
 
   Menu.add
   ContextMenu.add

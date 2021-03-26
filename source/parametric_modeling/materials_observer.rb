@@ -18,34 +18,22 @@
 # Get a copy of the GPL here: https://www.gnu.org/licenses/gpl.html
 
 require 'sketchup'
-require 'parametric_modeling/materials_observer'
-require 'parametric_modeling/layers_observer'
 require 'parametric_modeling/nodes_editor'
 
 # Parametric Modeling plugin namespace.
 module ParametricModeling
 
-  # Observes SketchUp events and reacts.
-  class AppObserver < Sketchup::AppObserver
+  # Observes SketchUp materials events and reacts.
+  class MaterialsObserver < Sketchup::MaterialsObserver
 
-    # When user creates a new, empty model:
-    def onNewModel(model)
-
-      model.materials.add_observer(MaterialsObserver.new)
-      model.layers.add_observer(LayersObserver.new)
-
+    # When a new material is added:
+    def onMaterialAdd(_materials, _material)
       NodesEditor.reload
-
     end
 
-    # When user opens an existing model:
-    def onOpenModel(model)
-
-      model.materials.add_observer(MaterialsObserver.new)
-      model.layers.add_observer(LayersObserver.new)
-
+    # When a material is deleted:
+    def onMaterialRemove(_materials, _material)
       NodesEditor.reload
-
     end
 
   end
