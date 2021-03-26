@@ -19,6 +19,7 @@
 
 require 'sketchup'
 require 'parametric_modeling/nodes_editor'
+require 'parametric_modeling/utils'
 
 # Parametric Modeling plugin namespace.
 module ParametricModeling
@@ -37,24 +38,57 @@ module ParametricModeling
 
           context_menu_submenu = context_menu.add_submenu(NAME)
 
-          context_menu_submenu.add_item('Add to Schema as Vector') do
+          context_menu_submenu.add_item('Extract Vector From Face Normal') do
             
             faces = model.selection.grep(Sketchup::Face)
 
             if faces.empty?
-              UI.messagebox('No face found in selection.')
+              UI.messagebox('Error: No face found in selection.')
             else
 
               faces.each do |face|
 
                 face_normal = face.normal
 
-                NodesEditor.add_node(
+                add_node_status = NodesEditor.add_node(
                   'Vector',
                   {
                     x: face_normal.x, y: face_normal.y, z: face_normal.z
                   }
                 )
+
+                UI.messagebox('Error: Nodes Editor is not open.')\
+                  if add_node_status == false
+
+              end
+
+            end
+
+          end
+
+          context_menu_submenu.add_item('Extract Point From Construction Point') do
+
+            construction_points = model.selection.grep(Sketchup::ConstructionPoint)
+
+            if construction_points.empty?
+              UI.messagebox('Error: No construction point found in selection.')
+            else
+
+              construction_points.each do |construction_point|
+
+                construction_point_position = construction_point.position
+
+                add_node_status = NodesEditor.add_node(
+                  'Point',
+                  {
+                    x: Utils.ul2num(construction_point_position.x),
+                    y: Utils.ul2num(construction_point_position.y),
+                    z: Utils.ul2num(construction_point_position.z)
+                  }
+                )
+
+                UI.messagebox('Error: Nodes Editor is not open.')\
+                  if add_node_status == false
 
               end
 
