@@ -647,7 +647,11 @@ module ParametricModeling
               rounddown: ['floor']
             }
           })
-  
+
+          calculator.add_function(
+            :rand, :numeric, ->(number1, number2) { rand(number1..number2) }
+          )
+
           calculator_result = calculator.evaluate(
             formula, {
               a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i, j: j, k: k, l: l,
