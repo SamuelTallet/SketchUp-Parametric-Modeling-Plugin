@@ -1,6 +1,6 @@
 # Parametric modeling free plugin for SketchUp
 
-Do parametric modeling in SketchUp thanks to a Nodes Editor similar to Unreal Engine's Blueprints. Modify entities parameters at any time and see result instantly. Import schema from file. Export schema to file.
+Do parametric modeling in SketchUp thanks to a Nodes Editor similar to Unreal Engine's Blueprints. Modify entities parameters at any time and see result instantly. Import schema from a file. Export schema to a file.
 
 Demos
 -----
