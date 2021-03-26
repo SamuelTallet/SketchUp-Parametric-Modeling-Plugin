@@ -1,1 +1,4632 @@
-{"id":"ParametricModeling@1.0.0","nodes":{"74":{"id":74,"data":{"material":"grain-54","name":"Lame"},"inputs":{"width":{"connections":[{"node":75,"output":"number","data":{}}]},"depth":{"connections":[{"node":76,"output":"number","data":{}}]},"height":{"connections":[{"node":77,"output":"number","data":{}}]}},"outputs":{"groups":{"connections":[{"node":79,"input":"groups","data":{}},{"node":139,"input":"groups2","data":{}}]}},"position":[509.1719102334922,-16.71701853294448],"name":"Draw box"},"75":{"id":75,"data":{"label":"Length Tile","number":0.5},"inputs":{},"outputs":{"number":{"connections":[{"node":74,"input":"width","data":{}},{"node":78,"input":"dividend","data":{}},{"node":89,"input":"dividend","data":{}},{"node":92,"input":"x","data":{}},{"node":95,"input":"number1","data":{}},{"node":120,"input":"y","data":{}},{"node":137,"input":"a","data":{}},{"node":129,"input":"width","data":{}},{"node":168,"input":"x","data":{}},{"node":167,"input":"y","data":{}}]}},"position":[-976.1960445529224,54.252629475087886],"name":"Number"},"76":{"id":76,"data":{"label":"Depht Wood Slate","number":0.09},"inputs":{},"outputs":{"number":{"connections":[{"node":74,"input":"depth","data":{}},{"node":78,"input":"divisor","data":{}},{"node":83,"input":"c","data":{}},{"node":137,"input":"b","data":{}},{"node":129,"input":"depth","data":{}},{"node":143,"input":"a","data":{}}]}},"position":[-991.216713178574,277.82796150459035],"name":"Number"},"77":{"id":77,"data":{"number":0.021,"label":"Heigh Wood Slate"},"inputs":{},"outputs":{"number":{"connections":[{"node":74,"input":"height","data":{}},{"node":129,"input":"height","data":{}},{"node":133,"input":"a","data":{}},{"node":140,"input":"a","data":{}},{"node":161,"input":"number1","data":{}}]}},"position":[-988.5796150442538,487.61666232595724],"name":"Number"},"78":{"id":78,"data":{},"inputs":{"dividend":{"connections":[{"node":75,"output":"number","data":{}}]},"divisor":{"connections":[{"node":76,"output":"number","data":{}}]}},"outputs":{"quotient":{"connections":[{"node":80,"input":"a","data":{}}]},"remainder":{"connections":[{"node":83,"input":"a","data":{}}]}},"position":[290.1158342641518,884.512884028529],"name":"Divide"},"79":{"id":79,"data":{},"inputs":{"groups":{"connections":[{"node":74,"output":"groups","data":{}}]},"copies":{"connections":[{"node":80,"output":"number","data":{}}]}},"outputs":{"groups":{"connections":[{"node":81,"input":"groups","data":{}}]}},"position":[880.5770329160008,187.52814794842268],"name":"Copy"},"80":{"id":80,"data":{"formula":"a-1"},"inputs":{"a":{"connections":[{"node":78,"output":"quotient","data":{}}]},"b":{"connections":[]},"c":{"connections":[]},"d":{"connections":[]},"e":{"connections":[]},"f":{"connections":[]},"g":{"connections":[]},"h":{"connections":[]},"i":{"connections":[]},"j":{"connections":[]},"k":{"connections":[]},"l":{"connections":[]}},"outputs":{"number":{"connections":[{"node":79,"input":"copies","data":{}},{"node":83,"input":"b","data":{}}]}},"position":[612.6530431904229,443.4439129436148],"name":"Calculate"},"81":{"id":81,"data":{},"inputs":{"groups":{"connections":[{"node":79,"output":"groups","data":{}}]},"point":{"connections":[{"node":82,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[{"node":139,"input":"groups1","data":{}}]}},"position":[1243.5290960994064,62.11337911297443],"name":"Move"},"82":{"id":82,"data":{"x":0,"z":0},"inputs":{"x":{"connections":[]},"y":{"connections":[{"node":83,"output":"number","data":{}}]},"z":{"connections":[]}},"outputs":{"point":{"connections":[{"node":81,"input":"point","data":{}}]}},"position":[1239.6716885418366,531.7854449163096],"name":"Point"},"83":{"id":83,"data":{"formula":"a/(round(b,0)-1)+c"},"inputs":{"a":{"connections":[{"node":78,"output":"remainder","data":{}}]},"b":{"connections":[{"node":80,"output":"number","data":{}}]},"c":{"connections":[{"node":76,"output":"number","data":{}}]},"d":{"connections":[]},"e":{"connections":[]},"f":{"connections":[]},"g":{"connections":[]},"h":{"connections":[]},"i":{"connections":[]},"j":{"connections":[]},"k":{"connections":[]},"l":{"connections":[]}},"outputs":{"number":{"connections":[{"node":82,"input":"y","data":{}}]}},"position":[924.5136889802568,444.80360716763727],"name":"Calculate"},"84":{"id":84,"data":{"name":"Deck Tile"},"inputs":{"groups1":{"connections":[{"node":159,"output":"groups","data":{}}]},"groups2":{"connections":[]},"groups3":{"connections":[]},"groups4":{"connections":[]},"groups5":{"connections":[]},"groups6":{"connections":[]},"groups7":{"connections":[]},"groups8":{"connections":[]},"groups9":{"connections":[]},"groups10":{"connections":[]},"groups11":{"connections":[]},"groups12":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":85,"input":"groups","data":{}},{"node":96,"input":"groups2","data":{}}]}},"position":[1883.413761876215,-668.8591045758642],"name":"Make group"},"85":{"id":85,"data":{"copies":2,"output_original":false},"inputs":{"groups":{"connections":[{"node":84,"output":"groups","data":{}}]},"copies":{"connections":[{"node":175,"output":"number","data":{}}]}},"outputs":{"groups":{"connections":[{"node":87,"input":"groups","data":{}}]}},"position":[2922.15325953008,65.05821603985453],"name":"Copy"},"87":{"id":87,"data":{"angle":90},"inputs":{"groups":{"connections":[{"node":85,"output":"groups","data":{}}]},"center":{"connections":[{"node":88,"output":"point","data":{}}]},"axis":{"connections":[]},"angle":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":90,"input":"groups","data":{}}]}},"position":[4030.3503266083367,62.80100315260599],"name":"Rotate"},"88":{"id":88,"data":{},"inputs":{"x":{"connections":[{"node":89,"output":"quotient","data":{}}]},"y":{"connections":[{"node":89,"output":"quotient","data":{}}]},"z":{"connections":[]}},"outputs":{"point":{"connections":[{"node":87,"input":"center","data":{}}]}},"position":[3500.919666372277,281.55622302567593],"name":"Point"},"89":{"id":89,"data":{"divisor":2},"inputs":{"dividend":{"connections":[{"node":75,"output":"number","data":{}}]},"divisor":{"connections":[]}},"outputs":{"quotient":{"connections":[{"node":88,"input":"x","data":{}},{"node":88,"input":"y","data":{}}]},"remainder":{"connections":[]}},"position":[2946.36367534052,500.5036724822063],"name":"Divide"},"90":{"id":90,"data":{},"inputs":{"groups":{"connections":[{"node":87,"output":"groups","data":{}}]},"point":{"connections":[{"node":92,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[{"node":96,"input":"groups1","data":{}}]}},"position":[4504.917395883176,145.80920709001703],"name":"Move"},"91":{"id":91,"data":{"copies":3},"inputs":{"groups":{"connections":[{"node":96,"output":"groups","data":{}}]},"copies":{"connections":[{"node":177,"output":"number","data":{}}]}},"outputs":{"groups":{"connections":[{"node":94,"input":"groups","data":{}}]}},"position":[5110.278760164689,122.96821047915113],"name":"Copy"},"92":{"id":92,"data":{},"inputs":{"x":{"connections":[{"node":75,"output":"number","data":{}}]},"y":{"connections":[]},"z":{"connections":[]}},"outputs":{"point":{"connections":[{"node":90,"input":"point","data":{}},{"node":125,"input":"point","data":{}}]}},"position":[3491.1244674363393,-91.9407961351836],"name":"Point"},"93":{"id":93,"data":{},"inputs":{"x":{"connections":[]},"y":{"connections":[{"node":95,"output":"number","data":{}}]},"z":{"connections":[]}},"outputs":{"point":{"connections":[{"node":94,"input":"point","data":{}}]}},"position":[5110.558619069404,466.93646806418957],"name":"Point"},"94":{"id":94,"data":{},"inputs":{"groups":{"connections":[{"node":91,"output":"groups","data":{}}]},"point":{"connections":[{"node":93,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[]}},"position":[5531.14472067267,305.69507552544496],"name":"Move"},"95":{"id":95,"data":{"number2":2},"inputs":{"number1":{"connections":[{"node":75,"output":"number","data":{}}]},"number2":{"connections":[]}},"outputs":{"number":{"connections":[{"node":93,"input":"y","data":{}},{"node":128,"input":"y","data":{}}]}},"position":[3967.058302992465,831.9104498163938],"name":"Multiply"},"96":{"id":96,"data":{"name":"Raw Even"},"inputs":{"groups1":{"connections":[{"node":90,"output":"groups","data":{}}]},"groups2":{"connections":[{"node":84,"output":"groups","data":{}}]},"groups3":{"connections":[]},"groups4":{"connections":[]},"groups5":{"connections":[]},"groups6":{"connections":[]},"groups7":{"connections":[]},"groups8":{"connections":[]},"groups9":{"connections":[]},"groups10":{"connections":[]},"groups11":{"connections":[]},"groups12":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":91,"input":"groups","data":{}}]}},"position":[4772.551316794078,90.17284562182255],"name":"Make group"},"118":{"id":118,"data":{"output_original":false,"copies":2},"inputs":{"groups":{"connections":[{"node":121,"output":"groups","data":{}}]},"copies":{"connections":[{"node":175,"output":"number","data":{}}]}},"outputs":{"groups":{"connections":[{"node":124,"input":"groups","data":{}}]}},"position":[3762.5490857340756,-696.3273694424819],"name":"Copy"},"119":{"id":119,"data":{},"inputs":{"groups":{"connections":[{"node":123,"output":"groups","data":{}}]},"point":{"connections":[{"node":120,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[{"node":121,"input":"groups","data":{}}]}},"position":[3049.375359209711,-699.9229019641347],"name":"Move"},"120":{"id":120,"data":{},"inputs":{"x":{"connections":[]},"y":{"connections":[{"node":75,"output":"number","data":{}}]},"z":{"connections":[{"node":140,"output":"number","data":{}}]}},"outputs":{"point":{"connections":[{"node":119,"input":"point","data":{}}]}},"position":[2680.59824438256,-441.1532130669864],"name":"Point"},"121":{"id":121,"data":{"angle":90},"inputs":{"groups":{"connections":[{"node":119,"output":"groups","data":{}}]},"center":{"connections":[]},"axis":{"connections":[]},"angle":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":118,"input":"groups","data":{}},{"node":122,"input":"groups2","data":{}}]}},"position":[3379.2020835859803,-699.4140978991086],"name":"Rotate"},"122":{"id":122,"data":{"name":"Raw Odd"},"inputs":{"groups1":{"connections":[{"node":125,"output":"groups","data":{}}]},"groups2":{"connections":[{"node":121,"output":"groups","data":{}}]},"groups3":{"connections":[]},"groups4":{"connections":[]},"groups5":{"connections":[]},"groups6":{"connections":[]},"groups7":{"connections":[]},"groups8":{"connections":[]},"groups9":{"connections":[]},"groups10":{"connections":[]},"groups11":{"connections":[]},"groups12":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":126,"input":"groups","data":{}}]}},"position":[4760.813189981661,-691.7259931103056],"name":"Make group"},"123":{"id":123,"data":{"name":"Deck Tile"},"inputs":{"groups1":{"connections":[{"node":159,"output":"groups","data":{}}]},"groups2":{"connections":[]},"groups3":{"connections":[]},"groups4":{"connections":[]},"groups5":{"connections":[]},"groups6":{"connections":[]},"groups7":{"connections":[]},"groups8":{"connections":[]},"groups9":{"connections":[]},"groups10":{"connections":[]},"groups11":{"connections":[]},"groups12":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":119,"input":"groups","data":{}}]}},"position":[1561.1487960934744,-911.6299849812974],"name":"Make group"},"124":{"id":124,"data":{"angle":90},"inputs":{"groups":{"connections":[{"node":118,"output":"groups","data":{}}]},"center":{"connections":[]},"axis":{"connections":[]},"angle":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":125,"input":"groups","data":{}}]}},"position":[4101.107284904762,-696.7431178041411],"name":"Rotate"},"125":{"id":125,"data":{},"inputs":{"groups":{"connections":[{"node":124,"output":"groups","data":{}}]},"point":{"connections":[{"node":92,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[{"node":122,"input":"groups1","data":{}}]}},"position":[4447.991535454375,-692.5653611868971],"name":"Move"},"126":{"id":126,"data":{"copies":3},"inputs":{"groups":{"connections":[{"node":122,"output":"groups","data":{}}]},"copies":{"connections":[{"node":178,"output":"number","data":{}}]}},"outputs":{"groups":{"connections":[{"node":127,"input":"groups","data":{}}]}},"position":[5123.909348276138,-622.3774665550317],"name":"Copy"},"127":{"id":127,"data":{},"inputs":{"groups":{"connections":[{"node":126,"output":"groups","data":{}}]},"point":{"connections":[{"node":128,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[]}},"position":[5529.351584265058,-626.484292134767],"name":"Move"},"128":{"id":128,"data":{},"inputs":{"x":{"connections":[]},"y":{"connections":[{"node":95,"output":"number","data":{}}]},"z":{"connections":[]}},"outputs":{"point":{"connections":[{"node":127,"input":"point","data":{}}]}},"position":[5119.334234572765,-322.47673026768854],"name":"Point"},"129":{"id":129,"data":{"name":"ContreLame","material":"grain-54"},"inputs":{"width":{"connections":[{"node":75,"output":"number","data":{}}]},"depth":{"connections":[{"node":76,"output":"number","data":{}}]},"height":{"connections":[{"node":77,"output":"number","data":{}}]}},"outputs":{"groups":{"connections":[{"node":138,"input":"groups2","data":{}},{"node":141,"input":"groups","data":{}}]}},"position":[617.1891810563177,1185.7505925181006],"name":"Draw box"},"130":{"id":130,"data":{"number":0.07,"label":"Plot Radius"},"inputs":{},"outputs":{"number":{"connections":[{"node":144,"input":"radius","data":{}},{"node":179,"input":"dividend","data":{}}]}},"position":[-992.3920505366768,737.2519610945146],"name":"Number"},"131":{"id":131,"data":{},"inputs":{"groups":{"connections":[{"node":141,"output":"groups","data":{}}]},"point":{"connections":[{"node":132,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[{"node":134,"input":"groups","data":{}}]}},"position":[1240.5909742552055,1253.1881165201191],"name":"Move"},"132":{"id":132,"data":{},"inputs":{"x":{"connections":[]},"y":{"connections":[]},"z":{"connections":[{"node":133,"output":"number","data":{}}]}},"outputs":{"point":{"connections":[{"node":131,"input":"point","data":{}}]}},"position":[1020.6803676513692,1515.4073750040204],"name":"Point"},"133":{"id":133,"data":{"formula":"-a"},"inputs":{"a":{"connections":[{"node":77,"output":"number","data":{}}]},"b":{"connections":[]},"c":{"connections":[]},"d":{"connections":[]},"e":{"connections":[]},"f":{"connections":[]},"g":{"connections":[]},"h":{"connections":[]},"i":{"connections":[]},"j":{"connections":[]},"k":{"connections":[]},"l":{"connections":[]}},"outputs":{"number":{"connections":[{"node":132,"input":"z","data":{}}]}},"position":[621.4743459261435,1660.4940051464837],"name":"Calculate"},"134":{"id":134,"data":{"copies":1},"inputs":{"groups":{"connections":[{"node":131,"output":"groups","data":{}}]},"copies":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":135,"input":"groups","data":{}}]}},"position":[1561.6981352883204,1233.199513212346],"name":"Copy"},"135":{"id":135,"data":{},"inputs":{"groups":{"connections":[{"node":134,"output":"groups","data":{}}]},"point":{"connections":[{"node":136,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[{"node":138,"input":"groups1","data":{}}]}},"position":[1961.5485833496919,1440.6536914024903],"name":"Move"},"136":{"id":136,"data":{},"inputs":{"x":{"connections":[{"node":137,"output":"number","data":{}}]},"y":{"connections":[]},"z":{"connections":[]}},"outputs":{"point":{"connections":[{"node":135,"input":"point","data":{}}]}},"position":[1707.0185581278809,1627.8031994781204],"name":"Point"},"137":{"id":137,"data":{"formula":"a-b"},"inputs":{"a":{"connections":[{"node":75,"output":"number","data":{}}]},"b":{"connections":[{"node":76,"output":"number","data":{}}]},"c":{"connections":[]},"d":{"connections":[]},"e":{"connections":[]},"f":{"connections":[]},"g":{"connections":[]},"h":{"connections":[]},"i":{"connections":[]},"j":{"connections":[]},"k":{"connections":[]},"l":{"connections":[]}},"outputs":{"number":{"connections":[{"node":136,"input":"x","data":{}}]}},"position":[1210.8622901408298,1747.8632346944564],"name":"Calculate"},"138":{"id":138,"data":{},"inputs":{"groups1":{"connections":[{"node":135,"output":"groups","data":{}}]},"groups2":{"connections":[{"node":129,"output":"groups","data":{}}]},"groups3":{"connections":[]},"groups4":{"connections":[]},"groups5":{"connections":[]},"groups6":{"connections":[]},"groups7":{"connections":[]},"groups8":{"connections":[]},"groups9":{"connections":[]},"groups10":{"connections":[]},"groups11":{"connections":[]},"groups12":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":139,"input":"groups3","data":{}}]}},"position":[1876.5687993671563,726.4007763015063],"name":"Make group"},"139":{"id":139,"data":{},"inputs":{"groups1":{"connections":[{"node":81,"output":"groups","data":{}}]},"groups2":{"connections":[{"node":74,"output":"groups","data":{}}]},"groups3":{"connections":[{"node":138,"output":"groups","data":{}}]},"groups4":{"connections":[]},"groups5":{"connections":[]},"groups6":{"connections":[]},"groups7":{"connections":[]},"groups8":{"connections":[]},"groups9":{"connections":[]},"groups10":{"connections":[]},"groups11":{"connections":[]},"groups12":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":159,"input":"groups","data":{}}]}},"position":[1882.1263021514735,44.45944433574513],"name":"Make group"},"140":{"id":140,"data":{"formula":"b-a"},"inputs":{"a":{"connections":[{"node":77,"output":"number","data":{}}]},"b":{"connections":[{"node":161,"output":"number","data":{}}]},"c":{"connections":[]},"d":{"connections":[]},"e":{"connections":[]},"f":{"connections":[]},"g":{"connections":[]},"h":{"connections":[]},"i":{"connections":[]},"j":{"connections":[]},"k":{"connections":[]},"l":{"connections":[]}},"outputs":{"number":{"connections":[{"node":120,"input":"z","data":{}}]}},"position":[685.1536992012916,-693.2438344514251],"name":"Calculate"},"141":{"id":141,"data":{"angle":90},"inputs":{"groups":{"connections":[{"node":129,"output":"groups","data":{}}]},"center":{"connections":[{"node":142,"output":"point","data":{}}]},"axis":{"connections":[]},"angle":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":131,"input":"groups","data":{}}]}},"position":[928.922393060086,1225.5511781971654],"name":"Rotate"},"142":{"id":142,"data":{},"inputs":{"x":{"connections":[{"node":143,"output":"number","data":{}}]},"y":{"connections":[{"node":143,"output":"number","data":{}}]},"z":{"connections":[]}},"outputs":{"point":{"connections":[{"node":141,"input":"center","data":{}}]}},"position":[231.82081395677022,1737.7961684746424],"name":"Point"},"143":{"id":143,"data":{"formula":"a/2"},"inputs":{"a":{"connections":[{"node":76,"output":"number","data":{}}]},"b":{"connections":[]},"c":{"connections":[]},"d":{"connections":[]},"e":{"connections":[]},"f":{"connections":[]},"g":{"connections":[]},"h":{"connections":[]},"i":{"connections":[]},"j":{"connections":[]},"k":{"connections":[]},"l":{"connections":[]}},"outputs":{"number":{"connections":[{"node":142,"input":"x","data":{}},{"node":142,"input":"y","data":{}}]}},"position":[-195.27839898271304,1416.5757540376287],"name":"Calculate"},"144":{"id":144,"data":{},"inputs":{"radius":{"connections":[{"node":130,"output":"number","data":{}}]},"height":{"connections":[{"node":146,"output":"number","data":{}}]},"segments":{"connections":[{"node":145,"output":"number","data":{}}]}},"outputs":{"groups":{"connections":[{"node":147,"input":"groups","data":{}},{"node":158,"input":"groups1","data":{}}]}},"position":[-199.58310645522153,2083.7662784563613],"name":"Draw cylinder"},"145":{"id":145,"data":{"number":24,"label":"Plot Segments"},"inputs":{},"outputs":{"number":{"connections":[{"node":144,"input":"segments","data":{}},{"node":152,"input":"segments","data":{}}]}},"position":[-993.1565408312015,1180.7404498580536],"name":"Number"},"146":{"id":146,"data":{"number":0.01,"label":"Plot Height SubDisc"},"inputs":{},"outputs":{"number":{"connections":[{"node":144,"input":"height","data":{}},{"node":151,"input":"a","data":{}},{"node":154,"input":"b","data":{}},{"node":157,"input":"z","data":{}}]}},"position":[-1001.0199726883653,954.259642932974],"name":"Number"},"147":{"id":147,"data":{},"inputs":{"groups":{"connections":[{"node":144,"output":"groups","data":{}}]},"copies":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":149,"input":"groups","data":{}}]}},"position":[234.00176862364668,2059.420076340474],"name":"Copy"},"148":{"id":148,"data":{},"inputs":{"x":{"connections":[]},"y":{"connections":[]},"z":{"connections":[{"node":151,"output":"number","data":{}}]}},"outputs":{"point":{"connections":[{"node":149,"input":"point","data":{}}]}},"position":[229.68745791942098,2386.488169486041],"name":"Point"},"149":{"id":149,"data":{},"inputs":{"groups":{"connections":[{"node":147,"output":"groups","data":{}}]},"point":{"connections":[{"node":148,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[{"node":155,"input":"groups","data":{}}]}},"position":[634.3980575983064,2279.9224539747906],"name":"Move"},"150":{"id":150,"data":{"number":0.07,"label":"Plot Height"},"inputs":{},"outputs":{"number":{"connections":[{"node":151,"input":"b","data":{}},{"node":154,"input":"a","data":{}},{"node":161,"input":"number2","data":{}}]}},"position":[-1015.0998550630222,1407.6523445796497],"name":"Number"},"151":{"id":151,"data":{"formula":"b-a"},"inputs":{"a":{"connections":[{"node":146,"output":"number","data":{}}]},"b":{"connections":[{"node":150,"output":"number","data":{}}]},"c":{"connections":[]},"d":{"connections":[]},"e":{"connections":[]},"f":{"connections":[]},"g":{"connections":[]},"h":{"connections":[]},"i":{"connections":[]},"j":{"connections":[]},"k":{"connections":[]},"l":{"connections":[]}},"outputs":{"number":{"connections":[{"node":148,"input":"z","data":{}}]}},"position":[-206.0872850751732,2528.9308875801557],"name":"Calculate"},"152":{"id":152,"data":{},"inputs":{"radius":{"connections":[{"node":179,"output":"quotient","data":{}}]},"height":{"connections":[{"node":154,"output":"number","data":{}}]},"segments":{"connections":[{"node":145,"output":"number","data":{}}]}},"outputs":{"groups":{"connections":[{"node":156,"input":"groups","data":{}}]}},"position":[230.27186689748163,2688.1074714035267],"name":"Draw cylinder"},"154":{"id":154,"data":{"formula":"a-2*b"},"inputs":{"a":{"connections":[{"node":150,"output":"number","data":{}}]},"b":{"connections":[{"node":146,"output":"number","data":{}}]},"c":{"connections":[]},"d":{"connections":[]},"e":{"connections":[]},"f":{"connections":[]},"g":{"connections":[]},"h":{"connections":[]},"i":{"connections":[]},"j":{"connections":[]},"k":{"connections":[]},"l":{"connections":[]}},"outputs":{"number":{"connections":[{"node":152,"input":"height","data":{}}]}},"position":[237.1508963970233,3115.148481181309],"name":"Calculate"},"155":{"id":155,"data":{"x_factor":0.75,"y_factor":0.75,"z_factor":1},"inputs":{"groups":{"connections":[{"node":149,"output":"groups","data":{}}]},"point":{"connections":[]},"x_factor":{"connections":[]},"y_factor":{"connections":[]},"z_factor":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":158,"input":"groups2","data":{}}]}},"position":[938.6939291796772,2242.435074932532],"name":"Scale"},"156":{"id":156,"data":{},"inputs":{"groups":{"connections":[{"node":152,"output":"groups","data":{}}]},"point":{"connections":[{"node":157,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[{"node":158,"input":"groups3","data":{}}]}},"position":[931.7359736465971,2654.729588023077],"name":"Move"},"157":{"id":157,"data":{},"inputs":{"x":{"connections":[]},"y":{"connections":[]},"z":{"connections":[{"node":146,"output":"number","data":{}}]}},"outputs":{"point":{"connections":[{"node":156,"input":"point","data":{}}]}},"position":[819.2129652971219,2921.711669556854],"name":"Point"},"158":{"id":158,"data":{"name":"Plot","material":"[Color M08]"},"inputs":{"groups1":{"connections":[{"node":144,"output":"groups","data":{}}]},"groups2":{"connections":[{"node":155,"output":"groups","data":{}}]},"groups3":{"connections":[{"node":156,"output":"groups","data":{}}]},"groups4":{"connections":[]},"groups5":{"connections":[]},"groups6":{"connections":[]},"groups7":{"connections":[]},"groups8":{"connections":[]},"groups9":{"connections":[]},"groups10":{"connections":[]},"groups11":{"connections":[]},"groups12":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":162,"input":"groups","data":{}},{"node":164,"input":"groups2","data":{}}]}},"position":[1499.012887102746,2610.9452191118753],"name":"Make group"},"159":{"id":159,"data":{},"inputs":{"groups":{"connections":[{"node":139,"output":"groups","data":{}}]},"point":{"connections":[{"node":160,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[{"node":84,"input":"groups1","data":{}},{"node":123,"input":"groups1","data":{}}]}},"position":[1139.8609474526766,-452.15483770450913],"name":"Move"},"160":{"id":160,"data":{},"inputs":{"x":{"connections":[]},"y":{"connections":[]},"z":{"connections":[{"node":161,"output":"number","data":{}}]}},"outputs":{"point":{"connections":[{"node":159,"input":"point","data":{}}]}},"position":[345.42466419915263,-740.2778150124732],"name":"Point"},"161":{"id":161,"data":{},"inputs":{"number1":{"connections":[{"node":77,"output":"number","data":{}}]},"number2":{"connections":[{"node":150,"output":"number","data":{}}]}},"outputs":{"number":{"connections":[{"node":160,"input":"z","data":{}},{"node":140,"input":"b","data":{}}]}},"position":[5.639264031637822,-681.0083439546418],"name":"Add"},"162":{"id":162,"data":{"copies":3},"inputs":{"groups":{"connections":[{"node":158,"output":"groups","data":{}}]},"copies":{"connections":[{"node":172,"output":"number","data":{}}]}},"outputs":{"groups":{"connections":[{"node":166,"input":"groups","data":{}}]}},"position":[1869.4963262276992,2621.4724201939734],"name":"Copy"},"163":{"id":163,"data":{},"inputs":{"groups":{"connections":[{"node":165,"output":"groups","data":{}}]},"point":{"connections":[{"node":167,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[{"node":169,"input":"groups1","data":{}}]}},"position":[3255.4631331348596,2609.008725102149],"name":"Move"},"164":{"id":164,"data":{"name":"Raw Plot"},"inputs":{"groups1":{"connections":[{"node":166,"output":"groups","data":{}}]},"groups2":{"connections":[{"node":158,"output":"groups","data":{}}]},"groups3":{"connections":[]},"groups4":{"connections":[]},"groups5":{"connections":[]},"groups6":{"connections":[]},"groups7":{"connections":[]},"groups8":{"connections":[]},"groups9":{"connections":[]},"groups10":{"connections":[]},"groups11":{"connections":[]},"groups12":{"connections":[]}},"outputs":{"groups":{"connections":[{"node":165,"input":"groups","data":{}},{"node":169,"input":"groups2","data":{}}]}},"position":[2576.7514580462826,2609.7356175150817],"name":"Make group"},"165":{"id":165,"data":{"copies":6},"inputs":{"groups":{"connections":[{"node":164,"output":"groups","data":{}}]},"copies":{"connections":[{"node":171,"output":"number","data":{}}]}},"outputs":{"groups":{"connections":[{"node":163,"input":"groups","data":{}}]}},"position":[2905.640402482578,2610.6761607421713],"name":"Copy"},"166":{"id":166,"data":{},"inputs":{"groups":{"connections":[{"node":162,"output":"groups","data":{}}]},"point":{"connections":[{"node":168,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[{"node":164,"input":"groups1","data":{}}]}},"position":[2235.1828422362937,2614.0111690005856],"name":"Move"},"167":{"id":167,"data":{},"inputs":{"x":{"connections":[]},"y":{"connections":[{"node":75,"output":"number","data":{}}]},"z":{"connections":[]}},"outputs":{"point":{"connections":[{"node":163,"input":"point","data":{}}]}},"position":[2907.968950553824,2905.459112820967],"name":"Point"},"168":{"id":168,"data":{},"inputs":{"x":{"connections":[{"node":75,"output":"number","data":{}}]},"y":{"connections":[]},"z":{"connections":[]}},"outputs":{"point":{"connections":[{"node":166,"input":"point","data":{}}]}},"position":[1868.7810690635054,3050.4103547198342],"name":"Point"},"169":{"id":169,"data":{"name":"Deck plot"},"inputs":{"groups1":{"connections":[{"node":163,"output":"groups","data":{}}]},"groups2":{"connections":[{"node":164,"output":"groups","data":{}}]},"groups3":{"connections":[]},"groups4":{"connections":[]},"groups5":{"connections":[]},"groups6":{"connections":[]},"groups7":{"connections":[]},"groups8":{"connections":[]},"groups9":{"connections":[]},"groups10":{"connections":[]},"groups11":{"connections":[]},"groups12":{"connections":[]}},"outputs":{"groups":{"connections":[]}},"position":[3727.2974002931032,2611.248352140313],"name":"Make group"},"171":{"id":171,"data":{"label":"Raw","number":8},"inputs":{},"outputs":{"number":{"connections":[{"node":177,"input":"a","data":{}},{"node":178,"input":"a","data":{}},{"node":165,"input":"copies","data":{}}]}},"position":[-977.806569165746,-365.4549384147624],"name":"Number"},"172":{"id":172,"data":{"label":"Column","number":6},"inputs":{},"outputs":{"number":{"connections":[{"node":175,"input":"number1","data":{}},{"node":162,"input":"copies","data":{}}]}},"position":[-974.1154931157414,-175.28070221705366],"name":"Number"},"175":{"id":175,"data":{"number2":1},"inputs":{"number1":{"connections":[{"node":172,"output":"number","data":{}}]},"number2":{"connections":[]}},"outputs":{"number":{"connections":[{"node":85,"input":"copies","data":{}},{"node":118,"input":"copies","data":{}}]}},"position":[2351.920580251462,-34.44934843193595],"name":"Subtract"},"177":{"id":177,"data":{"formula":"if(round(a/2,0)*2<a,round(a/2,0),round(a/2,0)-1)"},"inputs":{"a":{"connections":[{"node":171,"output":"number","data":{}}]},"b":{"connections":[]},"c":{"connections":[]},"d":{"connections":[]},"e":{"connections":[]},"f":{"connections":[]},"g":{"connections":[]},"h":{"connections":[]},"i":{"connections":[]},"j":{"connections":[]},"k":{"connections":[]},"l":{"connections":[]}},"outputs":{"number":{"connections":[{"node":91,"input":"copies","data":{}},{"node":178,"input":"b","data":{}}]}},"position":[4344.672258718166,407.5497300004199],"name":"Calculate"},"178":{"id":178,"data":{"formula":"a-b-2"},"inputs":{"a":{"connections":[{"node":171,"output":"number","data":{}}]},"b":{"connections":[{"node":177,"output":"number","data":{}}]},"c":{"connections":[]},"d":{"connections":[]},"e":{"connections":[]},"f":{"connections":[]},"g":{"connections":[]},"h":{"connections":[]},"i":{"connections":[]},"j":{"connections":[]},"k":{"connections":[]},"l":{"connections":[]}},"outputs":{"number":{"connections":[{"node":126,"input":"copies","data":{}}]}},"position":[4341.342384930612,-449.7835763249863],"name":"Calculate"},"179":{"id":179,"data":{"divisor":2},"inputs":{"dividend":{"connections":[{"node":130,"output":"number","data":{}}]},"divisor":{"connections":[]}},"outputs":{"quotient":{"connections":[{"node":152,"input":"radius","data":{}}]},"remainder":{"connections":[]}},"position":[-502.30774400201824,2926.5126085914667],"name":"Divide"}}}
+{
+  "id": "ParametricModeling@1.0.0",
+  "nodes": {
+    "74": {
+      "id": 74,
+      "data": {
+        "material": "grain-54",
+        "name": "Lame"
+      },
+      "inputs": {
+        "width": {
+          "connections": [
+            {
+              "node": 75,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "depth": {
+          "connections": [
+            {
+              "node": 76,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "height": {
+          "connections": [
+            {
+              "node": 77,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 79,
+              "input": "groups",
+              "data": {
+              }
+            },
+            {
+              "node": 139,
+              "input": "groups2",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        509.1719102334922,
+        -16.71701853294448
+      ],
+      "name": "Draw box"
+    },
+    "75": {
+      "id": 75,
+      "data": {
+        "label": "Length Tile",
+        "number": 0.5
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 74,
+              "input": "width",
+              "data": {
+              }
+            },
+            {
+              "node": 78,
+              "input": "dividend",
+              "data": {
+              }
+            },
+            {
+              "node": 89,
+              "input": "dividend",
+              "data": {
+              }
+            },
+            {
+              "node": 92,
+              "input": "x",
+              "data": {
+              }
+            },
+            {
+              "node": 95,
+              "input": "number1",
+              "data": {
+              }
+            },
+            {
+              "node": 120,
+              "input": "y",
+              "data": {
+              }
+            },
+            {
+              "node": 137,
+              "input": "a",
+              "data": {
+              }
+            },
+            {
+              "node": 129,
+              "input": "width",
+              "data": {
+              }
+            },
+            {
+              "node": 168,
+              "input": "x",
+              "data": {
+              }
+            },
+            {
+              "node": 167,
+              "input": "y",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        -976.1960445529224,
+        54.252629475087886
+      ],
+      "name": "Number"
+    },
+    "76": {
+      "id": 76,
+      "data": {
+        "label": "Depht Wood Slate",
+        "number": 0.09
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 74,
+              "input": "depth",
+              "data": {
+              }
+            },
+            {
+              "node": 78,
+              "input": "divisor",
+              "data": {
+              }
+            },
+            {
+              "node": 83,
+              "input": "c",
+              "data": {
+              }
+            },
+            {
+              "node": 137,
+              "input": "b",
+              "data": {
+              }
+            },
+            {
+              "node": 129,
+              "input": "depth",
+              "data": {
+              }
+            },
+            {
+              "node": 143,
+              "input": "a",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        -991.216713178574,
+        277.82796150459035
+      ],
+      "name": "Number"
+    },
+    "77": {
+      "id": 77,
+      "data": {
+        "number": 0.021,
+        "label": "Heigh Wood Slate"
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 74,
+              "input": "height",
+              "data": {
+              }
+            },
+            {
+              "node": 129,
+              "input": "height",
+              "data": {
+              }
+            },
+            {
+              "node": 133,
+              "input": "a",
+              "data": {
+              }
+            },
+            {
+              "node": 140,
+              "input": "a",
+              "data": {
+              }
+            },
+            {
+              "node": 161,
+              "input": "number1",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        -988.5796150442538,
+        487.61666232595724
+      ],
+      "name": "Number"
+    },
+    "78": {
+      "id": 78,
+      "data": {
+      },
+      "inputs": {
+        "dividend": {
+          "connections": [
+            {
+              "node": 75,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "divisor": {
+          "connections": [
+            {
+              "node": 76,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "quotient": {
+          "connections": [
+            {
+              "node": 80,
+              "input": "a",
+              "data": {
+              }
+            }
+          ]
+        },
+        "remainder": {
+          "connections": [
+            {
+              "node": 83,
+              "input": "a",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        290.1158342641518,
+        884.512884028529
+      ],
+      "name": "Divide"
+    },
+    "79": {
+      "id": 79,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 74,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "copies": {
+          "connections": [
+            {
+              "node": 80,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 81,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        880.5770329160008,
+        187.52814794842268
+      ],
+      "name": "Copy"
+    },
+    "80": {
+      "id": 80,
+      "data": {
+        "formula": "a-1"
+      },
+      "inputs": {
+        "a": {
+          "connections": [
+            {
+              "node": 78,
+              "output": "quotient",
+              "data": {
+              }
+            }
+          ]
+        },
+        "b": {
+          "connections": [
+
+          ]
+        },
+        "c": {
+          "connections": [
+
+          ]
+        },
+        "d": {
+          "connections": [
+
+          ]
+        },
+        "e": {
+          "connections": [
+
+          ]
+        },
+        "f": {
+          "connections": [
+
+          ]
+        },
+        "g": {
+          "connections": [
+
+          ]
+        },
+        "h": {
+          "connections": [
+
+          ]
+        },
+        "i": {
+          "connections": [
+
+          ]
+        },
+        "j": {
+          "connections": [
+
+          ]
+        },
+        "k": {
+          "connections": [
+
+          ]
+        },
+        "l": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 79,
+              "input": "copies",
+              "data": {
+              }
+            },
+            {
+              "node": 83,
+              "input": "b",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        612.6530431904229,
+        443.4439129436148
+      ],
+      "name": "Calculate"
+    },
+    "81": {
+      "id": 81,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 79,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 82,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 139,
+              "input": "groups1",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1243.5290960994064,
+        62.11337911297443
+      ],
+      "name": "Move"
+    },
+    "82": {
+      "id": 82,
+      "data": {
+        "x": 0,
+        "z": 0
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+
+          ]
+        },
+        "y": {
+          "connections": [
+            {
+              "node": 83,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "z": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 81,
+              "input": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1239.6716885418366,
+        531.7854449163096
+      ],
+      "name": "Point"
+    },
+    "83": {
+      "id": 83,
+      "data": {
+        "formula": "a/(round(b,0)-1)+c"
+      },
+      "inputs": {
+        "a": {
+          "connections": [
+            {
+              "node": 78,
+              "output": "remainder",
+              "data": {
+              }
+            }
+          ]
+        },
+        "b": {
+          "connections": [
+            {
+              "node": 80,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "c": {
+          "connections": [
+            {
+              "node": 76,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "d": {
+          "connections": [
+
+          ]
+        },
+        "e": {
+          "connections": [
+
+          ]
+        },
+        "f": {
+          "connections": [
+
+          ]
+        },
+        "g": {
+          "connections": [
+
+          ]
+        },
+        "h": {
+          "connections": [
+
+          ]
+        },
+        "i": {
+          "connections": [
+
+          ]
+        },
+        "j": {
+          "connections": [
+
+          ]
+        },
+        "k": {
+          "connections": [
+
+          ]
+        },
+        "l": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 82,
+              "input": "y",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        924.5136889802568,
+        444.80360716763727
+      ],
+      "name": "Calculate"
+    },
+    "84": {
+      "id": 84,
+      "data": {
+        "name": "Deck Tile"
+      },
+      "inputs": {
+        "groups1": {
+          "connections": [
+            {
+              "node": 159,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups2": {
+          "connections": [
+
+          ]
+        },
+        "groups3": {
+          "connections": [
+
+          ]
+        },
+        "groups4": {
+          "connections": [
+
+          ]
+        },
+        "groups5": {
+          "connections": [
+
+          ]
+        },
+        "groups6": {
+          "connections": [
+
+          ]
+        },
+        "groups7": {
+          "connections": [
+
+          ]
+        },
+        "groups8": {
+          "connections": [
+
+          ]
+        },
+        "groups9": {
+          "connections": [
+
+          ]
+        },
+        "groups10": {
+          "connections": [
+
+          ]
+        },
+        "groups11": {
+          "connections": [
+
+          ]
+        },
+        "groups12": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 85,
+              "input": "groups",
+              "data": {
+              }
+            },
+            {
+              "node": 96,
+              "input": "groups2",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1883.413761876215,
+        -668.8591045758642
+      ],
+      "name": "Make group"
+    },
+    "85": {
+      "id": 85,
+      "data": {
+        "copies": 2,
+        "output_original": false
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 84,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "copies": {
+          "connections": [
+            {
+              "node": 175,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 87,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        2922.15325953008,
+        65.05821603985453
+      ],
+      "name": "Copy"
+    },
+    "87": {
+      "id": 87,
+      "data": {
+        "angle": 90
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 85,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "center": {
+          "connections": [
+            {
+              "node": 88,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        },
+        "axis": {
+          "connections": [
+
+          ]
+        },
+        "angle": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 90,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        4030.3503266083367,
+        62.80100315260599
+      ],
+      "name": "Rotate"
+    },
+    "88": {
+      "id": 88,
+      "data": {
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+            {
+              "node": 89,
+              "output": "quotient",
+              "data": {
+              }
+            }
+          ]
+        },
+        "y": {
+          "connections": [
+            {
+              "node": 89,
+              "output": "quotient",
+              "data": {
+              }
+            }
+          ]
+        },
+        "z": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 87,
+              "input": "center",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        3500.919666372277,
+        281.55622302567593
+      ],
+      "name": "Point"
+    },
+    "89": {
+      "id": 89,
+      "data": {
+        "divisor": 2
+      },
+      "inputs": {
+        "dividend": {
+          "connections": [
+            {
+              "node": 75,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "divisor": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "quotient": {
+          "connections": [
+            {
+              "node": 88,
+              "input": "x",
+              "data": {
+              }
+            },
+            {
+              "node": 88,
+              "input": "y",
+              "data": {
+              }
+            }
+          ]
+        },
+        "remainder": {
+          "connections": [
+
+          ]
+        }
+      },
+      "position": [
+        2946.36367534052,
+        500.5036724822063
+      ],
+      "name": "Divide"
+    },
+    "90": {
+      "id": 90,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 87,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 92,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 96,
+              "input": "groups1",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        4504.917395883176,
+        145.80920709001703
+      ],
+      "name": "Move"
+    },
+    "91": {
+      "id": 91,
+      "data": {
+        "copies": 3
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 96,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "copies": {
+          "connections": [
+            {
+              "node": 177,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 94,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        5110.278760164689,
+        122.96821047915113
+      ],
+      "name": "Copy"
+    },
+    "92": {
+      "id": 92,
+      "data": {
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+            {
+              "node": 75,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "y": {
+          "connections": [
+
+          ]
+        },
+        "z": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 90,
+              "input": "point",
+              "data": {
+              }
+            },
+            {
+              "node": 125,
+              "input": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        3491.1244674363393,
+        -91.9407961351836
+      ],
+      "name": "Point"
+    },
+    "93": {
+      "id": 93,
+      "data": {
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+
+          ]
+        },
+        "y": {
+          "connections": [
+            {
+              "node": 95,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "z": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 94,
+              "input": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        5110.558619069404,
+        466.93646806418957
+      ],
+      "name": "Point"
+    },
+    "94": {
+      "id": 94,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 91,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 93,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+
+          ]
+        }
+      },
+      "position": [
+        5531.14472067267,
+        305.69507552544496
+      ],
+      "name": "Move"
+    },
+    "95": {
+      "id": 95,
+      "data": {
+        "number2": 2
+      },
+      "inputs": {
+        "number1": {
+          "connections": [
+            {
+              "node": 75,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "number2": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 93,
+              "input": "y",
+              "data": {
+              }
+            },
+            {
+              "node": 128,
+              "input": "y",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        3967.058302992465,
+        831.9104498163938
+      ],
+      "name": "Multiply"
+    },
+    "96": {
+      "id": 96,
+      "data": {
+        "name": "Raw Even"
+      },
+      "inputs": {
+        "groups1": {
+          "connections": [
+            {
+              "node": 90,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups2": {
+          "connections": [
+            {
+              "node": 84,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups3": {
+          "connections": [
+
+          ]
+        },
+        "groups4": {
+          "connections": [
+
+          ]
+        },
+        "groups5": {
+          "connections": [
+
+          ]
+        },
+        "groups6": {
+          "connections": [
+
+          ]
+        },
+        "groups7": {
+          "connections": [
+
+          ]
+        },
+        "groups8": {
+          "connections": [
+
+          ]
+        },
+        "groups9": {
+          "connections": [
+
+          ]
+        },
+        "groups10": {
+          "connections": [
+
+          ]
+        },
+        "groups11": {
+          "connections": [
+
+          ]
+        },
+        "groups12": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 91,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        4772.551316794078,
+        90.17284562182255
+      ],
+      "name": "Make group"
+    },
+    "118": {
+      "id": 118,
+      "data": {
+        "output_original": false,
+        "copies": 2
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 121,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "copies": {
+          "connections": [
+            {
+              "node": 175,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 124,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        3762.5490857340756,
+        -696.3273694424819
+      ],
+      "name": "Copy"
+    },
+    "119": {
+      "id": 119,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 123,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 120,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 121,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        3049.375359209711,
+        -699.9229019641347
+      ],
+      "name": "Move"
+    },
+    "120": {
+      "id": 120,
+      "data": {
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+
+          ]
+        },
+        "y": {
+          "connections": [
+            {
+              "node": 75,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "z": {
+          "connections": [
+            {
+              "node": 140,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 119,
+              "input": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        2680.59824438256,
+        -441.1532130669864
+      ],
+      "name": "Point"
+    },
+    "121": {
+      "id": 121,
+      "data": {
+        "angle": 90
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 119,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "center": {
+          "connections": [
+
+          ]
+        },
+        "axis": {
+          "connections": [
+
+          ]
+        },
+        "angle": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 118,
+              "input": "groups",
+              "data": {
+              }
+            },
+            {
+              "node": 122,
+              "input": "groups2",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        3379.2020835859803,
+        -699.4140978991086
+      ],
+      "name": "Rotate"
+    },
+    "122": {
+      "id": 122,
+      "data": {
+        "name": "Raw Odd"
+      },
+      "inputs": {
+        "groups1": {
+          "connections": [
+            {
+              "node": 125,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups2": {
+          "connections": [
+            {
+              "node": 121,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups3": {
+          "connections": [
+
+          ]
+        },
+        "groups4": {
+          "connections": [
+
+          ]
+        },
+        "groups5": {
+          "connections": [
+
+          ]
+        },
+        "groups6": {
+          "connections": [
+
+          ]
+        },
+        "groups7": {
+          "connections": [
+
+          ]
+        },
+        "groups8": {
+          "connections": [
+
+          ]
+        },
+        "groups9": {
+          "connections": [
+
+          ]
+        },
+        "groups10": {
+          "connections": [
+
+          ]
+        },
+        "groups11": {
+          "connections": [
+
+          ]
+        },
+        "groups12": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 126,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        4760.813189981661,
+        -691.7259931103056
+      ],
+      "name": "Make group"
+    },
+    "123": {
+      "id": 123,
+      "data": {
+        "name": "Deck Tile"
+      },
+      "inputs": {
+        "groups1": {
+          "connections": [
+            {
+              "node": 159,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups2": {
+          "connections": [
+
+          ]
+        },
+        "groups3": {
+          "connections": [
+
+          ]
+        },
+        "groups4": {
+          "connections": [
+
+          ]
+        },
+        "groups5": {
+          "connections": [
+
+          ]
+        },
+        "groups6": {
+          "connections": [
+
+          ]
+        },
+        "groups7": {
+          "connections": [
+
+          ]
+        },
+        "groups8": {
+          "connections": [
+
+          ]
+        },
+        "groups9": {
+          "connections": [
+
+          ]
+        },
+        "groups10": {
+          "connections": [
+
+          ]
+        },
+        "groups11": {
+          "connections": [
+
+          ]
+        },
+        "groups12": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 119,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1561.1487960934744,
+        -911.6299849812974
+      ],
+      "name": "Make group"
+    },
+    "124": {
+      "id": 124,
+      "data": {
+        "angle": 90
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 118,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "center": {
+          "connections": [
+
+          ]
+        },
+        "axis": {
+          "connections": [
+
+          ]
+        },
+        "angle": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 125,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        4101.107284904762,
+        -696.7431178041411
+      ],
+      "name": "Rotate"
+    },
+    "125": {
+      "id": 125,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 124,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 92,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 122,
+              "input": "groups1",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        4447.991535454375,
+        -692.5653611868971
+      ],
+      "name": "Move"
+    },
+    "126": {
+      "id": 126,
+      "data": {
+        "copies": 3
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 122,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "copies": {
+          "connections": [
+            {
+              "node": 178,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 127,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        5123.909348276138,
+        -622.3774665550317
+      ],
+      "name": "Copy"
+    },
+    "127": {
+      "id": 127,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 126,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 128,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+
+          ]
+        }
+      },
+      "position": [
+        5529.351584265058,
+        -626.484292134767
+      ],
+      "name": "Move"
+    },
+    "128": {
+      "id": 128,
+      "data": {
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+
+          ]
+        },
+        "y": {
+          "connections": [
+            {
+              "node": 95,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "z": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 127,
+              "input": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        5119.334234572765,
+        -322.47673026768854
+      ],
+      "name": "Point"
+    },
+    "129": {
+      "id": 129,
+      "data": {
+        "name": "ContreLame",
+        "material": "grain-54"
+      },
+      "inputs": {
+        "width": {
+          "connections": [
+            {
+              "node": 75,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "depth": {
+          "connections": [
+            {
+              "node": 76,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "height": {
+          "connections": [
+            {
+              "node": 77,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 138,
+              "input": "groups2",
+              "data": {
+              }
+            },
+            {
+              "node": 141,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        617.1891810563177,
+        1185.7505925181006
+      ],
+      "name": "Draw box"
+    },
+    "130": {
+      "id": 130,
+      "data": {
+        "number": 0.07,
+        "label": "Plot Radius"
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 144,
+              "input": "radius",
+              "data": {
+              }
+            },
+            {
+              "node": 179,
+              "input": "dividend",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        -992.3920505366768,
+        737.2519610945146
+      ],
+      "name": "Number"
+    },
+    "131": {
+      "id": 131,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 141,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 132,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 134,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1240.5909742552055,
+        1253.1881165201191
+      ],
+      "name": "Move"
+    },
+    "132": {
+      "id": 132,
+      "data": {
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+
+          ]
+        },
+        "y": {
+          "connections": [
+
+          ]
+        },
+        "z": {
+          "connections": [
+            {
+              "node": 133,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 131,
+              "input": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1020.6803676513692,
+        1515.4073750040204
+      ],
+      "name": "Point"
+    },
+    "133": {
+      "id": 133,
+      "data": {
+        "formula": "-a"
+      },
+      "inputs": {
+        "a": {
+          "connections": [
+            {
+              "node": 77,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "b": {
+          "connections": [
+
+          ]
+        },
+        "c": {
+          "connections": [
+
+          ]
+        },
+        "d": {
+          "connections": [
+
+          ]
+        },
+        "e": {
+          "connections": [
+
+          ]
+        },
+        "f": {
+          "connections": [
+
+          ]
+        },
+        "g": {
+          "connections": [
+
+          ]
+        },
+        "h": {
+          "connections": [
+
+          ]
+        },
+        "i": {
+          "connections": [
+
+          ]
+        },
+        "j": {
+          "connections": [
+
+          ]
+        },
+        "k": {
+          "connections": [
+
+          ]
+        },
+        "l": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 132,
+              "input": "z",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        621.4743459261435,
+        1660.4940051464837
+      ],
+      "name": "Calculate"
+    },
+    "134": {
+      "id": 134,
+      "data": {
+        "copies": 1
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 131,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "copies": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 135,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1561.6981352883204,
+        1233.199513212346
+      ],
+      "name": "Copy"
+    },
+    "135": {
+      "id": 135,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 134,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 136,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 138,
+              "input": "groups1",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1961.5485833496919,
+        1440.6536914024903
+      ],
+      "name": "Move"
+    },
+    "136": {
+      "id": 136,
+      "data": {
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+            {
+              "node": 137,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "y": {
+          "connections": [
+
+          ]
+        },
+        "z": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 135,
+              "input": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1707.0185581278809,
+        1627.8031994781204
+      ],
+      "name": "Point"
+    },
+    "137": {
+      "id": 137,
+      "data": {
+        "formula": "a-b"
+      },
+      "inputs": {
+        "a": {
+          "connections": [
+            {
+              "node": 75,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "b": {
+          "connections": [
+            {
+              "node": 76,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "c": {
+          "connections": [
+
+          ]
+        },
+        "d": {
+          "connections": [
+
+          ]
+        },
+        "e": {
+          "connections": [
+
+          ]
+        },
+        "f": {
+          "connections": [
+
+          ]
+        },
+        "g": {
+          "connections": [
+
+          ]
+        },
+        "h": {
+          "connections": [
+
+          ]
+        },
+        "i": {
+          "connections": [
+
+          ]
+        },
+        "j": {
+          "connections": [
+
+          ]
+        },
+        "k": {
+          "connections": [
+
+          ]
+        },
+        "l": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 136,
+              "input": "x",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1210.8622901408298,
+        1747.8632346944564
+      ],
+      "name": "Calculate"
+    },
+    "138": {
+      "id": 138,
+      "data": {
+      },
+      "inputs": {
+        "groups1": {
+          "connections": [
+            {
+              "node": 135,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups2": {
+          "connections": [
+            {
+              "node": 129,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups3": {
+          "connections": [
+
+          ]
+        },
+        "groups4": {
+          "connections": [
+
+          ]
+        },
+        "groups5": {
+          "connections": [
+
+          ]
+        },
+        "groups6": {
+          "connections": [
+
+          ]
+        },
+        "groups7": {
+          "connections": [
+
+          ]
+        },
+        "groups8": {
+          "connections": [
+
+          ]
+        },
+        "groups9": {
+          "connections": [
+
+          ]
+        },
+        "groups10": {
+          "connections": [
+
+          ]
+        },
+        "groups11": {
+          "connections": [
+
+          ]
+        },
+        "groups12": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 139,
+              "input": "groups3",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1876.5687993671563,
+        726.4007763015063
+      ],
+      "name": "Make group"
+    },
+    "139": {
+      "id": 139,
+      "data": {
+      },
+      "inputs": {
+        "groups1": {
+          "connections": [
+            {
+              "node": 81,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups2": {
+          "connections": [
+            {
+              "node": 74,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups3": {
+          "connections": [
+            {
+              "node": 138,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups4": {
+          "connections": [
+
+          ]
+        },
+        "groups5": {
+          "connections": [
+
+          ]
+        },
+        "groups6": {
+          "connections": [
+
+          ]
+        },
+        "groups7": {
+          "connections": [
+
+          ]
+        },
+        "groups8": {
+          "connections": [
+
+          ]
+        },
+        "groups9": {
+          "connections": [
+
+          ]
+        },
+        "groups10": {
+          "connections": [
+
+          ]
+        },
+        "groups11": {
+          "connections": [
+
+          ]
+        },
+        "groups12": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 159,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1882.1263021514735,
+        44.45944433574513
+      ],
+      "name": "Make group"
+    },
+    "140": {
+      "id": 140,
+      "data": {
+        "formula": "b-a"
+      },
+      "inputs": {
+        "a": {
+          "connections": [
+            {
+              "node": 77,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "b": {
+          "connections": [
+            {
+              "node": 161,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "c": {
+          "connections": [
+
+          ]
+        },
+        "d": {
+          "connections": [
+
+          ]
+        },
+        "e": {
+          "connections": [
+
+          ]
+        },
+        "f": {
+          "connections": [
+
+          ]
+        },
+        "g": {
+          "connections": [
+
+          ]
+        },
+        "h": {
+          "connections": [
+
+          ]
+        },
+        "i": {
+          "connections": [
+
+          ]
+        },
+        "j": {
+          "connections": [
+
+          ]
+        },
+        "k": {
+          "connections": [
+
+          ]
+        },
+        "l": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 120,
+              "input": "z",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        685.1536992012916,
+        -693.2438344514251
+      ],
+      "name": "Calculate"
+    },
+    "141": {
+      "id": 141,
+      "data": {
+        "angle": 90
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 129,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "center": {
+          "connections": [
+            {
+              "node": 142,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        },
+        "axis": {
+          "connections": [
+
+          ]
+        },
+        "angle": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 131,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        928.922393060086,
+        1225.5511781971654
+      ],
+      "name": "Rotate"
+    },
+    "142": {
+      "id": 142,
+      "data": {
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+            {
+              "node": 143,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "y": {
+          "connections": [
+            {
+              "node": 143,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "z": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 141,
+              "input": "center",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        231.82081395677022,
+        1737.7961684746424
+      ],
+      "name": "Point"
+    },
+    "143": {
+      "id": 143,
+      "data": {
+        "formula": "a/2"
+      },
+      "inputs": {
+        "a": {
+          "connections": [
+            {
+              "node": 76,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "b": {
+          "connections": [
+
+          ]
+        },
+        "c": {
+          "connections": [
+
+          ]
+        },
+        "d": {
+          "connections": [
+
+          ]
+        },
+        "e": {
+          "connections": [
+
+          ]
+        },
+        "f": {
+          "connections": [
+
+          ]
+        },
+        "g": {
+          "connections": [
+
+          ]
+        },
+        "h": {
+          "connections": [
+
+          ]
+        },
+        "i": {
+          "connections": [
+
+          ]
+        },
+        "j": {
+          "connections": [
+
+          ]
+        },
+        "k": {
+          "connections": [
+
+          ]
+        },
+        "l": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 142,
+              "input": "x",
+              "data": {
+              }
+            },
+            {
+              "node": 142,
+              "input": "y",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        -195.27839898271304,
+        1416.5757540376287
+      ],
+      "name": "Calculate"
+    },
+    "144": {
+      "id": 144,
+      "data": {
+      },
+      "inputs": {
+        "radius": {
+          "connections": [
+            {
+              "node": 130,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "height": {
+          "connections": [
+            {
+              "node": 146,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "segments": {
+          "connections": [
+            {
+              "node": 145,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 147,
+              "input": "groups",
+              "data": {
+              }
+            },
+            {
+              "node": 158,
+              "input": "groups1",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        -199.58310645522153,
+        2083.7662784563613
+      ],
+      "name": "Draw cylinder"
+    },
+    "145": {
+      "id": 145,
+      "data": {
+        "number": 24,
+        "label": "Plot Segments"
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 144,
+              "input": "segments",
+              "data": {
+              }
+            },
+            {
+              "node": 152,
+              "input": "segments",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        -993.1565408312015,
+        1180.7404498580536
+      ],
+      "name": "Number"
+    },
+    "146": {
+      "id": 146,
+      "data": {
+        "number": 0.01,
+        "label": "Plot Height SubDisc"
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 144,
+              "input": "height",
+              "data": {
+              }
+            },
+            {
+              "node": 151,
+              "input": "a",
+              "data": {
+              }
+            },
+            {
+              "node": 154,
+              "input": "b",
+              "data": {
+              }
+            },
+            {
+              "node": 157,
+              "input": "z",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        -1001.0199726883653,
+        954.259642932974
+      ],
+      "name": "Number"
+    },
+    "147": {
+      "id": 147,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 144,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "copies": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 149,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        234.00176862364668,
+        2059.420076340474
+      ],
+      "name": "Copy"
+    },
+    "148": {
+      "id": 148,
+      "data": {
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+
+          ]
+        },
+        "y": {
+          "connections": [
+
+          ]
+        },
+        "z": {
+          "connections": [
+            {
+              "node": 151,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 149,
+              "input": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        229.68745791942098,
+        2386.488169486041
+      ],
+      "name": "Point"
+    },
+    "149": {
+      "id": 149,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 147,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 148,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 155,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        634.3980575983064,
+        2279.9224539747906
+      ],
+      "name": "Move"
+    },
+    "150": {
+      "id": 150,
+      "data": {
+        "number": 0.07,
+        "label": "Plot Height"
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 151,
+              "input": "b",
+              "data": {
+              }
+            },
+            {
+              "node": 154,
+              "input": "a",
+              "data": {
+              }
+            },
+            {
+              "node": 161,
+              "input": "number2",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        -1015.0998550630222,
+        1407.6523445796497
+      ],
+      "name": "Number"
+    },
+    "151": {
+      "id": 151,
+      "data": {
+        "formula": "b-a"
+      },
+      "inputs": {
+        "a": {
+          "connections": [
+            {
+              "node": 146,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "b": {
+          "connections": [
+            {
+              "node": 150,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "c": {
+          "connections": [
+
+          ]
+        },
+        "d": {
+          "connections": [
+
+          ]
+        },
+        "e": {
+          "connections": [
+
+          ]
+        },
+        "f": {
+          "connections": [
+
+          ]
+        },
+        "g": {
+          "connections": [
+
+          ]
+        },
+        "h": {
+          "connections": [
+
+          ]
+        },
+        "i": {
+          "connections": [
+
+          ]
+        },
+        "j": {
+          "connections": [
+
+          ]
+        },
+        "k": {
+          "connections": [
+
+          ]
+        },
+        "l": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 148,
+              "input": "z",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        -206.0872850751732,
+        2528.9308875801557
+      ],
+      "name": "Calculate"
+    },
+    "152": {
+      "id": 152,
+      "data": {
+      },
+      "inputs": {
+        "radius": {
+          "connections": [
+            {
+              "node": 179,
+              "output": "quotient",
+              "data": {
+              }
+            }
+          ]
+        },
+        "height": {
+          "connections": [
+            {
+              "node": 154,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "segments": {
+          "connections": [
+            {
+              "node": 145,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 156,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        230.27186689748163,
+        2688.1074714035267
+      ],
+      "name": "Draw cylinder"
+    },
+    "154": {
+      "id": 154,
+      "data": {
+        "formula": "a-2*b"
+      },
+      "inputs": {
+        "a": {
+          "connections": [
+            {
+              "node": 150,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "b": {
+          "connections": [
+            {
+              "node": 146,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "c": {
+          "connections": [
+
+          ]
+        },
+        "d": {
+          "connections": [
+
+          ]
+        },
+        "e": {
+          "connections": [
+
+          ]
+        },
+        "f": {
+          "connections": [
+
+          ]
+        },
+        "g": {
+          "connections": [
+
+          ]
+        },
+        "h": {
+          "connections": [
+
+          ]
+        },
+        "i": {
+          "connections": [
+
+          ]
+        },
+        "j": {
+          "connections": [
+
+          ]
+        },
+        "k": {
+          "connections": [
+
+          ]
+        },
+        "l": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 152,
+              "input": "height",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        237.1508963970233,
+        3115.148481181309
+      ],
+      "name": "Calculate"
+    },
+    "155": {
+      "id": 155,
+      "data": {
+        "x_factor": 0.75,
+        "y_factor": 0.75,
+        "z_factor": 1
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 149,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+
+          ]
+        },
+        "x_factor": {
+          "connections": [
+
+          ]
+        },
+        "y_factor": {
+          "connections": [
+
+          ]
+        },
+        "z_factor": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 158,
+              "input": "groups2",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        938.6939291796772,
+        2242.435074932532
+      ],
+      "name": "Scale"
+    },
+    "156": {
+      "id": 156,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 152,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 157,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 158,
+              "input": "groups3",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        931.7359736465971,
+        2654.729588023077
+      ],
+      "name": "Move"
+    },
+    "157": {
+      "id": 157,
+      "data": {
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+
+          ]
+        },
+        "y": {
+          "connections": [
+
+          ]
+        },
+        "z": {
+          "connections": [
+            {
+              "node": 146,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 156,
+              "input": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        819.2129652971219,
+        2921.711669556854
+      ],
+      "name": "Point"
+    },
+    "158": {
+      "id": 158,
+      "data": {
+        "name": "Plot",
+        "material": "[Color M08]"
+      },
+      "inputs": {
+        "groups1": {
+          "connections": [
+            {
+              "node": 144,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups2": {
+          "connections": [
+            {
+              "node": 155,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups3": {
+          "connections": [
+            {
+              "node": 156,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups4": {
+          "connections": [
+
+          ]
+        },
+        "groups5": {
+          "connections": [
+
+          ]
+        },
+        "groups6": {
+          "connections": [
+
+          ]
+        },
+        "groups7": {
+          "connections": [
+
+          ]
+        },
+        "groups8": {
+          "connections": [
+
+          ]
+        },
+        "groups9": {
+          "connections": [
+
+          ]
+        },
+        "groups10": {
+          "connections": [
+
+          ]
+        },
+        "groups11": {
+          "connections": [
+
+          ]
+        },
+        "groups12": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 162,
+              "input": "groups",
+              "data": {
+              }
+            },
+            {
+              "node": 164,
+              "input": "groups2",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1499.012887102746,
+        2610.9452191118753
+      ],
+      "name": "Make group"
+    },
+    "159": {
+      "id": 159,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 139,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 160,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 84,
+              "input": "groups1",
+              "data": {
+              }
+            },
+            {
+              "node": 123,
+              "input": "groups1",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1139.8609474526766,
+        -452.15483770450913
+      ],
+      "name": "Move"
+    },
+    "160": {
+      "id": 160,
+      "data": {
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+
+          ]
+        },
+        "y": {
+          "connections": [
+
+          ]
+        },
+        "z": {
+          "connections": [
+            {
+              "node": 161,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 159,
+              "input": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        345.42466419915263,
+        -740.2778150124732
+      ],
+      "name": "Point"
+    },
+    "161": {
+      "id": 161,
+      "data": {
+      },
+      "inputs": {
+        "number1": {
+          "connections": [
+            {
+              "node": 77,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "number2": {
+          "connections": [
+            {
+              "node": 150,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 160,
+              "input": "z",
+              "data": {
+              }
+            },
+            {
+              "node": 140,
+              "input": "b",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        5.639264031637822,
+        -681.0083439546418
+      ],
+      "name": "Add"
+    },
+    "162": {
+      "id": 162,
+      "data": {
+        "copies": 3
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 158,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "copies": {
+          "connections": [
+            {
+              "node": 172,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 166,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1869.4963262276992,
+        2621.4724201939734
+      ],
+      "name": "Copy"
+    },
+    "163": {
+      "id": 163,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 165,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 167,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 169,
+              "input": "groups1",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        3255.4631331348596,
+        2609.008725102149
+      ],
+      "name": "Move"
+    },
+    "164": {
+      "id": 164,
+      "data": {
+        "name": "Raw Plot"
+      },
+      "inputs": {
+        "groups1": {
+          "connections": [
+            {
+              "node": 166,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups2": {
+          "connections": [
+            {
+              "node": 158,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups3": {
+          "connections": [
+
+          ]
+        },
+        "groups4": {
+          "connections": [
+
+          ]
+        },
+        "groups5": {
+          "connections": [
+
+          ]
+        },
+        "groups6": {
+          "connections": [
+
+          ]
+        },
+        "groups7": {
+          "connections": [
+
+          ]
+        },
+        "groups8": {
+          "connections": [
+
+          ]
+        },
+        "groups9": {
+          "connections": [
+
+          ]
+        },
+        "groups10": {
+          "connections": [
+
+          ]
+        },
+        "groups11": {
+          "connections": [
+
+          ]
+        },
+        "groups12": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 165,
+              "input": "groups",
+              "data": {
+              }
+            },
+            {
+              "node": 169,
+              "input": "groups2",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        2576.7514580462826,
+        2609.7356175150817
+      ],
+      "name": "Make group"
+    },
+    "165": {
+      "id": 165,
+      "data": {
+        "copies": 6
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 164,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "copies": {
+          "connections": [
+            {
+              "node": 171,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 163,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        2905.640402482578,
+        2610.6761607421713
+      ],
+      "name": "Copy"
+    },
+    "166": {
+      "id": 166,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 162,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 168,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 164,
+              "input": "groups1",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        2235.1828422362937,
+        2614.0111690005856
+      ],
+      "name": "Move"
+    },
+    "167": {
+      "id": 167,
+      "data": {
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+
+          ]
+        },
+        "y": {
+          "connections": [
+            {
+              "node": 75,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "z": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 163,
+              "input": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        2907.968950553824,
+        2905.459112820967
+      ],
+      "name": "Point"
+    },
+    "168": {
+      "id": 168,
+      "data": {
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+            {
+              "node": 75,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "y": {
+          "connections": [
+
+          ]
+        },
+        "z": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 166,
+              "input": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1868.7810690635054,
+        3050.4103547198342
+      ],
+      "name": "Point"
+    },
+    "169": {
+      "id": 169,
+      "data": {
+        "name": "Deck plot"
+      },
+      "inputs": {
+        "groups1": {
+          "connections": [
+            {
+              "node": 163,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups2": {
+          "connections": [
+            {
+              "node": 164,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "groups3": {
+          "connections": [
+
+          ]
+        },
+        "groups4": {
+          "connections": [
+
+          ]
+        },
+        "groups5": {
+          "connections": [
+
+          ]
+        },
+        "groups6": {
+          "connections": [
+
+          ]
+        },
+        "groups7": {
+          "connections": [
+
+          ]
+        },
+        "groups8": {
+          "connections": [
+
+          ]
+        },
+        "groups9": {
+          "connections": [
+
+          ]
+        },
+        "groups10": {
+          "connections": [
+
+          ]
+        },
+        "groups11": {
+          "connections": [
+
+          ]
+        },
+        "groups12": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+
+          ]
+        }
+      },
+      "position": [
+        3727.2974002931032,
+        2611.248352140313
+      ],
+      "name": "Make group"
+    },
+    "171": {
+      "id": 171,
+      "data": {
+        "label": "Raw",
+        "number": 8
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 177,
+              "input": "a",
+              "data": {
+              }
+            },
+            {
+              "node": 178,
+              "input": "a",
+              "data": {
+              }
+            },
+            {
+              "node": 165,
+              "input": "copies",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        -977.806569165746,
+        -365.4549384147624
+      ],
+      "name": "Number"
+    },
+    "172": {
+      "id": 172,
+      "data": {
+        "label": "Column",
+        "number": 6
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 175,
+              "input": "number1",
+              "data": {
+              }
+            },
+            {
+              "node": 162,
+              "input": "copies",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        -974.1154931157414,
+        -175.28070221705366
+      ],
+      "name": "Number"
+    },
+    "175": {
+      "id": 175,
+      "data": {
+        "number2": 1
+      },
+      "inputs": {
+        "number1": {
+          "connections": [
+            {
+              "node": 172,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "number2": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 85,
+              "input": "copies",
+              "data": {
+              }
+            },
+            {
+              "node": 118,
+              "input": "copies",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        2351.920580251462,
+        -34.44934843193595
+      ],
+      "name": "Subtract"
+    },
+    "177": {
+      "id": 177,
+      "data": {
+        "formula": "if(round(a/2,0)*2<a,round(a/2,0),round(a/2,0)-1)"
+      },
+      "inputs": {
+        "a": {
+          "connections": [
+            {
+              "node": 171,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "b": {
+          "connections": [
+
+          ]
+        },
+        "c": {
+          "connections": [
+
+          ]
+        },
+        "d": {
+          "connections": [
+
+          ]
+        },
+        "e": {
+          "connections": [
+
+          ]
+        },
+        "f": {
+          "connections": [
+
+          ]
+        },
+        "g": {
+          "connections": [
+
+          ]
+        },
+        "h": {
+          "connections": [
+
+          ]
+        },
+        "i": {
+          "connections": [
+
+          ]
+        },
+        "j": {
+          "connections": [
+
+          ]
+        },
+        "k": {
+          "connections": [
+
+          ]
+        },
+        "l": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 91,
+              "input": "copies",
+              "data": {
+              }
+            },
+            {
+              "node": 178,
+              "input": "b",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        4344.672258718166,
+        407.5497300004199
+      ],
+      "name": "Calculate"
+    },
+    "178": {
+      "id": 178,
+      "data": {
+        "formula": "a-b-2"
+      },
+      "inputs": {
+        "a": {
+          "connections": [
+            {
+              "node": 171,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "b": {
+          "connections": [
+            {
+              "node": 177,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "c": {
+          "connections": [
+
+          ]
+        },
+        "d": {
+          "connections": [
+
+          ]
+        },
+        "e": {
+          "connections": [
+
+          ]
+        },
+        "f": {
+          "connections": [
+
+          ]
+        },
+        "g": {
+          "connections": [
+
+          ]
+        },
+        "h": {
+          "connections": [
+
+          ]
+        },
+        "i": {
+          "connections": [
+
+          ]
+        },
+        "j": {
+          "connections": [
+
+          ]
+        },
+        "k": {
+          "connections": [
+
+          ]
+        },
+        "l": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 126,
+              "input": "copies",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        4341.342384930612,
+        -449.7835763249863
+      ],
+      "name": "Calculate"
+    },
+    "179": {
+      "id": 179,
+      "data": {
+        "divisor": 2
+      },
+      "inputs": {
+        "dividend": {
+          "connections": [
+            {
+              "node": 130,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "divisor": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "quotient": {
+          "connections": [
+            {
+              "node": 152,
+              "input": "radius",
+              "data": {
+              }
+            }
+          ]
+        },
+        "remainder": {
+          "connections": [
+
+          ]
+        }
+      },
+      "position": [
+        -502.30774400201824,
+        2926.5126085914667
+      ],
+      "name": "Divide"
+    }
+  }
+}

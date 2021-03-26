@@ -1,1 +1,443 @@
-{"id":"ParametricModeling@1.0.0","nodes":{"4":{"id":4,"data":{"material":"Polished Concrete New","name":"Step"},"inputs":{"width":{"connections":[{"node":6,"output":"number","data":{}}]},"depth":{"connections":[{"node":7,"output":"number","data":{}}]},"height":{"connections":[{"node":8,"output":"number","data":{}}]}},"outputs":{"groups":{"connections":[{"node":5,"input":"groups","data":{}}]}},"position":[585.332874386637,274.89896137150515],"name":"Draw box"},"5":{"id":5,"data":{"copies":11},"inputs":{"groups":{"connections":[{"node":4,"output":"groups","data":{}}]},"copies":{"connections":[{"node":18,"output":"number","data":{}}]}},"outputs":{"groups":{"connections":[{"node":13,"input":"groups","data":{}}]}},"position":[864.9734179226134,35.050811518635506],"name":"Copy"},"6":{"id":6,"data":{"number":0.45,"label":"Step Depth"},"inputs":{},"outputs":{"number":{"connections":[{"node":4,"input":"width","data":{}},{"node":14,"input":"x","data":{}}]}},"position":[306.7335961939963,33.01301759577329],"name":"Number"},"7":{"id":7,"data":{"number":2,"label":"Step Width"},"inputs":{},"outputs":{"number":{"connections":[{"node":4,"input":"depth","data":{}}]}},"position":[305.9462803678681,228.16186805454979],"name":"Number"},"8":{"id":8,"data":{"number":0.25,"label":"Step Height"},"inputs":{},"outputs":{"number":{"connections":[{"node":4,"input":"height","data":{}},{"node":15,"input":"distance","data":{}}]}},"position":[304.83799267157923,422.18783396939],"name":"Number"},"13":{"id":13,"data":{},"inputs":{"groups":{"connections":[{"node":5,"output":"groups","data":{}}]},"point":{"connections":[{"node":14,"output":"point","data":{}}]}},"outputs":{"groups":{"connections":[{"node":15,"input":"groups","data":{}}]}},"position":[1150.839118832065,36.11274267838122],"name":"Move"},"14":{"id":14,"data":{"x":1,"y":0,"z":0},"inputs":{"x":{"connections":[{"node":6,"output":"number","data":{}}]},"y":{"connections":[]},"z":{"connections":[]}},"outputs":{"point":{"connections":[{"node":13,"input":"point","data":{}}]}},"position":[863.8204955035803,246.18907631245938],"name":"Point"},"15":{"id":15,"data":{"increment_distance":true},"inputs":{"groups":{"connections":[{"node":13,"output":"groups","data":{}}]},"distance":{"connections":[{"node":8,"output":"number","data":{}}]},"direction":{"connections":[{"node":16,"output":"vector","data":{}}]}},"outputs":{"groups":{"connections":[]}},"position":[1434.7185084938694,212.25321969128788],"name":"Push/Pull"},"16":{"id":16,"data":{"z":1},"inputs":{"x":{"connections":[]},"y":{"connections":[]},"z":{"connections":[]}},"outputs":{"vector":{"connections":[{"node":15,"input":"direction","data":{}}]}},"position":[1151.1166275377002,244.74475809465875],"name":"Vector"},"17":{"id":17,"data":{"label":"Steps","number":10},"inputs":{},"outputs":{"number":{"connections":[{"node":18,"input":"number1","data":{}}]}},"position":[26.860347294868063,227.42193112090158],"name":"Number"},"18":{"id":18,"data":{"number2":1},"inputs":{"number1":{"connections":[{"node":17,"output":"number","data":{}}]},"number2":{"connections":[]}},"outputs":{"number":{"connections":[{"node":5,"input":"copies","data":{}}]}},"position":[587.1811947907324,36.08272209494622],"name":"Subtract"}}}
+{
+  "id": "ParametricModeling@1.0.0",
+  "nodes": {
+    "4": {
+      "id": 4,
+      "data": {
+        "material": "Polished Concrete New",
+        "name": "Step"
+      },
+      "inputs": {
+        "width": {
+          "connections": [
+            {
+              "node": 6,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "depth": {
+          "connections": [
+            {
+              "node": 7,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "height": {
+          "connections": [
+            {
+              "node": 8,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 5,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        585.332874386637,
+        274.89896137150515
+      ],
+      "name": "Draw box"
+    },
+    "5": {
+      "id": 5,
+      "data": {
+        "copies": 11
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 4,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "copies": {
+          "connections": [
+            {
+              "node": 18,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 13,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        864.9734179226134,
+        35.050811518635506
+      ],
+      "name": "Copy"
+    },
+    "6": {
+      "id": 6,
+      "data": {
+        "number": 0.45,
+        "label": "Step Depth"
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 4,
+              "input": "width",
+              "data": {
+              }
+            },
+            {
+              "node": 14,
+              "input": "x",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        306.7335961939963,
+        33.01301759577329
+      ],
+      "name": "Number"
+    },
+    "7": {
+      "id": 7,
+      "data": {
+        "number": 2,
+        "label": "Step Width"
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 4,
+              "input": "depth",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        305.9462803678681,
+        228.16186805454979
+      ],
+      "name": "Number"
+    },
+    "8": {
+      "id": 8,
+      "data": {
+        "number": 0.25,
+        "label": "Step Height"
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 4,
+              "input": "height",
+              "data": {
+              }
+            },
+            {
+              "node": 15,
+              "input": "distance",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        304.83799267157923,
+        422.18783396939
+      ],
+      "name": "Number"
+    },
+    "13": {
+      "id": 13,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 5,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+            {
+              "node": 14,
+              "output": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 15,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1150.839118832065,
+        36.11274267838122
+      ],
+      "name": "Move"
+    },
+    "14": {
+      "id": 14,
+      "data": {
+        "x": 1,
+        "y": 0,
+        "z": 0
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+            {
+              "node": 6,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "y": {
+          "connections": [
+
+          ]
+        },
+        "z": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "point": {
+          "connections": [
+            {
+              "node": 13,
+              "input": "point",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        863.8204955035803,
+        246.18907631245938
+      ],
+      "name": "Point"
+    },
+    "15": {
+      "id": 15,
+      "data": {
+        "increment_distance": true
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 13,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "distance": {
+          "connections": [
+            {
+              "node": 8,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "direction": {
+          "connections": [
+            {
+              "node": 16,
+              "output": "vector",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+
+          ]
+        }
+      },
+      "position": [
+        1434.7185084938694,
+        212.25321969128788
+      ],
+      "name": "Push/Pull"
+    },
+    "16": {
+      "id": 16,
+      "data": {
+        "z": 1
+      },
+      "inputs": {
+        "x": {
+          "connections": [
+
+          ]
+        },
+        "y": {
+          "connections": [
+
+          ]
+        },
+        "z": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "vector": {
+          "connections": [
+            {
+              "node": 15,
+              "input": "direction",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1151.1166275377002,
+        244.74475809465875
+      ],
+      "name": "Vector"
+    },
+    "17": {
+      "id": 17,
+      "data": {
+        "label": "Steps",
+        "number": 10
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 18,
+              "input": "number1",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        26.860347294868063,
+        227.42193112090158
+      ],
+      "name": "Number"
+    },
+    "18": {
+      "id": 18,
+      "data": {
+        "number2": 1
+      },
+      "inputs": {
+        "number1": {
+          "connections": [
+            {
+              "node": 17,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "number2": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 5,
+              "input": "copies",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        587.1811947907324,
+        36.08272209494622
+      ],
+      "name": "Subtract"
+    }
+  }
+}

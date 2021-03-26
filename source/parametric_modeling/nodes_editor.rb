@@ -326,7 +326,7 @@ module ParametricModeling
       # Exit if user canceled...
       return if schema_file.nil?
 
-      File.write(schema_file, schema.to_json)
+      File.write(schema_file, JSON.pretty_generate(schema))
 
       UI.messagebox('Parametric Modeling schema successfully exported here: ' + schema_file)
 
