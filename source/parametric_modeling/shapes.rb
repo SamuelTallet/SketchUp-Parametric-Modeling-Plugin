@@ -3,6 +3,9 @@
 
 # License: The MIT License (MIT)
 
+require 'sketchup'
+require 'parametric_modeling/utils'
+
 # Parametric Modeling plugin namespace.
 module ParametricModeling
 
@@ -356,6 +359,52 @@ module ParametricModeling
       group.name = name
       group.material = material
       group.layer = layer
+
+      group.set_attribute(CODE_NAME, 'isParametric', true)
+
+      group
+
+    end
+
+    # Draws an unknown shape.
+    #
+    # @param [Array] points
+    # @param [String] name
+    # @raise [ArgumentError]
+    #
+    # @return [Sketchup::Group]
+    def self.draw_shape(points, name)
+
+      raise ArgumentError, 'Points must be an Array.'\
+        unless points.is_a?(Array)
+
+      raise ArgumentError, 'Name must be a String.'\
+        unless name.is_a?(String)
+
+      group = Sketchup.active_model.entities.add_group
+
+      points.each do |face_points|
+
+        face_points_in_inches = []
+
+        face_points.each do |face_point|
+
+          face_points_in_inches.push([
+
+            Utils.num2ul(face_point[0].to_f),
+            Utils.num2ul(face_point[1].to_f),
+            Utils.num2ul(face_point[2].to_f)
+
+          ])
+
+        end
+
+        # FIXME: Sometimes, faces need to be reversed.
+        group.entities.add_face(face_points_in_inches)
+
+      end
+
+      group.name = name
 
       group.set_attribute(CODE_NAME, 'isParametric', true)
 

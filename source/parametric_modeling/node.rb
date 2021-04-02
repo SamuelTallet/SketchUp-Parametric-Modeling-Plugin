@@ -459,6 +459,24 @@ module ParametricModeling
         node[:computed_data][:output][:groups] = [
           Shapes.draw_sphere(radius, name, material, layer)
         ]
+
+      when 'Draw shape'
+
+        if node[:computed_data][:input].key?(:points) &&
+          node[:computed_data][:input][:points].is_a?(Array)
+          points = node[:computed_data][:input][:points]
+        else
+          raise NodeError.new('Points not found', node[:id])
+        end
+
+        if node[:computed_data][:input].key?(:name) &&
+          node[:computed_data][:input][:name].is_a?(String)
+          name = node[:computed_data][:input][:name]
+        else
+          name = 'Shape'
+        end
+
+        node[:computed_data][:output][:groups] = [Shapes.draw_shape(points, name)]
     
       when 'Number'
 

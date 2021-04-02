@@ -18,8 +18,9 @@
 # Get a copy of the GPL here: https://www.gnu.org/licenses/gpl.html
 
 require 'sketchup'
-require 'parametric_modeling/nodes_editor'
+require 'parametric_modeling/group'
 require 'parametric_modeling/utils'
+require 'parametric_modeling/nodes_editor'
 
 # Parametric Modeling plugin namespace.
 module ParametricModeling
@@ -38,27 +39,39 @@ module ParametricModeling
 
           context_menu_submenu = context_menu.add_submenu(NAME)
 
-          context_menu_submenu.add_item('Extract Vector From Face Normal') do
-            
-            faces = model.selection.grep(Sketchup::Face)
+          context_menu_submenu.add_item('Extract Shape From Group/Component') do
 
-            if faces.empty?
-              UI.messagebox('Error: No face found in selection.')
+            groups = model.selection.grep(Sketchup::Group)
+            components = model.selection.grep(Sketchup::ComponentInstance)
+            grouponents = groups.concat(components)
+
+            if grouponents.empty?
+              UI.messagebox('Error: No group or component found in selection.')
             else
 
-              faces.each do |face|
+              grouponents.each do |grouponent|
 
-                face_normal = face.normal
+                if grouponent.is_a?(Sketchup::ComponentInstance)
+
+                  grouponent_copy = model.entities.add_instance(
+                    grouponent.definition, grouponent.transformation
+                  )
+                  
+                else
+                  grouponent_copy = grouponent.copy
+                end
+
+                # We'll work on a flattened copy to ease points collect.
+                temp_flatten_group = Group.flatten(grouponent_copy)
 
                 add_node_status = NodesEditor.add_node(
-                  'Vector',
-                  {
-                    x: face_normal.x, y: face_normal.y, z: face_normal.z
-                  }
+                  'Draw shape', { points: Group.points(temp_flatten_group) }
                 )
 
                 UI.messagebox('Error: Nodes Editor is not open.')\
                   if add_node_status == false
+
+                temp_flatten_group.erase!
 
               end
 
@@ -84,6 +97,34 @@ module ParametricModeling
                     x: Utils.ul2num(construction_point_position.x),
                     y: Utils.ul2num(construction_point_position.y),
                     z: Utils.ul2num(construction_point_position.z)
+                  }
+                )
+
+                UI.messagebox('Error: Nodes Editor is not open.')\
+                  if add_node_status == false
+
+              end
+
+            end
+
+          end
+
+          context_menu_submenu.add_item('Extract Vector From Face Normal') do
+            
+            faces = model.selection.grep(Sketchup::Face)
+
+            if faces.empty?
+              UI.messagebox('Error: No face found in selection.')
+            else
+
+              faces.each do |face|
+
+                face_normal = face.normal
+
+                add_node_status = NodesEditor.add_node(
+                  'Vector',
+                  {
+                    x: face_normal.x, y: face_normal.y, z: face_normal.z
                   }
                 )
 

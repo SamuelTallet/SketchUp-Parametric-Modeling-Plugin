@@ -386,11 +386,11 @@ class LayerReteControl extends Rete.Control {
 
 class DrawBoxReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Draw box')
     }
 
-    builder (node) {
+    builder(node) {
 
         var width = new Rete.Input('width', 'Width', PMG.NodesEditor.sockets.number)
         var depth = new Rete.Input('depth', 'Depth', PMG.NodesEditor.sockets.number)
@@ -417,11 +417,11 @@ class DrawBoxReteComponent extends Rete.Component {
 
 class DrawPrismReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Draw prism')
     }
 
-    builder (node) {
+    builder(node) {
 
         var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
         var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
@@ -448,11 +448,11 @@ class DrawPrismReteComponent extends Rete.Component {
 
 class DrawCylinderReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Draw cylinder')
     }
 
-    builder (node) {
+    builder(node) {
 
         var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
         var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
@@ -479,11 +479,11 @@ class DrawCylinderReteComponent extends Rete.Component {
 
 class DrawPyramidReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Draw pyramid')
     }
 
-    builder (node) {
+    builder(node) {
 
         var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
         var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
@@ -510,11 +510,11 @@ class DrawPyramidReteComponent extends Rete.Component {
 
 class DrawConeReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Draw cone')
     }
 
-    builder (node) {
+    builder(node) {
 
         var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
         var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
@@ -541,11 +541,11 @@ class DrawConeReteComponent extends Rete.Component {
 
 class DrawSphereReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Draw sphere')
     }
 
-    builder (node) {
+    builder(node) {
 
         var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
 
@@ -556,6 +556,28 @@ class DrawSphereReteComponent extends Rete.Component {
             .addControl(new TextReteControl(this.editor, 'name', 'Name'))
             .addControl(new MaterialReteControl(this.editor, 'material'))
             .addControl(new LayerReteControl(this.editor, 'layer'))
+            .addOutput(group)
+
+    }
+
+    worker(_node, _inputs, outputs) {
+        outputs['groups'] = []
+    }
+
+}
+
+class DrawShapeReteComponent extends Rete.Component {
+
+    constructor() {
+        super('Draw shape')
+    }
+
+    builder(node) {
+
+        var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+
+        return node
+            .addControl(new TextReteControl(this.editor, 'name', 'Name'))
             .addOutput(group)
 
     }
@@ -591,11 +613,11 @@ class NumberReteComponent extends Rete.Component {
 
 class AddReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Add')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputNumber1 = new Rete.Input('number1', 'Number', PMG.NodesEditor.sockets.number)
         inputNumber1.addControl(new NumberReteControl(this.editor, 'number1'))
@@ -642,11 +664,11 @@ class AddReteComponent extends Rete.Component {
 
 class SubtractReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Subtract')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputNumber1 = new Rete.Input('number1', 'Number', PMG.NodesEditor.sockets.number)
         inputNumber1.addControl(new NumberReteControl(this.editor, 'number1'))
@@ -693,11 +715,11 @@ class SubtractReteComponent extends Rete.Component {
 
 class MultiplyReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Multiply')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputNumber1 = new Rete.Input('number1', 'Number', PMG.NodesEditor.sockets.number)
         inputNumber1.addControl(new NumberReteControl(this.editor, 'number1'))
@@ -743,11 +765,11 @@ class MultiplyReteComponent extends Rete.Component {
 
 class DivideReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Divide')
     }
 
-    builder (node) {
+    builder(node) {
 
         var dividend = new Rete.Input('dividend', 'Dividend', PMG.NodesEditor.sockets.number)
         dividend.addControl(new NumberReteControl(this.editor, 'dividend', 'Dividend'))
@@ -797,11 +819,11 @@ class DivideReteComponent extends Rete.Component {
 
 class CalculateReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Calculate')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputA = new Rete.Input('a', 'Variable A', PMG.NodesEditor.sockets.number)
         inputA.addControl(new NumberReteControl(this.editor, 'a', 'Variable A'))
@@ -1000,11 +1022,11 @@ class VectorReteComponent extends Rete.Component {
 
 class IntersectSolidsReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Intersect solids')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputGroups1 = new Rete.Input('groups1', 'Group', PMG.NodesEditor.sockets.groups)
         var inputGroups2 = new Rete.Input('groups2', 'Group', PMG.NodesEditor.sockets.groups)
@@ -1026,11 +1048,11 @@ class IntersectSolidsReteComponent extends Rete.Component {
 
 class UniteSolidsReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Unite solids')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputGroups1 = new Rete.Input('groups1', 'Group', PMG.NodesEditor.sockets.groups)
         var inputGroups2 = new Rete.Input('groups2', 'Group', PMG.NodesEditor.sockets.groups)
@@ -1052,11 +1074,11 @@ class UniteSolidsReteComponent extends Rete.Component {
 
 class SubtractSolidsReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Subtract solids')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputGroups1 = new Rete.Input('groups1', 'Group', PMG.NodesEditor.sockets.groups)
         var inputGroups2 = new Rete.Input('groups2', 'Group', PMG.NodesEditor.sockets.groups)
@@ -1078,11 +1100,11 @@ class SubtractSolidsReteComponent extends Rete.Component {
 
 class PushPullReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Push/Pull')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
         var inputDistance = new Rete.Input('distance', 'Distance', PMG.NodesEditor.sockets.number)
@@ -1108,11 +1130,11 @@ class PushPullReteComponent extends Rete.Component {
 
 class MoveReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Move')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
         var inputPoint = new Rete.Input('point', 'Point', PMG.NodesEditor.sockets.point)
@@ -1134,11 +1156,11 @@ class MoveReteComponent extends Rete.Component {
 
 class RotateReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Rotate')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
         var inputCenter = new Rete.Input('center', 'Center', PMG.NodesEditor.sockets.point)
@@ -1165,11 +1187,11 @@ class RotateReteComponent extends Rete.Component {
 
 class ScaleReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Scale')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
         var inputPoint = new Rete.Input('point', 'Point', PMG.NodesEditor.sockets.point)
@@ -1200,11 +1222,11 @@ class ScaleReteComponent extends Rete.Component {
 
 class PaintReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Paint')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
 
@@ -1225,11 +1247,11 @@ class PaintReteComponent extends Rete.Component {
 
 class CopyReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Copy')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
         var inputCopies = new Rete.Input('copies', 'Copies', PMG.NodesEditor.sockets.number)
@@ -1253,11 +1275,11 @@ class CopyReteComponent extends Rete.Component {
 
 class SelectReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Select')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
 
@@ -1326,11 +1348,11 @@ class SelectReteComponent extends Rete.Component {
 
 class MakeGroupReteComponent extends Rete.Component {
 
-    constructor(){
+    constructor() {
         super('Make group')
     }
 
-    builder (node) {
+    builder(node) {
 
         var inputGroups1 = new Rete.Input('groups1', 'Group(s)', PMG.NodesEditor.sockets.groups)
         var inputGroups2 = new Rete.Input('groups2', 'Group(s)', PMG.NodesEditor.sockets.groups)
@@ -1406,6 +1428,7 @@ PMG.NodesEditor.initializeComponents = () => {
         "Draw cone": new DrawConeReteComponent(),
         "Draw pyramid": new DrawPyramidReteComponent(),
         "Draw sphere": new DrawSphereReteComponent(),
+        "Draw shape": new DrawShapeReteComponent(),
         "Number": new NumberReteComponent(),
         "Add": new AddReteComponent(),
         "Subtract": new SubtractReteComponent(),

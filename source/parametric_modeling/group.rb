@@ -18,12 +18,78 @@
 # Get a copy of the GPL here: https://www.gnu.org/licenses/gpl.html
 
 require 'sketchup'
+require 'parametric_modeling/utils'
 
 # Parametric Modeling plugin namespace.
 module ParametricModeling
 
   # SketchUp group.
   module Group
+
+    # Flattens a group or a component (grouponent).
+    #
+    # Code of this method is based on dezmo's `merge_groups` function.
+    # @see https://forums.sketchup.com/t/how-to-merge-groups/145530/2
+    #
+    # @param [Sketchup::Group, Sketchup::ComponentInstance] grouponent
+    # @raise [ArgumentError]
+    #
+    # @return [Sketchup::Group] Flattened grouponent.
+    def self.flatten(grouponent)
+
+      raise ArgumentError, 'Grouponent must be a Sketchup::Group|ComponentInstance.'\
+        unless [Sketchup::Group, Sketchup::ComponentInstance].include?(grouponent.class)
+      
+      flattened_group = Sketchup.active_model.entities.add_group([grouponent])
+
+      flattened_group.entities.each do |entity|
+        entity.explode if entity.respond_to?(:explode)
+      end
+
+      flattened_group
+
+    end
+
+    # Gets points of a group.
+    #
+    # @param [Sketchup::Group] group
+    # @raise [ArgumentError]
+    #
+    # @return [Array] Points grouped by face and ordered...
+    def self.points(group)
+
+      raise ArgumentError, 'Group must be a Sketchup::Group.'\
+        unless group.is_a?(Sketchup::Group)
+      
+      group_points = []
+
+      group_faces = group.entities.grep(Sketchup::Face)
+
+      group_faces.each do |group_face|
+
+        group_face_points = []
+
+        group_face.outer_loop.vertices.each do |group_face_vertex|
+
+          group_face_point = group_face_vertex.position
+
+          group_face_points.push([
+
+            Utils.ul2num(group_face_point.x),
+            Utils.ul2num(group_face_point.y),
+            Utils.ul2num(group_face_point.z)
+            
+          ])
+
+        end
+
+        group_points.push(group_face_points)
+
+      end
+
+      group_points
+
+    end
 
     # Push/Pull faces of a group.
     #
@@ -160,7 +226,7 @@ module ParametricModeling
 
       raise ArgumentError, 'Group must be a Sketchup::Group.'\
         unless group.is_a?(Sketchup::Group)
-
+  
       copied_group = group.copy
 
       copied_group.name = group.name

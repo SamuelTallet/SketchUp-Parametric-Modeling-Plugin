@@ -141,6 +141,11 @@ module ParametricModeling
             color: 'rgba(133, 164, 255, 0.5)'
           },
 
+          "Draw shape": {
+            path: File.join(images_dir, 'draw-shape-node-icon.svg'),
+            color: 'rgba(252, 220, 25, 0.5)'
+          },
+
           "Number": {
             path: File.join(images_dir, 'number-node-icon.svg'),
             color: 'rgba(0, 140, 189, 0.5)'

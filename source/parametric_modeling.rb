@@ -27,7 +27,7 @@ module ParametricModeling
 
   if Sketchup.version.to_i >= 17
 
-    VERSION = '0.0.3'
+    VERSION = '0.0.4-dev'
 
     CODE_NAME = 'ParametricModeling'
     NAME = 'Parametric Modeling'
