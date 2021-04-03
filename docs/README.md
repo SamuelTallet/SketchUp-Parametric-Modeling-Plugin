@@ -46,14 +46,15 @@ This node type allows you to evaluate a math formula. Following elements are acc
 
 Constants: pi<br>
 Variables: a, b, c, d, e, f, g, h, i, j, k, l<br>
-Operators: +, -, \*, /, %<br>
-Functions: min, max, round, ceil, floor, asinh, asin, sin, acosh, cos, atanh, atan, tan, exp, log2, log10, sqrt, cbrt
+Operators: +, -, \*, /, %, <, <=, =, !=, >=, ><br>
+Functions: min, max, round, ceil, floor, asinh, asin, sin, acosh, cos, atanh, atan, tan, exp, log2, log10, sqrt, cbrt, rand, if
 
 Here are some correct math formulas:
 
 `floor(a)`<br>
 `a * max(b, c)`<br>
-`(a + b) / round(c)`
+`(a + b) / rand(c, d)`<br>
+`if(a > b, c, d)`
 
 ##### Select
 
