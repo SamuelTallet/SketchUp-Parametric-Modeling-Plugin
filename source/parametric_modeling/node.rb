@@ -203,7 +203,7 @@ module ParametricModeling
         end
 
         node[:computed_data][:output][:groups] = [
-          Shapes.draw_prism(radius, height, sides, name, material, layer)
+          Shapes.draw_prism(radius, height, sides, name, material, layer, soft = false)
         ]
 
       when 'Draw cylinder'
@@ -221,14 +221,14 @@ module ParametricModeling
           Utils.valid_num?(node[:computed_data][:input][:height])
           height = Utils.num2ul(node[:computed_data][:input][:height].to_f)
         else
-          height = Utils.num2ul(2.0)
+          height = Utils.num2ul(1.0)
         end
 
         if node[:computed_data][:input].key?(:segments) &&
           Utils.valid_num?(node[:computed_data][:input][:segments])
           segments = node[:computed_data][:input][:segments].to_i
         else
-          segments = 48
+          segments = 16
         end
 
         if node[:computed_data][:input].key?(:name) &&
@@ -270,7 +270,7 @@ module ParametricModeling
         end
 
         node[:computed_data][:output][:groups] = [
-          Shapes.draw_prism(radius, height, segments, name, material, layer)
+          Shapes.draw_prism(radius, height, segments, name, material, layer, soft = true)
         ]
 
       when 'Draw pyramid'
@@ -337,7 +337,7 @@ module ParametricModeling
         end
 
         node[:computed_data][:output][:groups] = [
-          Shapes.draw_pyramid(radius, height, sides, name, material, layer)
+          Shapes.draw_pyramid(radius, height, sides, name, material, layer, soft = false)
         ]
 
       when 'Draw cone'
@@ -355,14 +355,14 @@ module ParametricModeling
           Utils.valid_num?(node[:computed_data][:input][:height])
           height = Utils.num2ul(node[:computed_data][:input][:height].to_f)
         else
-          height = Utils.num2ul(2.0)
+          height = Utils.num2ul(1.0)
         end
 
         if node[:computed_data][:input].key?(:segments) &&
           Utils.valid_num?(node[:computed_data][:input][:segments])
           segments = node[:computed_data][:input][:segments].to_i
         else
-          segments = 48
+          segments = 16
         end
 
         if node[:computed_data][:input].key?(:name) &&
@@ -404,7 +404,7 @@ module ParametricModeling
         end
 
         node[:computed_data][:output][:groups] = [
-          Shapes.draw_pyramid(radius, height, segments, name, material, layer)
+          Shapes.draw_pyramid(radius, height, segments, name, material, layer, soft = true)
         ]
 
       when 'Draw sphere'
@@ -416,6 +416,13 @@ module ParametricModeling
           radius = Utils.num2ul(node[:computed_data][:input][:radius].to_f)
         else
           radius = Utils.num2ul(1.0)
+        end
+
+        if node[:computed_data][:input].key?(:segments) &&
+          Utils.valid_num?(node[:computed_data][:input][:segments])
+          segments = node[:computed_data][:input][:segments].to_i
+        else
+          segments = 16
         end
 
         if node[:computed_data][:input].key?(:name) &&
@@ -457,7 +464,7 @@ module ParametricModeling
         end
 
         node[:computed_data][:output][:groups] = [
-          Shapes.draw_sphere(radius, name, material, layer)
+          Shapes.draw_sphere(radius, segments, name, material, layer)
         ]
 
       when 'Draw shape'

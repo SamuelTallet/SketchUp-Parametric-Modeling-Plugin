@@ -193,10 +193,11 @@ module ParametricModeling
     # @param [String] name
     # @param [Sketchup::Material, nil] material
     # @param [Sketchup::Layer, nil] layer
+    # @param [Boolean] soft
     # @raise [ArgumentError]
     #
     # @return [Sketchup::Group] Group that contains cylinder.
-    def self.draw_prism(radius, height, sides, name, material, layer)
+    def self.draw_prism(radius, height, sides, name, material, layer, soft)
 
       raise ArgumentError, 'Radius must be a Length.'\
         unless radius.is_a?(Length)
@@ -216,13 +217,21 @@ module ParametricModeling
       raise ArgumentError, 'Layer must be a Sketchup::Layer or nil.'\
         unless layer.is_a?(Sketchup::Layer) || layer.nil?
 
+      raise ArgumentError, 'Soft must be a Boolean.'\
+        unless soft == true || soft == false
+
       model = Sketchup.active_model
 
       group = model.entities.add_group
 
       # Draw prism.
-      circle = group.entities.add_circle ORIGIN, Z_AXIS, radius, sides
-      base = group.entities.add_face circle
+      if soft
+        edges = group.entities.add_circle ORIGIN, Z_AXIS, radius, sides
+      else
+        edges = group.entities.add_ngon ORIGIN, Z_AXIS, radius, sides
+      end
+
+      base = group.entities.add_face edges
       height = -height if base.normal.dot(Z_AXIS) < 0.0
       base.pushpull height
 
@@ -244,10 +253,11 @@ module ParametricModeling
     # @param [String] name
     # @param [Sketchup::Material, nil] material
     # @param [Sketchup::Layer, nil] layer
+    # @param [Boolean] soft
     # @raise [ArgumentError]
     #
     # @return [Sketchup::Group] Group that contains pyramid.
-    def self.draw_pyramid(radius, height, sides, name, material, layer)
+    def self.draw_pyramid(radius, height, sides, name, material, layer, soft)
 
       raise ArgumentError, 'Radius must be a Length.'\
         unless radius.is_a?(Length)
@@ -267,13 +277,16 @@ module ParametricModeling
       raise ArgumentError, 'Layer must be a Sketchup::Layer or nil.'\
         unless layer.is_a?(Sketchup::Layer) || layer.nil?
 
+      raise ArgumentError, 'Soft must be a Boolean.'\
+        unless soft == true || soft == false
+
       model = Sketchup.active_model
 
       group = model.entities.add_group
 
       # Draw base and define apex point.
-      circle = group.entities.add_ngon ORIGIN, Z_AXIS, radius, sides
-      base = group.entities.add_face circle
+      edges = group.entities.add_ngon ORIGIN, Z_AXIS, radius, sides
+      base = group.entities.add_face edges
       apex = [0,0,height]
       base_edges = base.edges
 
@@ -283,8 +296,8 @@ module ParametricModeling
       edge2 = nil
       base_edges.each do |edge|
         edge2 = group.entities.add_line edge.start.position, apex
-        edge2.soft = false
-        edge2.smooth = false
+        edge2.soft = soft
+        edge2.smooth = soft
         if edge1
           group.entities.add_face edge, edge2, edge1
         end
@@ -308,16 +321,20 @@ module ParametricModeling
     # Draws a sphere.
     #
     # @param [Length] radius
+    # @param [Integer] segments
     # @param [String] name
     # @param [Sketchup::Material, nil] material
     # @param [Sketchup::Layer, nil] layer
     # @raise [ArgumentError]
     #
     # @return [Sketchup::Group] Group that contains sphere.
-    def self.draw_sphere(radius, name, material, layer)
+    def self.draw_sphere(radius, segments, name, material, layer)
 
       raise ArgumentError, 'Radius must be a Length.'\
         unless radius.is_a?(Length)
+
+      raise ArgumentError, 'Segments must be an Integer.'\
+        unless segments.is_a?(Integer)
 
       raise ArgumentError, 'Name must be a String.'\
         unless name.is_a?(String)
@@ -329,7 +346,7 @@ module ParametricModeling
         unless layer.is_a?(Sketchup::Layer) || layer.nil?
 
       # Set internal params.
-      n90 = 10
+      n90 = segments / 4
       smooth = 12
 
       model = Sketchup.active_model

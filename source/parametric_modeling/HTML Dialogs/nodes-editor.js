@@ -548,11 +548,13 @@ class DrawSphereReteComponent extends Rete.Component {
     builder(node) {
 
         var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
+        var segments = new Rete.Input('segments', 'Segments', PMG.NodesEditor.sockets.number)
 
         var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(radius)
+            .addInput(segments)
             .addControl(new TextReteControl(this.editor, 'name', 'Name'))
             .addControl(new MaterialReteControl(this.editor, 'material'))
             .addControl(new LayerReteControl(this.editor, 'layer'))
