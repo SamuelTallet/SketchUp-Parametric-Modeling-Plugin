@@ -1153,11 +1153,16 @@ module ParametricModeling
           calculator = Dentaku::Calculator.new
 
           # Select queries use implicit boolean values to alleviate syntax.
+          query.downcase!
           query.gsub!('first', 'first = 1')
           query.gsub!('even', 'even = 1')
           query.gsub!('odd', 'odd = 1')
           query.gsub!('last', 'last = 1')
           query.gsub!('solid', 'solid = 1')
+          query.gsub!('rand', 'rand = 1')
+
+          count = node[:computed_data][:input][:groups].size
+          rand_nth = rand(1..count)
 
           node[:computed_data][:output][:groups] = []
 
@@ -1171,14 +1176,15 @@ module ParametricModeling
             first = ( nth == 1 ) ? 1 : 0
             even = ( nth.even? ) ? 1 : 0
             odd = ( nth.odd? ) ? 1 : 0
-            last = ( nth == node[:computed_data][:input][:groups].size ) ? 1 : 0
-            solid = ( SolidOperations.solid?(group) ) ? 1 : 0
+            last = ( nth == count ) ? 1 : 0
+            solid = ( query.include?('solid') && SolidOperations.solid?(group) ) ? 1 : 0
+            random = ( nth == rand_nth ) ? 1 : 0
 
             calculator_result = calculator.evaluate(
               query, {
                 a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i, j: j, k: k, l: l,
                 nth: nth, width: width, height: height, depth: depth,
-                first: first, even: even, odd: odd, last: last, solid: solid
+                first: first, even: even, odd: odd, last: last, solid: solid, rand: random
               }
             )
     
