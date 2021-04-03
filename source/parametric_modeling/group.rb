@@ -62,7 +62,7 @@ module ParametricModeling
         unless group.is_a?(Sketchup::Group)
       
       group_points = []
-
+      group_transformation = group.transformation
       group_faces = group.entities.grep(Sketchup::Face)
 
       group_faces.each do |group_face|
@@ -72,6 +72,7 @@ module ParametricModeling
         group_face.outer_loop.vertices.each do |group_face_vertex|
 
           group_face_point = group_face_vertex.position
+          group_face_point.transform!(group_transformation)
 
           group_face_points.push([
 
