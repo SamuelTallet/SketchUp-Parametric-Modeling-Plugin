@@ -45,6 +45,19 @@ module ParametricModeling
 
     end
 
+    # Generates a random color.
+    #
+    # @return [Sketchup::Color]
+    def self.rand_color
+
+      Sketchup::Color.new(
+        rand(0..255), # red
+        rand(0..255), # green
+        rand(0..255) # blue
+      )
+
+    end
+
   end
 
 end

@@ -20,8 +20,9 @@
 require 'sketchup'
 require 'dentaku'
 require 'parametric_modeling/node_error'
-require 'parametric_modeling/utils'
+require 'parametric_modeling/number'
 require 'parametric_modeling/shapes'
+require 'parametric_modeling/materials'
 require 'parametric_modeling/solid_operations'
 require 'parametric_modeling/group'
 
@@ -77,24 +78,24 @@ module ParametricModeling
         model = Sketchup.active_model
 
         if node[:computed_data][:input].key?(:width) &&
-          Utils.valid_num?(node[:computed_data][:input][:width])
-          width = Utils.num2ul(node[:computed_data][:input][:width].to_f)
+          Number.valid?(node[:computed_data][:input][:width])
+          width = Number.to_ul(Number.parse(node[:computed_data][:input][:width]))
         else
-          width = Utils.num2ul(1.0)
+          width = Number.to_ul(1)
         end
 
         if node[:computed_data][:input].key?(:depth) &&
-          Utils.valid_num?(node[:computed_data][:input][:depth])
-          depth = Utils.num2ul(node[:computed_data][:input][:depth].to_f)
+          Number.valid?(node[:computed_data][:input][:depth])
+          depth = Number.to_ul(Number.parse(node[:computed_data][:input][:depth]))
         else
-          depth = Utils.num2ul(1.0)
+          depth = Number.to_ul(1)
         end
 
         if node[:computed_data][:input].key?(:height) &&
-          Utils.valid_num?(node[:computed_data][:input][:height])
-          height = Utils.num2ul(node[:computed_data][:input][:height].to_f)
+          Number.valid?(node[:computed_data][:input][:height])
+          height = Number.to_ul(Number.parse(node[:computed_data][:input][:height]))
         else
-          height = Utils.num2ul(1.0)
+          height = Number.to_ul(1)
         end
 
         if node[:computed_data][:input].key?(:name) &&
@@ -113,7 +114,7 @@ module ParametricModeling
           if material.nil?
 
             material = model.materials.add(node[:computed_data][:input][:material])
-            material.color = Utils.rand_color
+            material.color = Materials.rand_color
 
           end
 
@@ -144,22 +145,27 @@ module ParametricModeling
         model = Sketchup.active_model
 
         if node[:computed_data][:input].key?(:radius) &&
-          Utils.valid_num?(node[:computed_data][:input][:radius])
-          radius = Utils.num2ul(node[:computed_data][:input][:radius].to_f)
+          Number.valid?(node[:computed_data][:input][:radius])
+          radius = Number.to_ul(Number.parse(node[:computed_data][:input][:radius]))
         else
-          radius = Utils.num2ul(1.0)
+          radius = Number.to_ul(1)
         end
 
         if node[:computed_data][:input].key?(:height) &&
-          Utils.valid_num?(node[:computed_data][:input][:height])
-          height = Utils.num2ul(node[:computed_data][:input][:height].to_f)
+          Number.valid?(node[:computed_data][:input][:height])
+          height = Number.to_ul(Number.parse(node[:computed_data][:input][:height]))
         else
-          height = Utils.num2ul(1.0)
+          height = Number.to_ul(1)
         end
 
         if node[:computed_data][:input].key?(:sides) &&
-          Utils.valid_num?(node[:computed_data][:input][:sides])
-          sides = node[:computed_data][:input][:sides].to_i
+          Number.valid?(node[:computed_data][:input][:sides])
+
+          sides = Number.parse(node[:computed_data][:input][:sides])
+
+          raise NodeError.new('Sides must be an integer', node[:id])\
+            unless sides.is_a?(Integer)
+
         else
           sides = 6
         end
@@ -180,7 +186,7 @@ module ParametricModeling
           if material.nil?
 
             material = model.materials.add(node[:computed_data][:input][:material])
-            material.color = Utils.rand_color
+            material.color = Materials.rand_color
 
           end
 
@@ -211,22 +217,27 @@ module ParametricModeling
         model = Sketchup.active_model
 
         if node[:computed_data][:input].key?(:radius) &&
-          Utils.valid_num?(node[:computed_data][:input][:radius])
-          radius = Utils.num2ul(node[:computed_data][:input][:radius].to_f)
+          Number.valid?(node[:computed_data][:input][:radius])
+          radius = Number.to_ul(Number.parse(node[:computed_data][:input][:radius]))
         else
-          radius = Utils.num2ul(1.0)
+          radius = Number.to_ul(1)
         end
 
         if node[:computed_data][:input].key?(:height) &&
-          Utils.valid_num?(node[:computed_data][:input][:height])
-          height = Utils.num2ul(node[:computed_data][:input][:height].to_f)
+          Number.valid?(node[:computed_data][:input][:height])
+          height = Number.to_ul(Number.parse(node[:computed_data][:input][:height]))
         else
-          height = Utils.num2ul(1.0)
+          height = Number.to_ul(1)
         end
 
         if node[:computed_data][:input].key?(:segments) &&
-          Utils.valid_num?(node[:computed_data][:input][:segments])
-          segments = node[:computed_data][:input][:segments].to_i
+          Number.valid?(node[:computed_data][:input][:segments])
+
+          segments = Number.parse(node[:computed_data][:input][:segments])
+
+          raise NodeError.new('Segments must be an integer', node[:id])\
+            unless segments.is_a?(Integer)
+
         else
           segments = 16
         end
@@ -247,7 +258,7 @@ module ParametricModeling
           if material.nil?
 
             material = model.materials.add(node[:computed_data][:input][:material])
-            material.color = Utils.rand_color
+            material.color = Materials.rand_color
 
           end
 
@@ -278,22 +289,27 @@ module ParametricModeling
         model = Sketchup.active_model
 
         if node[:computed_data][:input].key?(:radius) &&
-          Utils.valid_num?(node[:computed_data][:input][:radius])
-          radius = Utils.num2ul(node[:computed_data][:input][:radius].to_f)
+          Number.valid?(node[:computed_data][:input][:radius])
+          radius = Number.to_ul(Number.parse(node[:computed_data][:input][:radius]))
         else
-          radius = Utils.num2ul(1.0)
+          radius = Number.to_ul(1)
         end
 
         if node[:computed_data][:input].key?(:height) &&
-          Utils.valid_num?(node[:computed_data][:input][:height])
-          height = Utils.num2ul(node[:computed_data][:input][:height].to_f)
+          Number.valid?(node[:computed_data][:input][:height])
+          height = Number.to_ul(Number.parse(node[:computed_data][:input][:height]))
         else
-          height = Utils.num2ul(1.0)
+          height = Number.to_ul(1)
         end
 
         if node[:computed_data][:input].key?(:sides) &&
-          Utils.valid_num?(node[:computed_data][:input][:sides])
-          sides = node[:computed_data][:input][:sides].to_i
+          Number.valid?(node[:computed_data][:input][:sides])
+
+          sides = Number.parse(node[:computed_data][:input][:sides])
+
+          raise NodeError.new('Sides must be an integer', node[:id])\
+            unless sides.is_a?(Integer)
+
         else
           sides = 4
         end
@@ -314,7 +330,7 @@ module ParametricModeling
           if material.nil?
 
             material = model.materials.add(node[:computed_data][:input][:material])
-            material.color = Utils.rand_color
+            material.color = Materials.rand_color
 
           end
 
@@ -345,22 +361,27 @@ module ParametricModeling
         model = Sketchup.active_model
 
         if node[:computed_data][:input].key?(:radius) &&
-          Utils.valid_num?(node[:computed_data][:input][:radius])
-          radius = Utils.num2ul(node[:computed_data][:input][:radius].to_f)
+          Number.valid?(node[:computed_data][:input][:radius])
+          radius = Number.to_ul(Number.parse(node[:computed_data][:input][:radius]))
         else
-          radius = Utils.num2ul(1.0)
+          radius = Number.to_ul(1)
         end
 
         if node[:computed_data][:input].key?(:height) &&
-          Utils.valid_num?(node[:computed_data][:input][:height])
-          height = Utils.num2ul(node[:computed_data][:input][:height].to_f)
+          Number.valid?(node[:computed_data][:input][:height])
+          height = Number.to_ul(Number.parse(node[:computed_data][:input][:height]))
         else
-          height = Utils.num2ul(1.0)
+          height = Number.to_ul(1)
         end
 
         if node[:computed_data][:input].key?(:segments) &&
-          Utils.valid_num?(node[:computed_data][:input][:segments])
-          segments = node[:computed_data][:input][:segments].to_i
+          Number.valid?(node[:computed_data][:input][:segments])
+
+          segments = Number.parse(node[:computed_data][:input][:segments])
+
+          raise NodeError.new('Segments must be an integer', node[:id])\
+            unless segments.is_a?(Integer)
+
         else
           segments = 16
         end
@@ -381,7 +402,7 @@ module ParametricModeling
           if material.nil?
 
             material = model.materials.add(node[:computed_data][:input][:material])
-            material.color = Utils.rand_color
+            material.color = Materials.rand_color
 
           end
 
@@ -412,15 +433,20 @@ module ParametricModeling
         model = Sketchup.active_model
 
         if node[:computed_data][:input].key?(:radius) &&
-          Utils.valid_num?(node[:computed_data][:input][:radius])
-          radius = Utils.num2ul(node[:computed_data][:input][:radius].to_f)
+          Number.valid?(node[:computed_data][:input][:radius])
+          radius = Number.to_ul(Number.parse(node[:computed_data][:input][:radius]))
         else
-          radius = Utils.num2ul(1.0)
+          radius = Number.to_ul(1)
         end
 
         if node[:computed_data][:input].key?(:segments) &&
-          Utils.valid_num?(node[:computed_data][:input][:segments])
-          segments = node[:computed_data][:input][:segments].to_i
+          Number.valid?(node[:computed_data][:input][:segments])
+
+          segments = Number.parse(node[:computed_data][:input][:segments])
+
+          raise NodeError.new('Segments must be an integer', node[:id])\
+            unless segments.is_a?(Integer)
+
         else
           segments = 16
         end
@@ -441,7 +467,7 @@ module ParametricModeling
           if material.nil?
 
             material = model.materials.add(node[:computed_data][:input][:material])
-            material.color = Utils.rand_color
+            material.color = Materials.rand_color
 
           end
 
@@ -469,6 +495,8 @@ module ParametricModeling
 
       when 'Draw shape'
 
+        model = Sketchup.active_model
+
         if node[:computed_data][:input].key?(:points) &&
           node[:computed_data][:input][:points].is_a?(Array)
           points = node[:computed_data][:input][:points]
@@ -482,16 +510,49 @@ module ParametricModeling
         else
           name = 'Shape'
         end
+        
+        if node[:computed_data][:input].key?(:material) &&
+          node[:computed_data][:input][:material].is_a?(String) &&
+          !node[:computed_data][:input][:material].empty?
 
-        node[:computed_data][:output][:groups] = [Shapes.draw_shape(points, name)]
+          material = model.materials[node[:computed_data][:input][:material]]
+
+          if material.nil?
+
+            material = model.materials.add(node[:computed_data][:input][:material])
+            material.color = Materials.rand_color
+
+          end
+
+        else
+          material = nil
+        end
+
+        if node[:computed_data][:input].key?(:layer) &&
+          node[:computed_data][:input][:layer].is_a?(String) &&
+          !node[:computed_data][:input][:layer].empty?
+
+          layer = model.layers[node[:computed_data][:input][:layer]]
+
+          if layer.nil?
+            layer = model.layers.add(node[:computed_data][:input][:layer])
+          end
+
+        else
+          layer = nil
+        end
+
+        node[:computed_data][:output][:groups] = [
+          Shapes.draw_shape(points, name, material, layer)
+        ]
     
       when 'Number'
 
         if node[:computed_data][:input].key?(:number) &&
-          Utils.valid_num?(node[:computed_data][:input][:number])
-          number = node[:computed_data][:input][:number].to_f
+          Number.valid?(node[:computed_data][:input][:number])
+          number = Number.parse(node[:computed_data][:input][:number])
         else
-          number = 0.0
+          number = 0
         end
 
         node[:computed_data][:output][:number] = number
@@ -499,17 +560,17 @@ module ParametricModeling
       when 'Add'
 
         if node[:computed_data][:input].key?(:number1) &&
-          Utils.valid_num?(node[:computed_data][:input][:number1])
-          number1 = node[:computed_data][:input][:number1].to_f
+          Number.valid?(node[:computed_data][:input][:number1])
+          number1 = Number.parse(node[:computed_data][:input][:number1])
         else
-          number1 = 0.0
+          number1 = 0
         end
 
         if node[:computed_data][:input].key?(:number2) &&
-          Utils.valid_num?(node[:computed_data][:input][:number2])
-          number2 = node[:computed_data][:input][:number2].to_f
+          Number.valid?(node[:computed_data][:input][:number2])
+          number2 = Number.parse(node[:computed_data][:input][:number2])
         else
-          number2 = 0.0
+          number2 = 0
         end
 
         sum = number1 + number2
@@ -520,17 +581,17 @@ module ParametricModeling
       when 'Subtract'
 
         if node[:computed_data][:input].key?(:number1) &&
-          Utils.valid_num?(node[:computed_data][:input][:number1])
-          number1 = node[:computed_data][:input][:number1].to_f
+          Number.valid?(node[:computed_data][:input][:number1])
+          number1 = Number.parse(node[:computed_data][:input][:number1])
         else
-          number1 = 0.0
+          number1 = 0
         end
 
         if node[:computed_data][:input].key?(:number2) &&
-          Utils.valid_num?(node[:computed_data][:input][:number2])
-          number2 = node[:computed_data][:input][:number2].to_f
+          Number.valid?(node[:computed_data][:input][:number2])
+          number2 = Number.parse(node[:computed_data][:input][:number2])
         else
-          number2 = 0.0
+          number2 = 0
         end
 
         diff = number1 - number2
@@ -541,17 +602,17 @@ module ParametricModeling
       when 'Multiply'
 
         if node[:computed_data][:input].key?(:number1) &&
-          Utils.valid_num?(node[:computed_data][:input][:number1])
-          number1 = node[:computed_data][:input][:number1].to_f
+          Number.valid?(node[:computed_data][:input][:number1])
+          number1 = Number.parse(node[:computed_data][:input][:number1])
         else
-          number1 = 0.0
+          number1 = 0
         end
 
         if node[:computed_data][:input].key?(:number2) &&
-          Utils.valid_num?(node[:computed_data][:input][:number2])
-          number2 = node[:computed_data][:input][:number2].to_f
+          Number.valid?(node[:computed_data][:input][:number2])
+          number2 = Number.parse(node[:computed_data][:input][:number2])
         else
-          number2 = 0.0
+          number2 = 0
         end
 
         node[:computed_data][:output][:number] = number1 * number2
@@ -559,14 +620,14 @@ module ParametricModeling
       when 'Divide'
 
         if node[:computed_data][:input].key?(:dividend) &&
-          Utils.valid_num?(node[:computed_data][:input][:dividend])
+          Number.valid?(node[:computed_data][:input][:dividend])
           dividend = node[:computed_data][:input][:dividend].to_f
         else
           dividend = 0.0
         end
 
         if node[:computed_data][:input].key?(:divisor) &&
-          Utils.valid_num?(node[:computed_data][:input][:divisor])
+          Number.valid?(node[:computed_data][:input][:divisor])
           divisor = node[:computed_data][:input][:divisor].to_f
         else
           divisor = 1.0
@@ -583,87 +644,87 @@ module ParametricModeling
           formula = node[:computed_data][:input][:formula]
 
           if node[:computed_data][:input].key?(:a) &&
-            Utils.valid_num?(node[:computed_data][:input][:a])
-            a = node[:computed_data][:input][:a].to_f
+            Number.valid?(node[:computed_data][:input][:a])
+            a = Number.parse(node[:computed_data][:input][:a])
           else
-            a = 0.0
+            a = 0
           end
   
           if node[:computed_data][:input].key?(:b) &&
-            Utils.valid_num?(node[:computed_data][:input][:b])
-            b = node[:computed_data][:input][:b].to_f
+            Number.valid?(node[:computed_data][:input][:b])
+            b = Number.parse(node[:computed_data][:input][:b])
           else
-            b = 0.0
+            b = 0
           end
   
           if node[:computed_data][:input].key?(:c) &&
-            Utils.valid_num?(node[:computed_data][:input][:c])
-            c = node[:computed_data][:input][:c].to_f
+            Number.valid?(node[:computed_data][:input][:c])
+            c = Number.parse(node[:computed_data][:input][:c])
           else
-            c = 0.0
+            c = 0
           end
   
           if node[:computed_data][:input].key?(:d) &&
-            Utils.valid_num?(node[:computed_data][:input][:d])
-            d = node[:computed_data][:input][:d].to_f
+            Number.valid?(node[:computed_data][:input][:d])
+            d = Number.parse(node[:computed_data][:input][:d])
           else
-            d = 0.0
+            d = 0
           end
   
           if node[:computed_data][:input].key?(:e) &&
-            Utils.valid_num?(node[:computed_data][:input][:e])
-            e = node[:computed_data][:input][:e].to_f
+            Number.valid?(node[:computed_data][:input][:e])
+            e = Number.parse(node[:computed_data][:input][:e])
           else
-            e = 0.0
+            e = 0
           end
   
           if node[:computed_data][:input].key?(:f) &&
-            Utils.valid_num?(node[:computed_data][:input][:f])
-            f = node[:computed_data][:input][:f].to_f
+            Number.valid?(node[:computed_data][:input][:f])
+            f = Number.parse(node[:computed_data][:input][:f])
           else
-            f = 0.0
+            f = 0
           end
 
           if node[:computed_data][:input].key?(:g) &&
-            Utils.valid_num?(node[:computed_data][:input][:g])
-            g = node[:computed_data][:input][:g].to_f
+            Number.valid?(node[:computed_data][:input][:g])
+            g = Number.parse(node[:computed_data][:input][:g])
           else
-            g = 0.0
+            g = 0
           end
 
           if node[:computed_data][:input].key?(:h) &&
-            Utils.valid_num?(node[:computed_data][:input][:h])
-            h = node[:computed_data][:input][:h].to_f
+            Number.valid?(node[:computed_data][:input][:h])
+            h = Number.parse(node[:computed_data][:input][:h])
           else
-            h = 0.0
+            h = 0
           end
 
           if node[:computed_data][:input].key?(:i) &&
-            Utils.valid_num?(node[:computed_data][:input][:i])
-            i = node[:computed_data][:input][:i].to_f
+            Number.valid?(node[:computed_data][:input][:i])
+            i = Number.parse(node[:computed_data][:input][:i])
           else
-            i = 0.0
+            i = 0
           end
 
           if node[:computed_data][:input].key?(:j) &&
-            Utils.valid_num?(node[:computed_data][:input][:j])
-            j = node[:computed_data][:input][:j].to_f
+            Number.valid?(node[:computed_data][:input][:j])
+            j = Number.parse(node[:computed_data][:input][:j])
           else
-            j = 0.0
+            j = 0
           end
 
           if node[:computed_data][:input].key?(:k) &&
-            Utils.valid_num?(node[:computed_data][:input][:k])
-            k = node[:computed_data][:input][:k].to_f
+            Number.valid?(node[:computed_data][:input][:k])
+            k = Number.parse(node[:computed_data][:input][:k])
           else
-            k = 0.0
+            k = 0
           end
 
           if node[:computed_data][:input].key?(:l) &&
-            Utils.valid_num?(node[:computed_data][:input][:l])
-            l = node[:computed_data][:input][:l].to_f
+            Number.valid?(node[:computed_data][:input][:l])
+            l = Number.parse(node[:computed_data][:input][:l])
           else
-            l = 0.0
+            l = 0
           end
 
           calculator = Dentaku::Calculator.new({
@@ -687,33 +748,33 @@ module ParametricModeling
           raise NodeError.new('Incorrect formula: ' + formula, node[:id])\
             if calculator_result.nil?
   
-          node[:computed_data][:output][:number] = calculator_result.to_f
+          node[:computed_data][:output][:number] = Number.parse(calculator_result)
   
         else
-          node[:computed_data][:output][:number] = 0.0
+          node[:computed_data][:output][:number] = 0
         end
 
       when 'Point'
 
         if node[:computed_data][:input].key?(:x) &&
-          Utils.valid_num?(node[:computed_data][:input][:x])
-          x = Utils.num2ul(node[:computed_data][:input][:x].to_f)
+          Number.valid?(node[:computed_data][:input][:x])
+          x = Number.to_ul(Number.parse(node[:computed_data][:input][:x]))
         else
-          x = 0.0
+          x = 0
         end
 
         if node[:computed_data][:input].key?(:y) &&
-          Utils.valid_num?(node[:computed_data][:input][:y])
-          y = Utils.num2ul(node[:computed_data][:input][:y].to_f)
+          Number.valid?(node[:computed_data][:input][:y])
+          y = Number.to_ul(Number.parse(node[:computed_data][:input][:y]))
         else
-          y = 0.0
+          y = 0
         end
 
         if node[:computed_data][:input].key?(:z) &&
-          Utils.valid_num?(node[:computed_data][:input][:z])
-          z = Utils.num2ul(node[:computed_data][:input][:z].to_f)
+          Number.valid?(node[:computed_data][:input][:z])
+          z = Number.to_ul(Number.parse(node[:computed_data][:input][:z]))
         else
-          z = 0.0
+          z = 0
         end
 
         node[:computed_data][:output][:point] = Geom::Point3d.new(x, y, z)
@@ -721,24 +782,24 @@ module ParametricModeling
       when 'Vector'
 
         if node[:computed_data][:input].key?(:x) &&
-          Utils.valid_num?(node[:computed_data][:input][:x])
-          x = node[:computed_data][:input][:x].to_f
+          Number.valid?(node[:computed_data][:input][:x])
+          x = Number.parse(node[:computed_data][:input][:x])
         else
-          x = 0.0
+          x = 0
         end
 
         if node[:computed_data][:input].key?(:y) &&
-          Utils.valid_num?(node[:computed_data][:input][:y])
-          y = node[:computed_data][:input][:y].to_f
+          Number.valid?(node[:computed_data][:input][:y])
+          y = Number.parse(node[:computed_data][:input][:y])
         else
-          y = 0.0
+          y = 0
         end
 
         if node[:computed_data][:input].key?(:z) &&
-          Utils.valid_num?(node[:computed_data][:input][:z])
-          z = node[:computed_data][:input][:z].to_f
+          Number.valid?(node[:computed_data][:input][:z])
+          z = Number.parse(node[:computed_data][:input][:z])
         else
-          z = 0.0
+          z = 0
         end
 
         node[:computed_data][:output][:vector] = Geom::Vector3d.new(x, y, z)
@@ -825,10 +886,10 @@ module ParametricModeling
           !node[:computed_data][:input][:groups].empty?
 
           if node[:computed_data][:input].key?(:distance) &&
-            Utils.valid_num?(node[:computed_data][:input][:distance])
-            distance = Utils.num2ul(node[:computed_data][:input][:distance].to_f)
+            Number.valid?(node[:computed_data][:input][:distance])
+            distance = Number.to_ul(Number.parse(node[:computed_data][:input][:distance]))
           else
-            distance = Utils.num2ul(1.0)
+            distance = Number.to_ul(1)
           end
   
           initial_distance = distance
@@ -871,7 +932,7 @@ module ParametricModeling
             node[:computed_data][:input][:point].is_a?(Geom::Point3d)
             point = node[:computed_data][:input][:point]
           else
-            point = Geom::Point3d.new(Utils.num2ul(1.0), 0.0, 0.0)
+            point = Geom::Point3d.new(Number.to_ul(1.0), 0.0, 0.0)
           end
   
           initial_point_x = point.x
@@ -909,10 +970,10 @@ module ParametricModeling
           end
 
           if node[:computed_data][:input].key?(:angle) &&
-            Utils.valid_num?(node[:computed_data][:input][:angle])
-            angle = node[:computed_data][:input][:angle].to_f
+            Number.valid?(node[:computed_data][:input][:angle])
+            angle = Number.parse(node[:computed_data][:input][:angle])
           else
-            angle = 45.0
+            angle = 45
           end
   
           initial_angle = angle
@@ -946,24 +1007,24 @@ module ParametricModeling
           !node[:computed_data][:input][:groups].empty?
 
           if node[:computed_data][:input].key?(:x_factor) &&
-            Utils.valid_num?(node[:computed_data][:input][:x_factor])
-            x_factor = node[:computed_data][:input][:x_factor].to_f
+            Number.valid?(node[:computed_data][:input][:x_factor])
+            x_factor = Number.parse(node[:computed_data][:input][:x_factor])
           else
-            x_factor = 2.0
+            x_factor = 2
           end
 
           if node[:computed_data][:input].key?(:y_factor) &&
-            Utils.valid_num?(node[:computed_data][:input][:y_factor])
-            y_factor = node[:computed_data][:input][:y_factor].to_f
+            Number.valid?(node[:computed_data][:input][:y_factor])
+            y_factor = Number.parse(node[:computed_data][:input][:y_factor])
           else
-            y_factor = 2.0
+            y_factor = 2
           end
 
           if node[:computed_data][:input].key?(:z_factor) &&
-            Utils.valid_num?(node[:computed_data][:input][:z_factor])
-            z_factor = node[:computed_data][:input][:z_factor].to_f
+            Number.valid?(node[:computed_data][:input][:z_factor])
+            z_factor = Number.parse(node[:computed_data][:input][:z_factor])
           else
-            z_factor = 2.0
+            z_factor = 2
           end
   
           initial_x_factor = x_factor
@@ -1011,7 +1072,7 @@ module ParametricModeling
             if material.nil?
   
               material = model.materials.add(node[:computed_data][:input][:material])
-              material.color = Utils.rand_color
+              material.color = Materials.rand_color
   
             end
   
@@ -1039,8 +1100,13 @@ module ParametricModeling
           !node[:computed_data][:input][:groups].empty?
 
           if node[:computed_data][:input].key?(:copies) &&
-            Utils.valid_num?(node[:computed_data][:input][:copies])
-            copies = node[:computed_data][:input][:copies].to_i
+            Number.valid?(node[:computed_data][:input][:copies])
+
+            copies = Number.parse(node[:computed_data][:input][:copies])
+
+            raise NodeError.new('Copies must be an integer', node[:id])\
+              unless copies.is_a?(Integer)
+
           else
             copies = 1
           end
@@ -1074,90 +1140,99 @@ module ParametricModeling
           query = node[:computed_data][:input][:query]
 
           if node[:computed_data][:input].key?(:a) &&
-            Utils.valid_num?(node[:computed_data][:input][:a])
-            a = node[:computed_data][:input][:a].to_f
+            Number.valid?(node[:computed_data][:input][:a])
+            a = Number.parse(node[:computed_data][:input][:a])
           else
-            a = 0.0
+            a = 0
           end
   
           if node[:computed_data][:input].key?(:b) &&
-            Utils.valid_num?(node[:computed_data][:input][:b])
-            b = node[:computed_data][:input][:b].to_f
+            Number.valid?(node[:computed_data][:input][:b])
+            b = Number.parse(node[:computed_data][:input][:b])
           else
-            b = 0.0
+            b = 0
           end
   
           if node[:computed_data][:input].key?(:c) &&
-            Utils.valid_num?(node[:computed_data][:input][:c])
-            c = node[:computed_data][:input][:c].to_f
+            Number.valid?(node[:computed_data][:input][:c])
+            c = Number.parse(node[:computed_data][:input][:c])
           else
-            c = 0.0
+            c = 0
           end
   
           if node[:computed_data][:input].key?(:d) &&
-            Utils.valid_num?(node[:computed_data][:input][:d])
-            d = node[:computed_data][:input][:d].to_f
+            Number.valid?(node[:computed_data][:input][:d])
+            d = Number.parse(node[:computed_data][:input][:d])
           else
-            d = 0.0
+            d = 0
           end
   
           if node[:computed_data][:input].key?(:e) &&
-            Utils.valid_num?(node[:computed_data][:input][:e])
-            e = node[:computed_data][:input][:e].to_f
+            Number.valid?(node[:computed_data][:input][:e])
+            e = Number.parse(node[:computed_data][:input][:e])
           else
-            e = 0.0
+            e = 0
           end
   
           if node[:computed_data][:input].key?(:f) &&
-            Utils.valid_num?(node[:computed_data][:input][:f])
-            f = node[:computed_data][:input][:f].to_f
+            Number.valid?(node[:computed_data][:input][:f])
+            f = Number.parse(node[:computed_data][:input][:f])
           else
-            f = 0.0
+            f = 0
           end
 
           if node[:computed_data][:input].key?(:g) &&
-            Utils.valid_num?(node[:computed_data][:input][:g])
-            g = node[:computed_data][:input][:g].to_f
+            Number.valid?(node[:computed_data][:input][:g])
+            g = Number.parse(node[:computed_data][:input][:g])
           else
-            g = 0.0
+            g = 0
           end
 
           if node[:computed_data][:input].key?(:h) &&
-            Utils.valid_num?(node[:computed_data][:input][:h])
-            h = node[:computed_data][:input][:h].to_f
+            Number.valid?(node[:computed_data][:input][:h])
+            h = Number.parse(node[:computed_data][:input][:h])
           else
-            h = 0.0
+            h = 0
           end
 
           if node[:computed_data][:input].key?(:i) &&
-            Utils.valid_num?(node[:computed_data][:input][:i])
-            i = node[:computed_data][:input][:i].to_f
+            Number.valid?(node[:computed_data][:input][:i])
+            i = Number.parse(node[:computed_data][:input][:i])
           else
-            i = 0.0
+            i = 0
           end
 
           if node[:computed_data][:input].key?(:j) &&
-            Utils.valid_num?(node[:computed_data][:input][:j])
-            j = node[:computed_data][:input][:j].to_f
+            Number.valid?(node[:computed_data][:input][:j])
+            j = Number.parse(node[:computed_data][:input][:j])
           else
-            j = 0.0
+            j = 0
           end
 
           if node[:computed_data][:input].key?(:k) &&
-            Utils.valid_num?(node[:computed_data][:input][:k])
-            k = node[:computed_data][:input][:k].to_f
+            Number.valid?(node[:computed_data][:input][:k])
+            k = Number.parse(node[:computed_data][:input][:k])
           else
-            k = 0.0
+            k = 0
           end
 
           if node[:computed_data][:input].key?(:l) &&
-            Utils.valid_num?(node[:computed_data][:input][:l])
-            l = node[:computed_data][:input][:l].to_f
+            Number.valid?(node[:computed_data][:input][:l])
+            l = Number.parse(node[:computed_data][:input][:l])
           else
-            l = 0.0
+            l = 0
           end
 
-          calculator = Dentaku::Calculator.new
+          calculator = Dentaku::Calculator.new({
+            aliases: {
+              roundup: ['ceil'],
+              rounddown: ['floor']
+            }
+          })
+
+          calculator.add_function(
+            :rand, :numeric, ->(number1, number2) { rand(number1..number2) }
+          )
 
           # Select queries use implicit boolean values to alleviate syntax.
           query.downcase!
@@ -1166,7 +1241,7 @@ module ParametricModeling
           query.gsub!('odd', 'odd = 1')
           query.gsub!('last', 'last = 1')
           query.gsub!('solid', 'solid = 1')
-          query.gsub!('rand', 'rand = 1')
+          query.gsub!('random', 'random = 1')
 
           count = node[:computed_data][:input][:groups].size
           rand_nth = rand(1..count)
@@ -1176,9 +1251,9 @@ module ParametricModeling
           node[:computed_data][:input][:groups].each_with_index do |group, group_index|
 
             nth = group_index + 1
-            width = Utils.ul2num(group.bounds.width)
-            height = Utils.ul2num(group.bounds.height)
-            depth = Utils.ul2num(group.bounds.depth)
+            width = Number.from_ul(group.bounds.width)
+            height = Number.from_ul(group.bounds.height)
+            depth = Number.from_ul(group.bounds.depth)
 
             first = ( nth == 1 ) ? 1 : 0
             even = ( nth.even? ) ? 1 : 0
@@ -1191,7 +1266,7 @@ module ParametricModeling
               query, {
                 a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i, j: j, k: k, l: l,
                 nth: nth, width: width, height: height, depth: depth,
-                first: first, even: even, odd: odd, last: last, solid: solid, rand: random
+                first: first, even: even, odd: odd, last: last, solid: solid, random: random
               }
             )
     
@@ -1264,7 +1339,7 @@ module ParametricModeling
             if material.nil?
   
               material = model.materials.add(node[:computed_data][:input][:material])
-              material.color = Utils.rand_color
+              material.color = Materials.rand_color
   
             end
   

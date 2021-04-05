@@ -19,7 +19,7 @@
 
 require 'sketchup'
 require 'parametric_modeling/group'
-require 'parametric_modeling/utils'
+require 'parametric_modeling/number'
 require 'parametric_modeling/nodes_editor'
 
 # Parametric Modeling plugin namespace.
@@ -94,9 +94,9 @@ module ParametricModeling
                 add_node_status = NodesEditor.add_node(
                   'Point',
                   {
-                    x: Utils.ul2num(construction_point_position.x),
-                    y: Utils.ul2num(construction_point_position.y),
-                    z: Utils.ul2num(construction_point_position.z)
+                    x: Number.from_ul(construction_point_position.x),
+                    y: Number.from_ul(construction_point_position.y),
+                    z: Number.from_ul(construction_point_position.z)
                   }
                 )
 

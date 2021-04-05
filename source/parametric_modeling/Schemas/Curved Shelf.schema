@@ -1600,7 +1600,8 @@
               0.02311744906338393
             ]
           ]
-        ]
+        ],
+        "material": "Material C"
       },
       "inputs": {
       },
@@ -2078,27 +2079,20 @@
     "20": {
       "id": 20,
       "data": {
-        "name": "Panel"
+        "name": "Panel",
+        "width": 0.35,
+        "material": "Material A",
+        "depth": 0.02
       },
       "inputs": {
         "width": {
           "connections": [
-            {
-              "node": 21,
-              "output": "number",
-              "data": {
-              }
-            }
+
           ]
         },
         "depth": {
           "connections": [
-            {
-              "node": 22,
-              "output": "number",
-              "data": {
-              }
-            }
+
           ]
         },
         "height": {
@@ -2120,12 +2114,6 @@
               "input": "groups",
               "data": {
               }
-            },
-            {
-              "node": 52,
-              "input": "groups",
-              "data": {
-              }
             }
           ]
         }
@@ -2135,56 +2123,6 @@
         -943.2236959721633
       ],
       "name": "Draw box"
-    },
-    "21": {
-      "id": 21,
-      "data": {
-        "number": 0.35
-      },
-      "inputs": {
-      },
-      "outputs": {
-        "number": {
-          "connections": [
-            {
-              "node": 20,
-              "input": "width",
-              "data": {
-              }
-            }
-          ]
-        }
-      },
-      "position": [
-        -462.3113064726845,
-        -969.0912718868087
-      ],
-      "name": "Number"
-    },
-    "22": {
-      "id": 22,
-      "data": {
-        "number": 0.02
-      },
-      "inputs": {
-      },
-      "outputs": {
-        "number": {
-          "connections": [
-            {
-              "node": 20,
-              "input": "depth",
-              "data": {
-              }
-            }
-          ]
-        }
-      },
-      "position": [
-        -461.7353850158257,
-        -711.2994407127109
-      ],
-      "name": "Number"
     },
     "23": {
       "id": 23,
@@ -2581,7 +2519,8 @@
               1.7454980657436256e-07
             ]
           ]
-        ]
+        ],
+        "material": "Material B"
       },
       "inputs": {
       },
@@ -2590,12 +2529,6 @@
           "connections": [
             {
               "node": 35,
-              "input": "groups",
-              "data": {
-              }
-            },
-            {
-              "node": 42,
               "input": "groups",
               "data": {
               }
@@ -2874,36 +2807,6 @@
       "position": [
         2383.9152767843075,
         1190.3442728686312
-      ],
-      "name": "Paint"
-    },
-    "42": {
-      "id": 42,
-      "data": {
-        "material": "Material B"
-      },
-      "inputs": {
-        "groups": {
-          "connections": [
-            {
-              "node": 34,
-              "output": "groups",
-              "data": {
-              }
-            }
-          ]
-        }
-      },
-      "outputs": {
-        "groups": {
-          "connections": [
-
-          ]
-        }
-      },
-      "position": [
-        -114.56263570920852,
-        1496.7702465007642
       ],
       "name": "Paint"
     },
@@ -3205,36 +3108,6 @@
         1663.082187791037
       ],
       "name": "Subtract"
-    },
-    "52": {
-      "id": 52,
-      "data": {
-        "material": "Material A"
-      },
-      "inputs": {
-        "groups": {
-          "connections": [
-            {
-              "node": 20,
-              "output": "groups",
-              "data": {
-              }
-            }
-          ]
-        }
-      },
-      "outputs": {
-        "groups": {
-          "connections": [
-
-          ]
-        }
-      },
-      "position": [
-        478.3698713564427,
-        -1158.502626481663
-      ],
-      "name": "Paint"
     }
   }
 }

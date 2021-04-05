@@ -18,7 +18,7 @@
 # Get a copy of the GPL here: https://www.gnu.org/licenses/gpl.html
 
 require 'sketchup'
-require 'parametric_modeling/utils'
+require 'parametric_modeling/number'
 
 # Parametric Modeling plugin namespace.
 module ParametricModeling
@@ -76,9 +76,9 @@ module ParametricModeling
 
           group_face_points.push([
 
-            Utils.ul2num(group_face_point.x),
-            Utils.ul2num(group_face_point.y),
-            Utils.ul2num(group_face_point.z)
+            Number.from_ul(group_face_point.x),
+            Number.from_ul(group_face_point.y),
+            Number.from_ul(group_face_point.z)
             
           ])
 
@@ -160,7 +160,7 @@ module ParametricModeling
     # @param [Sketchup::Group] group
     # @param [Geom::Point3d] center
     # @param [Geom::Vector3d] axis
-    # @param [Float] angle
+    # @param [Integer, Float] angle
     # @raise [ArgumentError]
     #
     # @return [Sketchup::Group]
@@ -175,8 +175,8 @@ module ParametricModeling
       raise ArgumentError, 'Axis must be a Geom::Vector3d.'\
         unless axis.is_a?(Geom::Vector3d)
 
-      raise ArgumentError, 'Angle must be a Float.'\
-        unless angle.is_a?(Float)
+      raise ArgumentError, 'Angle must be an Integer or a Float.'\
+        unless angle.is_a?(Integer) || angle.is_a?(Float)
 
       group.transform!(Geom::Transformation.rotation(center, axis, angle.degrees))
 
@@ -188,9 +188,9 @@ module ParametricModeling
     #
     # @param [Sketchup::Group] group
     # @param [Geom::Point3d] point
-    # @param [Float] x_factor
-    # @param [Float] y_factor
-    # @param [Float] z_factor
+    # @param [Integer, Float] x_factor
+    # @param [Integer, Float] y_factor
+    # @param [Integer, Float] z_factor
     # @raise [ArgumentError]
     #
     # @return [Sketchup::Group]
@@ -202,14 +202,14 @@ module ParametricModeling
       raise ArgumentError, 'Point must be a Geom::Point3d.'\
         unless point.is_a?(Geom::Point3d)
 
-      raise ArgumentError, 'X factor must be a Float.'\
-        unless x_factor.is_a?(Float)
+      raise ArgumentError, 'X factor must be an Integer or a Float.'\
+        unless x_factor.is_a?(Integer) || x_factor.is_a?(Float)
 
-      raise ArgumentError, 'Y factor must be a Float.'\
-        unless y_factor.is_a?(Float)
+      raise ArgumentError, 'Y factor must be an Integer or a Float.'\
+        unless y_factor.is_a?(Integer) || y_factor.is_a?(Float)
 
-      raise ArgumentError, 'Z factor must be a Float.'\
-        unless z_factor.is_a?(Float)
+      raise ArgumentError, 'Z factor must be an Integer or a Float.'\
+        unless z_factor.is_a?(Integer) || z_factor.is_a?(Float)
 
       group.transform!(Geom::Transformation.scaling(point, x_factor, y_factor, z_factor))
 

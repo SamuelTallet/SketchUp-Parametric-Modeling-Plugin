@@ -4,7 +4,7 @@
 # License: The MIT License (MIT)
 
 require 'sketchup'
-require 'parametric_modeling/utils'
+require 'parametric_modeling/number'
 
 # Parametric Modeling plugin namespace.
 module ParametricModeling
@@ -387,16 +387,24 @@ module ParametricModeling
     #
     # @param [Array] points
     # @param [String] name
+    # @param [Sketchup::Material, nil] material
+    # @param [Sketchup::Layer, nil] layer
     # @raise [ArgumentError]
     #
     # @return [Sketchup::Group]
-    def self.draw_shape(points, name)
+    def self.draw_shape(points, name, material, layer)
 
       raise ArgumentError, 'Points must be an Array.'\
         unless points.is_a?(Array)
 
       raise ArgumentError, 'Name must be a String.'\
         unless name.is_a?(String)
+
+      raise ArgumentError, 'Material must be a Sketchup::Material or nil.'\
+        unless material.is_a?(Sketchup::Material) || material.nil?
+  
+      raise ArgumentError, 'Layer must be a Sketchup::Layer or nil.'\
+        unless layer.is_a?(Sketchup::Layer) || layer.nil?
 
       group = Sketchup.active_model.entities.add_group
 
@@ -408,9 +416,9 @@ module ParametricModeling
 
           face_points_in_inches.push([
 
-            Utils.num2ul(face_point[0].to_f),
-            Utils.num2ul(face_point[1].to_f),
-            Utils.num2ul(face_point[2].to_f)
+            Number.to_ul(face_point[0].to_f),
+            Number.to_ul(face_point[1].to_f),
+            Number.to_ul(face_point[2].to_f)
 
           ])
 
@@ -422,6 +430,8 @@ module ParametricModeling
       end
 
       group.name = name
+      group.material = material
+      group.layer = layer
 
       group.set_attribute(CODE_NAME, 'isParametric', true)
 

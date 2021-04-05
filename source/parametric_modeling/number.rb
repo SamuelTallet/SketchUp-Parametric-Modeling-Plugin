@@ -22,13 +22,12 @@ require 'sketchup'
 # Parametric Modeling plugin namespace.
 module ParametricModeling
 
-  # Utilities.
-  module Utils
+  module Number
 
     # Checks if a number is valid.
     # 
     # @return [Boolean] true if number is valid, false otherwise.
-    def self.valid_num?(number)
+    def self.valid?(number)
 
       return true if number.is_a?(Integer) || number.is_a?(Float)
 
@@ -38,19 +37,38 @@ module ParametricModeling
 
     end
 
+    # Parses a number.
+    #
+    # @return [Integer, Float]
+    def self.parse(number)
+
+      return number if number.is_a?(Integer)
+
+      if !number.is_a?(Float)
+        number = number.to_f
+      end
+
+      # If number has no decimals:
+      if number % 1 == 0
+        number = number.to_i
+      end
+
+      number
+
+    end
+
     # Converts a number to a length according to model length unit.
     #
     # @param [Integer, Float] number
     # @raise [ArgumentError]
     #
     # @return [Length] Default: meters.
-    def self.num2ul(number)
+    def self.to_ul(number)
 
       raise ArgumentError, 'Number must be an Integer or a Float.'\
         unless number.is_a?(Integer) || number.is_a?(Float) 
       
       length_unit = Sketchup.active_model.options['UnitsOptions']['LengthUnit']
-      number = number.to_f
 
       if length_unit == Length::Inches
         number.inch
@@ -72,7 +90,7 @@ module ParametricModeling
     # @raise [ArgumentError]
     #
     # @return [Float] Default: meters.
-    def self.ul2num(length)
+    def self.from_ul(length)
 
       raise ArgumentError, 'Length must be a Length.'\
         unless length.is_a?(Length)
@@ -90,19 +108,6 @@ module ParametricModeling
       else
         length.to_m
       end
-
-    end
-
-    # Generates a random color.
-    #
-    # @return [Sketchup::Color]
-    def self.rand_color
-
-      Sketchup::Color.new(
-        rand(0..255), # red
-        rand(0..255), # green
-        rand(0..255) # blue
-      )
 
     end
 

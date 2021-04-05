@@ -53,7 +53,7 @@ PMG.NodesEditor.initializeControls = () => {
 
         props: ['emitter', 'ikey', 'getData', 'putData', 'placeholder', 'readonly'],
 
-        template: '<input type="number" :placeholder="placeholder" :readonly="readonly" :value="value" @input="change($event)" @pointerdown.stop="" @pointermove.stop="" />',
+        template: '<input type="number" :placeholder="placeholder" :title="placeholder" :readonly="readonly" :value="value" @input="change($event)" @pointerdown.stop="" @pointermove.stop="" />',
         
         data() {
 
@@ -393,8 +393,13 @@ class DrawBoxReteComponent extends Rete.Component {
     builder(node) {
 
         var width = new Rete.Input('width', 'Width', PMG.NodesEditor.sockets.number)
+        width.addControl(new NumberReteControl(this.editor, 'width', 'Width'))
+
         var depth = new Rete.Input('depth', 'Depth', PMG.NodesEditor.sockets.number)
+        depth.addControl(new NumberReteControl(this.editor, 'depth', 'Depth'))
+
         var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
+        height.addControl(new NumberReteControl(this.editor, 'height', 'Height'))
 
         var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
 
@@ -424,8 +429,13 @@ class DrawPrismReteComponent extends Rete.Component {
     builder(node) {
 
         var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
+        radius.addControl(new NumberReteControl(this.editor, 'radius', 'Radius'))
+
         var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
+        height.addControl(new NumberReteControl(this.editor, 'height', 'Height'))
+        
         var sides = new Rete.Input('sides', 'Sides', PMG.NodesEditor.sockets.number)
+        sides.addControl(new NumberReteControl(this.editor, 'sides', 'Sides'))
 
         var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
 
@@ -455,8 +465,13 @@ class DrawCylinderReteComponent extends Rete.Component {
     builder(node) {
 
         var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
+        radius.addControl(new NumberReteControl(this.editor, 'radius', 'Radius'))
+
         var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
+        height.addControl(new NumberReteControl(this.editor, 'height', 'Height'))
+
         var segments = new Rete.Input('segments', 'Segments', PMG.NodesEditor.sockets.number)
+        segments.addControl(new NumberReteControl(this.editor, 'segments', 'Segments'))
 
         var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
 
@@ -486,8 +501,13 @@ class DrawPyramidReteComponent extends Rete.Component {
     builder(node) {
 
         var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
+        radius.addControl(new NumberReteControl(this.editor, 'radius', 'Radius'))
+
         var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
+        height.addControl(new NumberReteControl(this.editor, 'height', 'Height'))
+
         var sides = new Rete.Input('sides', 'Sides', PMG.NodesEditor.sockets.number)
+        sides.addControl(new NumberReteControl(this.editor, 'sides', 'Sides'))
 
         var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
 
@@ -517,8 +537,13 @@ class DrawConeReteComponent extends Rete.Component {
     builder(node) {
 
         var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
+        radius.addControl(new NumberReteControl(this.editor, 'radius', 'Radius'))
+
         var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
+        height.addControl(new NumberReteControl(this.editor, 'height', 'Height'))
+
         var segments = new Rete.Input('segments', 'Segments', PMG.NodesEditor.sockets.number)
+        segments.addControl(new NumberReteControl(this.editor, 'segments', 'Segments'))
 
         var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
 
@@ -548,7 +573,10 @@ class DrawSphereReteComponent extends Rete.Component {
     builder(node) {
 
         var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
+        radius.addControl(new NumberReteControl(this.editor, 'radius', 'Radius'))
+
         var segments = new Rete.Input('segments', 'Segments', PMG.NodesEditor.sockets.number)
+        segments.addControl(new NumberReteControl(this.editor, 'segments', 'Segments'))
 
         var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
 
@@ -580,6 +608,8 @@ class DrawShapeReteComponent extends Rete.Component {
 
         return node
             .addControl(new TextReteControl(this.editor, 'name', 'Name'))
+            .addControl(new MaterialReteControl(this.editor, 'material'))
+            .addControl(new LayerReteControl(this.editor, 'layer'))
             .addOutput(group)
 
     }
