@@ -168,6 +168,7 @@ module ParametricModeling
       model = Sketchup.active_model
 
       group = model.entities.add_group
+      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       # Draw box.
       points = [[0,0,0], [width,0,0], [width,depth,0], [0,depth,0], [0,0,0]]
@@ -178,8 +179,6 @@ module ParametricModeling
       group.name = name
       group.material = material
       group.layer = layer
-
-      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       group
 
@@ -223,6 +222,7 @@ module ParametricModeling
       model = Sketchup.active_model
 
       group = model.entities.add_group
+      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       # Draw prism.
       if soft
@@ -238,8 +238,6 @@ module ParametricModeling
       group.name = name
       group.material = material
       group.layer = layer
-
-      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       group
 
@@ -287,6 +285,7 @@ module ParametricModeling
       model = Sketchup.active_model
 
       group = model.entities.add_group
+      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       # Draw outer loop of tube.
       outer_edges = group.entities.add_circle(ORIGIN, Z_AXIS, outer_radius, segments)
@@ -304,8 +303,6 @@ module ParametricModeling
       group.name = name
       group.material = material
       group.layer = layer
-
-      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       group
 
@@ -349,6 +346,7 @@ module ParametricModeling
       model = Sketchup.active_model
 
       group = model.entities.add_group
+      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       # Draw base and define apex point.
       edges = group.entities.add_ngon ORIGIN, Z_AXIS, radius, sides
@@ -377,8 +375,6 @@ module ParametricModeling
       group.name = name
       group.material = material
       group.layer = layer
-
-      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       group
 
@@ -418,6 +414,7 @@ module ParametricModeling
       model = Sketchup.active_model
 
       group = model.entities.add_group
+      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       # Compute a half circle.
       arcpts = []
@@ -442,8 +439,6 @@ module ParametricModeling
       group.name = name
       group.material = material
       group.layer = layer
-
-      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       group
 
@@ -473,6 +468,7 @@ module ParametricModeling
         unless layer.is_a?(Sketchup::Layer) || layer.nil?
 
       group = Sketchup.active_model.entities.add_group
+      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       points.each do |face_points|
 
@@ -498,8 +494,6 @@ module ParametricModeling
       group.name = name
       group.material = material
       group.layer = layer
-
-      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       group
 

@@ -163,7 +163,7 @@ module ParametricModeling
 
           sides = Number.parse(node[:computed_data][:input][:sides])
 
-          raise NodeError.new('Sides must be an integer', node[:id])\
+          raise NodeError.new('Sides must be an integer.', node[:id])\
             unless sides.is_a?(Integer)
 
         else
@@ -235,7 +235,7 @@ module ParametricModeling
 
           segments = Number.parse(node[:computed_data][:input][:segments])
 
-          raise NodeError.new('Segments must be an integer', node[:id])\
+          raise NodeError.new('Segments must be an integer.', node[:id])\
             unless segments.is_a?(Integer)
 
         else
@@ -290,14 +290,28 @@ module ParametricModeling
 
         if node[:computed_data][:input].key?(:radius) &&
           Number.valid?(node[:computed_data][:input][:radius])
-          radius = Number.to_ul(Number.parse(node[:computed_data][:input][:radius]))
+
+          radius = Number.parse(node[:computed_data][:input][:radius])
+
+          raise NodeError.new('Radius must be a strictly positive number.', node[:id])\
+            if radius <= 0
+
+          radius = Number.to_ul(radius)
+
         else
           radius = Number.to_ul(1)
         end
 
         if node[:computed_data][:input].key?(:thickness) &&
           Number.valid?(node[:computed_data][:input][:thickness])
-          thickness = Number.to_ul(Number.parse(node[:computed_data][:input][:thickness]))
+
+          thickness = Number.parse(node[:computed_data][:input][:thickness])
+
+          raise NodeError.new('Thickness must be a strictly positive number.', node[:id])\
+            if thickness <= 0
+
+          thickness = Number.to_ul(thickness)
+
         else
           thickness = Number.to_ul(0.1)
         end
@@ -314,7 +328,7 @@ module ParametricModeling
 
           segments = Number.parse(node[:computed_data][:input][:segments])
 
-          raise NodeError.new('Segments must be an integer', node[:id])\
+          raise NodeError.new('Segments must be an integer.', node[:id])\
             unless segments.is_a?(Integer)
 
         else
@@ -386,7 +400,7 @@ module ParametricModeling
 
           sides = Number.parse(node[:computed_data][:input][:sides])
 
-          raise NodeError.new('Sides must be an integer', node[:id])\
+          raise NodeError.new('Sides must be an integer.', node[:id])\
             unless sides.is_a?(Integer)
 
         else
@@ -458,7 +472,7 @@ module ParametricModeling
 
           segments = Number.parse(node[:computed_data][:input][:segments])
 
-          raise NodeError.new('Segments must be an integer', node[:id])\
+          raise NodeError.new('Segments must be an integer.', node[:id])\
             unless segments.is_a?(Integer)
 
         else
@@ -523,7 +537,7 @@ module ParametricModeling
 
           segments = Number.parse(node[:computed_data][:input][:segments])
 
-          raise NodeError.new('Segments must be an integer', node[:id])\
+          raise NodeError.new('Segments must be an integer.', node[:id])\
             unless segments.is_a?(Integer)
 
         else
@@ -580,7 +594,7 @@ module ParametricModeling
           node[:computed_data][:input][:points].is_a?(Array)
           points = node[:computed_data][:input][:points]
         else
-          raise NodeError.new('Points not found', node[:id])
+          raise NodeError.new('Points not found.', node[:id])
         end
 
         if node[:computed_data][:input].key?(:name) &&
@@ -901,7 +915,7 @@ module ParametricModeling
             node[:computed_data][:input][:groups2].first
           )
 
-          raise NodeError.new('Boolean intersect failed', node[:id])\
+          raise NodeError.new('Boolean intersect failed.', node[:id])\
             unless status == true
           
           node[:computed_data][:output][:groups] = [
@@ -926,7 +940,7 @@ module ParametricModeling
             node[:computed_data][:input][:groups2].first
           )
 
-          raise NodeError.new('Boolean union failed', node[:id])\
+          raise NodeError.new('Boolean union failed.', node[:id])\
             unless status == true
           
           node[:computed_data][:output][:groups] = [
@@ -951,7 +965,7 @@ module ParametricModeling
             node[:computed_data][:input][:groups2].first
           )
 
-          raise NodeError.new('Boolean subtract failed', node[:id])\
+          raise NodeError.new('Boolean subtract failed.', node[:id])\
             unless status == true
           
           node[:computed_data][:output][:groups] = [
@@ -1232,7 +1246,7 @@ module ParametricModeling
 
             copies = Number.parse(node[:computed_data][:input][:copies])
 
-            raise NodeError.new('Copies must be an integer', node[:id])\
+            raise NodeError.new('Copies must be an integer.', node[:id])\
               unless copies.is_a?(Integer)
 
           else

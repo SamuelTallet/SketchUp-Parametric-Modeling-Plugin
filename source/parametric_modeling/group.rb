@@ -229,12 +229,11 @@ module ParametricModeling
         unless group.is_a?(Sketchup::Group)
   
       copied_group = group.copy
+      copied_group.set_attribute(CODE_NAME, 'isParametric', true)
 
       copied_group.name = group.name
       copied_group.material = group.material
       copied_group.layer = group.layer
-
-      copied_group.set_attribute(CODE_NAME, 'isParametric', true)
 
       copied_group
 
@@ -264,12 +263,11 @@ module ParametricModeling
         unless layer.is_a?(Sketchup::Layer) || layer.nil?
 
       group = Sketchup.active_model.entities.add_group(groups)
+      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       group.name = name
       group.material = material
       group.layer = layer
-
-      group.set_attribute(CODE_NAME, 'isParametric', true)
 
       group
 
