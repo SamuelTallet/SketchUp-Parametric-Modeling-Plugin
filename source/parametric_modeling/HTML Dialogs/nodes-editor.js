@@ -685,7 +685,7 @@ class AddReteComponent extends Rete.Component {
         }
         
         var sum = number1 + number2
-        sum = Math.round((sum + Number.EPSILON) * 100) / 100
+        sum = Math.round((sum + Number.EPSILON) * 1000000) / 1000000
         
         this.editor.nodes.find(n => n.id == node.id).controls.get('preview').setValue(sum)
         outputs['number'] = sum
@@ -736,7 +736,7 @@ class SubtractReteComponent extends Rete.Component {
         }
         
         var diff = number1 - number2
-        diff = Math.round((diff + Number.EPSILON) * 100) / 100
+        diff = Math.round((diff + Number.EPSILON) * 1000000) / 1000000
         
         this.editor.nodes.find(n => n.id == node.id).controls.get('preview').setValue(diff)
         outputs['number'] = diff
@@ -1277,6 +1277,26 @@ class PaintReteComponent extends Rete.Component {
 
 }
 
+class EraseReteComponent extends Rete.Component {
+
+    constructor() {
+        super('Erase')
+    }
+
+    builder(node) {
+
+        var groups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+
+        return node
+            .addInput(groups)
+
+    }
+
+    worker(_node, _inputs, _outputs) {
+    }
+
+}
+
 class CopyReteComponent extends Rete.Component {
 
     constructor() {
@@ -1295,6 +1315,52 @@ class CopyReteComponent extends Rete.Component {
             .addInput(inputGroups)
             .addInput(inputCopies)
             .addControl(new CheckBoxReteControl(this.editor, 'output_original', 'Output original'))
+            .addOutput(outputGroups)
+
+    }
+
+    worker(_node, _inputs, outputs) {
+        outputs['groups'] = []
+    }
+
+}
+
+class ConcatenateReteComponent extends Rete.Component {
+
+    constructor() {
+        super('Concatenate')
+    }
+
+    builder(node) {
+
+        var inputGroups1 = new Rete.Input('groups1', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups2 = new Rete.Input('groups2', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups3 = new Rete.Input('groups3', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups4 = new Rete.Input('groups4', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups5 = new Rete.Input('groups5', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups6 = new Rete.Input('groups6', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups7 = new Rete.Input('groups7', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups8 = new Rete.Input('groups8', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups9 = new Rete.Input('groups9', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups10 = new Rete.Input('groups10', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups11 = new Rete.Input('groups11', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups12 = new Rete.Input('groups12', 'Group(s)', PMG.NodesEditor.sockets.groups)
+
+        var outputGroups = new Rete.Output('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+
+        return node
+            .addInput(inputGroups1)
+            .addInput(inputGroups2)
+            .addInput(inputGroups3)
+            .addInput(inputGroups4)
+            .addInput(inputGroups5)
+            .addInput(inputGroups6)
+            .addInput(inputGroups7)
+            .addInput(inputGroups8)
+            .addInput(inputGroups9)
+            .addInput(inputGroups10)
+            .addInput(inputGroups11)
+            .addInput(inputGroups12)
             .addOutput(outputGroups)
 
     }
@@ -1351,7 +1417,9 @@ class SelectReteComponent extends Rete.Component {
         var inputL = new Rete.Input('l', 'Variable L', PMG.NodesEditor.sockets.number)
         inputL.addControl(new NumberReteControl(this.editor, 'l', 'Variable L'))
 
-        var outputGroups = new Rete.Output('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var outputGroups = new Rete.Output('groups', 'Matching group(s)', PMG.NodesEditor.sockets.groups)
+        
+        var outputNotGroups = new Rete.Output('not_groups', 'Not matching group(s)', PMG.NodesEditor.sockets.groups)
 
         return node
             .addControl(new TextReteControl(this.editor, 'query', 'Query example: first or even'))
@@ -1369,11 +1437,15 @@ class SelectReteComponent extends Rete.Component {
             .addInput(inputK)
             .addInput(inputL)
             .addOutput(outputGroups)
+            .addOutput(outputNotGroups)
 
     }
 
     worker(_node, _inputs, outputs) {
+
         outputs['groups'] = []
+        outputs['not_groups'] = []
+
     }
 
 }
@@ -1477,7 +1549,9 @@ PMG.NodesEditor.initializeComponents = () => {
         "Rotate": new RotateReteComponent(),
         "Scale": new ScaleReteComponent(),
         "Paint": new PaintReteComponent(),
+        "Erase": new EraseReteComponent(),
         "Copy": new CopyReteComponent(),
+        "Concatenate": new ConcatenateReteComponent(),
         "Select": new SelectReteComponent(),
         "Make group": new MakeGroupReteComponent()
 
@@ -1587,7 +1661,7 @@ PMG.NodesEditor.addEventListeners = () => {
 
         if ( SketchUpVersion < 21 ) {
             new Drooltip({
-                element: '.node[data-node-id="' + node.id + '"] .socket',
+                element: '.node[data-node-id="' + node.id + '"] [title]',
                 position: 'bottom',
                 background: '#fff',
                 color: '#000',

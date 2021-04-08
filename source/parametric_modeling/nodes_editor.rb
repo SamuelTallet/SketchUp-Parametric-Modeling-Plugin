@@ -226,9 +226,19 @@ module ParametricModeling
             color: 'rgba(0, 206, 209, 0.5)'
           },
 
+          "Erase": {
+            path: File.join(images_dir, 'erase-node-icon.svg'),
+            color: 'rgba(128, 180, 251, 0.5)'
+          },
+
           "Copy": {
             path: File.join(images_dir, 'copy-node-icon.svg'),
             color: 'rgba(160, 160, 165, 0.5)'
+          },
+
+          "Concatenate": {
+            path: File.join(images_dir, 'concatenate-node-icon.svg'),
+            color: 'rgba(255, 209, 91, 0.5)'
           },
 
           "Select": {

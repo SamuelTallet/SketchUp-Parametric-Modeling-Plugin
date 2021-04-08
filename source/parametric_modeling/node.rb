@@ -574,7 +574,9 @@ module ParametricModeling
         end
 
         sum = number1 + number2
-        sum = sum.round(2)
+
+        # Fix precision to prevent incorrect result.
+        sum = sum.round(6)
 
         node[:computed_data][:output][:number] = sum
 
@@ -595,7 +597,9 @@ module ParametricModeling
         end
 
         diff = number1 - number2
-        diff = diff.round(2)
+
+        # Fix precision to prevent incorrect result.
+        diff = diff.round(6)
 
         node[:computed_data][:output][:number] = diff
 
@@ -1093,6 +1097,16 @@ module ParametricModeling
           node[:computed_data][:output][:groups] = []
         end
 
+      when 'Erase'
+
+        if node[:computed_data][:input].key?(:groups) &&
+          node[:computed_data][:input][:groups].is_a?(Array) &&
+          !node[:computed_data][:input][:groups].empty?
+
+          node[:computed_data][:input][:groups].each { |group| group.erase! }
+
+        end
+
       when 'Copy'
 
         if node[:computed_data][:input].key?(:groups) &&
@@ -1125,6 +1139,125 @@ module ParametricModeling
 
           end
 
+        else
+          node[:computed_data][:output][:groups] = []
+        end
+
+      when 'Concatenate'
+
+        if ( node[:computed_data][:input].key?(:groups1) &&
+          node[:computed_data][:input][:groups1].is_a?(Array) &&
+          !node[:computed_data][:input][:groups1].empty? ) ||
+          ( node[:computed_data][:input].key?(:groups2) &&
+          node[:computed_data][:input][:groups2].is_a?(Array) &&
+          !node[:computed_data][:input][:groups2].empty? ) ||
+          ( node[:computed_data][:input].key?(:groups3) &&
+          node[:computed_data][:input][:groups3].is_a?(Array) &&
+          !node[:computed_data][:input][:groups3].empty? ) ||
+          ( node[:computed_data][:input].key?(:groups4) &&
+          node[:computed_data][:input][:groups4].is_a?(Array) &&
+          !node[:computed_data][:input][:groups4].empty? ) ||
+          ( node[:computed_data][:input].key?(:groups5) &&
+          node[:computed_data][:input][:groups5].is_a?(Array) &&
+          !node[:computed_data][:input][:groups5].empty? ) ||
+          ( node[:computed_data][:input].key?(:groups6) &&
+          node[:computed_data][:input][:groups6].is_a?(Array) &&
+          !node[:computed_data][:input][:groups6].empty? ) ||
+          ( node[:computed_data][:input].key?(:groups7) &&
+          node[:computed_data][:input][:groups7].is_a?(Array) &&
+          !node[:computed_data][:input][:groups7].empty? ) ||
+          ( node[:computed_data][:input].key?(:groups8) &&
+          node[:computed_data][:input][:groups8].is_a?(Array) &&
+          !node[:computed_data][:input][:groups8].empty? ) ||
+          ( node[:computed_data][:input].key?(:groups9) &&
+          node[:computed_data][:input][:groups9].is_a?(Array) &&
+          !node[:computed_data][:input][:groups9].empty? ) ||
+          ( node[:computed_data][:input].key?(:groups10) &&
+          node[:computed_data][:input][:groups10].is_a?(Array) &&
+          !node[:computed_data][:input][:groups10].empty? ) ||
+          ( node[:computed_data][:input].key?(:groups11) &&
+          node[:computed_data][:input][:groups11].is_a?(Array) &&
+          !node[:computed_data][:input][:groups11].empty? ) ||
+          ( node[:computed_data][:input].key?(:groups12) &&
+          node[:computed_data][:input][:groups12].is_a?(Array) &&
+          !node[:computed_data][:input][:groups12].empty? )
+            
+          groups = []
+
+          if node[:computed_data][:input].key?(:groups1) &&
+            node[:computed_data][:input][:groups1].is_a?(Array) &&
+            !node[:computed_data][:input][:groups1].empty?
+            groups = groups.concat(node[:computed_data][:input][:groups1])
+          end
+
+          if node[:computed_data][:input].key?(:groups2) &&
+            node[:computed_data][:input][:groups2].is_a?(Array) &&
+            !node[:computed_data][:input][:groups2].empty?
+            groups = groups.concat(node[:computed_data][:input][:groups2])
+          end
+
+          if node[:computed_data][:input].key?(:groups3) &&
+            node[:computed_data][:input][:groups3].is_a?(Array) &&
+            !node[:computed_data][:input][:groups3].empty?
+            groups = groups.concat(node[:computed_data][:input][:groups3])
+          end
+
+          if node[:computed_data][:input].key?(:groups4) &&
+            node[:computed_data][:input][:groups4].is_a?(Array) &&
+            !node[:computed_data][:input][:groups4].empty?
+            groups = groups.concat(node[:computed_data][:input][:groups4])
+          end
+
+          if node[:computed_data][:input].key?(:groups5) &&
+            node[:computed_data][:input][:groups5].is_a?(Array) &&
+            !node[:computed_data][:input][:groups5].empty?
+            groups = groups.concat(node[:computed_data][:input][:groups5])
+          end
+
+          if node[:computed_data][:input].key?(:groups6) &&
+            node[:computed_data][:input][:groups6].is_a?(Array) &&
+            !node[:computed_data][:input][:groups6].empty?
+            groups = groups.concat(node[:computed_data][:input][:groups6])
+          end
+
+          if node[:computed_data][:input].key?(:groups7) &&
+            node[:computed_data][:input][:groups7].is_a?(Array) &&
+            !node[:computed_data][:input][:groups7].empty?
+            groups = groups.concat(node[:computed_data][:input][:groups7])
+          end
+
+          if node[:computed_data][:input].key?(:groups8) &&
+            node[:computed_data][:input][:groups8].is_a?(Array) &&
+            !node[:computed_data][:input][:groups8].empty?
+            groups = groups.concat(node[:computed_data][:input][:groups8])
+          end
+
+          if node[:computed_data][:input].key?(:groups9) &&
+            node[:computed_data][:input][:groups9].is_a?(Array) &&
+            !node[:computed_data][:input][:groups9].empty?
+            groups = groups.concat(node[:computed_data][:input][:groups9])
+          end
+
+          if node[:computed_data][:input].key?(:groups10) &&
+            node[:computed_data][:input][:groups10].is_a?(Array) &&
+            !node[:computed_data][:input][:groups10].empty?
+            groups = groups.concat(node[:computed_data][:input][:groups10])
+          end
+
+          if node[:computed_data][:input].key?(:groups11) &&
+            node[:computed_data][:input][:groups11].is_a?(Array) &&
+            !node[:computed_data][:input][:groups11].empty?
+            groups = groups.concat(node[:computed_data][:input][:groups11])
+          end
+
+          if node[:computed_data][:input].key?(:groups12) &&
+            node[:computed_data][:input][:groups12].is_a?(Array) &&
+            !node[:computed_data][:input][:groups12].empty?
+            groups = groups.concat(node[:computed_data][:input][:groups12])
+          end
+
+          node[:computed_data][:output][:groups] = groups
+          
         else
           node[:computed_data][:output][:groups] = []
         end
@@ -1247,6 +1380,7 @@ module ParametricModeling
           rand_nth = rand(1..count)
 
           node[:computed_data][:output][:groups] = []
+          node[:computed_data][:output][:not_groups] = []
 
           node[:computed_data][:input][:groups].each_with_index do |group, group_index|
 
@@ -1262,19 +1396,43 @@ module ParametricModeling
             solid = ( query.include?('solid') && SolidOperations.solid?(group) ) ? 1 : 0
             random = ( nth == rand_nth ) ? 1 : 0
 
+            name = group.name.downcase
+
+            if group.material.is_a?(Sketchup::Material)
+              material = group.material.display_name.downcase
+            else
+              material = ''
+            end
+
+            if group.layer.is_a?(Sketchup::Layer)
+
+              layer = group.layer.name.downcase
+
+              if layer == 'layer0'
+                layer = ''
+              end
+
+            else
+              layer = ''
+            end
+
             calculator_result = calculator.evaluate(
               query, {
                 a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i, j: j, k: k, l: l,
                 nth: nth, width: width, height: height, depth: depth,
-                first: first, even: even, odd: odd, last: last, solid: solid, random: random
+                first: first, even: even, odd: odd, last: last, solid: solid, random: random,
+                name: name, material: material, tag: layer, layer: layer
               }
             )
     
             raise NodeError.new('Invalid query: ' + query, node[:id])\
               if calculator_result.nil?
 
-            node[:computed_data][:output][:groups].push(group)\
-              if calculator_result == true
+            if calculator_result == true
+              node[:computed_data][:output][:groups].push(group)
+            else
+              node[:computed_data][:output][:not_groups].push(group)
+            end
 
           end
   
