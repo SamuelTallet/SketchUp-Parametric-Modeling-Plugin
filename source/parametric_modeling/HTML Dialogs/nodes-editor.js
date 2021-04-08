@@ -1728,7 +1728,7 @@ PMG.NodesEditor.addEventListeners = () => {
 
         if ( SketchUpVersion < 21 ) {
             new Drooltip({
-                element: '.node[data-node-id="' + node.id + '"] [title]',
+                element: '.node[data-node-id="' + node.id + '"] .socket',
                 position: 'bottom',
                 background: '#fff',
                 color: '#000',
