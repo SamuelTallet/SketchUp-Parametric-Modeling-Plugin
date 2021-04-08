@@ -126,6 +126,11 @@ module ParametricModeling
             color: 'rgba(252, 123, 214, 0.5)'
           },
 
+          "Draw tube": {
+            path: File.join(images_dir, 'draw-tube-node-icon.svg'),
+            color: 'rgba(252, 220, 25, 0.5)'
+          },
+
           "Draw pyramid": {
             path: File.join(images_dir, 'draw-pyramid-node-icon.svg'),
             color: 'rgba(252, 223, 43, 0.5)'
@@ -224,6 +229,11 @@ module ParametricModeling
           "Paint": {
             path: File.join(images_dir, 'paint-node-icon.svg'),
             color: 'rgba(0, 206, 209, 0.5)'
+          },
+
+          "Tag": {
+            path: File.join(images_dir, 'tag-node-icon.svg'),
+            color: 'rgba(235, 176, 68, 0.5)'
           },
 
           "Erase": {

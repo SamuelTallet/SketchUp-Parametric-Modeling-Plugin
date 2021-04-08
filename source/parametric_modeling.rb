@@ -61,6 +61,10 @@ module ParametricModeling
     )
 
     extension_features.push(
+      'Extract shapes, points and vectors from active model.'
+    )
+
+    extension_features.push(
       'Import schema from a file. Export schema to a file.'
     )
 

@@ -196,7 +196,7 @@ module ParametricModeling
     # @param [Boolean] soft
     # @raise [ArgumentError]
     #
-    # @return [Sketchup::Group] Group that contains cylinder.
+    # @return [Sketchup::Group] Group that contains prism.
     def self.draw_prism(radius, height, sides, name, material, layer, soft)
 
       raise ArgumentError, 'Radius must be a Length.'\
@@ -234,6 +234,72 @@ module ParametricModeling
       base = group.entities.add_face edges
       height = -height if base.normal.dot(Z_AXIS) < 0.0
       base.pushpull height
+
+      group.name = name
+      group.material = material
+      group.layer = layer
+
+      group.set_attribute(CODE_NAME, 'isParametric', true)
+
+      group
+
+    end
+
+    # Draws a tube.
+    #
+    # @param [Length] radius
+    # @param [Length] thickness
+    # @param [Length] height
+    # @param [Integer] segments
+    # @param [String] name
+    # @param [Sketchup::Material, nil] material
+    # @param [Sketchup::Layer, nil] layer
+    # @raise [ArgumentError]
+    #
+    # @return [Sketchup::Group] Group that contains tube.
+    def self.draw_tube(radius, thickness, height, segments, name, material, layer)
+
+      raise ArgumentError, 'Radius must be a Length.'\
+        unless radius.is_a?(Length)
+
+      raise ArgumentError, 'Thickness must be a Length.'\
+        unless thickness.is_a?(Length)
+
+      raise ArgumentError, 'Height must be a Length.'\
+        unless height.is_a?(Length)
+
+      raise ArgumentError, 'Segments must be an Integer.'\
+        unless segments.is_a?(Integer)
+
+      raise ArgumentError, 'Name must be a String.'\
+        unless name.is_a?(String)
+
+      raise ArgumentError, 'Material must be a Sketchup::Material or nil.'\
+        unless material.is_a?(Sketchup::Material) || material.nil?
+
+      raise ArgumentError, 'Layer must be a Sketchup::Layer or nil.'\
+        unless layer.is_a?(Sketchup::Layer) || layer.nil?
+
+      # Set internal params.
+      outer_radius = radius
+      inner_radius = radius - thickness
+
+      model = Sketchup.active_model
+
+      group = model.entities.add_group
+
+      # Draw outer loop of tube.
+      outer_edges = group.entities.add_circle(ORIGIN, Z_AXIS, outer_radius, segments)
+      # Adds a face to the circle, to form the bottom of the tube.
+      profile_face = group.entities.add_face(outer_edges)
+      # Draw the inner loop of the tuby profile and remove the inner face.
+      inner_edges = group.entities.add_circle(ORIGIN, Z_AXIS, inner_radius, segments)
+      inner_face = inner_edges.first.faces.find { |face| face != profile_face }
+      inner_face.erase!
+      # Ensure the face is extruded upwards.
+      profile_face.reverse! if profile_face.normal.samedirection?(Z_AXIS.reverse)
+      # Extrude the profile into a tube.
+      profile_face.pushpull(height)
 
       group.name = name
       group.material = material
@@ -391,7 +457,7 @@ module ParametricModeling
     # @param [Sketchup::Layer, nil] layer
     # @raise [ArgumentError]
     #
-    # @return [Sketchup::Group]
+    # @return [Sketchup::Group] Group that contains shape.
     def self.draw_shape(points, name, material, layer)
 
       raise ArgumentError, 'Points must be an Array.'\

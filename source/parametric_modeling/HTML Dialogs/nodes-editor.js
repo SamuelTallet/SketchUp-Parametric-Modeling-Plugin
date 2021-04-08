@@ -247,7 +247,7 @@ PMG.NodesEditor.initializeControls = () => {
 
         template:
         `<select @change="change($event)">
-            <option value="">Layer/Tag...</option>
+            <option value="">Tag/Layer...</option>
             <option v-for="layer in layers" v-bind:value="layer.name" v-bind:selected="layer.selected">
                 {{ layer.display_name }}
             </option>
@@ -477,6 +477,46 @@ class DrawCylinderReteComponent extends Rete.Component {
 
         return node
             .addInput(radius)
+            .addInput(height)
+            .addInput(segments)
+            .addControl(new TextReteControl(this.editor, 'name', 'Name'))
+            .addControl(new MaterialReteControl(this.editor, 'material'))
+            .addControl(new LayerReteControl(this.editor, 'layer'))
+            .addOutput(group)
+
+    }
+
+    worker(_node, _inputs, outputs) {
+        outputs['groups'] = []
+    }
+
+}
+
+class DrawTubeReteComponent extends Rete.Component {
+
+    constructor() {
+        super('Draw tube')
+    }
+
+    builder(node) {
+
+        var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
+        radius.addControl(new NumberReteControl(this.editor, 'radius', 'Radius'))
+
+        var thickness = new Rete.Input('thickness', 'Thickness', PMG.NodesEditor.sockets.number)
+        thickness.addControl(new NumberReteControl(this.editor, 'thickness', 'Thickness'))
+
+        var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
+        height.addControl(new NumberReteControl(this.editor, 'height', 'Height'))
+
+        var segments = new Rete.Input('segments', 'Segments', PMG.NodesEditor.sockets.number)
+        segments.addControl(new NumberReteControl(this.editor, 'segments', 'Segments'))
+
+        var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+
+        return node
+            .addInput(radius)
+            .addInput(thickness)
             .addInput(height)
             .addInput(segments)
             .addControl(new TextReteControl(this.editor, 'name', 'Name'))
@@ -1277,6 +1317,31 @@ class PaintReteComponent extends Rete.Component {
 
 }
 
+class TagReteComponent extends Rete.Component {
+
+    constructor() {
+        super('Tag')
+    }
+
+    builder(node) {
+
+        var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+
+        var outputGroups = new Rete.Output('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+
+        return node
+            .addInput(inputGroups)
+            .addControl(new LayerReteControl(this.editor, 'layer'))
+            .addOutput(outputGroups)
+
+    }
+
+    worker(_node, _inputs, outputs) {
+        outputs['groups'] = []
+    }
+
+}
+
 class EraseReteComponent extends Rete.Component {
 
     constructor() {
@@ -1529,8 +1594,9 @@ PMG.NodesEditor.initializeComponents = () => {
         "Draw box": new DrawBoxReteComponent(),
         "Draw prism": new DrawPrismReteComponent(),
         "Draw cylinder": new DrawCylinderReteComponent(),
-        "Draw cone": new DrawConeReteComponent(),
+        "Draw tube": new DrawTubeReteComponent(),
         "Draw pyramid": new DrawPyramidReteComponent(),
+        "Draw cone": new DrawConeReteComponent(),
         "Draw sphere": new DrawSphereReteComponent(),
         "Draw shape": new DrawShapeReteComponent(),
         "Number": new NumberReteComponent(),
@@ -1549,6 +1615,7 @@ PMG.NodesEditor.initializeComponents = () => {
         "Rotate": new RotateReteComponent(),
         "Scale": new ScaleReteComponent(),
         "Paint": new PaintReteComponent(),
+        "Tag": new TagReteComponent(),
         "Erase": new EraseReteComponent(),
         "Copy": new CopyReteComponent(),
         "Concatenate": new ConcatenateReteComponent(),

@@ -284,6 +284,85 @@ module ParametricModeling
           Shapes.draw_prism(radius, height, segments, name, material, layer, soft = true)
         ]
 
+      when 'Draw tube'
+
+        model = Sketchup.active_model
+
+        if node[:computed_data][:input].key?(:radius) &&
+          Number.valid?(node[:computed_data][:input][:radius])
+          radius = Number.to_ul(Number.parse(node[:computed_data][:input][:radius]))
+        else
+          radius = Number.to_ul(1)
+        end
+
+        if node[:computed_data][:input].key?(:thickness) &&
+          Number.valid?(node[:computed_data][:input][:thickness])
+          thickness = Number.to_ul(Number.parse(node[:computed_data][:input][:thickness]))
+        else
+          thickness = Number.to_ul(0.1)
+        end
+
+        if node[:computed_data][:input].key?(:height) &&
+          Number.valid?(node[:computed_data][:input][:height])
+          height = Number.to_ul(Number.parse(node[:computed_data][:input][:height]))
+        else
+          height = Number.to_ul(1)
+        end
+
+        if node[:computed_data][:input].key?(:segments) &&
+          Number.valid?(node[:computed_data][:input][:segments])
+
+          segments = Number.parse(node[:computed_data][:input][:segments])
+
+          raise NodeError.new('Segments must be an integer', node[:id])\
+            unless segments.is_a?(Integer)
+
+        else
+          segments = 16
+        end
+
+        if node[:computed_data][:input].key?(:name) &&
+          node[:computed_data][:input][:name].is_a?(String)
+          name = node[:computed_data][:input][:name]
+        else
+          name = 'Tube'
+        end
+
+        if node[:computed_data][:input].key?(:material) &&
+          node[:computed_data][:input][:material].is_a?(String) &&
+          !node[:computed_data][:input][:material].empty?
+
+          material = model.materials[node[:computed_data][:input][:material]]
+
+          if material.nil?
+
+            material = model.materials.add(node[:computed_data][:input][:material])
+            material.color = Materials.rand_color
+
+          end
+
+        else
+          material = nil
+        end
+
+        if node[:computed_data][:input].key?(:layer) &&
+          node[:computed_data][:input][:layer].is_a?(String) &&
+          !node[:computed_data][:input][:layer].empty?
+
+          layer = model.layers[node[:computed_data][:input][:layer]]
+
+          if layer.nil?
+            layer = model.layers.add(node[:computed_data][:input][:layer])
+          end
+
+        else
+          layer = nil
+        end
+
+        node[:computed_data][:output][:groups] = [
+          Shapes.draw_tube(radius, thickness, height, segments, name, material, layer)
+        ]
+
       when 'Draw pyramid'
 
         model = Sketchup.active_model
@@ -1089,6 +1168,41 @@ module ParametricModeling
           node[:computed_data][:input][:groups].each do |group|
 
             group.material = material
+            node[:computed_data][:output][:groups].push(group)
+
+          end
+
+        else
+          node[:computed_data][:output][:groups] = []
+        end
+
+      when 'Tag'
+
+        if node[:computed_data][:input].key?(:groups) &&
+          node[:computed_data][:input][:groups].is_a?(Array) &&
+          !node[:computed_data][:input][:groups].empty?
+
+          model = Sketchup.active_model
+
+          if node[:computed_data][:input].key?(:layer) &&
+            node[:computed_data][:input][:layer].is_a?(String) &&
+            !node[:computed_data][:input][:layer].empty?
+  
+            layer = model.layers[node[:computed_data][:input][:layer]]
+  
+            if layer.nil?
+              layer = model.layers.add(node[:computed_data][:input][:layer])
+            end
+  
+          else
+            layer = nil
+          end
+
+          node[:computed_data][:output][:groups] = []
+          
+          node[:computed_data][:input][:groups].each do |group|
+
+            group.layer = layer
             node[:computed_data][:output][:groups].push(group)
 
           end
