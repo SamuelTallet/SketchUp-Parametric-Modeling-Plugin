@@ -63,14 +63,18 @@ This node type is used to select parametric entities matching a query. You can w
 
 Numeric variables: a, b, c, d, e, f, g, h, i, j, k, l, nth, width, height, depth<br>
 Numeric operators: <, <=, =, !=, >=, ><br>
-Boolean variables: first, even, odd, last, solid<br>
+Boolean variables: first, even, odd, last, solid, random<br>
 Boolean operators: and, or<br>
-Boolean functions: not
+Boolean functions: not<br>
+Alphanumeric variables: name, material, tag, layer<br>
+Alphanumeric functions: concat
 
 Here are some valid select queries:
 
+`random`<br>
 `not(first)`<br>
 `width > a`<br>
+`name = concat('Box ', a)`<br>
 `first or nth = 4 or last`
 
 Credits
