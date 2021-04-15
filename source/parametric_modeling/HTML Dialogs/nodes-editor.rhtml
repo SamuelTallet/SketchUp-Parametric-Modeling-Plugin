@@ -23,8 +23,9 @@
     <script>SketchUpLayers = <%= Layers.list.to_json %></script>
     <script>SketchUpVersion = <%= Sketchup.version.to_i %></script>
 
+    <script>PMGNodesEditorTranslation = <%= NodesEditor.translation.to_json %></script>
     <script>PMGNodesEditorSchemaVersion = '<%= NodesEditor::SCHEMA_VERSION %>'</script>
-    <script>PMGNodesEditorIcons= <%= NodesEditor.icons.to_json %></script>
+    <script>PMGNodesEditorIcons = <%= NodesEditor.icons.to_json %></script>
     <script>PMGNodesEditorSchema = <%= NodesEditor.schema.to_json %></script>
 
     <%= scripts['libraries/drooltip.js'] %>

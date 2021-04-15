@@ -32,7 +32,7 @@ module ParametricModeling
 
       model = Sketchup.active_model
 
-      model.start_operation('Erase Parametric Entities', disable_ui = true)
+      model.start_operation(TRANSLATE['Erase Parametric Entities'], disable_ui = true)
 
       model.active_entities.each do |entity|
         entity.erase! if entity.get_attribute(CODE_NAME, 'isParametric') == true
@@ -50,7 +50,7 @@ module ParametricModeling
         NodesEditor.tag_nodes_as_valid
           
         model = Sketchup.active_model
-        model.start_operation('Draw Parametric Entities', disable_ui = true)
+        model.start_operation(TRANSLATE['Draw Parametric Entities'], disable_ui = true)
         
         SESSION[:nodes] = NodesEditor.schema[:nodes]
 

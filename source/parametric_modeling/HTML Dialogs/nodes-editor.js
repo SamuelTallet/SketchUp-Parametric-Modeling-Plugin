@@ -6,6 +6,17 @@
  * @licence GNU General Public License 3.0
  */
 
+// Translates.
+t = string => {
+
+    if ( PMGNodesEditorTranslation.hasOwnProperty(string) ) {
+        return PMGNodesEditorTranslation[string]
+    } else {
+        return string
+    }
+
+}
+
 PMG = {}
 
 PMG.NodesEditor = {}
@@ -14,10 +25,10 @@ PMG.NodesEditor.initializeSockets = () => {
 
     PMG.NodesEditor.sockets = {
 
-        number: new Rete.Socket('Number'),
-        groups: new Rete.Socket('Group(s)'),
-        point: new Rete.Socket('Point'),
-        vector: new Rete.Socket('Vector')
+        number: new Rete.Socket(t('Number')),
+        groups: new Rete.Socket(t('Groups')),
+        point: new Rete.Socket(t('Point')),
+        vector: new Rete.Socket(t('Vector'))
 
     }
 
@@ -188,7 +199,7 @@ PMG.NodesEditor.initializeControls = () => {
 
         template:
         `<select @change="change($event)">
-            <option value="">Material...</option>
+            <option value="">${t('Material...')}</option>
             <option v-for="material in materials" v-bind:value="material.name" v-bind:selected="material.selected">
                 {{ material.display_name }}
             </option>
@@ -247,7 +258,7 @@ PMG.NodesEditor.initializeControls = () => {
 
         template:
         `<select @change="change($event)">
-            <option value="">Tag/Layer...</option>
+            <option value="">${t('Tag/Layer...')}</option>
             <option v-for="layer in layers" v-bind:value="layer.name" v-bind:selected="layer.selected">
                 {{ layer.display_name }}
             </option>
@@ -392,22 +403,22 @@ class DrawBoxReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var width = new Rete.Input('width', 'Width', PMG.NodesEditor.sockets.number)
-        width.addControl(new NumberReteControl(this.editor, 'width', 'Width'))
+        var width = new Rete.Input('width', t('Width'), PMG.NodesEditor.sockets.number)
+        width.addControl(new NumberReteControl(this.editor, 'width', t('Width')))
 
-        var depth = new Rete.Input('depth', 'Depth', PMG.NodesEditor.sockets.number)
-        depth.addControl(new NumberReteControl(this.editor, 'depth', 'Depth'))
+        var depth = new Rete.Input('depth', t('Depth'), PMG.NodesEditor.sockets.number)
+        depth.addControl(new NumberReteControl(this.editor, 'depth', t('Depth')))
 
-        var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
-        height.addControl(new NumberReteControl(this.editor, 'height', 'Height'))
+        var height = new Rete.Input('height', t('Height'), PMG.NodesEditor.sockets.number)
+        height.addControl(new NumberReteControl(this.editor, 'height', t('Height')))
 
-        var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+        var group = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(width)
             .addInput(depth)
             .addInput(height)
-            .addControl(new TextReteControl(this.editor, 'name', 'Name'))
+            .addControl(new TextReteControl(this.editor, 'name', t('Name')))
             .addControl(new MaterialReteControl(this.editor, 'material'))
             .addControl(new LayerReteControl(this.editor, 'layer'))
             .addOutput(group)
@@ -428,22 +439,22 @@ class DrawPrismReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
-        radius.addControl(new NumberReteControl(this.editor, 'radius', 'Radius'))
+        var radius = new Rete.Input('radius', t('Radius'), PMG.NodesEditor.sockets.number)
+        radius.addControl(new NumberReteControl(this.editor, 'radius', t('Radius')))
 
-        var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
-        height.addControl(new NumberReteControl(this.editor, 'height', 'Height'))
+        var height = new Rete.Input('height', t('Height'), PMG.NodesEditor.sockets.number)
+        height.addControl(new NumberReteControl(this.editor, 'height', t('Height')))
         
-        var sides = new Rete.Input('sides', 'Sides', PMG.NodesEditor.sockets.number)
-        sides.addControl(new NumberReteControl(this.editor, 'sides', 'Sides'))
+        var sides = new Rete.Input('sides', t('Sides'), PMG.NodesEditor.sockets.number)
+        sides.addControl(new NumberReteControl(this.editor, 'sides', t('Sides')))
 
-        var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+        var group = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(radius)
             .addInput(height)
             .addInput(sides)
-            .addControl(new TextReteControl(this.editor, 'name', 'Name'))
+            .addControl(new TextReteControl(this.editor, 'name', t('Name')))
             .addControl(new MaterialReteControl(this.editor, 'material'))
             .addControl(new LayerReteControl(this.editor, 'layer'))
             .addOutput(group)
@@ -464,22 +475,22 @@ class DrawCylinderReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
-        radius.addControl(new NumberReteControl(this.editor, 'radius', 'Radius'))
+        var radius = new Rete.Input('radius', t('Radius'), PMG.NodesEditor.sockets.number)
+        radius.addControl(new NumberReteControl(this.editor, 'radius', t('Radius')))
 
-        var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
-        height.addControl(new NumberReteControl(this.editor, 'height', 'Height'))
+        var height = new Rete.Input('height', t('Height'), PMG.NodesEditor.sockets.number)
+        height.addControl(new NumberReteControl(this.editor, 'height', t('Height')))
 
-        var segments = new Rete.Input('segments', 'Segments', PMG.NodesEditor.sockets.number)
-        segments.addControl(new NumberReteControl(this.editor, 'segments', 'Segments'))
+        var segments = new Rete.Input('segments', t('Segments'), PMG.NodesEditor.sockets.number)
+        segments.addControl(new NumberReteControl(this.editor, 'segments', t('Segments')))
 
-        var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+        var group = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(radius)
             .addInput(height)
             .addInput(segments)
-            .addControl(new TextReteControl(this.editor, 'name', 'Name'))
+            .addControl(new TextReteControl(this.editor, 'name', t('Name')))
             .addControl(new MaterialReteControl(this.editor, 'material'))
             .addControl(new LayerReteControl(this.editor, 'layer'))
             .addOutput(group)
@@ -500,26 +511,26 @@ class DrawTubeReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
-        radius.addControl(new NumberReteControl(this.editor, 'radius', 'Radius'))
+        var radius = new Rete.Input('radius', t('Radius'), PMG.NodesEditor.sockets.number)
+        radius.addControl(new NumberReteControl(this.editor, 'radius', t('Radius')))
 
-        var thickness = new Rete.Input('thickness', 'Thickness', PMG.NodesEditor.sockets.number)
-        thickness.addControl(new NumberReteControl(this.editor, 'thickness', 'Thickness'))
+        var thickness = new Rete.Input('thickness', t('Thickness'), PMG.NodesEditor.sockets.number)
+        thickness.addControl(new NumberReteControl(this.editor, 'thickness', t('Thickness')))
 
-        var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
-        height.addControl(new NumberReteControl(this.editor, 'height', 'Height'))
+        var height = new Rete.Input('height', t('Height'), PMG.NodesEditor.sockets.number)
+        height.addControl(new NumberReteControl(this.editor, 'height', t('Height')))
 
-        var segments = new Rete.Input('segments', 'Segments', PMG.NodesEditor.sockets.number)
-        segments.addControl(new NumberReteControl(this.editor, 'segments', 'Segments'))
+        var segments = new Rete.Input('segments', t('Segments'), PMG.NodesEditor.sockets.number)
+        segments.addControl(new NumberReteControl(this.editor, 'segments', t('Segments')))
 
-        var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+        var group = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(radius)
             .addInput(thickness)
             .addInput(height)
             .addInput(segments)
-            .addControl(new TextReteControl(this.editor, 'name', 'Name'))
+            .addControl(new TextReteControl(this.editor, 'name', t('Name')))
             .addControl(new MaterialReteControl(this.editor, 'material'))
             .addControl(new LayerReteControl(this.editor, 'layer'))
             .addOutput(group)
@@ -540,22 +551,22 @@ class DrawPyramidReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
-        radius.addControl(new NumberReteControl(this.editor, 'radius', 'Radius'))
+        var radius = new Rete.Input('radius', t('Radius'), PMG.NodesEditor.sockets.number)
+        radius.addControl(new NumberReteControl(this.editor, 'radius', t('Radius')))
 
-        var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
-        height.addControl(new NumberReteControl(this.editor, 'height', 'Height'))
+        var height = new Rete.Input('height', t('Height'), PMG.NodesEditor.sockets.number)
+        height.addControl(new NumberReteControl(this.editor, 'height', t('Height')))
 
-        var sides = new Rete.Input('sides', 'Sides', PMG.NodesEditor.sockets.number)
-        sides.addControl(new NumberReteControl(this.editor, 'sides', 'Sides'))
+        var sides = new Rete.Input('sides', t('Sides'), PMG.NodesEditor.sockets.number)
+        sides.addControl(new NumberReteControl(this.editor, 'sides', t('Sides')))
 
-        var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+        var group = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(radius)
             .addInput(height)
             .addInput(sides)
-            .addControl(new TextReteControl(this.editor, 'name', 'Name'))
+            .addControl(new TextReteControl(this.editor, 'name', t('Name')))
             .addControl(new MaterialReteControl(this.editor, 'material'))
             .addControl(new LayerReteControl(this.editor, 'layer'))
             .addOutput(group)
@@ -576,22 +587,22 @@ class DrawConeReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
-        radius.addControl(new NumberReteControl(this.editor, 'radius', 'Radius'))
+        var radius = new Rete.Input('radius', t('Radius'), PMG.NodesEditor.sockets.number)
+        radius.addControl(new NumberReteControl(this.editor, 'radius', t('Radius')))
 
-        var height = new Rete.Input('height', 'Height', PMG.NodesEditor.sockets.number)
-        height.addControl(new NumberReteControl(this.editor, 'height', 'Height'))
+        var height = new Rete.Input('height', t('Height'), PMG.NodesEditor.sockets.number)
+        height.addControl(new NumberReteControl(this.editor, 'height', t('Height')))
 
-        var segments = new Rete.Input('segments', 'Segments', PMG.NodesEditor.sockets.number)
-        segments.addControl(new NumberReteControl(this.editor, 'segments', 'Segments'))
+        var segments = new Rete.Input('segments', t('Segments'), PMG.NodesEditor.sockets.number)
+        segments.addControl(new NumberReteControl(this.editor, 'segments', t('Segments')))
 
-        var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+        var group = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(radius)
             .addInput(height)
             .addInput(segments)
-            .addControl(new TextReteControl(this.editor, 'name', 'Name'))
+            .addControl(new TextReteControl(this.editor, 'name', t('Name')))
             .addControl(new MaterialReteControl(this.editor, 'material'))
             .addControl(new LayerReteControl(this.editor, 'layer'))
             .addOutput(group)
@@ -612,18 +623,18 @@ class DrawSphereReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var radius = new Rete.Input('radius', 'Radius', PMG.NodesEditor.sockets.number)
-        radius.addControl(new NumberReteControl(this.editor, 'radius', 'Radius'))
+        var radius = new Rete.Input('radius', t('Radius'), PMG.NodesEditor.sockets.number)
+        radius.addControl(new NumberReteControl(this.editor, 'radius', t('Radius')))
 
-        var segments = new Rete.Input('segments', 'Segments', PMG.NodesEditor.sockets.number)
-        segments.addControl(new NumberReteControl(this.editor, 'segments', 'Segments'))
+        var segments = new Rete.Input('segments', t('Segments'), PMG.NodesEditor.sockets.number)
+        segments.addControl(new NumberReteControl(this.editor, 'segments', t('Segments')))
 
-        var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+        var group = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(radius)
             .addInput(segments)
-            .addControl(new TextReteControl(this.editor, 'name', 'Name'))
+            .addControl(new TextReteControl(this.editor, 'name', t('Name')))
             .addControl(new MaterialReteControl(this.editor, 'material'))
             .addControl(new LayerReteControl(this.editor, 'layer'))
             .addOutput(group)
@@ -644,10 +655,10 @@ class DrawShapeReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var group = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+        var group = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
         return node
-            .addControl(new TextReteControl(this.editor, 'name', 'Name'))
+            .addControl(new TextReteControl(this.editor, 'name', t('Name')))
             .addControl(new MaterialReteControl(this.editor, 'material'))
             .addControl(new LayerReteControl(this.editor, 'layer'))
             .addOutput(group)
@@ -668,10 +679,10 @@ class NumberReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var number = new Rete.Output('number', 'Number', PMG.NodesEditor.sockets.number)
+        var number = new Rete.Output('number', t('Number'), PMG.NodesEditor.sockets.number)
 
         return node
-            .addControl(new TextReteControl(this.editor, 'label', 'Label'))
+            .addControl(new TextReteControl(this.editor, 'label', t('Label')))
             .addControl(new NumberReteControl(this.editor, 'number'))
             .addOutput(number)
 
@@ -691,13 +702,13 @@ class AddReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputNumber1 = new Rete.Input('number1', 'Number', PMG.NodesEditor.sockets.number)
+        var inputNumber1 = new Rete.Input('number1', t('Number'), PMG.NodesEditor.sockets.number)
         inputNumber1.addControl(new NumberReteControl(this.editor, 'number1'))
 
-        var inputNumber2 = new Rete.Input('number2', 'Number', PMG.NodesEditor.sockets.number)
+        var inputNumber2 = new Rete.Input('number2', t('Number'), PMG.NodesEditor.sockets.number)
         inputNumber2.addControl(new NumberReteControl(this.editor, 'number2'))
 
-        var outputNumber = new Rete.Output('number', 'Number', PMG.NodesEditor.sockets.number)
+        var outputNumber = new Rete.Output('number', t('Number'), PMG.NodesEditor.sockets.number)
 
         return node
             .addInput(inputNumber1)
@@ -742,13 +753,13 @@ class SubtractReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputNumber1 = new Rete.Input('number1', 'Number', PMG.NodesEditor.sockets.number)
+        var inputNumber1 = new Rete.Input('number1', t('Number'), PMG.NodesEditor.sockets.number)
         inputNumber1.addControl(new NumberReteControl(this.editor, 'number1'))
 
-        var inputNumber2 = new Rete.Input('number2', 'Number', PMG.NodesEditor.sockets.number)
+        var inputNumber2 = new Rete.Input('number2', t('Number'), PMG.NodesEditor.sockets.number)
         inputNumber2.addControl(new NumberReteControl(this.editor, 'number2'))
 
-        var outputNumber = new Rete.Output('number', 'Number', PMG.NodesEditor.sockets.number)
+        var outputNumber = new Rete.Output('number', t('Number'), PMG.NodesEditor.sockets.number)
 
         return node
             .addInput(inputNumber1)
@@ -793,13 +804,13 @@ class MultiplyReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputNumber1 = new Rete.Input('number1', 'Number', PMG.NodesEditor.sockets.number)
+        var inputNumber1 = new Rete.Input('number1', t('Number'), PMG.NodesEditor.sockets.number)
         inputNumber1.addControl(new NumberReteControl(this.editor, 'number1'))
 
-        var inputNumber2 = new Rete.Input('number2', 'Number', PMG.NodesEditor.sockets.number)
+        var inputNumber2 = new Rete.Input('number2', t('Number'), PMG.NodesEditor.sockets.number)
         inputNumber2.addControl(new NumberReteControl(this.editor, 'number2'))
 
-        var outputNumber = new Rete.Output('number', 'Number', PMG.NodesEditor.sockets.number)
+        var outputNumber = new Rete.Output('number', t('Number'), PMG.NodesEditor.sockets.number)
 
         return node
             .addInput(inputNumber1)
@@ -843,14 +854,14 @@ class DivideReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var dividend = new Rete.Input('dividend', 'Dividend', PMG.NodesEditor.sockets.number)
-        dividend.addControl(new NumberReteControl(this.editor, 'dividend', 'Dividend'))
+        var dividend = new Rete.Input('dividend', t('Dividend'), PMG.NodesEditor.sockets.number)
+        dividend.addControl(new NumberReteControl(this.editor, 'dividend', t('Dividend')))
 
-        var divisor = new Rete.Input('divisor', 'Divisor', PMG.NodesEditor.sockets.number)
-        divisor.addControl(new NumberReteControl(this.editor, 'divisor', 'Divisor'))
+        var divisor = new Rete.Input('divisor', t('Divisor'), PMG.NodesEditor.sockets.number)
+        divisor.addControl(new NumberReteControl(this.editor, 'divisor', t('Divisor')))
 
-        var quotient = new Rete.Output('quotient', 'Quotient', PMG.NodesEditor.sockets.number)
-        var remainder = new Rete.Output('remainder', 'Remainder', PMG.NodesEditor.sockets.number)
+        var quotient = new Rete.Output('quotient', t('Quotient'), PMG.NodesEditor.sockets.number)
+        var remainder = new Rete.Output('remainder', t('Remainder'), PMG.NodesEditor.sockets.number)
 
         return node
             .addInput(dividend)
@@ -897,46 +908,46 @@ class CalculateReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputA = new Rete.Input('a', 'Variable A', PMG.NodesEditor.sockets.number)
-        inputA.addControl(new NumberReteControl(this.editor, 'a', 'Variable A'))
+        var inputA = new Rete.Input('a', t('Variable A'), PMG.NodesEditor.sockets.number)
+        inputA.addControl(new NumberReteControl(this.editor, 'a', t('Variable A')))
 
-        var inputB = new Rete.Input('b', 'Variable B', PMG.NodesEditor.sockets.number)
-        inputB.addControl(new NumberReteControl(this.editor, 'b', 'Variable B'))
+        var inputB = new Rete.Input('b', t('Variable B'), PMG.NodesEditor.sockets.number)
+        inputB.addControl(new NumberReteControl(this.editor, 'b', t('Variable B')))
 
-        var inputC = new Rete.Input('c', 'Variable C', PMG.NodesEditor.sockets.number)
-        inputC.addControl(new NumberReteControl(this.editor, 'c', 'Variable C'))
+        var inputC = new Rete.Input('c', t('Variable C'), PMG.NodesEditor.sockets.number)
+        inputC.addControl(new NumberReteControl(this.editor, 'c', t('Variable C')))
 
-        var inputD = new Rete.Input('d', 'Variable D', PMG.NodesEditor.sockets.number)
-        inputD.addControl(new NumberReteControl(this.editor, 'd', 'Variable D'))
+        var inputD = new Rete.Input('d', t('Variable D'), PMG.NodesEditor.sockets.number)
+        inputD.addControl(new NumberReteControl(this.editor, 'd', t('Variable D')))
 
-        var inputE = new Rete.Input('e', 'Variable E', PMG.NodesEditor.sockets.number)
-        inputE.addControl(new NumberReteControl(this.editor, 'e', 'Variable E'))
+        var inputE = new Rete.Input('e', t('Variable E'), PMG.NodesEditor.sockets.number)
+        inputE.addControl(new NumberReteControl(this.editor, 'e', t('Variable E')))
         
-        var inputF = new Rete.Input('f', 'Variable F', PMG.NodesEditor.sockets.number)
-        inputF.addControl(new NumberReteControl(this.editor, 'f', 'Variable F'))
+        var inputF = new Rete.Input('f', t('Variable F'), PMG.NodesEditor.sockets.number)
+        inputF.addControl(new NumberReteControl(this.editor, 'f', t('Variable F')))
 
-        var inputG = new Rete.Input('g', 'Variable G', PMG.NodesEditor.sockets.number)
-        inputG.addControl(new NumberReteControl(this.editor, 'g', 'Variable G'))
+        var inputG = new Rete.Input('g', t('Variable G'), PMG.NodesEditor.sockets.number)
+        inputG.addControl(new NumberReteControl(this.editor, 'g', t('Variable G')))
 
-        var inputH = new Rete.Input('h', 'Variable H', PMG.NodesEditor.sockets.number)
-        inputH.addControl(new NumberReteControl(this.editor, 'h', 'Variable H'))
+        var inputH = new Rete.Input('h', t('Variable H'), PMG.NodesEditor.sockets.number)
+        inputH.addControl(new NumberReteControl(this.editor, 'h', t('Variable H')))
 
-        var inputI = new Rete.Input('i', 'Variable I', PMG.NodesEditor.sockets.number)
-        inputI.addControl(new NumberReteControl(this.editor, 'i', 'Variable I'))
+        var inputI = new Rete.Input('i', t('Variable I'), PMG.NodesEditor.sockets.number)
+        inputI.addControl(new NumberReteControl(this.editor, 'i', t('Variable I')))
 
-        var inputJ = new Rete.Input('j', 'Variable J', PMG.NodesEditor.sockets.number)
-        inputJ.addControl(new NumberReteControl(this.editor, 'j', 'Variable J'))
+        var inputJ = new Rete.Input('j', t('Variable J'), PMG.NodesEditor.sockets.number)
+        inputJ.addControl(new NumberReteControl(this.editor, 'j', t('Variable J')))
 
-        var inputK = new Rete.Input('k', 'Variable K', PMG.NodesEditor.sockets.number)
-        inputK.addControl(new NumberReteControl(this.editor, 'k', 'Variable K'))
+        var inputK = new Rete.Input('k', t('Variable K'), PMG.NodesEditor.sockets.number)
+        inputK.addControl(new NumberReteControl(this.editor, 'k', t('Variable K')))
 
-        var inputL = new Rete.Input('l', 'Variable L', PMG.NodesEditor.sockets.number)
-        inputL.addControl(new NumberReteControl(this.editor, 'l', 'Variable L'))
+        var inputL = new Rete.Input('l', t('Variable L'), PMG.NodesEditor.sockets.number)
+        inputL.addControl(new NumberReteControl(this.editor, 'l', t('Variable L')))
 
-        var outputNumber = new Rete.Output('number', 'Number', PMG.NodesEditor.sockets.number)
+        var outputNumber = new Rete.Output('number', t('Number'), PMG.NodesEditor.sockets.number)
 
         return node
-            .addControl(new TextReteControl(this.editor, 'formula', 'Formula example: round(a) * b'))
+            .addControl(new TextReteControl(this.editor, 'formula', t('Formula example:') + ' round(a) * b'))
             .addInput(inputA)
             .addInput(inputB)
             .addInput(inputC)
@@ -1033,7 +1044,7 @@ class PointReteComponent extends Rete.Component {
         var inputPointZ = new Rete.Input('z', 'Z', PMG.NodesEditor.sockets.number)
         inputPointZ.addControl(new NumberReteControl(this.editor, 'z', 'Z'))
 
-        var outputPoint = new Rete.Output('point', 'Point', PMG.NodesEditor.sockets.point)
+        var outputPoint = new Rete.Output('point', t('Point'), PMG.NodesEditor.sockets.point)
 
         return node
             .addInput(inputPointX)
@@ -1071,7 +1082,7 @@ class VectorReteComponent extends Rete.Component {
         var inputVectorZ = new Rete.Input('z', 'Z', PMG.NodesEditor.sockets.number)
         inputVectorZ.addControl(new NumberReteControl(this.editor, 'z', 'Z'))
 
-        var outputVector = new Rete.Output('vector', 'Vector', PMG.NodesEditor.sockets.vector)
+        var outputVector = new Rete.Output('vector', t('Vector'), PMG.NodesEditor.sockets.vector)
 
         return node
             .addInput(inputVectorX)
@@ -1100,10 +1111,10 @@ class IntersectSolidsReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputGroups1 = new Rete.Input('groups1', 'Group', PMG.NodesEditor.sockets.groups)
-        var inputGroups2 = new Rete.Input('groups2', 'Group', PMG.NodesEditor.sockets.groups)
+        var inputGroups1 = new Rete.Input('groups1', t('Group'), PMG.NodesEditor.sockets.groups)
+        var inputGroups2 = new Rete.Input('groups2', t('Group'), PMG.NodesEditor.sockets.groups)
 
-        var outputGroups = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+        var outputGroups = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(inputGroups1)
@@ -1126,10 +1137,10 @@ class UniteSolidsReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputGroups1 = new Rete.Input('groups1', 'Group', PMG.NodesEditor.sockets.groups)
-        var inputGroups2 = new Rete.Input('groups2', 'Group', PMG.NodesEditor.sockets.groups)
+        var inputGroups1 = new Rete.Input('groups1', t('Group'), PMG.NodesEditor.sockets.groups)
+        var inputGroups2 = new Rete.Input('groups2', t('Group'), PMG.NodesEditor.sockets.groups)
 
-        var outputGroups = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+        var outputGroups = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(inputGroups1)
@@ -1152,10 +1163,10 @@ class SubtractSolidsReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputGroups1 = new Rete.Input('groups1', 'Group', PMG.NodesEditor.sockets.groups)
-        var inputGroups2 = new Rete.Input('groups2', 'Group', PMG.NodesEditor.sockets.groups)
+        var inputGroups1 = new Rete.Input('groups1', t('Group'), PMG.NodesEditor.sockets.groups)
+        var inputGroups2 = new Rete.Input('groups2', t('Group'), PMG.NodesEditor.sockets.groups)
 
-        var outputGroups = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+        var outputGroups = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(inputGroups1)
@@ -1178,17 +1189,17 @@ class PushPullReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputDistance = new Rete.Input('distance', 'Distance', PMG.NodesEditor.sockets.number)
-        inputDistance.addControl(new NumberReteControl(this.editor, 'distance', 'Distance'))
-        var inputDirection = new Rete.Input('direction', 'Direction', PMG.NodesEditor.sockets.vector)
+        var inputGroups = new Rete.Input('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputDistance = new Rete.Input('distance', t('Distance'), PMG.NodesEditor.sockets.number)
+        inputDistance.addControl(new NumberReteControl(this.editor, 'distance', t('Distance')))
+        var inputDirection = new Rete.Input('direction', t('Direction'), PMG.NodesEditor.sockets.vector)
 
-        var outputGroups = new Rete.Output('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var outputGroups = new Rete.Output('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(inputGroups)
             .addInput(inputDistance)
-            .addControl(new CheckBoxReteControl(this.editor, 'increment_distance', 'Increment distance'))
+            .addControl(new CheckBoxReteControl(this.editor, 'increment_distance', t('Increment distance')))
             .addInput(inputDirection)
             .addOutput(outputGroups)
 
@@ -1208,14 +1219,15 @@ class MoveReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputPoint = new Rete.Input('point', 'Point', PMG.NodesEditor.sockets.point)
+        var inputGroups = new Rete.Input('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputPoint = new Rete.Input('point', t('Position'), PMG.NodesEditor.sockets.point)
 
-        var outputGroups = new Rete.Output('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var outputGroups = new Rete.Output('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(inputGroups)
             .addInput(inputPoint)
+            .addControl(new CheckBoxReteControl(this.editor, 'point_is_absolute', t('Position is absolute')))
             .addOutput(outputGroups)
 
     }
@@ -1234,13 +1246,13 @@ class RotateReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputCenter = new Rete.Input('center', 'Center', PMG.NodesEditor.sockets.point)
-        var inputAxis = new Rete.Input('axis', 'Axis', PMG.NodesEditor.sockets.vector)
-        var inputAngle = new Rete.Input('angle', 'Angle', PMG.NodesEditor.sockets.number)
-        inputAngle.addControl(new NumberReteControl(this.editor, 'angle', 'Angle'))
+        var inputGroups = new Rete.Input('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputCenter = new Rete.Input('center', t('Center'), PMG.NodesEditor.sockets.point)
+        var inputAxis = new Rete.Input('axis', t('Axis'), PMG.NodesEditor.sockets.vector)
+        var inputAngle = new Rete.Input('angle', t('Angle'), PMG.NodesEditor.sockets.number)
+        inputAngle.addControl(new NumberReteControl(this.editor, 'angle', t('Angle')))
 
-        var outputGroups = new Rete.Output('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var outputGroups = new Rete.Output('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(inputGroups)
@@ -1265,16 +1277,16 @@ class ScaleReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputPoint = new Rete.Input('point', 'Point', PMG.NodesEditor.sockets.point)
-        var inputXFactor = new Rete.Input('x_factor', 'X factor', PMG.NodesEditor.sockets.number)
-        inputXFactor.addControl(new NumberReteControl(this.editor, 'x_factor', 'X factor'))
+        var inputGroups = new Rete.Input('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputPoint = new Rete.Input('point', t('Point'), PMG.NodesEditor.sockets.point)
+        var inputXFactor = new Rete.Input('x_factor', t('X factor'), PMG.NodesEditor.sockets.number)
+        inputXFactor.addControl(new NumberReteControl(this.editor, 'x_factor', t('X factor')))
         var inputYFactor = new Rete.Input('y_factor', 'Y factor', PMG.NodesEditor.sockets.number)
-        inputYFactor.addControl(new NumberReteControl(this.editor, 'y_factor', 'Y factor'))
+        inputYFactor.addControl(new NumberReteControl(this.editor, 'y_factor', t('Y factor')))
         var inputZFactor = new Rete.Input('z_factor', 'Z factor', PMG.NodesEditor.sockets.number)
-        inputZFactor.addControl(new NumberReteControl(this.editor, 'z_factor', 'Z factor'))
+        inputZFactor.addControl(new NumberReteControl(this.editor, 'z_factor', t('Z factor')))
 
-        var outputGroups = new Rete.Output('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var outputGroups = new Rete.Output('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(inputGroups)
@@ -1300,9 +1312,9 @@ class PaintReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups = new Rete.Input('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
 
-        var outputGroups = new Rete.Output('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var outputGroups = new Rete.Output('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(inputGroups)
@@ -1325,9 +1337,9 @@ class TagReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups = new Rete.Input('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
 
-        var outputGroups = new Rete.Output('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var outputGroups = new Rete.Output('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(inputGroups)
@@ -1350,7 +1362,7 @@ class EraseReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var groups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var groups = new Rete.Input('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(groups)
@@ -1370,22 +1382,27 @@ class CopyReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputCopies = new Rete.Input('copies', 'Copies', PMG.NodesEditor.sockets.number)
-        inputCopies.addControl(new NumberReteControl(this.editor, 'copies', 'Copies'))
+        var inputGroups = new Rete.Input('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputCopies = new Rete.Input('copies', t('Copies'), PMG.NodesEditor.sockets.number)
+        inputCopies.addControl(new NumberReteControl(this.editor, 'copies', t('Copies')))
 
-        var outputGroups = new Rete.Output('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var outputCopiedGroups = new Rete.Output('groups', t('Copied groups'), PMG.NodesEditor.sockets.groups)
+        var outputOriginalGroups = new Rete.Output('original_groups', t('Original groups'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(inputGroups)
             .addInput(inputCopies)
-            .addControl(new CheckBoxReteControl(this.editor, 'output_original', 'Output original'))
-            .addOutput(outputGroups)
+            .addControl(new CheckBoxReteControl(this.editor, 'output_original', t('Put originals with copies')))
+            .addOutput(outputCopiedGroups)
+            .addOutput(outputOriginalGroups)
 
     }
 
     worker(_node, _inputs, outputs) {
+
         outputs['groups'] = []
+        outputs['original_groups'] = []
+
     }
 
 }
@@ -1398,20 +1415,20 @@ class ConcatenateReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputGroups1 = new Rete.Input('groups1', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups2 = new Rete.Input('groups2', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups3 = new Rete.Input('groups3', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups4 = new Rete.Input('groups4', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups5 = new Rete.Input('groups5', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups6 = new Rete.Input('groups6', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups7 = new Rete.Input('groups7', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups8 = new Rete.Input('groups8', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups9 = new Rete.Input('groups9', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups10 = new Rete.Input('groups10', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups11 = new Rete.Input('groups11', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups12 = new Rete.Input('groups12', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups1 = new Rete.Input('groups1', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups2 = new Rete.Input('groups2', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups3 = new Rete.Input('groups3', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups4 = new Rete.Input('groups4', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups5 = new Rete.Input('groups5', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups6 = new Rete.Input('groups6', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups7 = new Rete.Input('groups7', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups8 = new Rete.Input('groups8', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups9 = new Rete.Input('groups9', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups10 = new Rete.Input('groups10', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups11 = new Rete.Input('groups11', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups12 = new Rete.Input('groups12', t('Groups'), PMG.NodesEditor.sockets.groups)
 
-        var outputGroups = new Rete.Output('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var outputGroups = new Rete.Output('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(inputGroups1)
@@ -1444,50 +1461,50 @@ class SelectReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputGroups = new Rete.Input('groups', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups = new Rete.Input('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
 
-        var inputA = new Rete.Input('a', 'Variable A', PMG.NodesEditor.sockets.number)
-        inputA.addControl(new NumberReteControl(this.editor, 'a', 'Variable A'))
+        var inputA = new Rete.Input('a', t('Variable A'), PMG.NodesEditor.sockets.number)
+        inputA.addControl(new NumberReteControl(this.editor, 'a', t('Variable A')))
 
-        var inputB = new Rete.Input('b', 'Variable B', PMG.NodesEditor.sockets.number)
-        inputB.addControl(new NumberReteControl(this.editor, 'b', 'Variable B'))
+        var inputB = new Rete.Input('b', t('Variable B'), PMG.NodesEditor.sockets.number)
+        inputB.addControl(new NumberReteControl(this.editor, 'b', t('Variable B')))
 
-        var inputC = new Rete.Input('c', 'Variable C', PMG.NodesEditor.sockets.number)
-        inputC.addControl(new NumberReteControl(this.editor, 'c', 'Variable C'))
+        var inputC = new Rete.Input('c', t('Variable C'), PMG.NodesEditor.sockets.number)
+        inputC.addControl(new NumberReteControl(this.editor, 'c', t('Variable C')))
 
-        var inputD = new Rete.Input('d', 'Variable D', PMG.NodesEditor.sockets.number)
-        inputD.addControl(new NumberReteControl(this.editor, 'd', 'Variable D'))
+        var inputD = new Rete.Input('d', t('Variable D'), PMG.NodesEditor.sockets.number)
+        inputD.addControl(new NumberReteControl(this.editor, 'd', t('Variable D')))
 
-        var inputE = new Rete.Input('e', 'Variable E', PMG.NodesEditor.sockets.number)
-        inputE.addControl(new NumberReteControl(this.editor, 'e', 'Variable E'))
+        var inputE = new Rete.Input('e', t('Variable E'), PMG.NodesEditor.sockets.number)
+        inputE.addControl(new NumberReteControl(this.editor, 'e', t('Variable E')))
         
-        var inputF = new Rete.Input('f', 'Variable F', PMG.NodesEditor.sockets.number)
-        inputF.addControl(new NumberReteControl(this.editor, 'f', 'Variable F'))
+        var inputF = new Rete.Input('f', t('Variable F'), PMG.NodesEditor.sockets.number)
+        inputF.addControl(new NumberReteControl(this.editor, 'f', t('Variable F')))
 
-        var inputG = new Rete.Input('g', 'Variable G', PMG.NodesEditor.sockets.number)
-        inputG.addControl(new NumberReteControl(this.editor, 'g', 'Variable G'))
+        var inputG = new Rete.Input('g', t('Variable G'), PMG.NodesEditor.sockets.number)
+        inputG.addControl(new NumberReteControl(this.editor, 'g', t('Variable G')))
 
-        var inputH = new Rete.Input('h', 'Variable H', PMG.NodesEditor.sockets.number)
-        inputH.addControl(new NumberReteControl(this.editor, 'h', 'Variable H'))
+        var inputH = new Rete.Input('h', t('Variable H'), PMG.NodesEditor.sockets.number)
+        inputH.addControl(new NumberReteControl(this.editor, 'h', t('Variable H')))
 
-        var inputI = new Rete.Input('i', 'Variable I', PMG.NodesEditor.sockets.number)
-        inputI.addControl(new NumberReteControl(this.editor, 'i', 'Variable I'))
+        var inputI = new Rete.Input('i', t('Variable I'), PMG.NodesEditor.sockets.number)
+        inputI.addControl(new NumberReteControl(this.editor, 'i', t('Variable I')))
 
-        var inputJ = new Rete.Input('j', 'Variable J', PMG.NodesEditor.sockets.number)
-        inputJ.addControl(new NumberReteControl(this.editor, 'j', 'Variable J'))
+        var inputJ = new Rete.Input('j', t('Variable J'), PMG.NodesEditor.sockets.number)
+        inputJ.addControl(new NumberReteControl(this.editor, 'j', t('Variable J')))
 
-        var inputK = new Rete.Input('k', 'Variable K', PMG.NodesEditor.sockets.number)
-        inputK.addControl(new NumberReteControl(this.editor, 'k', 'Variable K'))
+        var inputK = new Rete.Input('k', t('Variable K'), PMG.NodesEditor.sockets.number)
+        inputK.addControl(new NumberReteControl(this.editor, 'k', t('Variable K')))
 
-        var inputL = new Rete.Input('l', 'Variable L', PMG.NodesEditor.sockets.number)
-        inputL.addControl(new NumberReteControl(this.editor, 'l', 'Variable L'))
+        var inputL = new Rete.Input('l', t('Variable L'), PMG.NodesEditor.sockets.number)
+        inputL.addControl(new NumberReteControl(this.editor, 'l', t('Variable L')))
 
-        var outputGroups = new Rete.Output('groups', 'Matching group(s)', PMG.NodesEditor.sockets.groups)
+        var outputGroups = new Rete.Output('groups', t('Matching groups'), PMG.NodesEditor.sockets.groups)
         
-        var outputNotGroups = new Rete.Output('not_groups', 'Not matching group(s)', PMG.NodesEditor.sockets.groups)
+        var outputNotGroups = new Rete.Output('not_groups', t('Not matching groups'), PMG.NodesEditor.sockets.groups)
 
         return node
-            .addControl(new TextReteControl(this.editor, 'query', 'Query example: first or even'))
+            .addControl(new TextReteControl(this.editor, 'query', t('Query example:') + ' odd'))
             .addInput(inputGroups)
             .addInput(inputA)
             .addInput(inputB)
@@ -1523,20 +1540,20 @@ class MakeGroupReteComponent extends Rete.Component {
 
     builder(node) {
 
-        var inputGroups1 = new Rete.Input('groups1', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups2 = new Rete.Input('groups2', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups3 = new Rete.Input('groups3', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups4 = new Rete.Input('groups4', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups5 = new Rete.Input('groups5', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups6 = new Rete.Input('groups6', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups7 = new Rete.Input('groups7', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups8 = new Rete.Input('groups8', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups9 = new Rete.Input('groups9', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups10 = new Rete.Input('groups10', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups11 = new Rete.Input('groups11', 'Group(s)', PMG.NodesEditor.sockets.groups)
-        var inputGroups12 = new Rete.Input('groups12', 'Group(s)', PMG.NodesEditor.sockets.groups)
+        var inputGroups1 = new Rete.Input('groups1', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups2 = new Rete.Input('groups2', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups3 = new Rete.Input('groups3', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups4 = new Rete.Input('groups4', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups5 = new Rete.Input('groups5', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups6 = new Rete.Input('groups6', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups7 = new Rete.Input('groups7', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups8 = new Rete.Input('groups8', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups9 = new Rete.Input('groups9', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups10 = new Rete.Input('groups10', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups11 = new Rete.Input('groups11', t('Groups'), PMG.NodesEditor.sockets.groups)
+        var inputGroups12 = new Rete.Input('groups12', t('Groups'), PMG.NodesEditor.sockets.groups)
 
-        var outputGroup = new Rete.Output('groups', 'Group', PMG.NodesEditor.sockets.groups)
+        var outputGroup = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(inputGroups1)
@@ -1551,7 +1568,7 @@ class MakeGroupReteComponent extends Rete.Component {
             .addInput(inputGroups10)
             .addInput(inputGroups11)
             .addInput(inputGroups12)
-            .addControl(new TextReteControl(this.editor, 'name', 'Name'))
+            .addControl(new TextReteControl(this.editor, 'name', t('Name')))
             .addControl(new MaterialReteControl(this.editor, 'material'))
             .addControl(new LayerReteControl(this.editor, 'layer'))
             .addOutput(outputGroup)
@@ -1644,7 +1661,7 @@ PMG.NodesEditor.loadToolbarIcons = () => {
     document.querySelectorAll('.toolbar .node-icon').forEach(toolbarNodeIcon => {
 
         toolbarNodeIcon.src = PMGNodesEditorIcons['nodes'][toolbarNodeIcon.dataset.nodeName]['path']
-        toolbarNodeIcon.title = toolbarNodeIcon.dataset.nodeName
+        toolbarNodeIcon.title = t(toolbarNodeIcon.dataset.nodeName)
 
     })
 
@@ -1713,7 +1730,7 @@ PMG.NodesEditor.addEventListeners = () => {
         PMG.NodesEditor.exportModelSchema(false)
     })
 
-    PMG.NodesEditor.editor.on('nodecreated', (node) => {
+    PMG.NodesEditor.editor.on('nodecreated', node => {
 
         var nodeElement = node.vueContext.$el
 
@@ -1721,7 +1738,7 @@ PMG.NodesEditor.addEventListeners = () => {
 
         new ContextMenu('.node[data-node-id="' + node.id + '"] *', [
             {
-                name: 'Remove this node',
+                name: t('Remove this node'),
                 fn: () => { PMG.NodesEditor.editor.removeNode(node) }
             }
         ])
@@ -1769,6 +1786,8 @@ PMG.NodesEditor.addEventListeners = () => {
         })
 
         var nodeTitleElement = nodeElement.querySelector('.title')
+
+        nodeTitleElement.innerHTML = t(node.name)
 
         var nodeTitleGradient = 'linear-gradient(0deg,hsla(0,0%,100%,.05) 0,hsla(0,0%,100%,.05)' +
             ' 40%,hsla(0,0%,100%,.19)),radial-gradient(70% 40px at center,' +
@@ -1849,6 +1868,8 @@ PMG.NodesEditor.importModelSchema = () => {
 PMG.NodesEditor.showOrHideMinimap = () => {
 
     document.querySelector('.minimap').classList.toggle('displayed')
+
+    // XXX This hack forces minimap display.
     PMG.NodesEditor.editor.trigger('zoomed')
 
 }
@@ -1857,23 +1878,23 @@ PMG.NodesEditor.setGlobalContextMenu = () => {
 
     var contextMenuOptions = [
         {
-            name: 'Import schema from file',
+            name: t('Import schema from a file'),
             fn: () => { sketchup.importSchemaFromFile() }
         },
         {
-            name: 'Export schema to file',
+            name: t('Export schema to a file'),
             fn: () => { sketchup.exportSchemaToFile() }
         },
         {
-            name: 'Freeze parametric entities',
+            name: t('Freeze parametric entities'),
             fn: () => { sketchup.freezeParametricEntities() }
         },
         {
-            name: 'Show or hide minimap',
+            name: t('Show or hide minimap'),
             fn: () => { PMG.NodesEditor.showOrHideMinimap() }
         },
         {
-            name: 'Remove all nodes',
+            name: t('Remove all nodes'),
             fn: () => { PMG.NodesEditor.editor.clear() }
         }
     ]

@@ -100,6 +100,102 @@ module ParametricModeling
 
     end
 
+    # Gets Nodes Editor translation.
+    #
+    # @return [Hash]
+    def self.translation
+
+      {
+
+        "Number": TRANSLATE['Number'],
+        "Groups": TRANSLATE['Groups'],
+        "Point": TRANSLATE['Point'],
+        "Vector": TRANSLATE['Vector'],
+        "Material...": TRANSLATE['Material...'],
+        "Tag/Layer...": TRANSLATE[Sketchup.version.to_i >= 20 ? 'Tag...' : 'Layer...'],
+        "Width": TRANSLATE['Width'],
+        "Depth": TRANSLATE['Depth'],
+        "Height": TRANSLATE['Height'],
+        "Group": TRANSLATE['Group'],
+        "Name": TRANSLATE['Name'],
+        "Radius": TRANSLATE['Radius'],
+        "Sides": TRANSLATE['Sides'],
+        "Segments": TRANSLATE['Segments'],
+        "Thickness": TRANSLATE['Thickness'],
+        "Label": TRANSLATE['Label'],
+        "Dividend": TRANSLATE['Dividend'],
+        "Divisor": TRANSLATE['Divisor'],
+        "Quotient": TRANSLATE['Quotient'],
+        "Remainder": TRANSLATE['Remainder'],
+        "Variable A": TRANSLATE['Variable A'],
+        "Variable B": TRANSLATE['Variable B'],
+        "Variable C": TRANSLATE['Variable C'],
+        "Variable D": TRANSLATE['Variable D'],
+        "Variable E": TRANSLATE['Variable E'],
+        "Variable F": TRANSLATE['Variable F'],
+        "Variable G": TRANSLATE['Variable G'],
+        "Variable H": TRANSLATE['Variable H'],
+        "Variable I": TRANSLATE['Variable I'],
+        "Variable J": TRANSLATE['Variable J'],
+        "Variable K": TRANSLATE['Variable K'],
+        "Variable L": TRANSLATE['Variable L'],
+        "Formula example:": TRANSLATE['Formula example:'],
+        "Distance": TRANSLATE['Distance'],
+        "Direction": TRANSLATE['Direction'],
+        "Increment distance": TRANSLATE['Increment distance'],
+        "Position": TRANSLATE['Position'],
+        "Position is absolute": TRANSLATE['Position is absolute'],
+        "Center": TRANSLATE['Center'],
+        "Axis": TRANSLATE['Axis'],
+        "Angle": TRANSLATE['Angle'],
+        "X factor": TRANSLATE['X factor'],
+        "Y factor": TRANSLATE['Y factor'],
+        "Z factor": TRANSLATE['Z factor'],
+        "Copies": TRANSLATE['Copies'],
+        "Copied groups": TRANSLATE['Copied groups'],
+        "Original groups": TRANSLATE['Original groups'],
+        "Put originals with copies": TRANSLATE['Put originals with copies'],
+        "Matching groups": TRANSLATE['Matching groups'],
+        "Not matching groups": TRANSLATE['Not matching groups'],
+        "Query example:": TRANSLATE['Query example:'],
+        "Draw box": TRANSLATE['Draw box'],
+        "Draw prism": TRANSLATE['Draw prism'],
+        "Draw cylinder": TRANSLATE['Draw cylinder'],
+        "Draw tube": TRANSLATE['Draw tube'],
+        "Draw pyramid": TRANSLATE['Draw pyramid'],
+        "Draw cone": TRANSLATE['Draw cone'],
+        "Draw sphere": TRANSLATE['Draw sphere'],
+        "Add": TRANSLATE['Add'],
+        "Subtract": TRANSLATE['Subtract'],
+        "Multiply": TRANSLATE['Multiply'],
+        "Divide": TRANSLATE['Divide'],
+        "Calculate": TRANSLATE['Calculate'],
+        "Intersect solids": TRANSLATE['Intersect solids'],
+        "Unite solids": TRANSLATE['Unite solids'],
+        "Subtract solids": TRANSLATE['Subtract solids'],
+        "Push/Pull": TRANSLATE['Push/Pull'],
+        "Move": TRANSLATE['Move'],
+        "Rotate": TRANSLATE['Rotate'],
+        "Scale": TRANSLATE['Scale'],
+        "Paint": TRANSLATE['Paint'],
+        "Tag": TRANSLATE[Sketchup.version.to_i >= 20 ? 'Tag' : 'Assign layer'],
+        "Erase": TRANSLATE['Erase'],
+        "Copy": TRANSLATE['Copy'],
+        "Concatenate": TRANSLATE['Concatenate'],
+        "Select": TRANSLATE['Select'],
+        "Make group": TRANSLATE['Make group'],
+        "Remove this node": TRANSLATE['Remove this node'],
+        "Draw shape": TRANSLATE['Draw shape'],
+        "Import schema from a file": TRANSLATE['Import schema from a file'],
+        "Export schema to a file": TRANSLATE['Export schema to a file'],
+        "Freeze parametric entities": TRANSLATE['Freeze parametric entities'],
+        "Show or hide minimap": TRANSLATE['Show or hide minimap'],
+        "Remove all nodes": TRANSLATE['Remove all nodes']
+
+      }
+
+    end
+
     # Gets Nodes Editor icons.
     #
     # @return [Hash]
@@ -265,7 +361,7 @@ module ParametricModeling
 
         help: {
           path: File.join(images_dir, 'help-icon.svg'),
-          title: 'Access online help'
+          title: TRANSLATE['Access online help']
         }
 
       }
@@ -306,13 +402,13 @@ module ParametricModeling
 
         candidate_schema = JSON.parse(schema_json)
 
-        return UI.messagebox('Error: Nodes Editor schema is incompatible.')\
+        return UI.messagebox(TRANSLATE['Error: Nodes Editor schema is incompatible.'])\
           if candidate_schema['id'] != CODE_NAME + '@' + SCHEMA_VERSION
 
         Sketchup.active_model.set_attribute(CODE_NAME, 'schema', schema_json)
 
       rescue
-        UI.messagebox('Error: Nodes Editor schema is invalid.')
+        UI.messagebox(TRANSLATE['Error: Nodes Editor schema is invalid.'])
       end
 
     end
@@ -321,9 +417,9 @@ module ParametricModeling
     def self.import_schema_from_file
 
       schema_file = UI.openpanel(
-        'Open Schema File',
+        TRANSLATE['Open Schema File'],
         File.join(__dir__, 'Schemas'),
-        'Schema Files|*.schema||'
+        TRANSLATE['Schema Files'] + '|*.schema||'
       )
 
       # Exit if user canceled...
@@ -339,11 +435,11 @@ module ParametricModeling
       if !Sketchup.active_model.path.empty?
         schema_filename = File.basename(Sketchup.active_model.path).sub('.skp', '.schema')
       else
-        schema_filename = 'Untitled model.schema'
+        schema_filename = TRANSLATE['Untitled model'] + '.schema'
       end
 
       schema_file = UI.savepanel(
-        'Save Schema File',
+        TRANSLATE['Save Schema File'],
         File.join(__dir__, 'Schemas'),
         schema_filename
       )
@@ -353,7 +449,9 @@ module ParametricModeling
 
       File.write(schema_file, JSON.pretty_generate(schema))
 
-      UI.messagebox('Parametric Modeling schema successfully exported here: ' + schema_file)
+      UI.messagebox(
+        TRANSLATE['Parametric Modeling schema successfully exported here:'] + ' ' + schema_file
+      )
 
     end
 
@@ -468,7 +566,7 @@ module ParametricModeling
     private def create_html_dialog
 
       UI::HtmlDialog.new(
-        dialog_title:     'Nodes Editor' + ' - ' + NAME,
+        dialog_title:     TRANSLATE['Nodes Editor'] + ' - ' + NAME,
         preferences_key:  CODE_NAME,
         scrollable:       true,
         width:            640,

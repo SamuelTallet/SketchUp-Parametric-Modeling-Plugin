@@ -1,4 +1,4 @@
-# Parametric Modeling extension for SketchUp.
+# Parametric Modeling (PMG) extension for SketchUp.
 # Copyright: © 2021 Samuel Tallet <samuel.tallet arobase gmail.com>
 # 
 # This program is free software: you can redistribute it and/or modify
@@ -27,10 +27,14 @@ module ParametricModeling
 
   if Sketchup.version.to_i >= 17
 
-    VERSION = '0.0.4'
+    VERSION = '0.0.5-dev'
+
+    # Load translation if it's available for current locale.
+    TRANSLATE = LanguageHandler.new('pmg.translation')
+    # See: "parametric_modeling/Resources/#{Sketchup.get_locale}/pmg.translation"
 
     CODE_NAME = 'ParametricModeling'
-    NAME = 'Parametric Modeling'
+    NAME = TRANSLATE['Parametric Modeling']
   
     # Initialize session storage.
     SESSION = {
@@ -51,22 +55,22 @@ module ParametricModeling
     
     extension_features = []
 
-    extension_features.push(
+    extension_features.push(TRANSLATE[
       "Do parametric modeling in SketchUp thanks to a " +
       "Nodes Editor similar to Unreal Engine's Blueprints."
-    )
+    ])
 
-    extension_features.push(
+    extension_features.push(TRANSLATE[
       'Modify entities parameters at any time and see result instantly.'
-    )
+    ])
 
-    extension_features.push(
+    extension_features.push(TRANSLATE[
       'Extract shapes, points and vectors from active model.'
-    )
+    ])
 
-    extension_features.push(
+    extension_features.push(TRANSLATE[
       'Import schema from a file. Export schema to a file.'
-    )
+    ])
 
     extension.description = extension_features.join(' ')
   

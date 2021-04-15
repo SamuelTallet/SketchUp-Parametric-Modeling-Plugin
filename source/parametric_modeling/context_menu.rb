@@ -37,16 +37,16 @@ module ParametricModeling
 
         if !model.selection.empty?
 
-          context_menu_submenu = context_menu.add_submenu(NAME)
+          context_submenu = context_menu.add_submenu(NAME)
 
-          context_menu_submenu.add_item('Extract Shape From Group/Component') do
+          context_submenu.add_item(TRANSLATE['Extract Shape From Group/Component']) do
 
             groups = model.selection.grep(Sketchup::Group)
             components = model.selection.grep(Sketchup::ComponentInstance)
             grouponents = groups.concat(components)
 
             if grouponents.empty?
-              UI.messagebox('Error: No group or component found in selection.')
+              UI.messagebox(TRANSLATE['Error: No group or component found in selection.'])
             else
 
               grouponents.each do |grouponent|
@@ -68,7 +68,7 @@ module ParametricModeling
                   'Draw shape', { points: Group.points(temp_flatten_group) }
                 )
 
-                UI.messagebox('Error: Nodes Editor is not open.')\
+                UI.messagebox(TRANSLATE['Error: Nodes Editor is not open.'])\
                   if add_node_status == false
 
                 temp_flatten_group.erase!
@@ -79,12 +79,12 @@ module ParametricModeling
 
           end
 
-          context_menu_submenu.add_item('Extract Point From Construction Point') do
+          context_submenu.add_item(TRANSLATE['Extract Position From Construction Point']) do
 
             construction_points = model.selection.grep(Sketchup::ConstructionPoint)
 
             if construction_points.empty?
-              UI.messagebox('Error: No construction point found in selection.')
+              UI.messagebox(TRANSLATE['Error: No construction point found in selection.'])
             else
 
               construction_points.each do |construction_point|
@@ -100,7 +100,7 @@ module ParametricModeling
                   }
                 )
 
-                UI.messagebox('Error: Nodes Editor is not open.')\
+                UI.messagebox(TRANSLATE['Error: Nodes Editor is not open.'])\
                   if add_node_status == false
 
               end
@@ -109,12 +109,12 @@ module ParametricModeling
 
           end
 
-          context_menu_submenu.add_item('Extract Vector From Face Normal') do
+          context_submenu.add_item(TRANSLATE['Extract Vector From Face Normal']) do
             
             faces = model.selection.grep(Sketchup::Face)
 
             if faces.empty?
-              UI.messagebox('Error: No face found in selection.')
+              UI.messagebox(TRANSLATE['Error: No face found in selection.'])
             else
 
               faces.each do |face|
@@ -128,7 +128,7 @@ module ParametricModeling
                   }
                 )
 
-                UI.messagebox('Error: Nodes Editor is not open.')\
+                UI.messagebox(TRANSLATE['Error: Nodes Editor is not open.'])\
                   if add_node_status == false
 
               end

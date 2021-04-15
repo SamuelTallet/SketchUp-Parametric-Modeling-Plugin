@@ -47,7 +47,7 @@ module ParametricModeling
       command = UI::Command.new('one') { NodesEditor.open }
 
       command.small_icon = command.large_icon = File.join(ICONS_DIR, 'one' + icon_extension)
-      command.tooltip = 'Open Nodes Editor'
+      command.tooltip = TRANSLATE['Open Nodes Editor']
 
       toolbar.add_item(command)
 

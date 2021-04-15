@@ -102,7 +102,7 @@ module ParametricModeling
           node[:computed_data][:input][:name].is_a?(String)
           name = node[:computed_data][:input][:name]
         else
-          name = 'Box'
+          name = TRANSLATE['Box']
         end
 
         if node[:computed_data][:input].key?(:material) &&
@@ -174,7 +174,7 @@ module ParametricModeling
           node[:computed_data][:input][:name].is_a?(String)
           name = node[:computed_data][:input][:name]
         else
-          name = 'Prism'
+          name = TRANSLATE['Prism']
         end
 
         if node[:computed_data][:input].key?(:material) &&
@@ -246,7 +246,7 @@ module ParametricModeling
           node[:computed_data][:input][:name].is_a?(String)
           name = node[:computed_data][:input][:name]
         else
-          name = 'Cylinder'
+          name = TRANSLATE['Cylinder']
         end
 
         if node[:computed_data][:input].key?(:material) &&
@@ -339,7 +339,7 @@ module ParametricModeling
           node[:computed_data][:input][:name].is_a?(String)
           name = node[:computed_data][:input][:name]
         else
-          name = 'Tube'
+          name = TRANSLATE['Tube']
         end
 
         if node[:computed_data][:input].key?(:material) &&
@@ -483,7 +483,7 @@ module ParametricModeling
           node[:computed_data][:input][:name].is_a?(String)
           name = node[:computed_data][:input][:name]
         else
-          name = 'Cone'
+          name = TRANSLATE['Cone']
         end
 
         if node[:computed_data][:input].key?(:material) &&
@@ -548,7 +548,7 @@ module ParametricModeling
           node[:computed_data][:input][:name].is_a?(String)
           name = node[:computed_data][:input][:name]
         else
-          name = 'Sphere'
+          name = TRANSLATE['Sphere']
         end
 
         if node[:computed_data][:input].key?(:material) &&
@@ -601,7 +601,7 @@ module ParametricModeling
           node[:computed_data][:input][:name].is_a?(String)
           name = node[:computed_data][:input][:name]
         else
-          name = 'Shape'
+          name = TRANSLATE['Shape']
         end
         
         if node[:computed_data][:input].key?(:material) &&
@@ -1021,6 +1021,8 @@ module ParametricModeling
 
       when 'Move'
 
+        node[:computed_data][:output][:groups] = []
+
         if node[:computed_data][:input].key?(:groups) &&
           node[:computed_data][:input][:groups].is_a?(Array) &&
           !node[:computed_data][:input][:groups].empty?
@@ -1036,11 +1038,20 @@ module ParametricModeling
           initial_point_y = point.y
           initial_point_z = point.z
 
-          node[:computed_data][:output][:groups] = []
-          
+          if node[:computed_data][:input].key?(:point_is_absolute) &&
+            node[:computed_data][:input][:point_is_absolute] == true
+
+            point_is_absolute = true
+
+          else
+            point_is_absolute = false
+          end
+
           node[:computed_data][:input][:groups].each do |group|
 
-            node[:computed_data][:output][:groups].push(Group.move(group, point))
+            node[:computed_data][:output][:groups].push(
+              Group.move(group, point, point_is_absolute)
+            )
 
             point = Geom::Point3d.new(
               point.x + initial_point_x,
@@ -1050,8 +1061,6 @@ module ParametricModeling
 
           end
 
-        else
-          node[:computed_data][:output][:groups] = []
         end
 
       when 'Rotate'
@@ -1237,9 +1246,21 @@ module ParametricModeling
 
       when 'Copy'
 
+        node[:computed_data][:output][:groups] = []
+        node[:computed_data][:output][:original_groups] = []
+
         if node[:computed_data][:input].key?(:groups) &&
           node[:computed_data][:input][:groups].is_a?(Array) &&
           !node[:computed_data][:input][:groups].empty?
+
+          if node[:computed_data][:input].key?(:output_original) &&
+            node[:computed_data][:input][:output_original] == true
+
+            put_originals_with_copies = true
+
+          else
+            put_originals_with_copies = false
+          end
 
           if node[:computed_data][:input].key?(:copies) &&
             Number.valid?(node[:computed_data][:input][:copies])
@@ -1252,14 +1273,14 @@ module ParametricModeling
           else
             copies = 1
           end
-
-          node[:computed_data][:output][:groups] = []
           
           node[:computed_data][:input][:groups].each do |group|
 
-            node[:computed_data][:output][:groups].push(group)\
-              if node[:computed_data][:input].key?(:output_original) &&
-                node[:computed_data][:input][:output_original] == true
+            if put_originals_with_copies
+              node[:computed_data][:output][:groups].push(group)
+            else
+              node[:computed_data][:output][:original_groups].push(group)
+            end
 
             copies.times do
               node[:computed_data][:output][:groups].push(Group.copy(group))
@@ -1267,8 +1288,6 @@ module ParametricModeling
 
           end
 
-        else
-          node[:computed_data][:output][:groups] = []
         end
 
       when 'Concatenate'
