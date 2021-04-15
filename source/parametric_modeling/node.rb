@@ -831,8 +831,14 @@ module ParametricModeling
             }
           })
 
+          # Generates a random number.
           calculator.add_function(
             :rand, :numeric, ->(number1, number2) { rand(number1..number2) }
+          )
+
+          # Converts degrees to radians.
+          calculator.add_function(
+            :deg, :numeric, ->(angle) { angle * ( Math::PI / 180 ) }
           )
 
           calculator_result = calculator.evaluate(
@@ -1510,6 +1516,7 @@ module ParametricModeling
             }
           })
 
+          # Generates a random number.
           calculator.add_function(
             :rand, :numeric, ->(number1, number2) { rand(number1..number2) }
           )

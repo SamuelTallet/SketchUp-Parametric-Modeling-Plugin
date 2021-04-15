@@ -253,6 +253,10 @@ body {
 
 }
 
+#pmg-nodes-editor .connection .main-path.selected {
+    stroke: rgb(130, 191, 64);
+}
+
 #pmg-nodes-editor .minimap {
 
     display: none;

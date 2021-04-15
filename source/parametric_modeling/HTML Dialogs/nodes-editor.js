@@ -900,6 +900,10 @@ class DivideReteComponent extends Rete.Component {
 
 }
 
+PMG.Utils.degrees2radians = angle => {
+    return angle * ( Math.PI / 180 )
+}
+
 class CalculateReteComponent extends Rete.Component {
 
     constructor() {
@@ -1006,6 +1010,7 @@ class CalculateReteComponent extends Rete.Component {
             .replace(/round/g, 'Math.round')
             .replace(/ceil/g, 'Math.ceil')
             .replace(/floor/g, 'Math.floor')
+            .replace(/deg/g, 'PMG.Utils.degrees2radians')
             .replace(/asinh/g, 'Math.asinh')
             .replace(/asin/g, 'Math.asin')
             .replace(/sin/g, 'Math.sin')
@@ -1823,11 +1828,21 @@ PMG.NodesEditor.addEventListeners = () => {
 
     window.addEventListener('click', event => {
 
-        if ( event.target.className === 'node-icon' ) {
+        if ( event.target.classList.contains('node-icon') ) {
             return
         }
 
         PMG.NodesEditor.nodeBeingAdded = undefined
+
+        if ( event.target.classList.contains('main-path') ) {
+            
+            document.querySelectorAll('.main-path.selected').forEach(connectionPath => {
+                connectionPath.classList.remove('selected')
+            })
+
+            event.target.classList.add('selected')
+
+        }
 
     })
 
