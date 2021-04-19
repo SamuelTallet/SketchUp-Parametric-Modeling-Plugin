@@ -140,12 +140,26 @@ module ParametricModeling
         "Variable K": TRANSLATE['Variable K'],
         "Variable L": TRANSLATE['Variable L'],
         "Formula example:": TRANSLATE['Formula example:'],
+        "Front bottom left": TRANSLATE['Front bottom left'],
+        "Front bottom right": TRANSLATE['Front bottom right'],
+        "Front center": TRANSLATE['Front center'],
+        "Front top left": TRANSLATE['Front top left'],
+        "Front top right": TRANSLATE['Front top right'],
+        "Bottom center": TRANSLATE['Bottom center'],
+        "Left center": TRANSLATE['Left center'],
+        "Center": TRANSLATE['Center'],
+        "Right center": TRANSLATE['Right center'],
+        "Top center": TRANSLATE['Top center'],
+        "Back bottom left": TRANSLATE['Back bottom left'],
+        "Back bottom right": TRANSLATE['Back bottom right'],
+        "Back center": TRANSLATE['Back center'],
+        "Back top left": TRANSLATE['Back top left'],
+        "Back top right": TRANSLATE['Back top right'],
         "Distance": TRANSLATE['Distance'],
         "Direction": TRANSLATE['Direction'],
         "Increment distance": TRANSLATE['Increment distance'],
         "Position": TRANSLATE['Position'],
         "Position is absolute": TRANSLATE['Position is absolute'],
-        "Center": TRANSLATE['Center'],
         "Axis": TRANSLATE['Axis'],
         "Angle": TRANSLATE['Angle'],
         "X factor": TRANSLATE['X factor'],
@@ -170,6 +184,7 @@ module ParametricModeling
         "Multiply": TRANSLATE['Multiply'],
         "Divide": TRANSLATE['Divide'],
         "Calculate": TRANSLATE['Calculate'],
+        "Get points": TRANSLATE['Get points'],
         "Intersect solids": TRANSLATE['Intersect solids'],
         "Unite solids": TRANSLATE['Unite solids'],
         "Subtract solids": TRANSLATE['Subtract solids'],
@@ -281,6 +296,11 @@ module ParametricModeling
           "Point": {
             path: File.join(images_dir, 'point-node-icon.svg'),
             color: 'rgba(229, 157, 31, 0.5)'
+          },
+
+          "Get points": {
+            path: File.join(images_dir, 'get-points-node-icon.svg'),
+            color: 'rgba(100, 128, 147, 0.5)'
           },
 
           "Vector": {

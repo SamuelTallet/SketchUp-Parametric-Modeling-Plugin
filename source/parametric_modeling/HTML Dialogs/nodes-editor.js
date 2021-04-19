@@ -425,9 +425,7 @@ class DrawBoxReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -461,9 +459,7 @@ class DrawPrismReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -497,9 +493,7 @@ class DrawCylinderReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -537,9 +531,7 @@ class DrawTubeReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -573,9 +565,7 @@ class DrawPyramidReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -609,9 +599,7 @@ class DrawConeReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -641,9 +629,7 @@ class DrawSphereReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -665,9 +651,7 @@ class DrawShapeReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1059,15 +1043,60 @@ class PointReteComponent extends Rete.Component {
 
     }
 
-    worker(node, _inputs, outputs) {
+    worker(node, _inputs, _outputs) {}
 
-        var x = PMG.Utils.isValidNumber(node.data.x) ? node.data.x : 0
-        var y = PMG.Utils.isValidNumber(node.data.y) ? node.data.y : 0
-        var z = PMG.Utils.isValidNumber(node.data.z) ? node.data.z : 0
+}
 
-        outputs['point'] = { x, y, z }
+class GetPointsReteComponent extends Rete.Component {
+
+    constructor() {
+        super('Get points')
+    }
+
+    builder(node) {
+
+        var inputGroup = new Rete.Input('groups', t('Group'), PMG.NodesEditor.sockets.groups)
+
+        var outputFrontBottomLeft = new Rete.Output('front_bottom_left', t('Front bottom left'), PMG.NodesEditor.sockets.point)
+        var outputFrontBottomRight = new Rete.Output('front_bottom_right', t('Front bottom right'), PMG.NodesEditor.sockets.point)
+        var outputFrontCenter = new Rete.Output('front_center', t('Front center'), PMG.NodesEditor.sockets.point)
+        var outputFrontTopLeft = new Rete.Output('front_top_left', t('Front top left'), PMG.NodesEditor.sockets.point)
+        var outputFrontTopRight = new Rete.Output('front_top_right', t('Front top right'), PMG.NodesEditor.sockets.point)
+
+        var outputBottomCenter = new Rete.Output('bottom_center', t('Bottom center'), PMG.NodesEditor.sockets.point)
+        var outputLeftCenter = new Rete.Output('left_center', t('Left center'), PMG.NodesEditor.sockets.point)
+        var outputCenter = new Rete.Output('center', t('Center'), PMG.NodesEditor.sockets.point)
+        var outputRightCenter = new Rete.Output('right_center', t('Right center'), PMG.NodesEditor.sockets.point)
+        var outputTopCenter = new Rete.Output('top_center', t('Top center'), PMG.NodesEditor.sockets.point)
+        
+        var outputBackBottomLeft = new Rete.Output('back_bottom_left', t('Back bottom left'), PMG.NodesEditor.sockets.point)
+        var outputBackBottomRight = new Rete.Output('back_bottom_right', t('Back bottom right'), PMG.NodesEditor.sockets.point)
+        var outputBackCenter = new Rete.Output('back_center', t('Back center'), PMG.NodesEditor.sockets.point)
+        var outputBackTopLeft = new Rete.Output('back_top_left', t('Back top left'), PMG.NodesEditor.sockets.point)
+        var outputBackTopRight = new Rete.Output('back_top_right', t('Back top right'), PMG.NodesEditor.sockets.point)
+        
+        return node
+            .addInput(inputGroup)
+            .addOutput(outputFrontBottomLeft)
+            .addOutput(outputFrontBottomRight)
+            .addOutput(outputFrontCenter)
+            .addOutput(outputFrontTopLeft)
+            .addOutput(outputFrontTopRight)
+            .addOutput(outputBottomCenter)
+            .addOutput(outputLeftCenter)
+            .addOutput(outputCenter)
+            .addOutput(outputRightCenter)
+            .addOutput(outputTopCenter)
+            .addOutput(outputBackBottomLeft)
+            .addOutput(outputBackBottomRight)
+            .addOutput(outputBackCenter)
+            .addOutput(outputBackTopLeft)
+            .addOutput(outputBackTopRight)
 
     }
+
+    worker(_node, _inputs, _outputs) {}
+
 }
 
 class VectorReteComponent extends Rete.Component {
@@ -1097,15 +1126,8 @@ class VectorReteComponent extends Rete.Component {
 
     }
 
-    worker(node, _inputs, outputs) {
+    worker(_node, _inputs, _outputs) {}
 
-        var x = PMG.Utils.isValidNumber(node.data.x) ? node.data.x : 0
-        var y = PMG.Utils.isValidNumber(node.data.y) ? node.data.y : 0
-        var z = PMG.Utils.isValidNumber(node.data.z) ? node.data.z : 0
-
-        outputs['vector'] = { x, y, z }
-
-    }
 }
 
 class IntersectSolidsReteComponent extends Rete.Component {
@@ -1128,9 +1150,7 @@ class IntersectSolidsReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1154,9 +1174,7 @@ class UniteSolidsReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1180,9 +1198,7 @@ class SubtractSolidsReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1210,9 +1226,7 @@ class PushPullReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1237,9 +1251,7 @@ class MoveReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1268,9 +1280,7 @@ class RotateReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1303,9 +1313,7 @@ class ScaleReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1328,9 +1336,7 @@ class PaintReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1353,9 +1359,7 @@ class TagReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1374,8 +1378,7 @@ class EraseReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, _outputs) {
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1403,12 +1406,7 @@ class CopyReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-
-        outputs['groups'] = []
-        outputs['original_groups'] = []
-
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1452,9 +1450,7 @@ class ConcatenateReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1528,12 +1524,7 @@ class SelectReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-
-        outputs['groups'] = []
-        outputs['not_groups'] = []
-
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1580,9 +1571,7 @@ class MakeGroupReteComponent extends Rete.Component {
 
     }
 
-    worker(_node, _inputs, outputs) {
-        outputs['groups'] = []
-    }
+    worker(_node, _inputs, _outputs) {}
 
 }
 
@@ -1628,6 +1617,7 @@ PMG.NodesEditor.initializeComponents = () => {
         "Divide": new DivideReteComponent(),
         "Calculate": new CalculateReteComponent(),
         "Point": new PointReteComponent(),
+        "Get points": new GetPointsReteComponent(),
         "Vector": new VectorReteComponent(),
         "Intersect solids": new IntersectSolidsReteComponent(),
         "Unite solids": new UniteSolidsReteComponent(),
