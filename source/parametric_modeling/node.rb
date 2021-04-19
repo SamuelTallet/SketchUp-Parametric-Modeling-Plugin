@@ -882,6 +882,12 @@ module ParametricModeling
 
         node[:computed_data][:output][:point] = Geom::Point3d.new(x, y, z)
 
+      when 'Get points'
+
+        node[:computed_data][:output][:center] = ORIGIN
+
+        # TODO
+
       when 'Vector'
 
         if node[:computed_data][:input].key?(:x) &&
@@ -909,6 +915,8 @@ module ParametricModeling
 
       when 'Intersect solids'
 
+        node[:computed_data][:output][:groups] = []
+
         if node[:computed_data][:input].key?(:groups1) &&
           node[:computed_data][:input][:groups1].is_a?(Array) &&
           !node[:computed_data][:input][:groups1].empty? &&
@@ -928,11 +936,11 @@ module ParametricModeling
             node[:computed_data][:input][:groups1].first
           ]
           
-        else
-          node[:computed_data][:output][:groups] = []
         end
 
       when 'Unite solids'
+
+        node[:computed_data][:output][:groups] = []
 
         if node[:computed_data][:input].key?(:groups1) &&
           node[:computed_data][:input][:groups1].is_a?(Array) &&
@@ -953,11 +961,11 @@ module ParametricModeling
             node[:computed_data][:input][:groups1].first
           ]
           
-        else
-          node[:computed_data][:output][:groups] = []
         end
 
       when 'Subtract solids'
+
+        node[:computed_data][:output][:groups] = []
 
         if node[:computed_data][:input].key?(:groups1) &&
           node[:computed_data][:input][:groups1].is_a?(Array) &&
@@ -978,11 +986,11 @@ module ParametricModeling
             node[:computed_data][:input][:groups1].first
           ]
           
-        else
-          node[:computed_data][:output][:groups] = []
         end
 
       when 'Push/Pull'
+
+        node[:computed_data][:output][:groups] = []
 
         if node[:computed_data][:input].key?(:groups) &&
           node[:computed_data][:input][:groups].is_a?(Array) &&
@@ -1014,15 +1022,11 @@ module ParametricModeling
 
             if node[:computed_data][:input].key?(:increment_distance) &&
               node[:computed_data][:input][:increment_distance] == true
-
               distance = (distance + initial_distance).to_l
-              
             end
 
           end
 
-        else
-          node[:computed_data][:output][:groups] = []
         end
 
       when 'Move'
@@ -1037,7 +1041,7 @@ module ParametricModeling
             node[:computed_data][:input][:point].is_a?(Geom::Point3d)
             point = node[:computed_data][:input][:point]
           else
-            point = Geom::Point3d.new(Number.to_ul(1.0), 0.0, 0.0)
+            point = Geom::Point3d.new(Number.to_ul(1), 0, 0)
           end
   
           initial_point_x = point.x
@@ -1046,9 +1050,7 @@ module ParametricModeling
 
           if node[:computed_data][:input].key?(:point_is_absolute) &&
             node[:computed_data][:input][:point_is_absolute] == true
-
             point_is_absolute = true
-
           else
             point_is_absolute = false
           end
@@ -1071,11 +1073,14 @@ module ParametricModeling
 
       when 'Rotate'
 
+        node[:computed_data][:output][:groups] = []
+
         if node[:computed_data][:input].key?(:groups) &&
           node[:computed_data][:input][:groups].is_a?(Array) &&
           !node[:computed_data][:input][:groups].empty?
 
-          if node[:computed_data][:input].key?(:axis)
+          if node[:computed_data][:input].key?(:axis) &&
+            node[:computed_data][:input][:axis].is_a?(Geom::Vector3d)
             axis = node[:computed_data][:input][:axis]
           else
             axis = Z_AXIS
@@ -1090,11 +1095,10 @@ module ParametricModeling
   
           initial_angle = angle
 
-          node[:computed_data][:output][:groups] = []
-          
           node[:computed_data][:input][:groups].each do |group|
 
-            if node[:computed_data][:input].key?(:center)
+            if node[:computed_data][:input].key?(:center) &&
+              node[:computed_data][:input][:center].is_a?(Geom::Point3d)
               center = node[:computed_data][:input][:center]
             else
               center = group.bounds.center
@@ -1108,11 +1112,11 @@ module ParametricModeling
 
           end
 
-        else
-          node[:computed_data][:output][:groups] = []
         end
 
       when 'Scale'
+
+        node[:computed_data][:output][:groups] = []
 
         if node[:computed_data][:input].key?(:groups) &&
           node[:computed_data][:input][:groups].is_a?(Array) &&
@@ -1143,11 +1147,10 @@ module ParametricModeling
           initial_y_factor = y_factor
           initial_z_factor = z_factor
 
-          node[:computed_data][:output][:groups] = []
-          
           node[:computed_data][:input][:groups].each do |group|
 
-            if node[:computed_data][:input].key?(:point)
+            if node[:computed_data][:input].key?(:point) &&
+              node[:computed_data][:input][:point].is_a?(Geom::Point3d)
               point = node[:computed_data][:input][:point]
             else
               point = group.bounds.center
@@ -1163,11 +1166,11 @@ module ParametricModeling
 
           end
 
-        else
-          node[:computed_data][:output][:groups] = []
         end
 
       when 'Paint'
+
+        node[:computed_data][:output][:groups] = []
 
         if node[:computed_data][:input].key?(:groups) &&
           node[:computed_data][:input][:groups].is_a?(Array) &&
@@ -1192,8 +1195,6 @@ module ParametricModeling
             material = nil
           end
 
-          node[:computed_data][:output][:groups] = []
-          
           node[:computed_data][:input][:groups].each do |group|
 
             group.material = material
@@ -1201,11 +1202,11 @@ module ParametricModeling
 
           end
 
-        else
-          node[:computed_data][:output][:groups] = []
         end
 
       when 'Tag'
+
+        node[:computed_data][:output][:groups] = []
 
         if node[:computed_data][:input].key?(:groups) &&
           node[:computed_data][:input][:groups].is_a?(Array) &&
@@ -1227,8 +1228,6 @@ module ParametricModeling
             layer = nil
           end
 
-          node[:computed_data][:output][:groups] = []
-          
           node[:computed_data][:input][:groups].each do |group|
 
             group.layer = layer
@@ -1236,8 +1235,6 @@ module ParametricModeling
 
           end
 
-        else
-          node[:computed_data][:output][:groups] = []
         end
 
       when 'Erase'
@@ -1245,9 +1242,7 @@ module ParametricModeling
         if node[:computed_data][:input].key?(:groups) &&
           node[:computed_data][:input][:groups].is_a?(Array) &&
           !node[:computed_data][:input][:groups].empty?
-
           node[:computed_data][:input][:groups].each { |group| group.erase! }
-
         end
 
       when 'Copy'
@@ -1261,9 +1256,7 @@ module ParametricModeling
 
           if node[:computed_data][:input].key?(:output_original) &&
             node[:computed_data][:input][:output_original] == true
-
             put_originals_with_copies = true
-
           else
             put_originals_with_copies = false
           end
@@ -1297,6 +1290,8 @@ module ParametricModeling
         end
 
       when 'Concatenate'
+
+        node[:computed_data][:output][:groups] = []
 
         if ( node[:computed_data][:input].key?(:groups1) &&
           node[:computed_data][:input][:groups1].is_a?(Array) &&
@@ -1411,11 +1406,12 @@ module ParametricModeling
 
           node[:computed_data][:output][:groups] = groups
           
-        else
-          node[:computed_data][:output][:groups] = []
         end
 
       when 'Select'
+
+        node[:computed_data][:output][:groups] = []
+        node[:computed_data][:output][:not_groups] = []
 
         if node[:computed_data][:input].key?(:groups) &&
           node[:computed_data][:input][:groups].is_a?(Array) &&
@@ -1521,6 +1517,11 @@ module ParametricModeling
             :rand, :numeric, ->(number1, number2) { rand(number1..number2) }
           )
 
+          # Converts degrees to radians.
+          calculator.add_function(
+            :deg, :numeric, ->(angle) { angle * ( Math::PI / 180 ) }
+          )
+
           # Select queries use implicit boolean values to alleviate syntax.
           query.downcase!
           query.gsub!('first', 'first = 1')
@@ -1532,9 +1533,6 @@ module ParametricModeling
 
           count = node[:computed_data][:input][:groups].size
           rand_nth = rand(1..count)
-
-          node[:computed_data][:output][:groups] = []
-          node[:computed_data][:output][:not_groups] = []
 
           node[:computed_data][:input][:groups].each_with_index do |group, group_index|
 
@@ -1590,11 +1588,11 @@ module ParametricModeling
 
           end
   
-        else
-          node[:computed_data][:output][:groups] = []
         end
 
       when 'Make group'
+
+        node[:computed_data][:output][:groups] = []
 
         if ( node[:computed_data][:input].key?(:groups1) &&
           node[:computed_data][:input][:groups1].is_a?(Array) &&
@@ -1751,8 +1749,6 @@ module ParametricModeling
             Group.make(groups, name, material, layer)
           ]
           
-        else
-          node[:computed_data][:output][:groups] = []
         end
 
       else

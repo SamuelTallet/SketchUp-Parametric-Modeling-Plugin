@@ -154,6 +154,14 @@ body {
     width: 98px;
 }
 
+#pmg-nodes-editor .node input[type="number"]::-webkit-outer-spin-button,
+#pmg-nodes-editor .node input[type="number"]::-webkit-inner-spin-button {
+
+    -webkit-appearance: none;
+    margin: 0;
+
+}
+
 #pmg-nodes-editor .node input[type="text"] {
     width: 100%;
 }

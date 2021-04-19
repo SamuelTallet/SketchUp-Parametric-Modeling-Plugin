@@ -190,6 +190,7 @@ module ParametricModeling
         "Export schema to a file": TRANSLATE['Export schema to a file'],
         "Freeze parametric entities": TRANSLATE['Freeze parametric entities'],
         "Show or hide minimap": TRANSLATE['Show or hide minimap'],
+        "Reset increment values": TRANSLATE['Reset increment values'],
         "Remove all nodes": TRANSLATE['Remove all nodes']
 
       }

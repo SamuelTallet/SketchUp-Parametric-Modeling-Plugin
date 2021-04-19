@@ -1687,6 +1687,31 @@ PMG.NodesEditor.loadToolbarIcons = () => {
 
 }
 
+PMG.NodesEditor.adaptNumberInputStep = input => {
+
+    if ( isNaN(parseFloat(input.step)) ) {
+        input.step = 1
+    }
+
+    if ( input.value.indexOf('.') !== -1 ) {
+
+        var inputParts = input.value.split('.')
+
+        if ( inputParts.length === 2 ) {
+
+            var inputDecimalPart = inputParts[1]
+            var inputStepCandidate = 1 / parseFloat('1' + '0'.repeat(inputDecimalPart.length))
+
+            if ( inputStepCandidate < input.step ) {
+                input.step = inputStepCandidate
+            }
+
+        }
+
+    }
+
+}
+
 PMG.NodesEditor.schemaIsExportable = false
 
 PMG.NodesEditor.exportModelSchema = redraw => {
@@ -1761,7 +1786,11 @@ PMG.NodesEditor.addEventListeners = () => {
         nodeElement.querySelectorAll('input[type="number"]').forEach(nodeNumberInputElement => {
 
             nodeNumberInputElement.addEventListener('input', _event => {
+
                 PMG.NodesEditor.exportModelSchema(true)
+
+                PMG.NodesEditor.adaptNumberInputStep(nodeNumberInputElement)
+
             })
 
         })
@@ -1889,6 +1918,14 @@ PMG.NodesEditor.showOrHideMinimap = () => {
 
 }
 
+PMG.NodesEditor.resetNumberInputsStep = () => {
+
+    document.querySelectorAll('input[type="number"]').forEach(numberInputElement => {
+        numberInputElement.step = 1
+    })
+
+}
+
 PMG.NodesEditor.setGlobalContextMenu = () => {
 
     var contextMenuOptions = [
@@ -1907,6 +1944,10 @@ PMG.NodesEditor.setGlobalContextMenu = () => {
         {
             name: t('Show or hide minimap'),
             fn: () => { PMG.NodesEditor.showOrHideMinimap() }
+        },
+        {
+            name: t('Reset increment values'),
+            fn: () => { PMG.NodesEditor.resetNumberInputsStep() }
         },
         {
             name: t('Remove all nodes'),
