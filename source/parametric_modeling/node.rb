@@ -884,6 +884,8 @@ module ParametricModeling
 
       when 'Get points'
 
+        node[:computed_data][:output][:groups] = []
+
         node[:computed_data][:output][:front_bottom_left] = ORIGIN
         node[:computed_data][:output][:front_bottom_right] = ORIGIN
         node[:computed_data][:output][:front_center] = ORIGIN
@@ -907,6 +909,9 @@ module ParametricModeling
           !node[:computed_data][:input][:groups].empty?
 
           group = node[:computed_data][:input][:groups].first
+
+          node[:computed_data][:output][:groups] = [group]
+
           bounding_box = group.bounds
 
           node[:computed_data][:output][:front_bottom_left] = bounding_box.corner(0)
@@ -1121,6 +1126,34 @@ module ParametricModeling
             )
 
           end
+
+        end
+
+      when 'Align'
+
+        node[:computed_data][:output][:groups] = []
+
+        if node[:computed_data][:input].key?(:groups) &&
+          node[:computed_data][:input][:groups].is_a?(Array) &&
+          !node[:computed_data][:input][:groups].empty?
+
+          group = node[:computed_data][:input][:groups].first
+
+          if node[:computed_data][:input].key?(:origin) &&
+            node[:computed_data][:input][:origin].is_a?(Geom::Point3d)
+            origin = node[:computed_data][:input][:origin]
+          else
+            origin = group.bounds.center
+          end
+
+          if node[:computed_data][:input].key?(:target) &&
+            node[:computed_data][:input][:target].is_a?(Geom::Point3d)
+            target = node[:computed_data][:input][:target]
+          else
+            target = ORIGIN
+          end
+
+          node[:computed_data][:output][:groups].push(Group.align(group, origin, target))
 
         end
 

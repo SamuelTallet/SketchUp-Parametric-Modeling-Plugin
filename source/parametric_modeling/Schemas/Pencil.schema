@@ -1,0 +1,447 @@
+{
+  "id": "ParametricModeling@1.0.0",
+  "nodes": {
+    "13": {
+      "id": 13,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 16,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+
+          ]
+        },
+        "front_bottom_left": {
+          "connections": [
+
+          ]
+        },
+        "front_bottom_right": {
+          "connections": [
+
+          ]
+        },
+        "front_center": {
+          "connections": [
+
+          ]
+        },
+        "front_top_left": {
+          "connections": [
+
+          ]
+        },
+        "front_top_right": {
+          "connections": [
+
+          ]
+        },
+        "bottom_center": {
+          "connections": [
+
+          ]
+        },
+        "left_center": {
+          "connections": [
+
+          ]
+        },
+        "center": {
+          "connections": [
+
+          ]
+        },
+        "right_center": {
+          "connections": [
+
+          ]
+        },
+        "top_center": {
+          "connections": [
+            {
+              "node": 14,
+              "input": "target",
+              "data": {
+              }
+            }
+          ]
+        },
+        "back_bottom_left": {
+          "connections": [
+
+          ]
+        },
+        "back_bottom_right": {
+          "connections": [
+
+          ]
+        },
+        "back_center": {
+          "connections": [
+
+          ]
+        },
+        "back_top_left": {
+          "connections": [
+
+          ]
+        },
+        "back_top_right": {
+          "connections": [
+
+          ]
+        }
+      },
+      "position": [
+        1185.1275406138725,
+        116.92704775425068
+      ],
+      "name": "Get points"
+    },
+    "14": {
+      "id": 14,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 15,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "origin": {
+          "connections": [
+            {
+              "node": 15,
+              "output": "bottom_center",
+              "data": {
+              }
+            }
+          ]
+        },
+        "target": {
+          "connections": [
+            {
+              "node": 13,
+              "output": "top_center",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+
+          ]
+        }
+      },
+      "position": [
+        1803.7492727280126,
+        116.51953575989423
+      ],
+      "name": "Align"
+    },
+    "15": {
+      "id": 15,
+      "data": {
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 17,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 14,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "front_bottom_left": {
+          "connections": [
+
+          ]
+        },
+        "front_bottom_right": {
+          "connections": [
+
+          ]
+        },
+        "front_center": {
+          "connections": [
+
+          ]
+        },
+        "front_top_left": {
+          "connections": [
+
+          ]
+        },
+        "front_top_right": {
+          "connections": [
+
+          ]
+        },
+        "bottom_center": {
+          "connections": [
+            {
+              "node": 14,
+              "input": "origin",
+              "data": {
+              }
+            }
+          ]
+        },
+        "left_center": {
+          "connections": [
+
+          ]
+        },
+        "center": {
+          "connections": [
+
+          ]
+        },
+        "right_center": {
+          "connections": [
+
+          ]
+        },
+        "top_center": {
+          "connections": [
+
+          ]
+        },
+        "back_bottom_left": {
+          "connections": [
+
+          ]
+        },
+        "back_bottom_right": {
+          "connections": [
+
+          ]
+        },
+        "back_center": {
+          "connections": [
+
+          ]
+        },
+        "back_top_left": {
+          "connections": [
+
+          ]
+        },
+        "back_top_right": {
+          "connections": [
+
+          ]
+        }
+      },
+      "position": [
+        1498.964655801041,
+        -291.215043412565
+      ],
+      "name": "Get points"
+    },
+    "16": {
+      "id": 16,
+      "data": {
+        "radius": 0.05,
+        "height": 1.5,
+        "segments": 4,
+        "name": "Base"
+      },
+      "inputs": {
+        "radius": {
+          "connections": [
+            {
+              "node": 18,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "height": {
+          "connections": [
+
+          ]
+        },
+        "segments": {
+          "connections": [
+            {
+              "node": 19,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 13,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        878.0993667911055,
+        117.20348227735028
+      ],
+      "name": "Draw cylinder"
+    },
+    "17": {
+      "id": 17,
+      "data": {
+        "height": 0.2,
+        "radius": 0.05,
+        "segments": 48,
+        "name": "Tip"
+      },
+      "inputs": {
+        "radius": {
+          "connections": [
+            {
+              "node": 18,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        },
+        "height": {
+          "connections": [
+
+          ]
+        },
+        "segments": {
+          "connections": [
+            {
+              "node": 19,
+              "output": "number",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 15,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        1185.8752749351906,
+        -291.28978362790207
+      ],
+      "name": "Draw cone"
+    },
+    "18": {
+      "id": 18,
+      "data": {
+        "label": "Radius",
+        "number": 0.05
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 17,
+              "input": "radius",
+              "data": {
+              }
+            },
+            {
+              "node": 16,
+              "input": "radius",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        519.9395178647361,
+        -152.24493146528
+      ],
+      "name": "Number"
+    },
+    "19": {
+      "id": 19,
+      "data": {
+        "label": "Segments",
+        "number": 24
+      },
+      "inputs": {
+      },
+      "outputs": {
+        "number": {
+          "connections": [
+            {
+              "node": 17,
+              "input": "segments",
+              "data": {
+              }
+            },
+            {
+              "node": 16,
+              "input": "segments",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        520.9708360841926,
+        83.98169675818033
+      ],
+      "name": "Number"
+    }
+  }
+}

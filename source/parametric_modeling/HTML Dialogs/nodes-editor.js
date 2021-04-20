@@ -1057,6 +1057,8 @@ class GetPointsReteComponent extends Rete.Component {
 
         var inputGroup = new Rete.Input('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
+        var outputGroup = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
+
         var outputFrontBottomLeft = new Rete.Output('front_bottom_left', t('Front bottom left'), PMG.NodesEditor.sockets.point)
         var outputFrontBottomRight = new Rete.Output('front_bottom_right', t('Front bottom right'), PMG.NodesEditor.sockets.point)
         var outputFrontCenter = new Rete.Output('front_center', t('Front center'), PMG.NodesEditor.sockets.point)
@@ -1077,6 +1079,7 @@ class GetPointsReteComponent extends Rete.Component {
         
         return node
             .addInput(inputGroup)
+            .addOutput(outputGroup)
             .addOutput(outputFrontBottomLeft)
             .addOutput(outputFrontBottomRight)
             .addOutput(outputFrontCenter)
@@ -1248,6 +1251,32 @@ class MoveReteComponent extends Rete.Component {
             .addInput(inputPoint)
             .addControl(new CheckBoxReteControl(this.editor, 'point_is_absolute', t('Position is absolute')))
             .addOutput(outputGroups)
+
+    }
+
+    worker(_node, _inputs, _outputs) {}
+
+}
+
+class AlignReteComponent extends Rete.Component {
+
+    constructor() {
+        super('Align')
+    }
+
+    builder(node) {
+
+        var inputGroup = new Rete.Input('groups', t('Group'), PMG.NodesEditor.sockets.groups)
+        var inputOrigin = new Rete.Input('origin', t('Origin'), PMG.NodesEditor.sockets.point)
+        var inputTarget = new Rete.Input('target', t('Target'), PMG.NodesEditor.sockets.point)
+
+        var outputGroup = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
+
+        return node
+            .addInput(inputGroup)
+            .addInput(inputOrigin)
+            .addInput(inputTarget)
+            .addOutput(outputGroup)
 
     }
 
@@ -1624,6 +1653,7 @@ PMG.NodesEditor.initializeComponents = () => {
         "Subtract solids": new SubtractSolidsReteComponent(),
         "Push/Pull": new PushPullReteComponent(),
         "Move": new MoveReteComponent(),
+        "Align": new AlignReteComponent(),
         "Rotate": new RotateReteComponent(),
         "Scale": new ScaleReteComponent(),
         "Paint": new PaintReteComponent(),

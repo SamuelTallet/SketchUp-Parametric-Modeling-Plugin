@@ -80,6 +80,8 @@
 "Increment distance"="Incrémenter la distance";
 "Position"="Position";
 "Position is absolute"="La position est absolue";
+"Origin"="Origine";
+"Target"="Cible";
 "Axis"="Axe";
 "Angle"="Angle";
 "X factor"="Facteur X";
@@ -110,6 +112,7 @@
 "Subtract solids"="Soustraire des solides";
 "Push/Pull"="Pousser/Tirer";
 "Move"="Déplacer";
+"Align"="Aligner";
 "Rotate"="Faire pivoter";
 "Scale"="Mettre à l'échelle";
 "Paint"="Peindre";

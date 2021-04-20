@@ -160,6 +160,8 @@ module ParametricModeling
         "Increment distance": TRANSLATE['Increment distance'],
         "Position": TRANSLATE['Position'],
         "Position is absolute": TRANSLATE['Position is absolute'],
+        "Origin": TRANSLATE['Origin'],
+        "Target": TRANSLATE['Target'],
         "Axis": TRANSLATE['Axis'],
         "Angle": TRANSLATE['Angle'],
         "X factor": TRANSLATE['X factor'],
@@ -190,6 +192,7 @@ module ParametricModeling
         "Subtract solids": TRANSLATE['Subtract solids'],
         "Push/Pull": TRANSLATE['Push/Pull'],
         "Move": TRANSLATE['Move'],
+        "Align": TRANSLATE['Align'],
         "Rotate": TRANSLATE['Rotate'],
         "Scale": TRANSLATE['Scale'],
         "Paint": TRANSLATE['Paint'],
@@ -331,6 +334,11 @@ module ParametricModeling
           "Move": {
             path: File.join(images_dir, 'move-node-icon.svg'),
             color: 'rgba(255, 128, 191, 0.5)'
+          },
+
+          "Align": {
+            path: File.join(images_dir, 'align-node-icon.svg'),
+            color: 'rgba(37, 185, 154, 0.5)'
           },
 
           "Rotate": {

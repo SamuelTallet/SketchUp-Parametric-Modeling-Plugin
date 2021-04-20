@@ -27,7 +27,7 @@ module ParametricModeling
 
   if Sketchup.version.to_i >= 17
 
-    VERSION = '0.0.5-dev'
+    VERSION = '0.0.5'
 
     # Load translation if it's available for current locale.
     TRANSLATE = LanguageHandler.new('pmg.translation')

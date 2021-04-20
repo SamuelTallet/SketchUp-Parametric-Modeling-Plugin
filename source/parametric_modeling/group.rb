@@ -168,6 +168,31 @@ module ParametricModeling
 
     end
 
+    # Aligns a group.
+    #
+    # @param [Sketchup::Group] group
+    # @param [Geom::Point3d] origin
+    # @param [Geom::Point3d] target
+    # @raise [ArgumentError]
+    #
+    # @return [Sketchup::Group]
+    def self.align(group, origin, target)
+
+      raise ArgumentError, 'Group must be a Sketchup::Group.'\
+        unless group.is_a?(Sketchup::Group)
+
+      raise ArgumentError, 'Origin must be a Geom::Point3d.'\
+        unless origin.is_a?(Geom::Point3d)
+
+      raise ArgumentError, 'Target must be a Geom::Point3d.'\
+        unless target.is_a?(Geom::Point3d)
+
+      group.transform!(Geom::Transformation.translation(origin.vector_to(target)))
+
+      group
+
+    end
+
     # Rotates a group.
     #
     # @param [Sketchup::Group] group
