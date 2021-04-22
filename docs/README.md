@@ -32,7 +32,7 @@ To connect two nodes: click on an output socket of first node then click on an i
 
 To move a node: drag and drop node at desired position.
 
-To move several nodes at once: hold `CTRL` key then click on each node. Nodes are selected. Hold again `CTRL` key then drag and drop nodes at desired position.
+To move several nodes at once: hold <kbd>CTRL</kbd> key then click on each node. Nodes are selected. Hold again <kbd>CTRL</kbd> key then drag and drop nodes at desired position.
 
 If you input a wrong data in a node field: node border becomes red.
 
