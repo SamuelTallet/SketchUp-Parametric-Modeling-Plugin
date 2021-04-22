@@ -28,9 +28,11 @@ Nodes Editor is the place where you can design a parametric schema. A parametric
 
 To add a node: click on an icon in toolbar inside Nodes Editor window. Node is stuck to mouse. Move mouse at desired position for node. Click again to unstick node from mouse.
 
+To connect two nodes: click on an output socket of first node then click on an input socket of second node. Only sockets of same type are connectable. Hint: hover a socket if you are not sure about its type.
+
 To move a node: drag and drop node at desired position.
 
-To connect two nodes: click on an output socket of first node then click on an input socket of second node. Only sockets of same type are connectable. Hint: hover a socket if you are not sure about its type.
+To move several nodes at once: hold `CTRL` key then click on nodes. Nodes are selected. Hold again `CTRL` key then drag and drop nodes at desired position.
 
 If you input a wrong data in a node field: node border becomes red.
 
