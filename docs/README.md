@@ -24,7 +24,7 @@ Now, you should have in SketchUp a "Parametric Modeling" menu in "Extensions" me
 
 #### Basics
 
-Nodes Editor is the place where you can design a parametric schema. A parametric schema is made of nodes and connections between nodes. A node is made of input sockets, fields and output sockets.
+Nodes Editor is the place where you can design a parametric schema. A parametric schema is made of nodes and connections between nodes. A node is made of input sockets, input fields and output sockets.
 
 To add a node: click on an icon in toolbar inside Nodes Editor window.
 
@@ -47,7 +47,7 @@ This node type allows you to evaluate a math formula. Following elements are acc
 Constants: pi<br>
 Variables: a, b, c, d, e, f, g, h, i, j, k, l<br>
 Operators: +, -, \*, /, %, <, <=, =, !=, >=, ><br>
-Functions: min, max, round, ceil, floor, asinh, asin, sin, acosh, cos, atanh, atan, tan, exp, log2, log10, sqrt, cbrt, rand, if, case
+Functions: min, max, round, ceil, floor, deg, asinh, asin, sin, acosh, cos, atanh, atan, tan, exp, log2, log10, sqrt, cbrt, rand, if, case
 
 Here are some correct math formulas:
 
@@ -62,11 +62,13 @@ Here are some correct math formulas:
 This node type is used to select parametric entities matching a query. You can write a select query with following elements.
 
 Numeric variables: a, b, c, d, e, f, g, h, i, j, k, l, nth, width, height, depth<br>
-Numeric operators: <, <=, =, !=, >=, ><br>
+Numeric operators: +, -, \*, /, %, <, <=, =, !=, >=, ><br>
+Numeric functions: min, max, round, ceil, floor, deg, asinh, asin, sin, acosh, cos, atanh, atan, tan, exp, log2, log10, sqrt, cbrt, rand, if, case<br>
 Boolean variables: first, even, odd, last, solid, random<br>
 Boolean operators: and, or<br>
 Boolean functions: not<br>
 Alphanumeric variables: name, material, tag, layer<br>
+Alphanumeric operators: =, !=<br>
 Alphanumeric functions: concat
 
 Here are some valid select queries:
@@ -74,8 +76,9 @@ Here are some valid select queries:
 `random`<br>
 `not(first)`<br>
 `width > a`<br>
-`name = concat('Box ', a)`<br>
-`first or nth = 4 or last`
+`first or last`<br>
+`nth = if(a = b, c, d)`<br>
+`name = concat('Box ', a)`
 
 Credits
 -------
