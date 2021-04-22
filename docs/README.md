@@ -18,7 +18,7 @@ Documentation
 2. Download latest Parametric Modeling plugin from the [SketchUcation PluginStore](https://sketchucation.com/plugin/2387-parametric_modeling).
 3. Install plugin following this [guide](https://www.youtube.com/watch?v=tyM5f81eRno).
 
-Now, you should have in SketchUp a "Parametric Modeling" menu in "Extensions" menu and a "Parametric Modeling" toolbar.
+Now, you should have in SketchUp a "Parametric Modeling" entry in "Extensions" menu and a "Parametric Modeling" toolbar.
 
 ### Nodes Editor
 
@@ -26,13 +26,13 @@ Now, you should have in SketchUp a "Parametric Modeling" menu in "Extensions" me
 
 Nodes Editor is the place where you can design a parametric schema. A parametric schema is made of nodes and connections between nodes. A node is made of input sockets, input fields and output sockets.
 
-To add a node: click on an icon in toolbar inside Nodes Editor window.
+To add a node: click on an icon in toolbar inside Nodes Editor window. Node is stuck to mouse. Move mouse at desired position for node. Click again to unstick node from mouse.
 
 To move a node: drag and drop node at desired position.
 
 To connect two nodes: click on an output socket of first node then click on an input socket of second node. Only sockets of same type are connectable. Hint: hover a socket if you are not sure about its type.
 
-If you enter a wrong data in a node field: node border becomes red.
+If you input a wrong data in a node field: node border becomes red.
 
 To remove a node: right click on node then click on "Remove this node".
 
