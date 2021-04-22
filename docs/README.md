@@ -65,15 +65,15 @@ to convert beforehand the degrees to radians. Following math formula will give y
 
 This node type is used to select parametric entities matching a query. You can write a select query with following elements.
 
-Numeric variables: a, b, c, d, e, f, g, h, i, j, k, l, nth, width, height, depth<br>
-Numeric operators: +, -, \*, /, %, <, <=, =, !=, >=, ><br>
-Numeric functions: min, max, round, ceil, floor, deg, asinh, asin, sin, acosh, cos, atanh, atan, tan, exp, log2, log10, sqrt, cbrt, rand, if, case<br>
-Boolean variables: first, even, odd, last, solid, random<br>
-Boolean operators: and, or<br>
-Boolean functions: not<br>
-Alphanumeric variables: name, material, tag, layer<br>
-Alphanumeric operators: =, !=<br>
-Alphanumeric functions: concat
+Numeric variables: `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `nth`, `width`, `height`, `depth`<br>
+Numeric operators: `+`, `-`, `*`, `/`, `%`, `<`, `<=`, `=`, `!=`, `>=`, `>`<br>
+Numeric functions: `min`, `max`, `round`, `ceil`, `floor`, `deg`, `asinh`, `asin`, `sin`, `acosh`, `cos`, `atanh`, `atan`, `tan`, `exp`, `log2`, `log10`, `sqrt`, `cbrt`, `rand`, `if`, `case`<br>
+Boolean variables: `first`, `even`, `odd`, `last`, `solid`, `random`<br>
+Boolean operators: `and`, `or`<br>
+Boolean functions: `not`<br>
+Alphanumeric variables: `name`, `material`, `tag`, `layer`<br>
+Alphanumeric operators: `=`, `!=`<br>
+Alphanumeric functions: `concat`
 
 Here are some valid select queries:
 
