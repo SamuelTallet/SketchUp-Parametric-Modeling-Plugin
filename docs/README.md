@@ -36,7 +36,7 @@ If you input a wrong data in a node field: node border becomes red.
 
 To remove a node: right click on node then click on "Remove this node".
 
-Right click in void to discover yourself other possible actions such as "Import schema from file", "Freeze parametric entities", "Export schema to file", etc.
+Right click in void to discover yourself other possible actions such as "Import schema from a file", "Freeze parametric entities", "Export schema to a file", etc.
 
 #### Nodes
 
@@ -44,10 +44,10 @@ Right click in void to discover yourself other possible actions such as "Import 
 
 This node type allows you to evaluate a math formula. Following elements are accepted in a math formula.
 
-Constants: pi<br>
-Variables: a, b, c, d, e, f, g, h, i, j, k, l<br>
-Operators: +, -, \*, /, %, <, <=, =, !=, >=, ><br>
-Functions: min, max, round, ceil, floor, deg, asinh, asin, sin, acosh, cos, atanh, atan, tan, exp, log2, log10, sqrt, cbrt, rand, if, case
+Constants: `pi`<br>
+Variables: `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`<br>
+Operators: `+`, `-`, `*`, `/`, `%`, `<`, `<=`, `=`, `!=`, `>=`, `>`<br>
+Functions: `min`, `max`, `round`, `ceil`, `floor`, `deg`, `asinh`, `asin`, `sin`, `acosh`, `cos`, `atanh`, `atan`, `tan`, `exp`, `log2`, `log10`, `sqrt`, `cbrt`, `rand`, `if`, `case`
 
 Here are some correct math formulas:
 
@@ -57,7 +57,7 @@ Here are some correct math formulas:
 `a * max(b, c, d, e)`<br>
 `case a when (b) then c when (d) then e else f end`
 
-Functions expecting an angle (such as `sin` or `cos`) work with radians. If you want to work with degrees instead, you can use `deg` function 
+Functions expecting an angle, such as `sin` or `cos`, work with radians. If you want to work with degrees instead, you can use `deg` function 
 to convert beforehand the degrees to radians. Following math formula will give you the cosinus of an angle of 36 degrees:
  `cos(deg(36)) `
 
