@@ -57,6 +57,10 @@ Here are some correct math formulas:
 `a * max(b, c, d, e)`<br>
 `case a when (b) then c when (d) then e else f end`
 
+Functions expecting an angle (such as `sin` or `cos`) work with radians. If you want to work with degrees instead, you can use `deg` function 
+to convert beforehand the degrees to radians. Following math formula will give you the cosinus of an angle of 36 degrees:
+ `cos(deg(36)) `
+
 ##### Select
 
 This node type is used to select parametric entities matching a query. You can write a select query with following elements.
