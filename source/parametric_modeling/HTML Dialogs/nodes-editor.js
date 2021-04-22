@@ -1709,6 +1709,13 @@ PMG.NodesEditor.loadToolbarIcons = () => {
 
 PMG.NodesEditor.adaptNumberInputStep = input => {
 
+    if ( input.value === '' ) {
+
+        input.step = 1
+        return
+
+    }
+
     if ( isNaN(parseFloat(input.step)) ) {
         input.step = 1
     }
@@ -1938,14 +1945,6 @@ PMG.NodesEditor.showOrHideMinimap = () => {
 
 }
 
-PMG.NodesEditor.resetNumberInputsStep = () => {
-
-    document.querySelectorAll('input[type="number"]').forEach(numberInputElement => {
-        numberInputElement.step = 1
-    })
-
-}
-
 PMG.NodesEditor.setGlobalContextMenu = () => {
 
     var contextMenuOptions = [
@@ -1964,10 +1963,6 @@ PMG.NodesEditor.setGlobalContextMenu = () => {
         {
             name: t('Show or hide minimap'),
             fn: () => { PMG.NodesEditor.showOrHideMinimap() }
-        },
-        {
-            name: t('Reset increment values'),
-            fn: () => { PMG.NodesEditor.resetNumberInputsStep() }
         },
         {
             name: t('Remove all nodes'),

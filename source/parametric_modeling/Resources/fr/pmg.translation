@@ -129,7 +129,6 @@
 "Export schema to a file"="Exporter le schéma vers un fichier";
 "Freeze parametric entities"="Geler les entités paramétriques";
 "Show or hide minimap"="Afficher ou masquer la mini-carte";
-"Reset increment values"="Réinitialiser les valeurs d'incrément";
 "Remove all nodes"="Supprimer tous les nœuds";
 "Access online help"="Accéder à l'aide en ligne";
 "Error: Nodes Editor schema is incompatible."="Erreur : Le schéma de l'éditeur de nœuds est incompatible.";
