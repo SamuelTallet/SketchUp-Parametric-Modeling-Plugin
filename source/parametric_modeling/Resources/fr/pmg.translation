@@ -2,7 +2,7 @@
 // Parametric Modeling extension for SketchUp.
 //
 // Translation language: Français
-// Translation date: 2021-04-22
+// Translation date: 2021-04-29
 // Translation author: Samuel Tallet
 //////////////////////////////////////////////
 
@@ -12,11 +12,11 @@
 "Extract shapes, points and vectors from active model."="Extrayez des formes, des points et des vecteurs à partir du modèle actif.";
 "Import schema from a file. Export schema to a file."="Importez le schéma à partir d'un fichier. Exportez le schéma vers un fichier.";
 
-"Extract Shape From Group/Component"="Extraire la forme du groupe/composant";
+"Extract Shape From Group Or Component"="Extraire la forme du groupe ou du composant";
 "Error: No group or component found in selection."="Erreur : Aucun groupe ou composant trouvé dans la sélection.";
 "Error: Nodes Editor is not open."="Erreur : L'éditeur de nœuds n'est pas ouvert.";
-"Extract Shape From Edges"="Extraire la forme des arêtes";
-"Error: No edge found in selection."="Erreur : Aucune arête trouvée dans la sélection.";
+"Extract Shape From Curve Or Edges"="Extraire la forme de la courbe ou des arêtes";
+"Error: No curve or edge found in selection."="Erreur : Aucune courbe ou arête trouvée dans la sélection.";
 "Extract Position From Construction Point"="Extraire la position du point de construction";
 "Error: No construction point found in selection."="Erreur : Aucun point de construction trouvé dans la sélection.";
 "Extract Vector From Face Normal"="Extraire le vecteur des normales de la face";
@@ -64,6 +64,8 @@
 "Variable K"="Variable K";
 "Variable L"="Variable L";
 "Formula example:"="Exemple de formule :";
+"Parent point"="Point parent";
+"Increment inherited XYZ"="Incrémenter les XYZ hérités";
 "Front bottom left"="Devant, en bas, à gauche";
 "Front bottom right"="Devant, en bas, à droite";
 "Front center"="Devant, au centre";

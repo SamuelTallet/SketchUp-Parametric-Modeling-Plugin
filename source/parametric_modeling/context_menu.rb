@@ -40,7 +40,7 @@ module ParametricModeling
 
           context_submenu = context_menu.add_submenu(NAME)
 
-          context_submenu.add_item(TRANSLATE['Extract Shape From Group/Component']) do
+          context_submenu.add_item(TRANSLATE['Extract Shape From Group Or Component']) do
 
             groups = model.selection.grep(Sketchup::Group)
             components = model.selection.grep(Sketchup::ComponentInstance)
@@ -80,12 +80,12 @@ module ParametricModeling
 
           end
 
-          context_submenu.add_item(TRANSLATE['Extract Shape From Edges']) do
+          context_submenu.add_item(TRANSLATE['Extract Shape From Curve Or Edges']) do
 
             edges = model.selection.grep(Sketchup::Edge)
 
             if edges.empty?
-              UI.messagebox(TRANSLATE['Error: No edge found in selection.'])
+              UI.messagebox(TRANSLATE['Error: No curve or edge found in selection.'])
             else
 
               add_node_status = NodesEditor.add_node(

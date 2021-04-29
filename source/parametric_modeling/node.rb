@@ -860,28 +860,76 @@ module ParametricModeling
 
       when 'Point'
 
-        if node[:computed_data][:input].key?(:x) &&
-          Number.valid?(node[:computed_data][:input][:x])
-          x = Number.to_ul(Number.parse(node[:computed_data][:input][:x]))
+        if node[:computed_data][:input].key?(:parent_point) &&
+          node[:computed_data][:input][:parent_point].is_a?(Geom::Point3d)
+
+          x = Number.from_ul(node[:computed_data][:input][:parent_point].x)
+          y = Number.from_ul(node[:computed_data][:input][:parent_point].y)
+          z = Number.from_ul(node[:computed_data][:input][:parent_point].z)
+
+          if node[:computed_data][:input].key?(:x) &&
+            Number.valid?(node[:computed_data][:input][:x])
+
+            if node[:computed_data][:input].key?(:increment_inherited_xyz) &&
+              node[:computed_data][:input][:increment_inherited_xyz] == true
+              x = x + Number.parse(node[:computed_data][:input][:x])
+            else
+              # Overwrite parent's X value with child's X value.
+              x = Number.parse(node[:computed_data][:input][:x])
+            end
+
+          end
+
+          if node[:computed_data][:input].key?(:y) &&
+            Number.valid?(node[:computed_data][:input][:y])
+
+            if node[:computed_data][:input].key?(:increment_inherited_xyz) &&
+              node[:computed_data][:input][:increment_inherited_xyz] == true
+              y = y + Number.parse(node[:computed_data][:input][:y])
+            else
+              # Overwrite parent's Y value with child's Y value.
+              y = Number.parse(node[:computed_data][:input][:y])
+            end
+
+          end
+
+          if node[:computed_data][:input].key?(:z) &&
+            Number.valid?(node[:computed_data][:input][:z])
+
+            if node[:computed_data][:input].key?(:increment_inherited_xyz) &&
+              node[:computed_data][:input][:increment_inherited_xyz] == true
+              z = z + Number.parse(node[:computed_data][:input][:z])
+            else
+              # Overwrite parent's Z value with child's Z value.
+              z = Number.parse(node[:computed_data][:input][:z])
+            end
+
+          end
+
         else
-          x = 0
+
+          x = y = z = 0
+
+          if node[:computed_data][:input].key?(:x) &&
+            Number.valid?(node[:computed_data][:input][:x])
+            x = Number.parse(node[:computed_data][:input][:x])
+          end
+  
+          if node[:computed_data][:input].key?(:y) &&
+            Number.valid?(node[:computed_data][:input][:y])
+            y = Number.parse(node[:computed_data][:input][:y])
+          end
+  
+          if node[:computed_data][:input].key?(:z) &&
+            Number.valid?(node[:computed_data][:input][:z])
+            z = Number.parse(node[:computed_data][:input][:z])
+          end
+
         end
 
-        if node[:computed_data][:input].key?(:y) &&
-          Number.valid?(node[:computed_data][:input][:y])
-          y = Number.to_ul(Number.parse(node[:computed_data][:input][:y]))
-        else
-          y = 0
-        end
-
-        if node[:computed_data][:input].key?(:z) &&
-          Number.valid?(node[:computed_data][:input][:z])
-          z = Number.to_ul(Number.parse(node[:computed_data][:input][:z]))
-        else
-          z = 0
-        end
-
-        node[:computed_data][:output][:point] = Geom::Point3d.new(x, y, z)
+        node[:computed_data][:output][:point] = Geom::Point3d.new(
+          Number.to_ul(x), Number.to_ul(y), Number.to_ul(z)
+        )
 
       when 'Get points'
 

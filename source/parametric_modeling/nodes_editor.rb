@@ -140,6 +140,8 @@ module ParametricModeling
         "Variable K": TRANSLATE['Variable K'],
         "Variable L": TRANSLATE['Variable L'],
         "Formula example:": TRANSLATE['Formula example:'],
+        "Parent point": TRANSLATE['Parent point'],
+        "Increment inherited XYZ": TRANSLATE['Increment inherited XYZ'],
         "Front bottom left": TRANSLATE['Front bottom left'],
         "Front bottom right": TRANSLATE['Front bottom right'],
         "Front center": TRANSLATE['Front center'],

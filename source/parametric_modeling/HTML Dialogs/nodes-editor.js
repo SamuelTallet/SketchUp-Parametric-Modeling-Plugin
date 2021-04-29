@@ -1024,6 +1024,8 @@ class PointReteComponent extends Rete.Component {
 
     builder(node) {
 
+        var inputParentPoint = new Rete.Input('parent_point', t('Parent point'), PMG.NodesEditor.sockets.point)
+
         var inputPointX = new Rete.Input('x', 'X', PMG.NodesEditor.sockets.number)
         inputPointX.addControl(new NumberReteControl(this.editor, 'x', 'X'))
 
@@ -1036,14 +1038,16 @@ class PointReteComponent extends Rete.Component {
         var outputPoint = new Rete.Output('point', t('Point'), PMG.NodesEditor.sockets.point)
 
         return node
+            .addInput(inputParentPoint)
             .addInput(inputPointX)
             .addInput(inputPointY)
             .addInput(inputPointZ)
+            .addControl(new CheckBoxReteControl(this.editor, 'increment_inherited_xyz', t('Increment inherited XYZ')))
             .addOutput(outputPoint)
 
     }
 
-    worker(node, _inputs, _outputs) {}
+    worker(_node, _inputs, _outputs) {}
 
 }
 
