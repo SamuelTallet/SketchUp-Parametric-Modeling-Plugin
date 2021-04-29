@@ -42,6 +42,19 @@ Right click in void to discover yourself other possible actions such as "Import 
 
 #### Nodes
 
+##### Number
+
+In a node of this type and many others, a numeric input field can contain an integer or a decimal number. Decimal separator is the dot.
+
+To increment or decrement a number: hold keyboard <kbd>Up</kbd> or <kbd>Down</kbd> arrows. Increment and decrement steps automatically adapt to scale of number. Examples:
+
+- If you input `1.25` next increment will be `1.26`.
+- If you input `1.264` next decrement will be `1.263`.
+
+To reset increment and decrement steps: empty the numeric field.
+
+When number defines a dimension, measure unit of active model is used. 
+
 ##### Calculate
 
 This node type allows you to evaluate a math formula. Following elements are accepted in a math formula.
