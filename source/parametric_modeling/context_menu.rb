@@ -19,8 +19,9 @@
 
 require 'sketchup'
 require 'parametric_modeling/group'
-require 'parametric_modeling/number'
 require 'parametric_modeling/nodes_editor'
+require 'parametric_modeling/edges'
+require 'parametric_modeling/number'
 
 # Parametric Modeling plugin namespace.
 module ParametricModeling
@@ -74,6 +75,25 @@ module ParametricModeling
                 temp_flatten_group.erase!
 
               end
+
+            end
+
+          end
+
+          context_submenu.add_item(TRANSLATE['Extract Shape From Edges']) do
+
+            edges = model.selection.grep(Sketchup::Edge)
+
+            if edges.empty?
+              UI.messagebox(TRANSLATE['Error: No edge found in selection.'])
+            else
+
+              add_node_status = NodesEditor.add_node(
+                'Draw shape', { points: Edges.points(edges) }
+              )
+
+              UI.messagebox(TRANSLATE['Error: Nodes Editor is not open.'])\
+                if add_node_status == false
 
             end
 

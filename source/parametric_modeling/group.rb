@@ -50,7 +50,7 @@ module ParametricModeling
 
     end
 
-    # Gets points of a group.
+    # Gets faces points of a group.
     #
     # @param [Sketchup::Group] group
     # @raise [ArgumentError]
@@ -61,7 +61,7 @@ module ParametricModeling
       raise ArgumentError, 'Group must be a Sketchup::Group.'\
         unless group.is_a?(Sketchup::Group)
       
-      group_points = []
+      group_faces_points = []
       group_transformation = group.transformation
       group_faces = group.entities.grep(Sketchup::Face)
 
@@ -84,11 +84,11 @@ module ParametricModeling
 
         end
 
-        group_points.push(group_face_points)
+        group_faces_points.push(group_face_points)
 
       end
 
-      group_points
+      group_faces_points
 
     end
 

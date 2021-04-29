@@ -591,7 +591,8 @@ module ParametricModeling
         model = Sketchup.active_model
 
         if node[:computed_data][:input].key?(:points) &&
-          node[:computed_data][:input][:points].is_a?(Array)
+          node[:computed_data][:input][:points].is_a?(Array) &&
+          !node[:computed_data][:input][:points].empty?
           points = node[:computed_data][:input][:points]
         else
           raise NodeError.new('Points not found.', node[:id])

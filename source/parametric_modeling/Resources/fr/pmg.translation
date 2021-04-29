@@ -15,6 +15,8 @@
 "Extract Shape From Group/Component"="Extraire la forme du groupe/composant";
 "Error: No group or component found in selection."="Erreur : Aucun groupe ou composant trouvé dans la sélection.";
 "Error: Nodes Editor is not open."="Erreur : L'éditeur de nœuds n'est pas ouvert.";
+"Extract Shape From Edges"="Extraire la forme des arêtes";
+"Error: No edge found in selection."="Erreur : Aucune arête trouvée dans la sélection.";
 "Extract Position From Construction Point"="Extraire la position du point de construction";
 "Error: No construction point found in selection."="Erreur : Aucun point de construction trouvé dans la sélection.";
 "Extract Vector From Face Normal"="Extraire le vecteur des normales de la face";

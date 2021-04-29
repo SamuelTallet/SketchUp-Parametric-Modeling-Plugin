@@ -446,7 +446,7 @@ module ParametricModeling
 
     # Draws an unknown shape.
     #
-    # @param [Array] points
+    # @param [Array] points Points grouped by face or edge.
     # @param [String] name
     # @param [Sketchup::Material, nil] material
     # @param [Sketchup::Layer, nil] layer
@@ -470,24 +470,28 @@ module ParametricModeling
       group = Sketchup.active_model.entities.add_group
       group.set_attribute(CODE_NAME, 'isParametric', true)
 
-      points.each do |face_points|
+      points.each do |entity_points|
 
-        face_points_in_inches = []
+        entity_points_in_inches = []
 
-        face_points.each do |face_point|
+        entity_points.each do |entity_point|
 
-          face_points_in_inches.push([
+          entity_points_in_inches.push([
 
-            Number.to_ul(face_point[0].to_f),
-            Number.to_ul(face_point[1].to_f),
-            Number.to_ul(face_point[2].to_f)
+            Number.to_ul(entity_point[0].to_f), # X
+            Number.to_ul(entity_point[1].to_f), # Y
+            Number.to_ul(entity_point[2].to_f)  # Z
 
           ])
 
         end
 
-        # FIXME: Sometimes, faces need to be reversed.
-        group.entities.add_face(face_points_in_inches)
+        if entity_points.size == 2
+          group.entities.add_edges(entity_points_in_inches)
+        elsif entity_points.size >= 3
+          # FIXME: Sometimes, faces need to be reversed.
+          group.entities.add_face(entity_points_in_inches)
+        end
 
       end
 
