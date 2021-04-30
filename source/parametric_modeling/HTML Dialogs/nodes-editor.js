@@ -1673,7 +1673,7 @@ class CommentReteComponent extends Rete.Component {
     builder(node) {
 
         return node
-            .addControl(new TextAreaReteControl(this.editor, 'comment'))
+            .addControl(new TextAreaReteControl(this.editor, 'comment', '...'))
 
     }
 
