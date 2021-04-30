@@ -1887,7 +1887,10 @@ module ParametricModeling
         end
 
       else
-        raise NodeError.new('Unsupported node type: ' + node[:name], node[:id])
+
+        raise NodeError.new('Unsupported node type: ' + node[:name], node[:id])\
+          if node[:name] != 'Comment'
+
       end
 
       node[:computed?] = true

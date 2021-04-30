@@ -112,7 +112,47 @@ PMG.NodesEditor.initializeControls = () => {
 
         props: ['emitter', 'ikey', 'getData', 'putData', 'placeholder', 'readonly'],
 
-        template: '<input type="text" :placeholder="placeholder" :readonly="readonly" :value="value" @input="change($event)" @pointerdown.stop="" @pointermove.stop="" />',
+        template: '<input type="text" spellcheck="false" :placeholder="placeholder" :readonly="readonly" :value="value" @input="change($event)" @pointerdown.stop="" @pointermove.stop="" />',
+        
+        data() {
+
+            return {
+                value: ''
+            }
+
+        },
+
+        methods: {
+
+            change(event) {
+
+                this.value = event.target.value
+
+                this.update()
+
+            },
+
+            update() {
+
+                this.putData(this.ikey, this.value)
+                
+                this.emitter.trigger('process')
+
+            }
+
+        },
+
+        mounted() {
+            this.value = this.getData(this.ikey)
+        }
+        
+    }
+
+    PMG.NodesEditor.controls['textarea'] = {
+
+        props: ['emitter', 'ikey', 'getData', 'putData', 'placeholder'],
+
+        template: '<textarea spellcheck="false" :placeholder="placeholder" @input="change($event)" @pointerdown.stop="" @pointermove.stop="">{{ value }}</textarea>',
         
         data() {
 
@@ -347,6 +387,22 @@ class TextReteControl extends Rete.Control {
 
 }
 
+class TextAreaReteControl extends Rete.Control {
+
+    constructor(emitter, ikey, placeholder) {
+
+        super(ikey)
+        this.component = PMG.NodesEditor.controls.textarea
+        this.props = { emitter, ikey, placeholder }
+
+    }
+  
+    setValue(value) {
+        this.vueContext.value = value
+    }
+
+}
+
 class CheckBoxReteControl extends Rete.Control {
 
     constructor(emitter, ikey, label) {
@@ -365,11 +421,11 @@ class CheckBoxReteControl extends Rete.Control {
 
 class MaterialReteControl extends Rete.Control {
 
-    constructor(emitter, key, _readonly) {
+    constructor(emitter, ikey) {
 
-        super(key)
+        super(ikey)
         this.component = PMG.NodesEditor.controls.material
-        this.props = { emitter, ikey: key }
+        this.props = { emitter, ikey }
 
     }
   
@@ -381,11 +437,11 @@ class MaterialReteControl extends Rete.Control {
 
 class LayerReteControl extends Rete.Control {
 
-    constructor(emitter, key, _readonly) {
+    constructor(emitter, ikey ) {
 
-        super(key)
+        super(ikey)
         this.component = PMG.NodesEditor.controls.layer
-        this.props = { emitter, ikey: key }
+        this.props = { emitter, ikey }
 
     }
   
@@ -1608,6 +1664,23 @@ class MakeGroupReteComponent extends Rete.Component {
 
 }
 
+class CommentReteComponent extends Rete.Component {
+
+    constructor() {
+        super('Comment')
+    }
+
+    builder(node) {
+
+        return node
+            .addControl(new TextAreaReteControl(this.editor, 'comment'))
+
+    }
+
+    worker(_node, _inputs, _outputs) {}
+
+}
+
 PMG.codeName = 'ParametricModeling'
 
 PMG.NodesEditor.initializeEditor = () => {
@@ -1666,7 +1739,8 @@ PMG.NodesEditor.initializeComponents = () => {
         "Copy": new CopyReteComponent(),
         "Concatenate": new ConcatenateReteComponent(),
         "Select": new SelectReteComponent(),
-        "Make group": new MakeGroupReteComponent()
+        "Make group": new MakeGroupReteComponent(),
+        "Comment": new CommentReteComponent()
 
     }
 
@@ -1755,6 +1829,8 @@ PMG.NodesEditor.exportModelSchema = redraw => {
 
 PMG.NodesEditor.addNode = (nodeName, nodeData) => {
 
+    nodeData = ( nodeData === undefined ) ? {} : nodeData
+
     var component = PMG.NodesEditor.components[nodeName]
     var mouse = PMG.NodesEditor.editor.view.area.mouse
 
@@ -1834,6 +1910,20 @@ PMG.NodesEditor.addEventListeners = () => {
 
         })
 
+        nodeElement.querySelectorAll('textarea').forEach(nodeTextAreaElement => {
+
+            nodeTextAreaElement.addEventListener('input', _event => {
+
+                if ( node.name === 'Comment' ) {
+                    PMG.NodesEditor.exportModelSchema(false)
+                } else {
+                    PMG.NodesEditor.exportModelSchema(true)
+                }
+                
+            })
+
+        })
+
         nodeElement.querySelectorAll('input[type="checkbox"]').forEach(nodeCheckBoxInputElement => {
 
             nodeCheckBoxInputElement.addEventListener('change', _event => {
@@ -1909,7 +1999,7 @@ PMG.NodesEditor.addEventListeners = () => {
     document.querySelectorAll('.toolbar .node-icon').forEach(toolbarNodeIcon => {
 
         toolbarNodeIcon.addEventListener('click', event => {
-            PMG.NodesEditor.addNode(event.currentTarget.dataset.nodeName, {})
+            PMG.NodesEditor.addNode(event.currentTarget.dataset.nodeName)
         })
 
     })
@@ -1967,6 +2057,10 @@ PMG.NodesEditor.setGlobalContextMenu = () => {
         {
             name: t('Show or hide minimap'),
             fn: () => { PMG.NodesEditor.showOrHideMinimap() }
+        },
+        {
+            name: t('Add a comment node'),
+            fn: () => { PMG.NodesEditor.addNode('Comment') }
         },
         {
             name: t('Remove all nodes'),

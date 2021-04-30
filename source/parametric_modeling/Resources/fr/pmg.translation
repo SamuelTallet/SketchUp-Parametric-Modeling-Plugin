@@ -129,12 +129,14 @@
 "Concatenate"="Concaténer";
 "Select"="Sélectionner";
 "Make group"="Créer un groupe";
+"Comment"="Commentaire";
 "Remove this node"="Supprimer ce nœud";
 "Draw shape"="Dessiner une forme";
 "Import schema from a file"="Importer le schéma à partir d'un fichier";
 "Export schema to a file"="Exporter le schéma vers un fichier";
 "Freeze parametric entities"="Geler les entités paramétriques";
 "Show or hide minimap"="Afficher ou masquer la mini-carte";
+"Add a comment node"="Ajouter un nœud de commentaire";
 "Remove all nodes"="Supprimer tous les nœuds";
 "Access online help"="Accéder à l'aide en ligne";
 "Error: Nodes Editor schema is incompatible."="Erreur : Le schéma de l'éditeur de nœuds est incompatible.";

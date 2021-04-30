@@ -204,12 +204,14 @@ module ParametricModeling
         "Concatenate": TRANSLATE['Concatenate'],
         "Select": TRANSLATE['Select'],
         "Make group": TRANSLATE['Make group'],
+        "Comment": TRANSLATE['Comment'],
         "Remove this node": TRANSLATE['Remove this node'],
         "Draw shape": TRANSLATE['Draw shape'],
         "Import schema from a file": TRANSLATE['Import schema from a file'],
         "Export schema to a file": TRANSLATE['Export schema to a file'],
         "Freeze parametric entities": TRANSLATE['Freeze parametric entities'],
         "Show or hide minimap": TRANSLATE['Show or hide minimap'],
+        "Add a comment node": TRANSLATE['Add a comment node'],
         "Remove all nodes": TRANSLATE['Remove all nodes']
 
       }
@@ -385,6 +387,11 @@ module ParametricModeling
           "Make group": {
             path: File.join(images_dir, 'make-group-node-icon.svg'),
             color: 'rgba(0, 0, 0, 0.8)'
+          },
+
+          "Comment": {
+            path: File.join(images_dir, 'comment-node-icon.svg'),
+            color: 'rgba(253, 123, 104, 0.5)'
           }
 
         },
