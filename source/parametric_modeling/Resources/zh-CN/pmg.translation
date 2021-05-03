@@ -2,11 +2,12 @@
 // Parametric Modeling extension for SketchUp.
 //
 // Translation language: 简体中文
-// Translation date: 2021-04-23
+// Translation date: 2021-05-01
 // Translation author: www.SketchUpBar.com
 //////////////////////////////////////////////
 
 "Access online help"="访问在线帮助";
+"Add a comment node"="添加注释节点";
 "Add"="加";
 "Align"="对齐";
 "Angle"="角度";
@@ -21,6 +22,7 @@
 "Box"="立方体";
 "Calculate"="计算";
 "Center"="中心点";
+"Comment"="注释";
 "Concatenate"="连接";
 "Cone"="圆锥体";
 "Copied groups"="复制群组";
@@ -33,7 +35,7 @@
 "Divide"="除";
 "Dividend"="被除数";
 "Divisor"="除数";
-"Do parametric modeling in SketchUp thanks to a Nodes Editor similar to Unreal Engine's Blueprints."="在SketchUp中进行参数化建模，这要归功于类似于虚幻引擎蓝图的节点编辑器。";
+"Do parametric modeling in SketchUp thanks to a Nodes Editor similar to Unreal Engine's Blueprints."="在SketchUp中进行参数化建模，这要归功于类似虚幻引擎蓝图的节点编辑器。";
 "Draw box"="绘制立方体";
 "Draw cone"="绘制圆锥体";
 "Draw cylinder"="绘制圆柱体";
@@ -45,15 +47,17 @@
 "Draw tube"="绘制圆管";
 "Erase Parametric Entities"="删除参数实体";
 "Erase"="删除";
-"Error: No construction point found in selection."="温馨提醒：当前选择集中没有构造点。";
-"Error: No face found in selection."="温馨提醒：当前选择集中没有面。";
-"Error: No group or component found in selection."="温馨提醒：没有选中群组或组件。";
-"Error: Nodes Editor is not open."="温馨提醒：节点编辑器尚未打开。";
+"Error: No construction point found in selection."="错误：当前选择集中没有构造点。";
+"Error: No curve or edge found in selection."="错误：当前选择集中没有曲线或边线。";
+"Error: No face found in selection."="错误：当前选择集中没有面。";
+"Error: No group or component found in selection."="错误：没有选中群组或组件。";
+"Error: Nodes Editor is not open."="错误：节点编辑器尚未打开。";
 "Error: Nodes Editor schema is incompatible."="错误：节点编辑器方案不兼容。";
 "Error: Nodes Editor schema is invalid."="错误：节点编辑器方案无效。";
 "Export schema to a file"="导出方案文件";
 "Extract Position From Construction Point"="根据构造点提取点";
-"Extract Shape From Group/Component"="根据群组/组件提取形状";
+"Extract Shape From Curve Or Edges"="根据曲线或边线提取形状";
+"Extract Shape From Group Or Component"="根据群组或组件提取形状";
 "Extract shapes, points and vectors from active model."="从当前模型中提取形状、点和向量。";
 "Extract Vector From Face Normal"="根据面法线提取向量";
 "Formula example:"="公式示例：";
@@ -70,6 +74,7 @@
 "Import schema from a file"="导入方案文件";
 "Import schema from a file. Export schema to a file."="导入方案文件。导出方案文件。";
 "Increment distance"="距离递增";
+"Increment inherited XYZ"="继承XYZ的增量";
 "Intersect solids"="交集";
 "Label"="名称";
 "Layer..."="图层...";
@@ -87,16 +92,17 @@
 "Open Nodes Editor"="打开节点编辑器";
 "Open Schema File"="打开方案文件";
 "Origin"="原点";
-"Original groups"="原始组";
+"Original groups"="原始群组";
 "Paint"="材质";
-"Parametric Modeling"="参数建模";
 "Parametric Modeling schema successfully exported here: "="参数化建模方案已成功导出到：";
+"Parametric Modeling"="参数建模";
+"Parent point"="父点";
 "Point"="点";
 "Position is absolute"="相对构造点";
 "Position"="构造点";
 "Prism"="棱柱体";
 "Push/Pull"="推拉";
-"Put originals with copies"="将原件与副本放在一起";
+"Put originals with copies"="保留原始群组";
 "Query example:"="查询示例：";
 "Quotient"="商";
 "Radius"="半径";
@@ -117,7 +123,7 @@
 "Subtract solids"="差集";
 "Subtract"="减";
 "Tag"="标记";
-"Tag..."="图层/标记...";
+"Tag..."="标记...";
 "Target"="目标";
 "Thickness"="厚度";
 "Top center"="顶部中心";
