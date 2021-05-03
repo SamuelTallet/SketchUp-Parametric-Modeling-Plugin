@@ -1120,40 +1120,60 @@ class GetPointsReteComponent extends Rete.Component {
         var outputGroup = new Rete.Output('groups', t('Group'), PMG.NodesEditor.sockets.groups)
 
         var outputFrontBottomLeft = new Rete.Output('front_bottom_left', t('Front bottom left'), PMG.NodesEditor.sockets.point)
+        var outputFrontBottomCenter = new Rete.Output('front_bottom_center', t('Front bottom center'), PMG.NodesEditor.sockets.point)
         var outputFrontBottomRight = new Rete.Output('front_bottom_right', t('Front bottom right'), PMG.NodesEditor.sockets.point)
         var outputFrontCenter = new Rete.Output('front_center', t('Front center'), PMG.NodesEditor.sockets.point)
         var outputFrontTopLeft = new Rete.Output('front_top_left', t('Front top left'), PMG.NodesEditor.sockets.point)
+        var outputFrontTopCenter = new Rete.Output('front_top_center', t('Front top center'), PMG.NodesEditor.sockets.point)
         var outputFrontTopRight = new Rete.Output('front_top_right', t('Front top right'), PMG.NodesEditor.sockets.point)
 
         var outputBottomCenter = new Rete.Output('bottom_center', t('Bottom center'), PMG.NodesEditor.sockets.point)
+        
+        var outputLeftBottomCenter = new Rete.Output('left_bottom_center', t('Left bottom center'), PMG.NodesEditor.sockets.point)
         var outputLeftCenter = new Rete.Output('left_center', t('Left center'), PMG.NodesEditor.sockets.point)
+        var outputLeftTopCenter = new Rete.Output('left_top_center', t('Left top center'), PMG.NodesEditor.sockets.point)
+
         var outputCenter = new Rete.Output('center', t('Center'), PMG.NodesEditor.sockets.point)
+        
+        var outputRightBottomCenter = new Rete.Output('right_bottom_center', t('Right bottom center'), PMG.NodesEditor.sockets.point)
         var outputRightCenter = new Rete.Output('right_center', t('Right center'), PMG.NodesEditor.sockets.point)
+        var outputRightTopCenter = new Rete.Output('right_top_center', t('Right top center'), PMG.NodesEditor.sockets.point)
+
         var outputTopCenter = new Rete.Output('top_center', t('Top center'), PMG.NodesEditor.sockets.point)
         
         var outputBackBottomLeft = new Rete.Output('back_bottom_left', t('Back bottom left'), PMG.NodesEditor.sockets.point)
+        var outputBackBottomCenter = new Rete.Output('back_bottom_center', t('Back bottom center'), PMG.NodesEditor.sockets.point)
         var outputBackBottomRight = new Rete.Output('back_bottom_right', t('Back bottom right'), PMG.NodesEditor.sockets.point)
         var outputBackCenter = new Rete.Output('back_center', t('Back center'), PMG.NodesEditor.sockets.point)
         var outputBackTopLeft = new Rete.Output('back_top_left', t('Back top left'), PMG.NodesEditor.sockets.point)
+        var outputBackTopCenter = new Rete.Output('back_top_center', t('Back top center'), PMG.NodesEditor.sockets.point)
         var outputBackTopRight = new Rete.Output('back_top_right', t('Back top right'), PMG.NodesEditor.sockets.point)
         
         return node
             .addInput(inputGroup)
             .addOutput(outputGroup)
             .addOutput(outputFrontBottomLeft)
+            .addOutput(outputFrontBottomCenter)
             .addOutput(outputFrontBottomRight)
             .addOutput(outputFrontCenter)
             .addOutput(outputFrontTopLeft)
+            .addOutput(outputFrontTopCenter)
             .addOutput(outputFrontTopRight)
             .addOutput(outputBottomCenter)
+            .addOutput(outputLeftBottomCenter)
             .addOutput(outputLeftCenter)
+            .addOutput(outputLeftTopCenter)
             .addOutput(outputCenter)
+            .addOutput(outputRightBottomCenter)
             .addOutput(outputRightCenter)
+            .addOutput(outputRightTopCenter)
             .addOutput(outputTopCenter)
             .addOutput(outputBackBottomLeft)
+            .addOutput(outputBackBottomCenter)
             .addOutput(outputBackBottomRight)
             .addOutput(outputBackCenter)
             .addOutput(outputBackTopLeft)
+            .addOutput(outputBackTopCenter)
             .addOutput(outputBackTopRight)
 
     }

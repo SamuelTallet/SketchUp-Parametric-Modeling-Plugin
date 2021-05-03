@@ -936,21 +936,33 @@ module ParametricModeling
         node[:computed_data][:output][:groups] = []
 
         node[:computed_data][:output][:front_bottom_left] = ORIGIN
+        node[:computed_data][:output][:front_bottom_center] = ORIGIN
         node[:computed_data][:output][:front_bottom_right] = ORIGIN
         node[:computed_data][:output][:front_center] = ORIGIN
         node[:computed_data][:output][:front_top_left] = ORIGIN
+        node[:computed_data][:output][:front_top_center] = ORIGIN
         node[:computed_data][:output][:front_top_right] = ORIGIN
 
         node[:computed_data][:output][:bottom_center] = ORIGIN
+
+        node[:computed_data][:output][:left_bottom_center] = ORIGIN
         node[:computed_data][:output][:left_center] = ORIGIN
+        node[:computed_data][:output][:left_top_center] = ORIGIN
+
         node[:computed_data][:output][:center] = ORIGIN
+
+        node[:computed_data][:output][:right_bottom_center] = ORIGIN
         node[:computed_data][:output][:right_center] = ORIGIN
+        node[:computed_data][:output][:right_top_center] = ORIGIN
+        
         node[:computed_data][:output][:top_center] = ORIGIN
 
         node[:computed_data][:output][:back_bottom_left] = ORIGIN
+        node[:computed_data][:output][:back_bottom_center] = ORIGIN
         node[:computed_data][:output][:back_bottom_right] = ORIGIN
         node[:computed_data][:output][:back_center] = ORIGIN
         node[:computed_data][:output][:back_top_left] = ORIGIN
+        node[:computed_data][:output][:back_top_center] = ORIGIN
         node[:computed_data][:output][:back_top_right] = ORIGIN
 
         if node[:computed_data][:input].key?(:groups) &&
@@ -964,33 +976,61 @@ module ParametricModeling
           bounding_box = group.bounds
 
           node[:computed_data][:output][:front_bottom_left] = bounding_box.corner(0)
+          node[:computed_data][:output][:front_bottom_center] = Geom::Point3d.linear_combination(
+            0.5, bounding_box.corner(0), 0.5, bounding_box.corner(1)
+          )
           node[:computed_data][:output][:front_bottom_right] = bounding_box.corner(1)
           node[:computed_data][:output][:front_center] = Geom::Point3d.linear_combination(
             0.5, bounding_box.corner(1), 0.5, bounding_box.corner(4)
           )
           node[:computed_data][:output][:front_top_left] = bounding_box.corner(4)
+          node[:computed_data][:output][:front_top_center] = Geom::Point3d.linear_combination(
+            0.5, bounding_box.corner(4), 0.5, bounding_box.corner(5)
+          )
           node[:computed_data][:output][:front_top_right] = bounding_box.corner(5)
 
           node[:computed_data][:output][:bottom_center] = Geom::Point3d.linear_combination(
             0.5, bounding_box.corner(0), 0.5, bounding_box.corner(3)
           )
+
+          node[:computed_data][:output][:left_bottom_center] = Geom::Point3d.linear_combination(
+            0.5, bounding_box.corner(0), 0.5, bounding_box.corner(2)
+          )
           node[:computed_data][:output][:left_center] = Geom::Point3d.linear_combination(
             0.5, bounding_box.corner(2), 0.5, bounding_box.corner(4)
           )
+          node[:computed_data][:output][:left_top_center] = Geom::Point3d.linear_combination(
+            0.5, bounding_box.corner(4), 0.5, bounding_box.corner(6)
+          )
+
           node[:computed_data][:output][:center] = bounding_box.center
+
+          node[:computed_data][:output][:right_bottom_center] = Geom::Point3d.linear_combination(
+            0.5, bounding_box.corner(1), 0.5, bounding_box.corner(3)
+          )
           node[:computed_data][:output][:right_center] = Geom::Point3d.linear_combination(
             0.5, bounding_box.corner(3), 0.5, bounding_box.corner(5)
           )
+          node[:computed_data][:output][:right_top_center] = Geom::Point3d.linear_combination(
+            0.5, bounding_box.corner(5), 0.5, bounding_box.corner(7)
+          )
+
           node[:computed_data][:output][:top_center] = Geom::Point3d.linear_combination(
             0.5, bounding_box.corner(4), 0.5, bounding_box.corner(7)
           )
 
           node[:computed_data][:output][:back_bottom_left] = bounding_box.corner(2)
+          node[:computed_data][:output][:back_bottom_center] = Geom::Point3d.linear_combination(
+            0.5, bounding_box.corner(2), 0.5, bounding_box.corner(3)
+          )
           node[:computed_data][:output][:back_bottom_right] = bounding_box.corner(3)
           node[:computed_data][:output][:back_center] = Geom::Point3d.linear_combination(
             0.5, bounding_box.corner(3), 0.5, bounding_box.corner(6)
           )
           node[:computed_data][:output][:back_top_left] = bounding_box.corner(6)
+          node[:computed_data][:output][:back_top_center] = Geom::Point3d.linear_combination(
+            0.5, bounding_box.corner(6), 0.5, bounding_box.corner(7)
+          )
           node[:computed_data][:output][:back_top_right] = bounding_box.corner(7)
 
         end
