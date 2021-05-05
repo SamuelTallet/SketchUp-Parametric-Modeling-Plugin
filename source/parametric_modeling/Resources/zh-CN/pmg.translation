@@ -2,7 +2,7 @@
 // Parametric Modeling extension for SketchUp.
 //
 // Translation language: 简体中文
-// Translation date: 2021-05-01
+// Translation date: 2021-05-04
 // Translation author: www.SketchUpBar.com
 //////////////////////////////////////////////
 
@@ -147,3 +147,11 @@
 "X factor"="X 系数";
 "Y factor"="Y 系数";
 "Z factor"="Z 系数";
+"Front bottom center"="前下中点";
+"Front top center"="前上中点";
+"Left bottom center"="左下中点";
+"Left top center"="左上中点";
+"Right bottom center"="右下中点";
+"Right top center"="右上中点";
+"Back bottom center"="后下中点";
+"Back top center"="后上中点";
