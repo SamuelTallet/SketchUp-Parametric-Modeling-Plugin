@@ -2,7 +2,7 @@
 // Parametric Modeling extension for SketchUp.
 //
 // Translation language: Français
-// Translation date: 2021-05-03
+// Translation date: 2021-05-31
 // Translation author: Samuel Tallet
 //////////////////////////////////////////////
 
@@ -26,6 +26,7 @@
 "Prism"="Prisme";
 "Cylinder"="Cylindre";
 "Tube"="Tube";
+"Pyramid"="Pyramide";
 "Cone"="Cône";
 "Sphere"="Sphère";
 "Shape"="Forme";
