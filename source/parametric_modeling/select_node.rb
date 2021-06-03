@@ -205,7 +205,7 @@ module ParametricModeling
           calculator_result = calculator.evaluate(
             query, {
               a: a, b: b, c: c, d: d, e: e, f: f, g: g, h: h, i: i, j: j, k: k, l: l,
-              nth: nth, width: width, height: height, depth: depth,
+              count: count, nth: nth, width: width, height: height, depth: depth,
               first: first, even: even, odd: odd, last: last, solid: solid, random: random,
               name: name, material: material, tag: layer, layer: layer
             }

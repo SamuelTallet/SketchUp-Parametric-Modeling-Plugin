@@ -1,0 +1,164 @@
+{
+  "id": "ParametricModeling@1.0.0",
+  "nodes": {
+    "2": {
+      "id": 2,
+      "data": {
+        "copies": 5,
+        "output_original": true
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 7,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "copies": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 3,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "original_groups": {
+          "connections": [
+
+          ]
+        }
+      },
+      "position": [
+        264.3940027226112,
+        75.43972936352303
+      ],
+      "name": "Copy"
+    },
+    "3": {
+      "id": 3,
+      "data": {
+        "x_position": "if(odd, nth, nth + a)",
+        "y_position": "if(odd, c, b)",
+        "z_position": "",
+        "a": -1,
+        "b": 0,
+        "point_is_absolute": false,
+        "c": 10
+      },
+      "inputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 2,
+              "output": "groups",
+              "data": {
+              }
+            }
+          ]
+        },
+        "point": {
+          "connections": [
+
+          ]
+        },
+        "a": {
+          "connections": [
+
+          ]
+        },
+        "b": {
+          "connections": [
+
+          ]
+        },
+        "c": {
+          "connections": [
+
+          ]
+        },
+        "d": {
+          "connections": [
+
+          ]
+        },
+        "e": {
+          "connections": [
+
+          ]
+        },
+        "f": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+
+          ]
+        }
+      },
+      "position": [
+        529.8895484806388,
+        76.2502071325138
+      ],
+      "name": "Move"
+    },
+    "7": {
+      "id": 7,
+      "data": {
+        "width": 2,
+        "depth": 1,
+        "height": 0.5
+      },
+      "inputs": {
+        "width": {
+          "connections": [
+
+          ]
+        },
+        "depth": {
+          "connections": [
+
+          ]
+        },
+        "height": {
+          "connections": [
+
+          ]
+        }
+      },
+      "outputs": {
+        "groups": {
+          "connections": [
+            {
+              "node": 2,
+              "input": "groups",
+              "data": {
+              }
+            }
+          ]
+        }
+      },
+      "position": [
+        2.6637703162369424,
+        74.34047086520447
+      ],
+      "name": "Draw box"
+    }
+  }
+}

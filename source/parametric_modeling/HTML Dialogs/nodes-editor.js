@@ -110,9 +110,9 @@ PMG.NodesEditor.initializeControls = () => {
 
     PMG.NodesEditor.controls['text'] = {
 
-        props: ['emitter', 'ikey', 'getData', 'putData', 'placeholder', 'readonly'],
+        props: ['emitter', 'ikey', 'getData', 'putData', 'placeholder', 'title', 'readonly'],
 
-        template: '<input type="text" spellcheck="false" :placeholder="placeholder" :readonly="readonly" :value="value" @input="change($event)" @pointerdown.stop="" @pointermove.stop="" />',
+        template: '<input type="text" spellcheck="false" :placeholder="placeholder" :title="title" :readonly="readonly" :value="value" @input="change($event)" @pointerdown.stop="" @pointermove.stop="" />',
         
         data() {
 
@@ -373,11 +373,11 @@ class NumberReteControl extends Rete.Control {
 
 class TextReteControl extends Rete.Control {
 
-    constructor(emitter, ikey, placeholder, readonly) {
+    constructor(emitter, ikey, placeholder, title, readonly) {
 
         super(ikey)
         this.component = PMG.NodesEditor.controls.text
-        this.props = { emitter, ikey, placeholder, readonly }
+        this.props = { emitter, ikey, placeholder, title, readonly }
 
     }
   
@@ -1322,13 +1322,40 @@ class MoveReteComponent extends Rete.Component {
     builder(node) {
 
         var inputGroups = new Rete.Input('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
-        var inputPoint = new Rete.Input('point', t('Position'), PMG.NodesEditor.sockets.point)
+        var inputPosition = new Rete.Input('point', t('Position'), PMG.NodesEditor.sockets.point)
+
+        var inputA = new Rete.Input('a', t('Variable A'), PMG.NodesEditor.sockets.number)
+        inputA.addControl(new NumberReteControl(this.editor, 'a', t('Variable A')))
+
+        var inputB = new Rete.Input('b', t('Variable B'), PMG.NodesEditor.sockets.number)
+        inputB.addControl(new NumberReteControl(this.editor, 'b', t('Variable B')))
+
+        var inputC = new Rete.Input('c', t('Variable C'), PMG.NodesEditor.sockets.number)
+        inputC.addControl(new NumberReteControl(this.editor, 'c', t('Variable C')))
+
+        var inputD = new Rete.Input('d', t('Variable D'), PMG.NodesEditor.sockets.number)
+        inputD.addControl(new NumberReteControl(this.editor, 'd', t('Variable D')))
+
+        var inputE = new Rete.Input('e', t('Variable E'), PMG.NodesEditor.sockets.number)
+        inputE.addControl(new NumberReteControl(this.editor, 'e', t('Variable E')))
+        
+        var inputF = new Rete.Input('f', t('Variable F'), PMG.NodesEditor.sockets.number)
+        inputF.addControl(new NumberReteControl(this.editor, 'f', t('Variable F')))
 
         var outputGroups = new Rete.Output('groups', t('Groups'), PMG.NodesEditor.sockets.groups)
 
         return node
             .addInput(inputGroups)
-            .addInput(inputPoint)
+            .addInput(inputPosition)
+            .addInput(inputA)
+            .addInput(inputB)
+            .addInput(inputC)
+            .addInput(inputD)
+            .addInput(inputE)
+            .addInput(inputF)
+            .addControl(new TextReteControl(this.editor, 'x_position', t('X position. Example:') + ' nth * a', t('X position')))
+            .addControl(new TextReteControl(this.editor, 'y_position', t('Y position. Example:') + ' nth * b', t('Y position')))
+            .addControl(new TextReteControl(this.editor, 'z_position', t('Z position. Example:') + ' nth * c', t('Z position')))
             .addControl(new CheckBoxReteControl(this.editor, 'point_is_absolute', t('Position is absolute')))
             .addOutput(outputGroups)
 

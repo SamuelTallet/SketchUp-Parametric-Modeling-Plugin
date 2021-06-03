@@ -169,6 +169,12 @@ module ParametricModeling
         "Direction": TRANSLATE['Direction'],
         "Increment distance": TRANSLATE['Increment distance'],
         "Position": TRANSLATE['Position'],
+        "X position. Example:": TRANSLATE['X position. Example:'],
+        "X position": TRANSLATE['X position'],
+        "Y position. Example:": TRANSLATE['Y position. Example:'],
+        "Y position": TRANSLATE['Y position'],
+        "Z position. Example:": TRANSLATE['Z position. Example:'],
+        "Z position": TRANSLATE['Z position'],
         "Position is absolute": TRANSLATE['Position is absolute'],
         "Origin": TRANSLATE['Origin'],
         "Target": TRANSLATE['Target'],
@@ -656,7 +662,7 @@ module ParametricModeling
 
       @html_dialog.add_action_callback('accessOnlineHelp') do |_ctx|
         UI.openURL(
-          'https://github.com/SamuelTS/SketchUp-Parametric-Modeling-Plugin#nodes-editor'
+          'https://github.com/SamuelTS/SketchUp-Parametric-Modeling-Plugin/wiki/Nodes-Editor'
         )
       end
 

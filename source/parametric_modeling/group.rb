@@ -137,23 +137,23 @@ module ParametricModeling
     # Moves a group.
     #
     # @param [Sketchup::Group] group
-    # @param [Geom::Point3d] point
-    # @param [Boolean] point_is_absolute
+    # @param [Geom::Point3d] position
+    # @param [Boolean] position_is_absolute
     # @raise [ArgumentError]
     #
     # @return [Sketchup::Group]
-    def self.move(group, point, point_is_absolute)
+    def self.move(group, position, position_is_absolute)
 
       raise ArgumentError, 'Group must be a Sketchup::Group.'\
         unless group.is_a?(Sketchup::Group)
 
-      raise ArgumentError, 'Point must be a Geom::Point3d.'\
-        unless point.is_a?(Geom::Point3d)
+      raise ArgumentError, 'Position must be a Geom::Point3d.'\
+        unless position.is_a?(Geom::Point3d)
 
-      raise ArgumentError, 'Point is absolute must be a Boolean.'\
-        unless point_is_absolute == true || point_is_absolute == false
+      raise ArgumentError, 'Position is absolute must be a Boolean.'\
+        unless position_is_absolute == true || position_is_absolute == false
 
-      if point_is_absolute
+      if position_is_absolute
 
         # Move the group to model origin before...
         vector_to_model_origin = group.transformation.origin.vector_to(ORIGIN)
@@ -162,7 +162,7 @@ module ParametricModeling
       end
       
       # ...we do a move relative to group origin.
-      group.transform!(Geom::Transformation.translation(point))
+      group.transform!(Geom::Transformation.translation(position))
 
       group
 

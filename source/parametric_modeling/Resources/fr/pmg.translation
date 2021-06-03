@@ -2,7 +2,7 @@
 // Parametric Modeling extension for SketchUp.
 //
 // Translation language: Français
-// Translation date: 2021-05-31
+// Translation date: 2021-06-03
 // Translation author: Samuel Tallet
 //////////////////////////////////////////////
 
@@ -94,6 +94,12 @@
 "Direction"="Direction";
 "Increment distance"="Incrémenter la distance";
 "Position"="Position";
+"X position. Example:"="Position X. Exemple :";
+"X position"="Position X";
+"Y position. Example:"="Position Y. Exemple :";
+"Y position"="Position Y";
+"Z position. Example:"="Position Z. Exemple :";
+"Z position"="Position Z";
 "Position is absolute"="La position est absolue";
 "Origin"="Origine";
 "Target"="Cible";

@@ -2,7 +2,7 @@
 // Parametric Modeling extension for SketchUp.
 //
 // Translation language: 简体中文
-// Translation date: 2021-05-04
+// Translation date: 2021-06-03
 // Translation author: www.SketchUpBar.com
 //////////////////////////////////////////////
 
@@ -155,3 +155,10 @@
 "Right top center"="右上中点";
 "Back bottom center"="后下中点";
 "Back top center"="后上中点";
+"Pyramid"="棱锥体";
+"X position. Example:"="X 位置。示例：";
+"X position"="X 位置";
+"Y position. Example:"="Y 位置。示例：";
+"Y position"="Y 位置";
+"Z position. Example:"="Z 位置。示例：";
+"Z position"="Z 位置";
