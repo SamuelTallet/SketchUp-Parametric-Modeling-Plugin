@@ -662,7 +662,7 @@ module ParametricModeling
 
       @html_dialog.add_action_callback('accessOnlineHelp') do |_ctx|
         UI.openURL(
-          'https://github.com/SamuelTS/SketchUp-Parametric-Modeling-Plugin/wiki/Nodes-Editor'
+          'https://github.com/SamuelTallet/SketchUp-Parametric-Modeling-Plugin/wiki/Nodes-Editor'
         )
       end
 

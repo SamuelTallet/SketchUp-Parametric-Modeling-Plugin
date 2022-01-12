@@ -5,9 +5,9 @@ Do parametric modeling in SketchUp thanks to a Nodes Editor similar to Unreal En
 Demos
 -----
 
-![Parametric Modeling SketchUp Plugin Staircase Demo](https://github.com/SamuelTS/SketchUp-Parametric-Modeling-Plugin/raw/main/docs/parametric-modeling-sketchup-plugin-staircase-demo.gif)
+![Parametric Modeling SketchUp Plugin Staircase Demo](https://github.com/SamuelTallet/SketchUp-Parametric-Modeling-Plugin/raw/main/docs/parametric-modeling-sketchup-plugin-staircase-demo.gif)
 
-![Parametric Modeling SketchUp Plugin Shelf Demo](https://github.com/SamuelTS/SketchUp-Parametric-Modeling-Plugin/raw/main/docs/parametric-modeling-sketchup-plugin-shelf-demo.gif)
+![Parametric Modeling SketchUp Plugin Shelf Demo](https://github.com/SamuelTallet/SketchUp-Parametric-Modeling-Plugin/raw/main/docs/parametric-modeling-sketchup-plugin-shelf-demo.gif)
 
 Documentation
 -------------
@@ -22,7 +22,7 @@ Now, you should have in SketchUp a "Parametric Modeling" entry in "Extensions" m
 
 ### Nodes Editor
 
-Check out this [Wiki page](https://github.com/SamuelTS/SketchUp-Parametric-Modeling-Plugin/wiki/Nodes-Editor) to learn more about Nodes Editor.
+Check out this [Wiki page](https://github.com/SamuelTallet/SketchUp-Parametric-Modeling-Plugin/wiki/Nodes-Editor) to learn more about Nodes Editor.
 
 Credits
 -------
