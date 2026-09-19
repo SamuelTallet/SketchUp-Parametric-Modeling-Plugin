@@ -27,9 +27,9 @@ Check out this [Wiki page](https://github.com/SamuelTallet/SketchUp-Parametric-M
 Credits
 -------
 
-Parametric Modeling plugin is powered by [Rete.js](https://github.com/retejs/rete) framework. This plugin uses [Dentaku](https://github.com/rubysolo/dentaku) library to evaluate formulas. Shapes module of this plugin is based on [SketchUp Shapes plugin code](https://github.com/SketchUp/sketchup-shapes). SolidOperations module of this plugin was coded by [Julia Christina Eneroth](https://github.com/Eneroth3). Toolbar icons of this plugin were made by [Freepik](https://www.freepik.com), [Smashicons](https://www.flaticon.com/authors/smashicons), [xnimrodx](https://www.flaticon.com/authors/xnimrodx) and [Pixel perfect](https://www.flaticon.com/authors/pixel-perfect) from [Flaticon](https://www.flaticon.com/).
+Parametric Modeling plugin is powered by [Rete.js](https://github.com/retejs/rete) framework and [React](https://react.dev/) library. This plugin uses [Dentaku](https://github.com/rubysolo/dentaku) library to evaluate formulas. Shapes module of this plugin is based on [SketchUp Shapes plugin code](https://github.com/SketchUp/sketchup-shapes), and SolidOperations module code comes from a [Julia Christina Eneroth](https://github.com/Eneroth3) plugin. Toolbar icons of this plugin were made by [Freepik](https://www.freepik.com), [Smashicons](https://www.flaticon.com/authors/smashicons), [xnimrodx](https://www.flaticon.com/authors/xnimrodx) and [Pixel perfect](https://www.flaticon.com/authors/pixel-perfect) from [Flaticon](https://www.flaticon.com/).
 
 Copyright
 ---------
 
-© 2021 Samuel Tallet
+© 2026 Samuel Tallet

@@ -1,0 +1,23 @@
+/*
+ * The editor's own tooltip, rendered by the Tooltip component.
+ *
+ * `position: fixed` keeps it out of the editor's `overflow: hidden` and out of the area's
+ * zoom transform; `#pmg-nodes-editor` sets no transform, so it stays the containing block.
+ * It is hidden until the component has measured and placed it.
+ */
+#pmg-nodes-editor .tooltip {
+  position: fixed;
+  z-index: 100;
+  visibility: hidden;
+  max-width: 300px;
+  padding: 4px 8px;
+  color: #000;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 1.2;
+  cursor: default;
+  pointer-events: none;
+}

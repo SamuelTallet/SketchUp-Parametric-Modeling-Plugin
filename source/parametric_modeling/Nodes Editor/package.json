@@ -1,0 +1,59 @@
+{
+  "name": "parametric-modeling-nodes-editor",
+  "private": true,
+  "version": "0.0.7",
+  "description": "Nodes Editor frontend of the Parametric Modeling extension for SketchUp.",
+  "license": "GPL-3.0-or-later",
+  "engines": {
+    "node": ">=24"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run check && vite build",
+    "build:only": "vite build",
+    "watch": "vite build --watch",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json && tsc --noEmit -p tsconfig.node.json",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:compat": "node scripts/compat-test.mjs",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test"
+  },
+  "dependencies": {
+    "@juggle/resize-observer": "^3.4.0",
+    "core-js": "^3.50.0",
+    "pepjs": "^0.5.3",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "rete": "^2.0.6",
+    "rete-area-plugin": "^2.3.2",
+    "rete-connection-plugin": "^2.0.5",
+    "rete-context-menu-plugin": "^2.0.6",
+    "rete-engine": "^2.1.1",
+    "rete-minimap-plugin": "^2.0.3",
+    "rete-react-plugin": "^2.1.2",
+    "rete-render-utils": "^2.0.3",
+    "styled-components": "^6.5.3"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^30.0.0",
+    "@types/node": "^24.13.5",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "acorn": "^8.18.0",
+    "extract-zip": "^2.0.1",
+    "jsdom": "^29.1.1",
+    "oxlint": "^1.83.0",
+    "oxlint-tsgolint": "^7.0.2001",
+    "prettier": "^3.9.7",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}

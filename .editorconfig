@@ -1,0 +1,8 @@
+# Marks this as the root .editorconfig file to stop searching parent directories.
+root = true
+
+# Frontend files are formatted by Prettier, so only Ruby files are targeted here.
+[*.rb]
+indent_style = space
+# We use two spaces for indentation as it is a common convention in Ruby projects.
+indent_size = 2

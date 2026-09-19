@@ -1,0 +1,29 @@
+#pmg-nodes-editor .connection {
+  position: absolute;
+  z-index: -1;
+  width: 9999px;
+  height: 9999px;
+  overflow: visible !important;
+  pointer-events: none;
+}
+
+#pmg-nodes-editor .connection .hit-path {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 14px;
+  /* "stroke", not "auto": hit-testing must not depend on the stroke being painted. */
+  pointer-events: stroke;
+  /* The curve is clickable, like a node or a socket. */
+  cursor: pointer;
+}
+
+#pmg-nodes-editor .connection .main-path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2px;
+  pointer-events: none;
+}
+
+#pmg-nodes-editor .connection .main-path.selected {
+  stroke: rgb(130, 191, 64);
+}

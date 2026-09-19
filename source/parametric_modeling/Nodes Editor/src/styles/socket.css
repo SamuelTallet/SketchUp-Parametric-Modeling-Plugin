@@ -1,0 +1,25 @@
+#pmg-nodes-editor .input-socket,
+#pmg-nodes-editor .output-socket {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#pmg-nodes-editor .socket {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+  margin: 10px !important;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+#pmg-nodes-editor .socket:hover,
+#pmg-nodes-editor [data-used='true'] .socket {
+  background: #fff;
+}

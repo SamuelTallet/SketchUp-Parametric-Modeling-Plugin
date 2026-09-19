@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  cursor: move;
+}
+
+*:focus {
+  outline: none;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}

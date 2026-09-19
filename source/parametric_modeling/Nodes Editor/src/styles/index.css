@@ -1,0 +1,14 @@
+/*
+ * Parametric Modeling (PMG) extension for SketchUp.
+ * Copyright: © 2026 Samuel Tallet
+ * Licence: GNU General Public License 3.0
+ */
+@import './base.css';
+@import './editor.css';
+@import './toolbar.css';
+@import './node.css';
+@import './controls.css';
+@import './socket.css';
+@import './connection.css';
+@import './minimap.css';
+@import './tooltip.css';

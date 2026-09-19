@@ -1,5 +1,5 @@
 # Parametric Modeling extension for SketchUp.
-# Copyright: © 2021 Samuel Tallet <samuel.tallet arobase gmail.com>
+# Copyright: © 2026 Samuel Tallet <samuel.tallet arobase gmail.com>
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -34,6 +34,11 @@ module ParametricModeling
     # Nodes Editor schema version. Not to be confused with version of this plugin.
     SCHEMA_VERSION = '1.0.0'
 
+    # Built Nodes Editor frontend. See "Nodes Editor" directory for its sources.
+    # While developing, `npm run watch` there rebuilds this file on each change:
+    # close and reopen Nodes Editor to load the new build.
+    HTML_FILE = 'nodes-editor.html'
+
     # Opens Nodes Editor.
     def self.open
 
@@ -54,30 +59,7 @@ module ParametricModeling
     #
     # @return [String]
     def self.html
-
-      HTMLDialogs.merge(
-
-        # Note: Paths below are relative to `HTMLDialogs::DIR`.
-        document: 'nodes-editor.rhtml',
-        scripts: [
-          'libraries/pep.min.js',
-          'libraries/lodash.min.js',
-          'libraries/vue.min.js',
-          'libraries/rete.min.js',
-          'libraries/rete/vue-render-plugin.min.js',
-          'libraries/rete/connection-plugin.min.js',
-          'libraries/rete/minimap-plugin.min.js',
-          'libraries/drooltip.js',
-          'libraries/context-menu.js',
-          'nodes-editor.js'
-        ],
-        styles: [
-          'libraries/drooltip.css',
-          'nodes-editor.css'
-        ]
-
-      )
-
+      HTMLDialogs.read(HTML_FILE)
     end
 
     # Reloads Nodes Editor.
@@ -97,6 +79,24 @@ module ParametricModeling
       end
 
       false
+
+    end
+
+    # Gets data Nodes Editor frontend needs at startup.
+    # Frontend requests it with `ready` callback and receives it via `PMG.NodesEditor.boot`.
+    #
+    # @return [Hash]
+    def self.bootstrap
+
+      {
+        locale: Sketchup.get_locale,
+        sketchupVersion: Sketchup.version.to_i,
+        schemaVersion: SCHEMA_VERSION,
+        translation: translation,
+        materials: Materials.list,
+        layers: Layers.list,
+        schema: schema
+      }
 
     end
 
@@ -226,194 +226,8 @@ module ParametricModeling
         "Freeze parametric entities": TRANSLATE['Freeze parametric entities'],
         "Show or hide minimap": TRANSLATE['Show or hide minimap'],
         "Add a comment node": TRANSLATE['Add a comment node'],
-        "Remove all nodes": TRANSLATE['Remove all nodes']
-
-      }
-
-    end
-
-    # Gets Nodes Editor icons.
-    #
-    # @return [Hash]
-    def self.icons
-
-      images_dir = File.join(HTMLDialogs::DIR, 'images')
-
-      {
-
-        nodes: {
-
-          "Draw box": {
-            path: File.join(images_dir, 'draw-box-node-icon.svg'),
-            color: 'rgba(30, 227, 165, 0.5)'
-          },
-
-          "Draw prism": {
-            path: File.join(images_dir, 'draw-prism-node-icon.svg'),
-            color: 'rgba(255, 106, 46, 0.5)'
-          },
-
-          "Draw cylinder": {
-            path: File.join(images_dir, 'draw-cylinder-node-icon.svg'),
-            color: 'rgba(252, 123, 214, 0.5)'
-          },
-
-          "Draw tube": {
-            path: File.join(images_dir, 'draw-tube-node-icon.svg'),
-            color: 'rgba(252, 220, 25, 0.5)'
-          },
-
-          "Draw pyramid": {
-            path: File.join(images_dir, 'draw-pyramid-node-icon.svg'),
-            color: 'rgba(252, 223, 43, 0.5)'
-          },
-
-          "Draw cone": {
-            path: File.join(images_dir, 'draw-cone-node-icon.svg'),
-            color: 'rgba(252, 231, 103, 0.5)'
-          },
-
-          "Draw sphere": {
-            path: File.join(images_dir, 'draw-sphere-node-icon.svg'),
-            color: 'rgba(133, 164, 255, 0.5)'
-          },
-
-          "Draw shape": {
-            path: File.join(images_dir, 'draw-shape-node-icon.svg'),
-            color: 'rgba(252, 220, 25, 0.5)'
-          },
-
-          "Number": {
-            path: File.join(images_dir, 'number-node-icon.svg'),
-            color: 'rgba(0, 140, 189, 0.5)'
-          },
-
-          "Add": {
-            path: File.join(images_dir, 'add-node-icon.svg'),
-            color: 'rgba(125, 210, 240, 0.5)'
-          },
-
-          "Subtract": {
-            path: File.join(images_dir, 'subtract-node-icon.svg'),
-            color: 'rgba(255, 100, 101, 0.5)'
-          },
-
-          "Multiply": {
-            path: File.join(images_dir, 'multiply-node-icon.svg'),
-            color: 'rgba(125, 210, 240, 0.5)'
-          },
-
-          "Divide": {
-            path: File.join(images_dir, 'divide-node-icon.svg'),
-            color: 'rgba(255, 100, 101, 0.5)'
-          },
-
-          "Calculate": {
-            path: File.join(images_dir, 'calculate-node-icon.svg'),
-            color: 'rgba(5, 112, 150, 0.5)'
-          },
-
-          "Point": {
-            path: File.join(images_dir, 'point-node-icon.svg'),
-            color: 'rgba(229, 157, 31, 0.5)'
-          },
-
-          "Get points": {
-            path: File.join(images_dir, 'get-points-node-icon.svg'),
-            color: 'rgba(100, 128, 147, 0.5)'
-          },
-
-          "Vector": {
-            path: File.join(images_dir, 'vector-node-icon.svg'),
-            color: 'rgba(229, 56, 4, 0.5)'
-          },
-
-          "Intersect solids": {
-            path: File.join(images_dir, 'intersect-solids-node-icon.svg'),
-            color: 'rgba(156, 129, 238, 0.5)'
-          },
-
-          "Unite solids": {
-            path: File.join(images_dir, 'unite-solids-node-icon.svg'),
-            color: 'rgba(125, 210, 240, 0.5)'
-          },
-
-          "Subtract solids": {
-            path: File.join(images_dir, 'subtract-solids-node-icon.svg'),
-            color: 'rgba(255, 100, 101, 0.5)'
-          },
-
-          "Push/Pull": {
-            path: File.join(images_dir, 'push-pull-node-icon.svg'),
-            color: 'rgba(29, 131, 212, 0.5)'
-          },
-
-          "Move": {
-            path: File.join(images_dir, 'move-node-icon.svg'),
-            color: 'rgba(255, 128, 191, 0.5)'
-          },
-
-          "Align": {
-            path: File.join(images_dir, 'align-node-icon.svg'),
-            color: 'rgba(37, 185, 154, 0.5)'
-          },
-
-          "Rotate": {
-            path: File.join(images_dir, 'rotate-node-icon.svg'),
-            color: 'rgba(255, 215, 0, 0.5)'
-          },
-
-          "Scale": {
-            path: File.join(images_dir, 'scale-node-icon.svg'),
-            color: 'rgba(153, 204, 0, 0.5)'
-          },
-
-          "Paint": {
-            path: File.join(images_dir, 'paint-node-icon.svg'),
-            color: 'rgba(0, 206, 209, 0.5)'
-          },
-
-          "Tag": {
-            path: File.join(images_dir, 'tag-node-icon.svg'),
-            color: 'rgba(235, 176, 68, 0.5)'
-          },
-
-          "Erase": {
-            path: File.join(images_dir, 'erase-node-icon.svg'),
-            color: 'rgba(128, 180, 251, 0.5)'
-          },
-
-          "Copy": {
-            path: File.join(images_dir, 'copy-node-icon.svg'),
-            color: 'rgba(160, 160, 165, 0.5)'
-          },
-
-          "Concatenate": {
-            path: File.join(images_dir, 'concatenate-node-icon.svg'),
-            color: 'rgba(255, 209, 91, 0.5)'
-          },
-
-          "Select": {
-            path: File.join(images_dir, 'select-node-icon.svg'),
-            color: 'rgba(204, 164, 0, 0.5)'
-          },
-
-          "Make group": {
-            path: File.join(images_dir, 'make-group-node-icon.svg'),
-            color: 'rgba(0, 0, 0, 0.8)'
-          },
-
-          "Comment": {
-            path: File.join(images_dir, 'comment-node-icon.svg'),
-            color: 'rgba(253, 123, 104, 0.5)'
-          }
-
-        },
-
-        help: {
-          path: File.join(images_dir, 'help-icon.svg'),
-          title: TRANSLATE['Access online help']
-        }
+        "Remove all nodes": TRANSLATE['Remove all nodes'],
+        "Access online help": TRANSLATE['Access online help']
 
       }
 
@@ -635,6 +449,12 @@ module ParametricModeling
 
     # Configures HTML dialog.
     private def configure_html_dialog
+
+      @html_dialog.add_action_callback('ready') do |_ctx|
+        @html_dialog.execute_script(
+          'PMG.NodesEditor.boot(' + self.class.bootstrap.to_json + ')'
+        )
+      end
 
       @html_dialog.add_action_callback('importSchemaFromFile') do |_ctx|
 

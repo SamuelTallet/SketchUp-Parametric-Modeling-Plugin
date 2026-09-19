@@ -1,0 +1,62 @@
+#pmg-nodes-editor .node input[type='number'],
+#pmg-nodes-editor .node input[type='text'],
+#pmg-nodes-editor .node textarea {
+  padding: 2px 6px;
+  cursor: text;
+}
+
+#pmg-nodes-editor .node input[type='number'],
+#pmg-nodes-editor .node input[type='text'] {
+  color: #fff;
+  background-color: transparent;
+  border: 0.5px solid #fff;
+}
+
+#pmg-nodes-editor .node input[type='number'] {
+  width: 98px;
+}
+
+#pmg-nodes-editor .node input[type='number']::-webkit-outer-spin-button,
+#pmg-nodes-editor .node input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#pmg-nodes-editor .node input[type='text'] {
+  width: 100%;
+}
+
+#pmg-nodes-editor .node input:read-only {
+  cursor: default;
+}
+
+#pmg-nodes-editor .node textarea {
+  width: 189px !important;
+  height: 100px !important;
+  border: none;
+  resize: none;
+}
+
+#pmg-nodes-editor .node.comment textarea {
+  background-color: rgb(255, 255, 136);
+}
+
+#pmg-nodes-editor .node .checkbox-control {
+  color: #fff;
+}
+
+#pmg-nodes-editor .node input[type='checkbox'] {
+  position: relative;
+  top: -1px;
+  left: -6px;
+  vertical-align: middle;
+  margin: 1px;
+  cursor: default;
+}
+
+#pmg-nodes-editor .node select {
+  width: 100%;
+  padding: 2px;
+  border: none;
+  cursor: default;
+}

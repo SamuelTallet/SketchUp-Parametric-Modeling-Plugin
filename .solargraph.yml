@@ -1,0 +1,14 @@
+---
+include:
+- "**/*.rb"
+exclude:
+- spec/**/*
+- test/**/*
+- vendor/**/*
+- ".bundle/**/*"
+require:
+- sketchup-api-stubs
+domains: []
+require_paths: []
+plugins: []
+max_files: 5000

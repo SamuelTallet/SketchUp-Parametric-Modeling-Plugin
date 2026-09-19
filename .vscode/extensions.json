@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "EditorConfig.EditorConfig",
+    "castwide.solargraph",
+    "oxc.oxc-vscode",
+    "esbenp.prettier-vscode",
+    "vitest.explorer",
+    "ms-vscode.powershell"
+  ]
+}

@@ -1,0 +1,27 @@
+#pmg-nodes-editor .minimap {
+  display: none;
+}
+
+#pmg-nodes-editor .minimap.displayed {
+  display: block;
+}
+
+/* Above nodes and sockets (which have their own z-index). */
+#pmg-nodes-editor .minimap [data-testid='minimap'] {
+  z-index: 3;
+}
+
+#pmg-nodes-editor .minimap [data-testid='minimap'] {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+#pmg-nodes-editor .minimap [data-testid='minimap-node'] {
+  background: rgba(0, 0, 0, 0.8);
+  border: none;
+}
+
+#pmg-nodes-editor .minimap [data-testid='minimap-viewport'] {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgb(130, 191, 64);
+}

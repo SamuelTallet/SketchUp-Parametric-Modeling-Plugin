@@ -1,0 +1,88 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "typescript", "react", "import", "vitest"],
+  "options": {
+    "typeAware": true
+  },
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error"
+  },
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "ignorePatterns": ["dist/"],
+  "rules": {
+    "no-console": "error",
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "typescript/consistent-type-imports": [
+      "error",
+      {
+        "fixStyle": "inline-type-imports"
+      }
+    ],
+    "typescript/no-floating-promises": "error",
+    "typescript/no-unnecessary-type-assertion": "error",
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "warn",
+    "react/only-export-components": [
+      "warn",
+      {
+        "allowConstantExport": true
+      }
+    ],
+    "react/react-in-jsx-scope": "off",
+    "import/no-named-as-default": "off",
+    "import/no-unassigned-import": "off",
+    "typescript/no-unsafe-type-assertion": "off",
+    "vitest/expect-expect": [
+      "error",
+      {
+        "assertFunctionNames": ["expect", "expectSameSchema", "expectRoundTrip"]
+      }
+    ],
+    "vitest/require-mock-type-parameters": "off",
+    "vitest/valid-expect": [
+      "error",
+      {
+        "maxArgs": 2
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["src/bridge/MockBridge.ts"],
+      "rules": {
+        "no-console": "off"
+      }
+    },
+    {
+      "files": ["src/**/*.test.ts"],
+      "env": {
+        "node": true
+      }
+    },
+    {
+      "files": ["vite.config.ts", "vitest.config.ts", "vite/**/*.ts"],
+      "env": {
+        "node": true
+      }
+    },
+    {
+      "files": ["scripts/**"],
+      "env": {
+        "node": true
+      },
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ]
+}

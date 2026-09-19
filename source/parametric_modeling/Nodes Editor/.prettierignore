@@ -1,0 +1,4 @@
+node_modules/
+dist/
+../HTML Dialogs/
+package-lock.json

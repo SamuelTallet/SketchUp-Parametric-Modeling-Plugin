@@ -1,0 +1,22 @@
+#pmg-nodes-editor .toolbar {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 1;
+}
+
+#pmg-nodes-editor .toolbar .toolbar-item {
+  display: inline-block;
+}
+
+#pmg-nodes-editor .toolbar .node-icon,
+#pmg-nodes-editor .toolbar .help-icon {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+}
+
+#pmg-nodes-editor .toolbar .toolbar-item + .toolbar-item {
+  margin-left: 5px;
+}

@@ -1,0 +1,17 @@
+{
+  "oxc.configPath": "source/parametric_modeling/Nodes Editor/.oxlintrc.json",
+  "prettier.configPath": "source/parametric_modeling/Nodes Editor/.prettierrc",
+  "prettier.ignorePath": "source/parametric_modeling/Nodes Editor/.prettierignore",
+  "[typescript][typescriptreact][javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.oxc": "explicit"
+    }
+  },
+  // VS Code opens tsconfig*.json files as JSONC.
+  "[json][jsonc][css][html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  }
+}
